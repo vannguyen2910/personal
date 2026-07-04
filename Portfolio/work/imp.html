@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Intelligent Mortgage Platform — NAB | Winnie Nguyen</title>
+<link rel="stylesheet" href="../css/tokens.css"/>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: var(--font-body); }
+  .gate-wrap { min-height: 100vh; display:flex; align-items:center; justify-content:center; background: var(--gray-50); padding: 24px; }
+  .gate-card { max-width: 440px; width:100%; background:#fff; border-radius: var(--radius-xl); box-shadow: var(--shadow-z16); padding: 48px 40px; text-align:center; }
+  .gate-card__icon { font-size: 32px; margin-bottom: 16px; }
+  .gate-card h1 { font-family: var(--font-display); font-weight:700; font-size: 24px; margin: 0 0 12px; color: var(--ink); }
+  .gate-card p { font-size: 15px; color: var(--ink-soft); line-height:1.6; margin: 0 0 24px; }
+  .gate-card a { color: var(--sienna); }
+  .gate-card input { width:100%; padding:14px; font-size:15px; border:1.5px solid var(--ink-ghost); border-radius:8px; margin-bottom:12px; font-family: var(--font-body); }
+  .gate-card input:focus { outline:none; border-color: var(--sienna); }
+  .gate-card button { width:100%; padding:14px; font-size:15px; font-weight:600; color:#fff; background: var(--sienna); border:none; border-radius:8px; cursor:pointer; font-family: var(--font-body); }
+  .gate-card button:hover { background: var(--sienna-deep); }
+  .gate-card button:disabled { opacity: .6; cursor: default; }
+  .gate-error { color:#EF4444; font-size:13px; margin: -4px 0 12px; display:none; }
+  .gate-error.show { display:block; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     PASSWORD GATE — the actual case study lives in imp-full.html
+     (your original standalone export, untouched). This page only
+     checks the password, then navigates there.
+
+     Password: imp-nab-2026 — change it by editing PASSWORD_PLAIN
+     reference below and recomputing PASSWORD_HASH (SHA-256 hex):
+     python3 -c "import hashlib;print(hashlib.sha256(b'yourpassword').hexdigest())"
+
+     Note: this is a client-side gate only — anyone who knows or
+     guesses the file path imp-full.html could open it directly,
+     bypassing the prompt. It deters casual browsing/indexing, not
+     a determined visitor. Fine for sharing with recruiters; not a
+     substitute for real access control if that's ever needed.
+     ══════════════════════════════════════════════════════════ -->
+<div class="gate-wrap">
+  <div class="gate-card">
+    <div class="gate-card__icon">🔒</div>
+    <h1>This case study is password protected</h1>
+    <p>The Intelligent Mortgage Platform project includes details from an active NAB platform. Enter the password shared with you to view it. Don't have it? <a href="../contact.html">Get in touch</a>.</p>
+    <form id="gate-form">
+      <input type="password" id="gate-password" placeholder="Password" autocomplete="off" required/>
+      <div id="gate-error" class="gate-error">Incorrect password — please try again.</div>
+      <button type="submit" id="gate-submit">Unlock case study</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  const PASSWORD_HASH = "5707cf0acd706361f2b056c843fed2e8fcf3a27d1000dc54197a0d1109d67235";
+
+  async function sha256Hex(str) {
+    const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+    return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("gate-form");
+    const errorEl = document.getElementById("gate-error");
+    const submitBtn = document.getElementById("gate-submit");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const pw = document.getElementById("gate-password").value;
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Checking…";
+      const hash = await sha256Hex(pw);
+      if (hash === PASSWORD_HASH) {
+        errorEl.classList.remove("show");
+        window.location.replace("imp-full.html");
+      } else {
+        errorEl.classList.add("show");
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Unlock case study";
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

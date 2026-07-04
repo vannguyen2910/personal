@@ -1,0 +1,2111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Designer Self-Assessment — Winnie Nguyen</title>
+  <link rel="stylesheet" href="../Themes/tokens.css">
+  <link rel="stylesheet" href="../Themes/components.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      background: #fff;
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+
+    /* ── Header ─────────────────────────────────────────── */
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid var(--border-default);
+      padding: 0 40px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo img { height: 28px; width: auto; display: block; }
+    .header-link {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .header-link:hover { color: var(--purple); }
+
+    /* ── Global progress bar ────────────────────────────── */
+    .progress-wrap { height: 3px; background: var(--border-default); }
+    .progress-bar  { height: 3px; background: var(--purple); transition: width 0.45s ease; width: 0%; }
+
+    /* ── Screens ────────────────────────────────────────── */
+    .screen { display: none; }
+    .screen.active { display: block; animation: fadeUp 0.3s ease both; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ── Buttons ────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px 32px;
+      border: none; border-radius: var(--radius-lg);
+      font-family: var(--font-body); font-size: var(--text-base); font-weight: 600;
+      cursor: pointer; transition: all 0.15s; text-decoration: none;
+    }
+    .btn-primary { background: var(--purple); color: #fff; box-shadow: 0 2px 10px rgba(107,63,238,.25); }
+    .btn-primary:hover:not(:disabled) { filter: brightness(1.08); transform: translateY(-1px); box-shadow: 0 4px 18px rgba(107,63,238,.35); }
+    .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+    .btn-secondary { background: #fff; color: var(--purple); border: 2px solid var(--purple); }
+    .btn-secondary:hover { background: var(--purple-tint); }
+    .btn-utility   { background: var(--gray-100); color: var(--text-primary); border: 1.5px solid var(--border-default); }
+    .btn-utility:hover { background: var(--gray-200); }
+    .btn-full { width: 100%; }
+    .btn-ghost {
+      background: none; border: none;
+      color: var(--text-secondary);
+      font-family: var(--font-body); font-size: var(--text-sm); font-weight: 500;
+      cursor: pointer; padding: 8px 0; display: flex; align-items: center; gap: 6px;
+    }
+    .btn-ghost:hover { color: var(--purple); }
+    .nav-row { display: flex; align-items: center; justify-content: space-between; margin-top: 28px; }
+
+    /* ── Forms ──────────────────────────────────────────── */
+    /* Spacing between floating-label inputs */
+    .form-card .input-field { margin-bottom: 16px; }
+
+    /* 2-column grid for selects */
+    .form-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+
+    /* Select field — mirrors .input-field but for <select> with JS-driven floating label */
+    .select-field { position: relative; width: 100%; }
+    .select-field__input {
+      width: 100%; padding: 14px 36px 14px 14px;
+      font-family: var(--font-body); font-size: var(--text-base);
+      color: var(--text-primary); background: var(--surface-base);
+      border: 1.5px solid var(--border-default); border-radius: var(--radius-md);
+      outline: none; cursor: pointer; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239A94A5' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center;
+      transition: border-color var(--duration-base) var(--ease-standard),
+                  box-shadow var(--duration-base) var(--ease-standard);
+    }
+    .select-field__input:hover:not(:disabled) { border-color: var(--border-strong); }
+    .select-field__input:focus { border-color: var(--gray-900); border-width: 2px; }
+    .select-field__label {
+      position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+      font-family: var(--font-body); font-size: var(--text-base);
+      color: var(--text-tertiary); background: var(--surface-base);
+      padding: 0 4px; pointer-events: none;
+      transition: all var(--duration-base) var(--ease-standard); line-height: 1;
+    }
+    .select-field__input:focus + .select-field__label,
+    .select-field__input.has-value + .select-field__label {
+      top: 0; transform: translateY(-50%);
+      font-size: var(--text-xs); color: var(--text-secondary);
+    }
+    .select-field__input:focus + .select-field__label { color: var(--purple); }
+
+    /* ════════════════════════════════════════════════════
+       SCREEN 0 — WELCOME  (two-column)
+    ════════════════════════════════════════════════════ */
+    .welcome-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 72px 48px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .welcome-eyebrow {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 18px;
+    }
+    .welcome-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .welcome-desc {
+      font-size: var(--text-base);
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .mentor-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .mentor-avatar {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      flex-shrink: 0;
+    }
+    .mentor-name  { font-family: var(--font-display); font-size: var(--text-base); font-weight: 700; color: var(--text-primary); }
+    .mentor-role  { font-size: var(--text-sm); color: var(--text-secondary); margin-top: 2px; }
+
+    /* Right column — form card */
+    .form-card {
+      background: #fff;
+      border: 1.5px solid var(--border-default);
+      border-radius: var(--radius-xl);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-z8);
+    }
+    .form-card-title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+    }
+    .form-meta {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      text-align: center;
+      margin: 16px 0 20px;
+    }
+
+    /* Resume banner */
+    .resume-banner {
+      background: var(--yellow-subtle);
+      border: 1.5px solid var(--yellow);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 10px;
+      font-size: var(--text-sm);
+    }
+    .resume-banner strong { font-weight: 600; }
+    .resume-banner .restart { margin-left: auto; color: var(--purple); font-weight: 600; cursor: pointer; font-size: var(--text-xs); white-space: nowrap; }
+
+    /* ════════════════════════════════════════════════════
+       SCREEN Q — QUESTION  (centred, wide)
+    ════════════════════════════════════════════════════ */
+    .q-wrap {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 56px 48px 80px;
+    }
+
+    /* Step label row */
+    .q-meta {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .q-eyebrow {
+      font-size: var(--text-xs); font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--purple);
+    }
+    .q-counter { font-size: var(--text-xs); font-weight: 600; color: var(--text-tertiary); }
+
+    /* In-question progress bar — removed (global header bar used instead) */
+
+    /* Section title (Core Skills / Operating Behaviours) */
+    .q-section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5vw, 3.4rem);
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      margin-bottom: 8px;
+    }
+    .q-section-desc {
+      font-size: var(--text-base);
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    /* Question card */
+    .q-card {
+      background: #fff;
+      border: 1.5px solid var(--border-default);
+      border-radius: var(--radius-xl);
+      padding: 32px 28px 28px;
+      box-shadow: var(--shadow-z4);
+    }
+    .q-card-title {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .q-card-desc {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    /* ── Skill options: 2×2 grid ── */
+    .skill-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    /* ── Behaviour options: 3 columns ── */
+    .beh-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    /* Shared option card */
+    .opt {
+      border: 1.5px solid var(--border-default);
+      border-radius: var(--radius-lg);
+      padding: 16px 14px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      background: #fff;
+      user-select: none;
+    }
+    .opt:hover   { border-color: var(--purple-mid); background: var(--purple-tint); }
+    .opt.selected { border-color: var(--purple); background: var(--purple-tint); }
+
+    .opt-title { font-family: var(--font-display); font-size: var(--text-base); font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+    .opt-desc  { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.5; }
+    .opt.selected .opt-title { color: var(--purple); }
+    .opt.selected .opt-desc  { color: var(--purple-deep); }
+
+    /* ════════════════════════════════════════════════════
+       RESULTS
+    ════════════════════════════════════════════════════ */
+    .results-wrap { max-width: 800px; margin: 0 auto; padding: 48px 32px 80px; }
+
+    .results-hero {
+      background: var(--purple);
+      border-radius: var(--radius-xl);
+      padding: 28px 24px 24px;
+      color: #fff;
+      margin-bottom: 24px;
+      position: relative; overflow: hidden;
+    }
+    .results-hero::before {
+      content: ''; position: absolute; top: -40px; right: -40px;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+    }
+    .rh-label { font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.65; margin-bottom: 4px; }
+    .rh-name  { font-family: var(--font-display); font-size: var(--text-3xl); font-weight: 800; margin-bottom: 2px; }
+    .rh-meta  { font-size: var(--text-sm); opacity: 0.8; }
+    .rh-date  { font-size: 12px; opacity: 0.5; margin-top: 8px; }
+
+    .chart-card {
+      background: #fff; border: 1.5px solid var(--border-default);
+      border-radius: var(--radius-lg); padding: 24px; margin-bottom: 20px;
+      box-shadow: var(--shadow-z4);
+    }
+    .chart-card canvas { max-height: 380px; }
+    .chart-legend { display: flex; gap: 20px; justify-content: center; margin-top: 16px; font-size: 12px; color: var(--text-secondary); }
+    .legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
+
+    .res-section-head { margin: 28px 0 12px; }
+    .res-section-head h3 { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 700; }
+    .res-section-head p  { font-size: var(--text-sm); color: var(--text-secondary); margin-top: 3px; }
+
+    .priority-card {
+      background: #fff; border: 1.5px solid var(--border-default);
+      border-radius: var(--radius-lg); padding: 18px 20px; margin-bottom: 10px;
+      box-shadow: var(--shadow-z4); display: flex; gap: 14px; align-items: flex-start;
+    }
+    .p-rank { width: 32px; height: 32px; border-radius: 50%; background: var(--purple); color: #fff; font-family: var(--font-display); font-size: var(--text-sm); font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .p-name  { font-family: var(--font-display); font-size: var(--text-base); font-weight: 700; margin-bottom: 3px; }
+    .p-gap   { font-size: 12px; color: var(--purple); font-weight: 600; margin-bottom: 4px; }
+    .p-why   { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.5; }
+
+    .pathway-wrap { background: #fff; border: 1.5px solid var(--border-default); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 20px; box-shadow: var(--shadow-z4); }
+    .pw-group  { border-bottom: 1px solid var(--gray-100); }
+    .pw-group:last-child { border-bottom: none; }
+    .pw-label  { padding: 10px 18px 6px; font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--purple); background: var(--surface-page); }
+    .pw-item   { padding: 9px 18px; display: flex; align-items: center; gap: 10px; font-size: var(--text-sm); border-top: 1px solid var(--gray-100); }
+    .pw-dot    { width: 6px; height: 6px; border-radius: 50%; background: var(--purple); flex-shrink: 0; }
+
+    .beh-summary { background: #fff; border: 1.5px solid var(--border-default); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 20px; box-shadow: var(--shadow-z4); }
+    .beh-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; border-bottom: 1px solid var(--gray-100); font-size: var(--text-sm); }
+    .beh-row:last-child { border-bottom: none; }
+    .badge-pill { display: inline-block; font-size: var(--text-xs); font-weight: 600; padding: 3px 10px; border-radius: 100px; }
+    .badge-developing { background: var(--error-tint);   color: var(--error-deep); }
+    .badge-practising { background: var(--warning-tint); color: var(--warning-deep); }
+    .badge-consistent { background: var(--success-tint); color: var(--success-deep); }
+
+    .cta-block {
+      background: #fff; border: 2px solid var(--purple);
+      border-radius: var(--radius-xl); padding: 32px 28px;
+      margin: 28px 0 20px;
+      box-shadow: 0 8px 40px rgba(0,0,0,.09);
+      text-align: center;
+    }
+    .cta-eyebrow { font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple); margin-bottom: 8px; }
+    .cta-title   { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 800; line-height: 1.15; margin-bottom: 10px; }
+    .cta-sub     { font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: 24px; line-height: 1.65; }
+    .cta-btns    { display: flex; flex-direction: column; gap: 10px; }
+    .cta-or      { font-size: var(--text-xs); color: var(--text-tertiary); }
+    .cta-note    { font-size: 12px; color: var(--text-tertiary); margin-top: 14px; line-height: 1.6; }
+
+    .contact-footer { background: var(--surface-page); border: 1.5px solid var(--border-default); border-radius: var(--radius-lg); padding: 20px 24px; text-align: center; }
+    .cf-name  { font-family: var(--font-display); font-size: var(--text-md); font-weight: 700; margin-bottom: 2px; }
+    .cf-role  { font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: 12px; }
+    .cf-links { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+    .cf-link  { font-size: 12px; color: var(--purple); text-decoration: none; display: flex; align-items: center; gap: 4px; padding: 5px 10px; border: 1px solid var(--purple-tint); border-radius: 100px; }
+    .cf-link:hover { background: var(--purple-tint); }
+
+    .olu-note {
+      margin-top: 14px;
+      padding: 12px 16px;
+      background: var(--success-tint);
+      border-radius: var(--radius-md);
+      font-size: var(--text-sm);
+      color: var(--success-deep);
+      line-height: 1.55;
+    }
+
+    /* ════════════════════════════════════════════════════
+       SCREEN DIRECTION
+    ════════════════════════════════════════════════════ */
+    .direction-intro {
+      font-size: var(--text-base);
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+    .direction-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+    .direction-card {
+      border: 1.5px solid var(--border-default);
+      border-radius: var(--radius-lg);
+      padding: 18px 16px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      background: #fff;
+      user-select: none;
+    }
+    .direction-card:hover   { border-color: var(--purple-mid); background: var(--purple-tint); }
+    .direction-card.selected { border-color: var(--purple); background: var(--purple-tint); }
+    .dc-emoji { font-size: 22px; margin-bottom: 8px; }
+    .dc-name  { font-family: var(--font-display); font-size: var(--text-base); font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+    .dc-desc  { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.5; }
+    .direction-card.selected .dc-name { color: var(--purple); }
+    .direction-card.selected .dc-desc { color: var(--purple-deep); }
+    .direction-card.dim { opacity: 0.4; pointer-events: none; }
+
+    .depr-section { border-top: 1.5px solid var(--border-default); padding-top: 24px; }
+    .depr-heading { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+    .depr-sub     { font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: 16px; line-height: 1.6; }
+    .depr-chips   { display: flex; flex-wrap: wrap; gap: 8px; }
+    .depr-chip {
+      padding: 7px 16px;
+      border: 1.5px solid var(--border-default);
+      border-radius: 100px;
+      font-size: var(--text-sm);
+      font-family: var(--font-body);
+      cursor: pointer;
+      background: #fff;
+      color: var(--text-secondary);
+      transition: all 0.15s;
+    }
+    .depr-chip:hover { border-color: var(--border-strong); color: var(--text-primary); }
+    .depr-chip.selected {
+      border-color: var(--error);
+      background: var(--error-tint);
+      color: var(--error-deep);
+      text-decoration: line-through;
+    }
+
+    /* Outside focus block in results */
+    .outside-focus {
+      margin-top: 14px;
+      background: var(--surface-page);
+      border: 1.5px solid var(--border-default);
+      border-radius: var(--radius-lg);
+      padding: 16px 20px;
+    }
+    .of-label { font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-tertiary); margin-bottom: 10px; }
+    .of-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .of-chip  { display: flex; align-items: center; gap: 6px; padding: 5px 12px; background: #fff; border: 1.5px solid var(--border-default); border-radius: 100px; font-size: 12px; }
+    .of-chip-name { color: var(--text-secondary); font-weight: 600; }
+    .of-chip-gap  { color: var(--text-tertiary); }
+    .of-note  { font-size: 12px; color: var(--text-tertiary); font-style: italic; line-height: 1.55; }
+
+    /* Direction tag in results hero */
+    .rh-direction {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 10px;
+      padding: 4px 12px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 100px;
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .loading-spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.35); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; margin-right: 4px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Insight: Archetype card ────────────────────────── */
+    .archetype-card {
+      border-radius: var(--radius-xl);
+      padding: 24px 24px 20px;
+      margin-bottom: 14px;
+      display: flex; gap: 18px; align-items: flex-start;
+      border: 1.5px solid transparent;
+      box-shadow: var(--shadow-z4);
+    }
+    .archetype-emoji { font-size: 32px; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+    .archetype-label { font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.65; margin-bottom: 3px; }
+    .archetype-name  { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 800; margin-bottom: 10px; line-height: 1.1; }
+    .archetype-row   { display: flex; gap: 10px; flex-wrap: wrap; }
+    .archetype-tag   { font-size: var(--text-xs); font-weight: 600; padding: 4px 10px; border-radius: var(--radius-pill); background: rgba(0,0,0,0.08); }
+    .archetype-tag span { opacity: 0.6; font-weight: 400; margin-right: 4px; }
+
+    /* ── Insight: Stat pair row ─────────────────────────── */
+    .insight-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 14px; }
+    .insight-stat {
+      background: #fff; border: 1.5px solid var(--border-default);
+      border-radius: var(--radius-lg); padding: 18px 20px;
+      box-shadow: var(--shadow-z4);
+    }
+    .is-label { font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 6px; }
+    .is-value { font-family: var(--font-display); font-size: var(--text-3xl); font-weight: 800; line-height: 1; margin-bottom: 4px; color: var(--purple); }
+    .is-sub   { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.4; }
+    .is-signal { display: flex; align-items: center; gap: 6px; font-size: var(--text-sm); font-weight: 500; }
+    .is-signal-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── Insight: 3-card row ────────────────────────────── */
+    .insight-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 24px; }
+    .insight-card {
+      background: #fff; border-radius: var(--radius-lg);
+      padding: 18px 18px 16px; box-shadow: var(--shadow-z4);
+      border-top: 3px solid transparent;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .ic-label   { font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); }
+    .ic-title   { font-family: var(--font-display); font-size: var(--text-base); font-weight: 700; color: var(--text-primary); line-height: 1.2; }
+    .ic-value   { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.5; }
+    .ic-skills  { display: flex; flex-direction: column; gap: 4px; }
+    .ic-skill   { font-size: var(--text-sm); font-weight: 600; color: var(--text-primary); }
+    .ic-skill-sub { font-size: 11px; color: var(--text-tertiary); }
+    .ic-bar-wrap { display: flex; flex-direction: column; gap: 6px; margin-top: 2px; }
+    .ic-bar-row  { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--text-secondary); }
+    .ic-bar-bg   { flex: 1; height: 6px; background: var(--gray-100); border-radius: 3px; overflow: hidden; }
+    .ic-bar-fill { height: 100%; border-radius: 3px; transition: width 0.8s ease; }
+    .ic-bar-pct  { width: 28px; text-align: right; font-weight: 600; font-size: 11px; }
+
+    /* ── Insight: One-level-up plan ─────────────────────── */
+    .one-level-up {
+      background: var(--purple-subtle); border: 1.5px solid var(--purple-tint);
+      border-radius: var(--radius-xl); padding: 22px 24px;
+      margin-bottom: 24px;
+    }
+    .olu-head  { font-family: var(--font-display); font-size: var(--text-base); font-weight: 700; color: var(--text-primary); margin-bottom: 14px; }
+    .olu-items { display: flex; flex-direction: column; gap: 10px; }
+    .olu-item  { display: flex; align-items: flex-start; gap: 12px; }
+    .olu-icon  { width: 32px; height: 32px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+    .olu-body  { flex: 1; }
+    .olu-type  { font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 1px; }
+    .olu-text  { font-size: var(--text-sm); font-weight: 600; color: var(--text-primary); line-height: 1.4; }
+    .olu-hint  { font-size: 11px; color: var(--text-secondary); margin-top: 1px; line-height: 1.4; }
+
+    @media (max-width: 700px) {
+      .insight-cards { grid-template-columns: 1fr; }
+      .insight-stats  { grid-template-columns: 1fr 1fr; }
+      .welcome-wrap { grid-template-columns: 1fr; gap: 40px; padding: 40px 24px 60px; }
+      .skill-options { grid-template-columns: 1fr; }
+      .beh-options   { grid-template-columns: 1fr; }
+      .q-wrap        { padding: 36px 24px 60px; }
+      .form-row      { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="site-header">
+  <a href="index.html" class="nav-logo">
+    <img src="assets/Logo.svg" alt="Winnie Nguyen">
+  </a>
+  <button class="header-link" onclick="document.getElementById('contactDialog').classList.add('open')" style="background:none;border:none;cursor:pointer;">
+    <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Contact me
+  </button>
+</header>
+
+<!-- ── Contact dialog ── -->
+<div id="contactDialog" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal" style="max-width:440px;">
+    <button class="modal-close" onclick="document.getElementById('contactDialog').classList.remove('open')">✕</button>
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
+      <img src="assets/GV5.jpg" alt="Winnie Nguyen" style="width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;">
+      <div>
+        <div style="font-family:var(--font-display);font-size:var(--text-base);font-weight:700;color:var(--text-primary);">Winnie Nguyen</div>
+        <div style="font-size:var(--text-sm);color:var(--text-secondary);margin-top:2px;">UX Product Design Mentor</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <a href="mailto:nguyenphuctuongvan@gmail.com" style="display:flex;align-items:center;gap:12px;padding:14px 16px;border:1.5px solid var(--border-default);border-radius:var(--radius-md);text-decoration:none;color:var(--text-primary);transition:var(--transition);" onmouseover="this.style.borderColor='var(--purple)';this.style.background='var(--purple-subtle)'" onmouseout="this.style.borderColor='var(--border-default)';this.style.background=''">
+        <span style="width:36px;height:36px;border-radius:var(--radius-sm);background:var(--purple-tint);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="var(--purple)" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        </span>
+        <div>
+          <div style="font-size:var(--text-xs);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-tertiary);margin-bottom:2px;">Email</div>
+          <div style="font-size:var(--text-sm);font-weight:500;">nguyenphuctuongvan@gmail.com</div>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/winnienguyen2910/" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:12px;padding:14px 16px;border:1.5px solid var(--border-default);border-radius:var(--radius-md);text-decoration:none;color:var(--text-primary);transition:var(--transition);" onmouseover="this.style.borderColor='var(--purple)';this.style.background='var(--purple-subtle)'" onmouseout="this.style.borderColor='var(--border-default)';this.style.background=''">
+        <span style="width:36px;height:36px;border-radius:var(--radius-sm);background:var(--purple-tint);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="16" height="16" fill="var(--purple)" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </span>
+        <div>
+          <div style="font-size:var(--text-xs);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-tertiary);margin-bottom:2px;">LinkedIn</div>
+          <div style="font-size:var(--text-sm);font-weight:500;">linkedin.com/in/winnienguyen2910</div>
+        </div>
+      </a>
+      <a href="https://adplist.org/mentors/winnie-nguyen" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:12px;padding:14px 16px;border:1.5px solid var(--border-default);border-radius:var(--radius-md);text-decoration:none;color:var(--text-primary);transition:var(--transition);" onmouseover="this.style.borderColor='var(--purple)';this.style.background='var(--purple-subtle)'" onmouseout="this.style.borderColor='var(--border-default)';this.style.background=''">
+        <span style="width:36px;height:36px;border-radius:var(--radius-sm);background:var(--purple-tint);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="var(--purple)" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </span>
+        <div>
+          <div style="font-size:var(--text-xs);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-tertiary);margin-bottom:2px;">ADPList</div>
+          <div style="font-size:var(--text-sm);font-weight:500;">Book a free mentoring session</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ── Global progress ── -->
+<div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     SCREEN 0 — WELCOME
+════════════════════════════════════════════════════════ -->
+<div id="screen-0" class="screen active">
+  <div class="welcome-wrap">
+
+    <!-- LEFT: hero -->
+    <div>
+      <div class="welcome-eyebrow">UX Product Design Assessment</div>
+      <h1 class="welcome-title">Know where<br>you stand.</h1>
+      <p class="welcome-desc">This self-assessment maps your skills against a professional product design framework. You'll get a personalised learning pathway based on your gaps — and a clear next step to accelerate your growth.</p>
+      <div class="mentor-card">
+        <img src="assets/GV5.jpg" alt="Winnie Nguyen" class="mentor-avatar">
+        <div>
+          <div class="mentor-name">Winnie Nguyen</div>
+          <div class="mentor-role">UX Product Design Mentor</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: form -->
+    <div>
+      <div id="resumeBanner" style="display:none" class="resume-banner">
+        <span>💾</span>
+        <div><strong>Welcome back!</strong> Your answers are saved.</div>
+        <span class="restart" onclick="clearAndRestart()">Start over</span>
+      </div>
+
+      <div class="form-card">
+        <div class="form-card-title">About you</div>
+
+        <div class="input-field">
+          <input type="text" id="inputName" placeholder=" ">
+          <label for="inputName">Your name *</label>
+        </div>
+        <div class="input-field">
+          <input type="email" id="inputEmail" placeholder=" ">
+          <label for="inputEmail">Email address</label>
+        </div>
+        <div class="form-2col">
+          <div class="select-field">
+            <select id="inputExperience" class="select-field__input">
+              <option value="" disabled selected></option>
+              <option value="0–1 years">0–1 years</option>
+              <option value="1–3 years">1–3 years</option>
+              <option value="3–5 years">3–5 years</option>
+              <option value="5–10 years">5–10 years</option>
+              <option value="10+ years">10+ years</option>
+            </select>
+            <label for="inputExperience" class="select-field__label">Years of experience *</label>
+          </div>
+          <div class="select-field">
+            <select id="inputTarget" class="select-field__input">
+              <option value="" disabled selected></option>
+              <option value="Associate">Associate Designer</option>
+              <option value="Mid">Mid Designer</option>
+              <option value="Senior">Senior Designer</option>
+              <option value="Lead">Lead Designer</option>
+              <option value="Principal">Principal Designer</option>
+            </select>
+            <label for="inputTarget" class="select-field__label">Target level *</label>
+          </div>
+        </div>
+
+        <div class="form-meta">Takes about 15–20 minutes · Progress saved automatically</div>
+
+        <button class="btn btn-primary btn-full" onclick="startAssessment()">Start assessment &nbsp;›</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     SCREEN Q — QUESTION (one at a time)
+════════════════════════════════════════════════════════ -->
+<div id="screen-q" class="screen">
+  <div class="q-wrap">
+
+    <div class="q-meta">
+      <div class="q-eyebrow" id="qEyebrow">Core Skill 1 of 9</div>
+      <div class="q-counter" id="qCounter">1 / 15</div>
+    </div>
+
+    <h2 class="q-section-title" id="qSectionTitle">Core Skills</h2>
+    <p class="q-section-desc" id="qSectionDesc">Expand each card to read what each level looks like, then select the level that best describes you right now.</p>
+
+    <div class="q-card">
+      <div class="q-card-title" id="qCardTitle">—</div>
+      <div class="q-card-desc"  id="qCardDesc">—</div>
+      <div id="qOptions"></div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-ghost" onclick="prevQuestion()">← Back</button>
+      <button class="btn btn-primary" id="qNextBtn" onclick="nextQuestion()" disabled>
+        <span id="qNextLabel">Next</span> &nbsp;›
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     SCREEN DIRECTION
+════════════════════════════════════════════════════════ -->
+<div id="screen-direction" class="screen">
+  <div class="q-wrap">
+
+    <div class="q-meta">
+      <div class="q-eyebrow">Career Direction</div>
+      <div class="q-counter">Almost there</div>
+    </div>
+
+    <h2 class="q-section-title">Where do you want to go?</h2>
+    <p class="direction-intro">Your skill gaps tell you what's missing — but not all gaps matter equally. Pick up to 3 directions you want to develop toward so we can focus your results on what's actually relevant to your path.</p>
+
+    <div class="direction-grid" id="directionGrid"></div>
+
+    <div class="depr-section">
+      <div class="depr-heading">Anything you're intentionally not focusing on?</div>
+      <div class="depr-sub">Optional — select skills you're deliberately deprioritising right now. They'll still appear in your full breakdown, but won't drive your recommendations.</div>
+      <div class="depr-chips" id="deprChips"></div>
+    </div>
+
+    <div class="nav-row" style="margin-top:32px;">
+      <button class="btn-ghost" onclick="backToQuestions()">← Back</button>
+      <button class="btn btn-primary" id="dirNextBtn" onclick="submitDirection()" disabled>
+        See my results &nbsp;›
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     SCREEN RESULTS
+════════════════════════════════════════════════════════ -->
+<div id="screen-results" class="screen">
+  <div class="results-wrap">
+
+    <div class="results-hero">
+      <div class="rh-label">Your Assessment Results</div>
+      <div class="rh-name" id="heroName">—</div>
+      <div class="rh-meta" id="heroMeta">—</div>
+      <div class="rh-date" id="heroDate">—</div>
+      <div id="heroDirection"></div>
+    </div>
+
+    <!-- ── New: Archetype + stats + insight cards ── -->
+    <div id="insightArchetype"></div>
+    <div class="insight-stats">
+      <div class="insight-stat" id="insightReadiness"></div>
+      <div class="insight-stat" id="insightCalibration"></div>
+      <div class="insight-stat" id="insightAIReadiness"></div>
+    </div>
+    <div class="insight-cards" id="insightCards"></div>
+
+    <div class="chart-card">
+      <canvas id="radarChart"></canvas>
+      <div class="chart-legend">
+        <span><span class="legend-dot" style="background:rgba(107,63,238,0.7)"></span>Your rating</span>
+        <span><span class="legend-dot" style="background:var(--yellow);border:2px dashed #C9A800"></span>Target level</span>
+      </div>
+    </div>
+
+    <!-- ── New: One-level-up plan ── -->
+    <div id="insightOneLevelUp"></div>
+
+    <div class="res-section-head" id="focusAreasHead">
+      <h3>Your top focus areas</h3>
+      <p id="focusAreasDesc">Ranked by gap size within your chosen direction.</p>
+    </div>
+    <div id="priorityGaps"></div>
+
+    <div class="res-section-head">
+      <h3>Your personalised learning pathway</h3>
+      <p>Resources matched to your skill gaps on your chosen path.</p>
+    </div>
+    <div id="learningPathway" class="pathway-wrap"></div>
+
+    <div class="res-section-head"><h3>Operating behaviours summary</h3></div>
+    <div id="behaviourSummary" class="beh-summary"></div>
+
+    <div class="cta-block">
+      <div class="cta-eyebrow">Ready to level up?</div>
+      <div class="cta-title">Turn your gaps into a growth plan</div>
+      <div class="cta-sub">A 1-on-1 session with Winnie can help you build a structured, realistic roadmap — with accountability built in.</div>
+      <div class="cta-btns">
+        <a href="https://adplist.org/mentors/winnie-nguyen" target="_blank" class="btn btn-primary">📞 Book a Free Discovery Call</a>
+        <div class="cta-or">or</div>
+        <button onclick="downloadPDF()" class="btn btn-utility btn-full" id="pdfBtn">⬇ Save My Results — Download PDF</button>
+      </div>
+      <div class="cta-note">The free discovery call is a 20-min conversation — no commitment, no pitch. Just clarity on where to go next.</div>
+    </div>
+
+    <div class="contact-footer">
+      <div class="cf-name">Winnie Nguyen</div>
+      <div class="cf-role">UX Product Designer &amp; Mentor</div>
+      <div class="cf-links">
+        <a href="https://www.linkedin.com/in/winnienguyen2910" target="_blank" class="cf-link">🔗 LinkedIn</a>
+        <a href="https://adplist.org/mentors/winnie-nguyen" target="_blank" class="cf-link">🔗 ADPList</a>
+        <a href="mailto:nguyenphuctuongvan@gmail.com" class="cf-link">✉️ Email</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════════════════ -->
+<script>
+// ── DATA ─────────────────────────────────────────────────────────
+
+const SKILLS = [
+  {
+    id: 'user-research', name: 'User Research',
+    desc: 'Rate your ability to understand customers and uncover meaningful insights.',
+    levels: {
+      aware:   'Understand the Design Process (Design Thinking, Double Diamond) and when to apply it.',
+      capable: 'Plan and lead user research activities and interviews. Synthesise research insights with a team.',
+      strong:  'Plan and conduct research to deeply understand customers, their unmet needs, and opportunities. Communicate insights and recommendations to key product decision makers.',
+      expert:  'Define and assure best practice, influence organisational strategy. Make insights scalable and evergreen. Enable others to find, synthesise and action their own insights.'
+    }
+  },
+  {
+    id: 'information-architecture', name: 'Information Architecture',
+    desc: 'Rate your ability to structure and organise information effectively.',
+    levels: {
+      aware:   'Can demonstrate a theoretical understanding of disciplines of information architecture.',
+      capable: 'Can architect (effectively structure and sequence) information and content using a variety of mapping techniques.',
+      strong:  'Can work with a broad range of people and processes to extract and document a coherent systemic overview of an experience.',
+      expert:  'Is adept at shaping complex user experiences, architecting solutions across a variety of touchpoints and channels, or for an intricate mix of audiences and scenarios.'
+    }
+  },
+  {
+    id: 'interaction-design', name: 'Interaction Design',
+    desc: 'Rate your ability to design clear, elegant, and usable interaction flows.',
+    levels: {
+      aware:   'Understand when strong interaction design is needed and ask for help.',
+      capable: 'Reflect design principles in your designs. Design holistic flows, not individual screens. Choose design patterns based on strong rationale.',
+      strong:  'Design simple and elegant interfaces for complex systems. Refine the details of interaction design to achieve a high level of polish.',
+      expert:  'Lead projects in unknown or new forms of interaction, with demonstrable outcomes. Guide the rest of the team in interaction best practices.'
+    }
+  },
+  {
+    id: 'visual-design', name: 'Visual Design',
+    desc: 'Rate your ability to craft visually compelling and consistent design.',
+    levels: {
+      aware:   'Produce work that respects the styling of the surrounding product and is visually up to standards.',
+      capable: 'Produce multiple medium to large scale pieces of visual design. Augment and adapt to what you need, building on it appropriately.',
+      strong:  'Define and improve the styling and experience of your product. Lead and guide others\' work, with effective critique.',
+      expert:  'Exceptional ability with visual design. Finger on the pulse of trends, tools and techniques. Drive impactful visual improvements to the entire product suite.'
+    }
+  },
+  {
+    id: 'writing', name: 'Writing / Content Design',
+    desc: 'Rate your ability to write clear, strategic UX copy and microcopy.',
+    levels: {
+      aware:   'Familiar with copy guidelines and why we use them.',
+      capable: 'Develop and improve copy and microcopy found throughout the product experience. Test copy with users.',
+      strong:  'Own and develop the strategic voice and tone of the product. Guide teams to ensure consistency across the customer journey.',
+      expert:  'Master content design and help others. Raise the content design bar with innovative concept design.'
+    }
+  },
+  {
+    id: 'service-design', name: 'Service Design',
+    desc: 'Rate your ability to map and improve end-to-end customer experiences.',
+    levels: {
+      aware:   'Familiar with service blueprints, journey maps and user flow maps.',
+      capable: 'Understand and map each key customer\'s journey. Use research and data to highlight key gaps and opportunities.',
+      strong:  'Champion and communicate which gaps need to close in each Service Blueprint. Know who needs to be involved to see the whole picture and make changes.',
+      expert:  'Lead organisational change management through collaboration and trust. Drive company-wide objectives and key results.'
+    }
+  },
+  {
+    id: 'prototyping', name: 'Prototyping',
+    desc: 'Rate your ability to make ideas tangible with prototypes at the right fidelity.',
+    levels: {
+      aware:   'Understand the strengths of prototypes, when they\'re most useful and the different types.',
+      capable: 'Create click-based prototypes to validate a journey or flow. Recognise the level of prototyping required based on context.',
+      strong:  'Create refined interactive prototypes to test complex interactive flows, micro-interactions and user reactions.',
+      expert:  'Can make any idea real. Complex animations and interactions are a breeze. Inspire others towards a vision with highly interactive experiences.'
+    }
+  },
+  {
+    id: 'frontend-development', name: 'Frontend Development',
+    desc: 'Rate your ability to work with code and collaborate closely with engineers.',
+    levels: {
+      aware:   'Pair with developers to craft quality experiences. Understand the basics of frontend and design systems to make smart trade-offs.',
+      capable: 'Make moderate changes to production code in a design system or front-end applications. Understand accessibility standards.',
+      strong:  'Add new components and large improvements to a design system. Make complex interactions and animations possible with code.',
+      expert:  'Can work as a senior front-end developer. On the cutting-edge of new technologies. Uplift the skills and quality of other designers and front-end developers.'
+    }
+  },
+  {
+    id: 'system-design', name: 'System Design',
+    desc: 'Rate your ability to build, maintain, and scale design systems.',
+    levels: {
+      aware:   'Aware of the history and future of your work and design accordingly. Understand the value of using a design system.',
+      capable: 'Contribute to a design system.',
+      strong:  'Act as steward for a design system. Drive improvements to design system and tooling.',
+      expert:  'An industry-renowned system designer. Oversee large scale projects serving broad design goals at scale.'
+    }
+  },
+  {
+    id: 'ai-workflow', name: 'AI-Assisted Workflow',
+    desc: 'Rate your ability to integrate AI tools meaningfully into your design process.',
+    levels: {
+      aware:   'Aware that AI tools can accelerate design tasks. Has experimented with at least one AI tool in a design context (research synthesis, copy, ideation).',
+      capable: 'Actively integrates AI tools across multiple stages of the design process — generating options faster, synthesising notes, drafting copy — with appropriate review.',
+      strong:  'Has a repeatable AI-integrated workflow. Evaluates when AI output is good enough vs. needs rework. Coaches others on practical AI tool use in design.',
+      expert:  'Defines team-wide AI workflow standards. Stays current with emerging AI capabilities and identifies new leverage points. Shapes how the organisation uses AI in design.'
+    }
+  },
+  {
+    id: 'ai-features', name: 'Designing for AI Features',
+    desc: 'Rate your ability to design products and interfaces that contain AI-powered functionality.',
+    levels: {
+      aware:   'Understands that AI-powered features have different design constraints. Aware of concepts like confidence levels, errors, and model limitations.',
+      capable: 'Can design core states for AI features: empty, loading, low-confidence output, error, and fallback. Considers how users build trust with AI over time.',
+      strong:  'Designs end-to-end AI feature experiences — onboarding, progressive disclosure, recovery flows, and human override patterns. Tests with users to validate mental models.',
+      expert:  'Sets standards for AI feature design across the product. Leads conversations with engineering and product on capability, reliability, and user trust. Shapes responsible AI UX for the organisation.'
+    }
+  },
+  {
+    id: 'stakeholder-management', name: 'Stakeholder Management',
+    desc: 'Rate your ability to manage relationships, expectations, and alignment with key stakeholders.',
+    levels: {
+      aware:   'Knows who the key stakeholders are for their project. Keeps them informed at appropriate intervals.',
+      capable: 'Proactively manages stakeholder expectations — sets scope, flags risks early, and avoids surprises at review. Handles feedback constructively.',
+      strong:  'Builds trust with difficult or senior stakeholders. Navigates competing priorities across functions. Brings stakeholders into alignment without escalation.',
+      expert:  'Manages stakeholder relationships at an executive level. Shapes expectations before projects begin. Creates the conditions for design to be heard at the strategic level.'
+    }
+  },
+  {
+    id: 'storytelling', name: 'Storytelling',
+    desc: 'Rate your ability to frame and communicate design work in a compelling, audience-appropriate narrative.',
+    levels: {
+      aware:   'Can describe what they designed and why in a clear sequence. Uses "problem → solution → outcome" structure.',
+      capable: 'Frames design work as a narrative — sets context, builds tension around the problem, lands the solution with evidence. Adapts the story for different audiences.',
+      strong:  'Uses storytelling to shift perspectives and build alignment in high-stakes moments. Makes complex, ambiguous work feel clear and credible.',
+      expert:  'Shapes how the team and organisation talks about design work. Creates the narratives that get design a seat in strategic conversations. Inspires others to communicate with more intention.'
+    }
+  }
+];
+
+const BEHAVIOURS = [
+  {
+    id: 'customer-understanding', name: 'Customer Understanding',
+    desc: 'How well do you know your target customers — their jobs, challenges, and needs?',
+    levels: {
+      developing: 'Know your ideal customer and personas. Know who\'s using your product.',
+      practising: 'Leverage existing research and talk to customers regularly. Pair with stakeholders to do research.',
+      consistent: 'Understand underlying motivations. Lead research and make customer needs clear to the whole team.'
+    }
+  },
+  {
+    id: 'define-success', name: 'Define Success',
+    desc: 'How effectively do you frame problems and hypothesise solutions with your team?',
+    levels: {
+      developing: 'Know what success looks like and explore different ways to solve problems.',
+      practising: 'Involve cross-functional partners in discovery. Narrow to the best solution with strong rationale.',
+      consistent: 'Diverge and converge quickly. Apply first principles thinking for complex problems.'
+    }
+  },
+  {
+    id: 'measure-outcomes', name: 'Measure Outcomes',
+    desc: 'How much ownership do you take of measuring impact and customer outcomes?',
+    levels: {
+      developing: 'Know what business impact metrics you\'re trying to achieve.',
+      practising: 'Help shape metrics that tell you if customers are achieving their outcomes.',
+      consistent: 'Own your team\'s customer outcomes and business impact. Influence go-to-market approach.'
+    }
+  },
+  {
+    id: 'iterate', name: 'Iterate Towards Success',
+    desc: 'How effectively do you work with engineers and use feedback to improve shipped work?',
+    levels: {
+      developing: 'Collaborate with engineers to improve solutions as they\'re built. Use insights after release.',
+      practising: 'Pair with developers to ship quality work. Make smart trade-offs between quality and speed.',
+      consistent: 'Improve the way your squad ships. Help developers prioritise what matters most to customers.'
+    }
+  },
+  {
+    id: 'shared-responsibility', name: 'Shared Responsibility',
+    desc: 'How much do you take ownership beyond your immediate design tasks?',
+    levels: {
+      developing: 'Actively involved in testing usability during solution and validation stages. Own your work.',
+      practising: 'Test designs with customers. Help your PM understand usability impact. Be generous with feedback.',
+      consistent: 'Own your squad\'s work. Identify and anticipate risks. Work beyond design to ensure quality.'
+    }
+  },
+  {
+    id: 'transparency', name: 'Transparency',
+    desc: 'How well do you communicate your design decisions and involve others?',
+    levels: {
+      developing: 'Involved in squad rituals. Use data and insights to communicate your decisions.',
+      practising: 'Actively contribute to team rituals. Make the complex clear in writing and speaking.',
+      consistent: 'Use storytelling to communicate work. Influence product and org leaders\' thinking and decisions.'
+    }
+  },
+  {
+    id: 'learning-agility', name: 'Learning Agility',
+    desc: 'How proactively do you grow your skills and adapt to new tools, methods, and contexts?',
+    levels: {
+      developing: 'Tries new tools or methods when directed. Completes learning when assigned. Shows curiosity about the craft.',
+      practising: 'Proactively seeks out new skills relevant to their role. Picks up unfamiliar tools without needing a course first. Reflects and adjusts.',
+      consistent: 'Continuously self-directed in learning. Shares what they\'ve learned with the team. Adapts quickly when methods, tools, or context shift — including AI.'
+    }
+  }
+];
+
+const SKILL_RESOURCES = {
+  'user-research':            [{ title: 'Intro to UX Research Methods' }, { title: 'Interviewing Users Effectively' }, { title: 'Synthesis & Problem Definition in UX' }],
+  'information-architecture': [{ title: 'Information Architecture' }],
+  'interaction-design':       [{ title: 'Mental Models in UX Design' }, { title: 'UX Design Principles Reference' }],
+  'visual-design':            [{ title: 'Visual Design Study Guide (NN/g)' }, { title: 'Refactoring UI — Visual Design Patterns' }],
+  'writing':                  [{ title: 'UX Content Collective — Writing for UX' }, { title: 'Google Developer Documentation Style Guide' }],
+  'service-design':           [{ title: 'Journey Mapping Workshop Guide' }, { title: 'Synthesis & Problem Definition in UX' }],
+  'prototyping':              [{ title: 'Product Thinking Foundations' }, { title: 'Figma Prototyping — Official Learning' }],
+  'frontend-development':     [{ title: 'Frontend for Designers (CareerFoundry)' }, { title: 'MDN Web Docs — HTML & CSS for Designers' }],
+  'system-design':            [{ title: 'How to Give Design Critique' }, { title: 'Product Thinking Foundations' }],
+  'ai-workflow':              [{ title: 'AI Tools for Designers — Getting Started' }, { title: 'Prompt Engineering for Design Tasks' }],
+  'ai-features':              [{ title: 'Designing for AI — Patterns & Principles' }, { title: 'Google PAIR Guidebook — Human-AI Interaction' }],
+  'stakeholder-management':   [{ title: 'Influencing Without Authority' }, { title: 'Design Critique & Stakeholder Feedback' }],
+  'storytelling':             [{ title: 'Presenting Design Work to Stakeholders' }, { title: 'Storytelling in Product Design' }]
+};
+
+const DIRECTIONS = [
+  {
+    id: 'e2e-service', emoji: '🗺️', name: 'E2E / Service Designer',
+    desc: 'Design end-to-end experiences across touchpoints — research through to service blueprints and systems.',
+    skills: ['user-research', 'service-design', 'information-architecture', 'prototyping', 'interaction-design']
+  },
+  {
+    id: 'product-specialist', emoji: '🎨', name: 'Product Specialist',
+    desc: 'Go deep on craft — shipping polished, well-considered product experiences.',
+    skills: ['visual-design', 'interaction-design', 'prototyping', 'system-design', 'user-research']
+  },
+  {
+    id: 'research-led', emoji: '🔍', name: 'Research-led Designer',
+    desc: 'Lead with evidence — drive product decisions through deep user understanding and insight strategy.',
+    skills: ['user-research', 'service-design', 'writing', 'information-architecture', 'stakeholder-management']
+  },
+  {
+    id: 'design-lead', emoji: '🎤', name: 'Design Lead / Manager',
+    desc: 'Move from maker to multiplier — build influence, coach others, and connect design to business strategy.',
+    skills: ['storytelling', 'stakeholder-management', 'system-design', 'user-research', 'service-design']
+  },
+  {
+    id: 'design-engineering', emoji: '⚙️', name: 'Design × Engineering',
+    desc: 'Work at the boundary between design and code — building systems, components, and interactive experiences.',
+    skills: ['frontend-development', 'system-design', 'prototyping', 'interaction-design', 'ai-workflow']
+  },
+  {
+    id: 'ai-integrated', emoji: '🤖', name: 'AI-integrated Designer',
+    desc: 'Build an AI-native practice — integrate AI tools into your workflow and design intelligent AI features.',
+    skills: ['ai-workflow', 'ai-features', 'user-research', 'prototyping', 'storytelling']
+  }
+];
+
+const TARGET_LEVELS = { Associate: 1.5, Mid: 2, Senior: 3, Lead: 3.5, Principal: 4 };
+const LEVEL_NAMES   = ['', 'Aware', 'Capable', 'Strong', 'Expert'];
+const TOTAL_Q = SKILLS.length + BEHAVIOURS.length; // 15
+
+// ── STATE ────────────────────────────────────────────────────────
+const STORAGE_KEY = 'winnie_assessment_v4';
+let state = { name:'', email:'', experience:'', target:'', skills:{}, behaviours:{}, directions:[], deprioritised:[] };
+let questionIndex = 0;
+let currentScreenId = 'screen-0';
+
+function saveState() {
+  state.name       = document.getElementById('inputName').value;
+  state.email      = document.getElementById('inputEmail').value;
+  state.experience = document.getElementById('inputExperience').value;
+  state.target     = document.getElementById('inputTarget').value;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...state, questionIndex }));
+}
+
+function loadState() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (!saved) return false;
+    const p = JSON.parse(saved);
+    state = { ...state, ...p };
+    if (p.questionIndex !== undefined) questionIndex = p.questionIndex;
+    return true;
+  } catch(e) { return false; }
+}
+
+function restoreForm() {
+  document.getElementById('inputName').value       = state.name || '';
+  document.getElementById('inputEmail').value      = state.email || '';
+  document.getElementById('inputExperience').value = state.experience || '';
+  document.getElementById('inputTarget').value     = state.target || '';
+  // Sync floating labels for selects
+  document.querySelectorAll('.select-field__input').forEach(sel => {
+    sel.classList.toggle('has-value', !!sel.value);
+  });
+}
+
+function clearAndRestart() {
+  if (!confirm('Clear all saved answers and start fresh?')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  state = { name:'', email:'', experience:'', target:'', skills:{}, behaviours:{}, directions:[], deprioritised:[] };
+  questionIndex = 0;
+  restoreForm();
+  document.getElementById('resumeBanner').style.display = 'none';
+}
+
+// ── NAVIGATION ───────────────────────────────────────────────────
+function showScreen(id) {
+  document.getElementById(currentScreenId).classList.remove('active');
+  document.getElementById(id).classList.add('active');
+  currentScreenId = id;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function setGlobalProgress(pct) {
+  document.getElementById('progressBar').style.width = pct + '%';
+}
+
+// ── SCREEN 0: WELCOME ────────────────────────────────────────────
+function startAssessment() {
+  const name = document.getElementById('inputName').value.trim();
+  const exp  = document.getElementById('inputExperience').value;
+  const tgt  = document.getElementById('inputTarget').value;
+  if (!name) { alert('Please enter your name.'); return; }
+  if (!exp)  { alert('Please select your experience level.'); return; }
+  if (!tgt)  { alert('Please select your target level.'); return; }
+  state.name = name;
+  state.email = document.getElementById('inputEmail').value.trim();
+  state.experience = exp;
+  state.target = tgt;
+  saveState();
+  questionIndex = 0;
+  renderQuestion(0);
+  showScreen('screen-q');
+}
+
+// ── QUESTION SCREEN ──────────────────────────────────────────────
+function renderQuestion(idx) {
+  const isSkill = idx < SKILLS.length;
+  const item    = isSkill ? SKILLS[idx] : BEHAVIOURS[idx - SKILLS.length];
+  const num     = isSkill ? idx + 1 : idx - SKILLS.length + 1;
+  const total   = isSkill ? SKILLS.length : BEHAVIOURS.length;
+
+  // Section label
+  document.getElementById('qEyebrow').textContent = (isSkill ? 'Core Skill' : 'Operating Behaviour') + ' ' + num + ' of ' + total;
+  document.getElementById('qCounter').textContent = (idx + 1) + ' / ' + TOTAL_Q;
+
+  // Progress
+  setGlobalProgress(5 + (idx / TOTAL_Q) * 90);
+
+  // Section title + desc
+  document.getElementById('qSectionTitle').textContent = isSkill ? 'Core Skills' : 'Operating Behaviours';
+  document.getElementById('qSectionDesc').textContent  = isSkill
+    ? 'Select the level that best describes you right now — be honest.'
+    : 'Beyond craft skills, these behaviours shape how effective you are in a product team.';
+
+  // Question card
+  document.getElementById('qCardTitle').textContent = item.name;
+  document.getElementById('qCardDesc').textContent  = item.desc;
+
+  // Options
+  const container = document.getElementById('qOptions');
+  container.innerHTML = '';
+
+  if (isSkill) {
+    const keys  = ['aware','capable','strong','expert'];
+    const names = ['Aware','Capable','Strong','Expert'];
+    const cur   = state.skills[item.id];
+
+    const grid = document.createElement('div');
+    grid.className = 'skill-options';
+
+    keys.forEach((key, i) => {
+      const d = document.createElement('div');
+      d.className = 'opt' + (cur === i+1 ? ' selected' : '');
+      d.innerHTML = `<div class="opt-title">${names[i]}</div><div class="opt-desc">${item.levels[key]}</div>`;
+      d.onclick = () => {
+        state.skills[item.id] = i + 1;
+        saveState();
+        grid.querySelectorAll('.opt').forEach((el, j) => el.classList.toggle('selected', j === i));
+        setNextEnabled(true);
+        setTimeout(nextQuestion, 380);
+      };
+      grid.appendChild(d);
+    });
+
+    container.appendChild(grid);
+    setNextEnabled(cur !== undefined);
+
+  } else {
+    const keys  = ['developing','practising','consistent'];
+    const names = ['Developing','Practising','Consistent'];
+    const cur   = state.behaviours[item.id];
+
+    const grid = document.createElement('div');
+    grid.className = 'beh-options';
+
+    keys.forEach((key, i) => {
+      const d = document.createElement('div');
+      d.className = 'opt' + (cur === key ? ' selected' : '');
+      d.innerHTML = `<div class="opt-title">${names[i]}</div><div class="opt-desc">${item.levels[key]}</div>`;
+      d.onclick = () => {
+        state.behaviours[item.id] = key;
+        saveState();
+        grid.querySelectorAll('.opt').forEach((el, j) => el.classList.toggle('selected', j === i));
+        setNextEnabled(true);
+        setTimeout(nextQuestion, 380);
+      };
+      grid.appendChild(d);
+    });
+
+    container.appendChild(grid);
+    setNextEnabled(cur !== undefined);
+  }
+
+  // Next button label
+  document.getElementById('qNextLabel').textContent = idx === TOTAL_Q - 1 ? 'See my results' : 'Next';
+}
+
+function setNextEnabled(enabled) {
+  document.getElementById('qNextBtn').disabled = !enabled;
+}
+
+function nextQuestion() {
+  if (questionIndex < TOTAL_Q - 1) {
+    questionIndex++;
+    renderQuestion(questionIndex);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    renderDirectionScreen();
+    showScreen('screen-direction');
+    setGlobalProgress(95);
+  }
+}
+
+function prevQuestion() {
+  if (questionIndex > 0) {
+    questionIndex--;
+    renderQuestion(questionIndex);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    showScreen('screen-0');
+    setGlobalProgress(0);
+  }
+}
+
+function backToQuestions() {
+  renderQuestion(TOTAL_Q - 1);
+  showScreen('screen-q');
+  setGlobalProgress(5 + ((TOTAL_Q - 1) / TOTAL_Q) * 90);
+}
+
+function renderDirectionScreen() {
+  // Direction cards
+  const grid = document.getElementById('directionGrid');
+  grid.innerHTML = DIRECTIONS.map(d => `
+    <div class="direction-card${(state.directions||[]).includes(d.id) ? ' selected' : ''}" data-dir="${d.id}" onclick="selectDirection('${d.id}')">
+      <div class="dc-emoji">${d.emoji}</div>
+      <div class="dc-name">${d.name}</div>
+      <div class="dc-desc">${d.desc}</div>
+    </div>`).join('');
+
+  // Deprioritise chips
+  const chips = document.getElementById('deprChips');
+  chips.innerHTML = SKILLS.map(s => `
+    <button class="depr-chip${(state.deprioritised||[]).includes(s.id) ? ' selected' : ''}"
+      onclick="toggleDepr('${s.id}', this)">${s.name}</button>`).join('');
+
+  updateDirCounter();
+}
+
+function updateDirCounter() {
+  const n = (state.directions||[]).length;
+  document.getElementById('dirNextBtn').disabled = n === 0;
+  // Dim cards that can't be selected once 3 chosen
+  document.querySelectorAll('.direction-card').forEach(el => {
+    const isSel = (state.directions||[]).includes(el.dataset.dir);
+    el.classList.toggle('dim', n >= 3 && !isSel);
+  });
+}
+
+function selectDirection(id) {
+  state.directions = state.directions || [];
+  if (state.directions.includes(id)) {
+    // Deselect
+    state.directions = state.directions.filter(d => d !== id);
+  } else if (state.directions.length < 3) {
+    state.directions.push(id);
+  }
+  saveState();
+  document.querySelectorAll('.direction-card').forEach(el => {
+    el.classList.toggle('selected', state.directions.includes(el.dataset.dir));
+  });
+  updateDirCounter();
+}
+
+function toggleDepr(skillId, el) {
+  state.deprioritised = state.deprioritised || [];
+  if (state.deprioritised.includes(skillId)) {
+    state.deprioritised = state.deprioritised.filter(id => id !== skillId);
+    el.classList.remove('selected');
+  } else {
+    state.deprioritised.push(skillId);
+    el.classList.add('selected');
+  }
+  saveState();
+}
+
+function submitDirection() {
+  saveState();
+  buildResults();
+  showScreen('screen-results');
+  setGlobalProgress(100);
+}
+
+// Returns union of skills across all selected directions, or null if none selected
+function getDirectionSkills() {
+  const dirs = (state.directions||[]).map(id => DIRECTIONS.find(d => d.id === id)).filter(Boolean);
+  if (!dirs.length) return null;
+  return [...new Set(dirs.flatMap(d => d.skills))];
+}
+
+// ── RESULTS ──────────────────────────────────────────────────────
+let radarChart = null;
+
+function buildResults() {
+  const date = new Date().toLocaleDateString('en-AU', { day:'numeric', month:'long', year:'numeric' });
+  document.getElementById('heroName').textContent = state.name;
+  document.getElementById('heroMeta').textContent = state.experience + ' experience · Targeting ' + state.target + ' level';
+  document.getElementById('heroDate').textContent = 'Completed ' + date;
+  const selDirs = (state.directions||[]).map(id => DIRECTIONS.find(d => d.id === id)).filter(Boolean);
+  document.getElementById('heroDirection').innerHTML = selDirs.length
+    ? selDirs.map(d => `<span class="rh-direction">${d.emoji} ${d.name}</span>`).join('')
+    : '';
+  if (selDirs.length) {
+    document.querySelector('#focusAreasHead h3').textContent = 'Your top focus areas on your path';
+    document.getElementById('focusAreasDesc').textContent = `Ranked by gap size within your chosen direction${selDirs.length > 1 ? 's' : ''}. Skills outside your focus are shown separately.`;
+  } else {
+    document.querySelector('#focusAreasHead h3').textContent = 'Your top 3 focus areas';
+    document.getElementById('focusAreasDesc').textContent = 'Ranked by gap between your current rating and your target level.';
+  }
+  buildInsights();
+  buildRadar();
+  buildPriorityGaps();
+  buildPathway();
+  buildBehaviourSummary();
+}
+
+// ── INSIGHTS ENGINE ──────────────────────────────────────────────
+
+const ARCHETYPES = [
+  { id:'craftsperson', name:'The Craftsperson', emoji:'🎨',
+    color:'#C9A400', bg:'#FFFDE8', border:'#F5D028',
+    superpower:'Beautiful, considered execution that makes complex things feel simple.',
+    blindspot:'Can over-polish before validating the right problem.' },
+  { id:'researcher', name:'The Researcher', emoji:'🔍',
+    color:'#2563EB', bg:'#DBEAFE', border:'#93C5FD',
+    superpower:'Deep user understanding that keeps the team grounded in real needs.',
+    blindspot:'Work can lack the craft finish to land strongly with stakeholders.' },
+  { id:'strategist', name:'The Strategist', emoji:'♟️',
+    color:'#16A34A', bg:'#DCFCE7', border:'#86EFAC',
+    superpower:'Sees the big picture — connects features to outcomes to strategy.',
+    blindspot:'Can get stuck in concepts without shipping tangible work.' },
+  { id:'communicator', name:'The Communicator', emoji:'💬',
+    color:'#C2185B', bg:'#FCE4EC', border:'#F48FB1',
+    superpower:'Turns complex work into clear, compelling narratives that earn trust.',
+    blindspot:'May underestimate the need to level up core execution and craft skills.' },
+  { id:'influencer', name:'The Influencer', emoji:'🎤',
+    color:'#0891B2', bg:'#ECFEFF', border:'#67E8F9',
+    superpower:'Leads through story and relationships — gets alignment where others hit friction.',
+    blindspot:'Can rely too much on communication and under-deliver on execution depth.' },
+  { id:'allrounder', name:'The All-Rounder', emoji:'⚡',
+    color:'#6B3FEE', bg:'#EAE0FF', border:'#C4B5FD',
+    superpower:'Adaptable across any team, brief, or product challenge.',
+    blindspot:'Not yet deep enough in any area to be the go-to person.' }
+];
+
+function getArchetype() {
+  const s = state.skills;
+  const bMap = { developing:1, practising:2, consistent:3 };
+  const craft      = ((s['visual-design']||0) + (s['interaction-design']||0)) / 2;
+  const research   = ((s['user-research']||0) + (s['service-design']||0)) / 2;
+  const strategy   = ((s['system-design']||0) + (s['information-architecture']||0)) / 2;
+  // Communicator: writing craft + transparency behaviour
+  const comms      = ((s['writing']||0) + (bMap[state.behaviours['transparency']]||1) / 3 * 4) / 2;
+  // Influencer: storytelling + stakeholder management — lead-through-influence profile
+  const influencer = ((s['storytelling']||0) + (s['stakeholder-management']||0)) / 2;
+  const scores = { craftsperson:craft, researcher:research, strategist:strategy, communicator:comms, influencer };
+  const vals = Object.values(scores);
+  const range = Math.max(...vals) - Math.min(...vals);
+  if (range < 0.7) return ARCHETYPES.find(a => a.id === 'allrounder');
+  const winner = Object.entries(scores).sort((a,b) => b[1]-a[1])[0][0];
+  return ARCHETYPES.find(a => a.id === winner) || ARCHETYPES[5];
+}
+
+function getReadinessScore() {
+  const tv = TARGET_LEVELS[state.target] || 2;
+  const skillScore = SKILLS.reduce((sum,s) => sum + Math.min((state.skills[s.id]||0)/tv, 1), 0) / SKILLS.length;
+  const bMap = { developing:0, practising:0.5, consistent:1 };
+  const behScore = BEHAVIOURS.reduce((sum,b) => sum + (bMap[state.behaviours[b.id]]||0), 0) / BEHAVIOURS.length;
+  return Math.round((skillScore * 0.7 + behScore * 0.3) * 100);
+}
+
+function getCalibration() {
+  const avgSkill = SKILLS.reduce((s,sk) => s + (state.skills[sk.id]||0), 0) / SKILLS.length;
+  const expRanges = { '0–1 years':[0,1.8], '1–3 years':[0.8,2.5], '3–5 years':[1.5,3.0], '5–10 years':[2.0,3.5], '10+ years':[2.5,4.0] };
+  const range = expRanges[state.experience];
+  if (!range) return 'calibrated';
+  if (avgSkill < range[0]) return 'under';
+  if (avgSkill > range[1]) return 'over';
+  return 'calibrated';
+}
+
+function getStrengthSkills() {
+  const tv = TARGET_LEVELS[state.target] || 2;
+  const atOrAbove = SKILLS.filter(s => (state.skills[s.id]||0) >= tv);
+  if (atOrAbove.length >= 1) return atOrAbove.slice(0,2);
+  return [...SKILLS].sort((a,b) => (state.skills[b.id]||0)-(state.skills[a.id]||0)).slice(0,2);
+}
+
+function getCriticalGap() {
+  const tv        = TARGET_LEVELS[state.target] || 2;
+  const dirSkills = getDirectionSkills();
+  const depr      = state.deprioritised || [];
+  let candidates  = SKILLS.map(s => ({ skill:s, gap:tv-(state.skills[s.id]||0), self:state.skills[s.id]||0 }))
+    .filter(g => g.gap > 0);
+  if (dirSkills) {
+    const onPath = candidates.filter(g => dirSkills.includes(g.skill.id) && !depr.includes(g.skill.id));
+    if (onPath.length) candidates = onPath;
+  } else if (depr.length) {
+    const active = candidates.filter(g => !depr.includes(g.skill.id));
+    if (active.length) candidates = active;
+  }
+  return candidates.sort((a,b) => b.gap-a.gap)[0] || null;
+}
+
+function getAIReadiness() {
+  const avg = ((state.skills['ai-workflow']||0) + (state.skills['ai-features']||0)) / 2;
+  if (avg >= 3) return { label:'AI Ready', dot:'#16A34A', msg:'You\'re integrating AI into your practice — this puts you ahead of most designers right now.' };
+  if (avg >= 2) return { label:'AI Growing', dot:'#D97706', msg:'You\'re building AI skills. Deepening your practice here will become a clear differentiator.' };
+  return { label:'AI Early', dot:'#6B3FEE', msg:'AI fluency is fast becoming a baseline expectation. This is a high-leverage area to build next.' };
+}
+
+function getSkillVsBehaviourBalance() {
+  const skillPct = Math.round(SKILLS.reduce((s,sk) => s+(state.skills[sk.id]||0),0)/SKILLS.length/4*100);
+  const bMap = { developing:0, practising:50, consistent:100 };
+  const behPct = Math.round(BEHAVIOURS.reduce((s,b) => s+(bMap[state.behaviours[b.id]]||0),0)/BEHAVIOURS.length);
+  let type = 'balanced';
+  if (skillPct < 40 && behPct < 40) type = 'both-low';
+  else if (skillPct >= 65 && behPct >= 65) type = 'both-high';
+  else if (skillPct - behPct > 20) type = 'high-skills';
+  else if (behPct - skillPct > 20) type = 'high-behaviours';
+  return { type, skillPct, behPct };
+}
+
+function buildInsights() {
+  const archetype  = getArchetype();
+  const readiness  = getReadinessScore();
+  const calib      = getCalibration();
+  const aiRead     = getAIReadiness();
+  const strengths  = getStrengthSkills();
+  const critGap    = getCriticalGap();
+  const balance    = getSkillVsBehaviourBalance();
+  const tv         = TARGET_LEVELS[state.target] || 2;
+
+  // ── Archetype card ──────────────────────────────────
+  document.getElementById('insightArchetype').innerHTML = `
+    <div class="archetype-card" style="background:${archetype.bg};border-color:${archetype.border};">
+      <div class="archetype-emoji">${archetype.emoji}</div>
+      <div style="flex:1;">
+        <div class="archetype-label" style="color:${archetype.color};">Your designer profile</div>
+        <div class="archetype-name" style="color:${archetype.color};">${archetype.name}</div>
+        <div class="archetype-row">
+          <div class="archetype-tag" style="color:${archetype.color};background:rgba(0,0,0,0.07);">
+            <span>Superpower</span>${archetype.superpower}
+          </div>
+          <div class="archetype-tag" style="color:${archetype.color};background:rgba(0,0,0,0.07);">
+            <span>Watch out for</span>${archetype.blindspot}
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  // ── Readiness stat ──────────────────────────────────
+  const readColor = readiness >= 75 ? 'var(--success-deep)' : readiness >= 50 ? 'var(--purple)' : 'var(--warning-deep)';
+  document.getElementById('insightReadiness').innerHTML = `
+    <div class="is-label">Career readiness</div>
+    <div class="is-value" style="color:${readColor};">${readiness}%</div>
+    <div class="is-sub">Ready for <strong>${state.target}</strong> level right now</div>`;
+
+  // ── Calibration stat ────────────────────────────────
+  const calibContent = {
+    under: { dot:'#F59E0B', msg:'You may be underselling yourself based on your experience. Revisit a few ratings with a peer.' },
+    over:  { dot:'#EF4444', msg:'Some ratings may be aspirational. Expert means consistently leading others — check with a manager.' },
+    calibrated: { dot:'#22C55E', msg:'Your self-ratings look well-calibrated for your years of experience.' }
+  }[calib];
+  document.getElementById('insightCalibration').innerHTML = `
+    <div class="is-label">Experience signal</div>
+    <div class="is-signal" style="margin-bottom:6px;">
+      <div class="is-signal-dot" style="background:${calibContent.dot};"></div>
+      <strong style="font-size:var(--text-base);">${calib === 'calibrated' ? 'Well calibrated' : calib === 'under' ? 'Possibly under-rated' : 'Check your ratings'}</strong>
+    </div>
+    <div class="is-sub">${calibContent.msg}</div>`;
+
+  // ── AI Readiness stat ───────────────────────────────
+  document.getElementById('insightAIReadiness').innerHTML = `
+    <div class="is-label">AI readiness</div>
+    <div class="is-signal" style="margin-bottom:6px;">
+      <div class="is-signal-dot" style="background:${aiRead.dot};"></div>
+      <strong style="font-size:var(--text-base);">${aiRead.label}</strong>
+    </div>
+    <div class="is-sub">${aiRead.msg}</div>`;
+
+  // ── 3 Insight cards ─────────────────────────────────
+  // Card 1: Strengths
+  const strengthHTML = strengths.length ? strengths.map(s => {
+    const self = state.skills[s.id]||0;
+    const atTarget = self >= tv;
+    return `<div class="ic-skill">${s.name}<div class="ic-skill-sub">${LEVEL_NAMES[self]} ${atTarget ? '· At target ✓' : '· Your strongest'}</div></div>`;
+  }).join('') : '<div class="ic-value">Keep building — you\'re making progress.</div>';
+
+  // Card 2: Critical gap
+  const gapHTML = critGap ? `
+    <div class="ic-skill">${critGap.skill.name}</div>
+    <div class="ic-skill-sub" style="color:var(--warning-deep);font-weight:600;">${LEVEL_NAMES[critGap.self]||'Not rated'} → ${LEVEL_NAMES[Math.round(tv)]} needed</div>
+    <div class="ic-value" style="margin-top:4px;">${getRationale(critGap.skill.id)}</div>` : '<div class="ic-value">You\'re at or above target in all skills! 🎉</div>';
+
+  // Card 3: Skills vs Behaviours
+  const balanceMsg = {
+    'high-skills':     'Your craft is ahead of how you operate. Focus on visibility and influence.',
+    'high-behaviours': 'Your professional maturity is strong. Time to close the craft gaps.',
+    'both-low':        'Focus on fundamentals. Behaviour maturity follows real project experience.',
+    'both-high':       'Strong across both. You may be closer to levelling up than you think.',
+    'balanced':        'Good balance between craft and working style. Keep building both steadily.'
+  }[balance.type];
+
+  document.getElementById('insightCards').innerHTML = `
+    <div class="insight-card" style="border-top-color:var(--success);">
+      <div class="ic-label">✦ Where you shine</div>
+      <div class="ic-skills">${strengthHTML}</div>
+    </div>
+    <div class="insight-card" style="border-top-color:var(--warning);">
+      <div class="ic-label">⚠ Biggest unlock</div>
+      ${gapHTML}
+    </div>
+    <div class="insight-card" style="border-top-color:var(--info);">
+      <div class="ic-label">⚖ Skills vs Behaviours</div>
+      <div class="ic-bar-wrap">
+        <div class="ic-bar-row">
+          <span style="width:60px;">Craft</span>
+          <div class="ic-bar-bg"><div class="ic-bar-fill" style="width:${balance.skillPct}%;background:var(--purple);"></div></div>
+          <div class="ic-bar-pct">${balance.skillPct}%</div>
+        </div>
+        <div class="ic-bar-row">
+          <span style="width:60px;">Behaviours</span>
+          <div class="ic-bar-bg"><div class="ic-bar-fill" style="width:${balance.behPct}%;background:var(--yellow-deep);"></div></div>
+          <div class="ic-bar-pct">${balance.behPct}%</div>
+        </div>
+      </div>
+      <div class="ic-value">${balanceMsg}</div>
+    </div>`;
+
+  // ── One-level-up plan ───────────────────────────────
+  const bRank = { developing:0, practising:1, consistent:2 };
+  const lowestBeh = [...BEHAVIOURS].sort((a,b) => (bRank[state.behaviours[a.id]]||0)-(bRank[state.behaviours[b.id]]||0))[0];
+  const quickWinSkill = SKILLS.map(s => ({ s, gap:tv-(state.skills[s.id]||0) }))
+    .filter(g => g.gap > 0 && g.gap <= 1).sort((a,b) => a.gap-b.gap)[0];
+
+  const behActions = {
+    'customer-understanding': 'Talk to one user about a problem you\'re currently designing for',
+    'delivering-outcomes':    'Track the metric your next design decision is meant to move',
+    'iteration':              'Set a rule: test with a real user before any design goes hi-fi',
+    'shared-responsibility':  'Schedule a working session with your PM or engineer before the next kickoff',
+    'transparency':           'Write a 5-sentence decision log the next time you make a major design call',
+    'learning-agility':       'Spend 30 minutes a week exploring one new tool or method — then share what you found with someone',
+    'custom-focus':           'Ask your manager what \'great\' looks like for your current role'
+  };
+
+  const practiceItem = critGap ? `
+    <div class="olu-item">
+      <div class="olu-icon" style="background:var(--purple-tint);">📚</div>
+      <div class="olu-body">
+        <div class="olu-type">Practice this skill</div>
+        <div class="olu-text">${critGap.skill.name}</div>
+        <div class="olu-hint">${(SKILL_RESOURCES[critGap.skill.id]||[])[0]?.title || 'Start with one focused project in this area'}</div>
+      </div>
+    </div>` : '';
+
+  const behItem = lowestBeh ? `
+    <div class="olu-item">
+      <div class="olu-icon" style="background:var(--yellow-tint);">🎯</div>
+      <div class="olu-body">
+        <div class="olu-type">Strengthen this behaviour</div>
+        <div class="olu-text">${lowestBeh.name}</div>
+        <div class="olu-hint">${behActions[lowestBeh.id] || 'Make this behaviour a deliberate habit in your next sprint'}</div>
+      </div>
+    </div>` : '';
+
+  const quickWinItem = quickWinSkill ? `
+    <div class="olu-item">
+      <div class="olu-icon" style="background:var(--success-tint);">⚡</div>
+      <div class="olu-body">
+        <div class="olu-type">Quick win</div>
+        <div class="olu-text">${quickWinSkill.s.name}</div>
+        <div class="olu-hint">You're close — one real project will close this gap</div>
+      </div>
+    </div>` : '';
+
+  const learningAgility = state.behaviours['learning-agility'];
+  const agilityNote = learningAgility === 'consistent' ? `
+    <div class="olu-note">
+      🚀 <strong>Your advantage:</strong> Your learning agility is strong — you tend to close skill gaps faster than average. Use that.
+    </div>` : '';
+
+  const items = [practiceItem, behItem, quickWinItem].filter(Boolean);
+  if (items.length) {
+    document.getElementById('insightOneLevelUp').innerHTML = `
+      <div class="one-level-up">
+        <div class="olu-head">If you only do 3 things</div>
+        <div class="olu-items">${items.join('')}</div>
+        ${agilityNote}
+      </div>`;
+  }
+}
+
+function buildRadar() {
+  const SHORT_LABELS = {
+    'user-research':            'User Research',
+    'information-architecture': 'Info Arch',
+    'interaction-design':       'Interaction',
+    'visual-design':            'Visual Design',
+    'writing':                  'Writing',
+    'service-design':           'Service Design',
+    'prototyping':              'Prototyping',
+    'frontend-development':     'Frontend Dev',
+    'system-design':            'Systems',
+    'ai-workflow':              'AI Workflow',
+    'ai-features':              'AI Features',
+    'stakeholder-management':   'Stakeholders',
+    'storytelling':             'Storytelling'
+  };
+  const labels = SKILLS.map(s => SHORT_LABELS[s.id] || s.name.split(' ').slice(0,2).join(' '));
+  const selfData = SKILLS.map(s => state.skills[s.id] || 0);
+  const tv = TARGET_LEVELS[state.target] || 2;
+  if (radarChart) radarChart.destroy();
+  radarChart = new Chart(document.getElementById('radarChart').getContext('2d'), {
+    type: 'radar',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Your rating', data: selfData, backgroundColor: 'rgba(107,63,238,0.2)', borderColor: 'rgba(107,63,238,0.9)', borderWidth: 2.5, pointBackgroundColor: '#6B3FEE', pointRadius: 4 },
+        { label: 'Target',      data: SKILLS.map(() => tv), backgroundColor: 'rgba(245,208,40,0.08)', borderColor: '#F5D028', borderWidth: 2, borderDash: [5,4], pointBackgroundColor: '#F5D028', pointRadius: 3 }
+      ]
+    },
+    options: {
+      responsive: true,
+      scales: { r: { min:0, max:4, ticks:{ stepSize:1, display:false }, grid:{ color:'rgba(0,0,0,0.06)' }, angleLines:{ color:'rgba(0,0,0,0.06)' }, pointLabels:{ font:{ family:"'Public Sans', system-ui", size:11, weight:'500' }, color:'#6B6084' } } },
+      plugins: { legend: { display: false } },
+      animation: { duration: 800 }
+    }
+  });
+}
+
+function buildPriorityGaps() {
+  const tv        = TARGET_LEVELS[state.target] || 2;
+  const dirSkills = getDirectionSkills();
+  const depr      = state.deprioritised || [];
+  const el        = document.getElementById('priorityGaps');
+
+  const allGaps = SKILLS.map(s => ({ skill:s, self:state.skills[s.id]||0, gap:tv-(state.skills[s.id]||0) }))
+    .filter(g => g.gap > 0).sort((a,b) => b.gap-a.gap);
+
+  if (!allGaps.length) {
+    el.innerHTML = '<div style="background:#fff;border:1.5px solid var(--border-default);border-radius:var(--radius-lg);padding:24px;text-align:center;box-shadow:var(--shadow-z4)"><div style="font-size:32px;margin-bottom:8px">🎉</div><strong>You\'re at or above target in all skills!</strong></div>';
+    return;
+  }
+
+  // Split into on-path and outside-focus
+  const onPath = dirSkills
+    ? allGaps.filter(g => dirSkills.includes(g.skill.id) && !depr.includes(g.skill.id))
+    : allGaps.filter(g => !depr.includes(g.skill.id));
+  const outsideFocus = allGaps.filter(g => !onPath.find(p => p.skill.id === g.skill.id));
+
+  const tv_label = LEVEL_NAMES[Math.round(tv)];
+  let html = onPath.slice(0,3).map((g,i) => `
+    <div class="priority-card">
+      <div class="p-rank">${i+1}</div>
+      <div>
+        <div class="p-name">${g.skill.name}</div>
+        <div class="p-gap">Currently ${LEVEL_NAMES[g.self]||'Not rated'} → Target ${tv_label}</div>
+        <div class="p-why">${getRationale(g.skill.id)}</div>
+      </div>
+    </div>`).join('');
+
+  if (!onPath.length) {
+    html = '<div style="padding:16px;text-align:center;color:var(--text-secondary);font-size:var(--text-sm)">No gaps in your chosen direction — great position to be in. See full breakdown below.</div>';
+  }
+
+  if (outsideFocus.length && dirSkills) {
+    html += `<div class="outside-focus">
+      <div class="of-label">Outside your current focus</div>
+      <div class="of-chips">${outsideFocus.map(g => `
+        <div class="of-chip">
+          <span class="of-chip-name">${g.skill.name}</span>
+          <span class="of-chip-gap">${LEVEL_NAMES[g.self]||'—'} → ${tv_label}</span>
+        </div>`).join('')}
+      </div>
+      <div class="of-note">These gaps exist but sit outside your stated direction. You can revisit them later.</div>
+    </div>`;
+  }
+
+  el.innerHTML = html;
+}
+
+function getRationale(id) {
+  return ({
+    'user-research':           'Strong research foundation is the single biggest multiplier for design decisions at any level.',
+    'information-architecture':'IA shapes every navigation decision. Weak IA often can\'t be fixed by visual design alone.',
+    'interaction-design':      'Interaction craft separates designers who deliver screens from designers who deliver experiences.',
+    'visual-design':           'Visual polish signals professionalism and is often the first thing stakeholders respond to.',
+    'writing':                 'Microcopy and content strategy are increasingly core designer responsibilities, not handoffs.',
+    'service-design':          'Connecting user journeys across touchpoints is essential for senior and lead-level work.',
+    'prototyping':             'The ability to make ideas tangible fast accelerates every phase of product development.',
+    'frontend-development':    'Designers who can speak in code build significantly stronger relationships with engineering teams.',
+    'system-design':           'Design systems thinking is a force multiplier — one decision scales to hundreds of components.',
+    'ai-workflow':             'AI fluency is fast becoming a baseline expectation. Designers who use AI well ship more and learn faster.',
+    'ai-features':             'Most products now include AI-powered functionality. Knowing how to design for it is a distinct, in-demand skill.',
+    'stakeholder-management':  'Your ability to manage stakeholders often determines whether great design actually ships — or gets deprioritised.',
+    'storytelling':            'The ability to frame your work as a narrative is what gets design a seat at the table in high-stakes decisions.'
+  })[id] || 'Closing this gap will directly support your growth toward your target level.';
+}
+
+function buildPathway() {
+  const tv        = TARGET_LEVELS[state.target] || 2;
+  const dirSkills = getDirectionSkills();
+  const depr      = state.deprioritised || [];
+  const el        = document.getElementById('learningPathway');
+
+  let skills = SKILLS.filter(s => (state.skills[s.id]||0) < tv);
+  if (dirSkills) {
+    const onPath = skills.filter(s => dirSkills.includes(s.id) && !depr.includes(s.id));
+    skills = onPath.length ? onPath : skills.filter(s => !depr.includes(s.id));
+  } else {
+    skills = skills.filter(s => !depr.includes(s.id));
+  }
+  skills = skills.sort((a,b) => (tv-(state.skills[b.id]||0))-(tv-(state.skills[a.id]||0))).slice(0,5);
+
+  if (!skills.length) {
+    el.innerHTML = '<div style="padding:20px;text-align:center;font-size:14px;color:var(--text-secondary)">No skill gaps in your chosen direction.</div>';
+    return;
+  }
+  el.innerHTML = skills.map(s => `
+    <div class="pw-group">
+      <div class="pw-label">${s.name}</div>
+      ${(SKILL_RESOURCES[s.id]||[]).map(r => `<div class="pw-item"><span class="pw-dot"></span>${r.title}</div>`).join('')}
+    </div>`).join('');
+}
+
+function buildBehaviourSummary() {
+  const bc = { developing:'badge-developing', practising:'badge-practising', consistent:'badge-consistent' };
+  const bn = { developing:'Developing', practising:'Practising', consistent:'Consistent' };
+  document.getElementById('behaviourSummary').innerHTML = BEHAVIOURS.map(b => {
+    const v = state.behaviours[b.id] || 'developing';
+    return `<div class="beh-row"><span>${b.name}</span><span class="badge-pill ${bc[v]}">${bn[v]}</span></div>`;
+  }).join('');
+}
+
+// ── PDF ──────────────────────────────────────────────────────────
+async function downloadPDF() {
+  const btn = document.getElementById('pdfBtn');
+  btn.innerHTML = '<span class="loading-spinner"></span> Generating…';
+  btn.disabled = true;
+  try {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ orientation:'portrait', unit:'mm', format:'a4' });
+    const W=210, H=297, m=18, cW=W-m*2;
+    const tv  = TARGET_LEVELS[state.target] || 2;
+    const pu=[107,63,238], ye=[245,208,40], g8=[45,37,70], g6=[107,96,132], g2=[224,220,233];
+    const gr=[16,185,129], or_=[217,119,6];
+
+    // ── Pre-compute insights ────────────────────────────────────
+    const archetype = getArchetype();
+    const readiness = getReadinessScore();
+    const calib     = getCalibration();
+    const aiRead    = getAIReadiness();
+    const strengths = getStrengthSkills();
+    const critGap   = getCriticalGap();
+    const balance   = getSkillVsBehaviourBalance();
+    const bRank     = { developing:0, practising:1, consistent:2 };
+    const lowestBeh = [...BEHAVIOURS].sort((a,b)=>(bRank[state.behaviours[a.id]]||0)-(bRank[state.behaviours[b.id]]||0))[0];
+    const quickWin  = SKILLS.map(s=>({s,gap:tv-(state.skills[s.id]||0)})).filter(g=>g.gap>0&&g.gap<=1).sort((a,b)=>a.gap-b.gap)[0];
+    const topGaps   = SKILLS.map(s=>({skill:s,self:state.skills[s.id]||0,gap:tv-(state.skills[s.id]||0)})).filter(g=>g.gap>0).sort((a,b)=>b.gap-a.gap).slice(0,3);
+    const pwSkills  = SKILLS.filter(s=>(state.skills[s.id]||0)<tv).sort((a,b)=>(tv-(state.skills[b.id]||0))-(tv-(state.skills[a.id]||0))).slice(0,5);
+
+    // ── Helpers ────────────────────────────────────────────────
+    const archetypeRgb = {
+      craftsperson:{ bg:[255,253,232], bd:[245,208,40],  tx:[180,140,0]   },
+      researcher:  { bg:[219,234,254], bd:[147,197,253], tx:[37,99,235]   },
+      strategist:  { bg:[220,252,231], bd:[134,239,172], tx:[22,163,74]   },
+      communicator:{ bg:[252,228,236], bd:[244,143,177], tx:[194,24,91]   },
+      influencer:  { bg:[236,254,255], bd:[103,232,249], tx:[8,145,178]   },
+      allrounder:  { bg:[234,224,255], bd:[196,181,253], tx:[107,63,238]  }
+    };
+    function pHead(title) {
+      doc.setFillColor(...pu); doc.rect(0,0,W,10,'F');
+      doc.setFont('helvetica','bold'); doc.setFontSize(9); doc.setTextColor(255,255,255);
+      doc.text(title, m, 7);
+    }
+    function secHead(label, yPos) {
+      doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.setTextColor(...g8);
+      doc.text(label, m, yPos);
+      doc.setDrawColor(...g2); doc.line(m, yPos+2, W-m, yPos+2);
+      return yPos+8;
+    }
+    const behHints = {
+      'customer-understanding':'Talk to one user about a problem you\'re currently designing for',
+      'define-success':'Involve cross-functional partners in your next discovery session',
+      'measure-outcomes':'Track the metric your next design decision is meant to move',
+      'iterate':'Test with a real user before any design goes hi-fi',
+      'shared-responsibility':'Schedule a working session with your PM or engineer',
+      'transparency':'Write a decision log the next time you make a major design call',
+      'learning-agility':'Spend 30 min/week on a new tool or method — then share it'
+    };
+
+    // ════════════════════════════════════════════════════════════
+    // PAGE 1 — Cover + Radar + Skill Snapshot
+    // ════════════════════════════════════════════════════════════
+    doc.setFillColor(...pu); doc.rect(0,0,W,38,'F');
+    doc.setFont('helvetica','bold'); doc.setFontSize(18); doc.setTextColor(255,255,255);
+    doc.text('Product Designer Self-Assessment', m, 17);
+    doc.setFont('helvetica','normal'); doc.setFontSize(10);
+    doc.text('Prepared by Winnie Nguyen · UX Product Designer & Mentor', m, 28);
+    let y=50;
+    doc.setFont('helvetica','bold'); doc.setFontSize(22); doc.setTextColor(...g8);
+    doc.text(state.name, m, y); y+=9;
+    doc.setFont('helvetica','normal'); doc.setFontSize(11); doc.setTextColor(...g6);
+    doc.text(state.experience+' experience  ·  Targeting '+state.target+' level', m, y); y+=6;
+    doc.setFontSize(9); doc.text('Completed '+new Date().toLocaleDateString('en-AU',{day:'numeric',month:'long',year:'numeric'}), m, y); y+=12;
+    const img = document.getElementById('radarChart').toDataURL('image/png',1);
+    doc.addImage(img,'PNG', m+(cW-130)/2, y, 130, 90); y+=98;
+    doc.setFillColor(...pu); doc.circle(m+3,y-1,2,'F');
+    doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(...g6);
+    doc.text('Your rating', m+7, y);
+    doc.setFillColor(...ye); doc.circle(m+45,y-1,2,'F');
+    doc.text('Target ('+state.target+')', m+49, y); y+=12;
+    y = secHead('Skill Snapshot', y);
+    const colW = cW/3;
+    SKILLS.forEach((s,i)=>{
+      const sv=state.skills[s.id]||0, gap=tv-sv, xC=m+(i%3)*colW;
+      if(i%3===0&&i>0) y+=10;
+      doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...g6);
+      doc.text(s.name.substring(0,20), xC, y);
+      doc.setFont('helvetica','bold'); doc.setFontSize(9);
+      doc.setTextColor(...(gap>0?pu:gr));
+      doc.text(LEVEL_NAMES[sv]+(gap>0?' ↑':' ✓'), xC, y+4.5);
+    }); y+=16;
+    footer(doc,1,W,H,m,g6,pu);
+
+    // ════════════════════════════════════════════════════════════
+    // PAGE 2 — Insights Dashboard
+    // ════════════════════════════════════════════════════════════
+    doc.addPage(); y=m;
+    pHead('Insights Dashboard');
+    y=18;
+
+    // — Archetype card —
+    const ac = archetypeRgb[archetype.id] || archetypeRgb.allrounder;
+    doc.setFillColor(...ac.bg); doc.setDrawColor(...ac.bd);
+    doc.roundedRect(m, y, cW, 38, 3, 3, 'FD');
+    doc.setFont('helvetica','normal'); doc.setFontSize(7); doc.setTextColor(...ac.tx);
+    doc.text('YOUR DESIGNER PROFILE', m+6, y+8);
+    doc.setFont('helvetica','bold'); doc.setFontSize(15); doc.setTextColor(...ac.tx);
+    doc.text(archetype.name, m+6, y+17);
+    // Superpower
+    doc.setFont('helvetica','bold'); doc.setFontSize(7); doc.setTextColor(...ac.tx);
+    doc.text('Superpower:', m+6, y+26);
+    doc.setFont('helvetica','normal');
+    const spLines = doc.splitTextToSize(archetype.superpower, cW/2-14);
+    doc.text(spLines[0]||'', m+6, y+31);
+    // Blindspot
+    const bsX = m + cW/2 + 2;
+    doc.setFont('helvetica','bold'); doc.setFontSize(7); doc.setTextColor(...ac.tx);
+    doc.text('Watch out for:', bsX, y+26);
+    doc.setFont('helvetica','normal');
+    const bsLines = doc.splitTextToSize(archetype.blindspot, cW/2-14);
+    doc.text(bsLines[0]||'', bsX, y+31);
+    y+=44;
+
+    // — 3 stat boxes —
+    const sw = (cW-8)/3;
+    const calibLabel = calib==='calibrated'?'Calibrated ✓':calib==='under'?'Under-rated':'Check ratings';
+    const calibSub   = calib==='calibrated'?'Ratings match your experience':calib==='under'?'You may be selling yourself short':'Some ratings may be aspirational';
+    [
+      { label:'CAREER READINESS', value:readiness+'%', sub:'Ready for '+state.target+' level' },
+      { label:'EXPERIENCE SIGNAL', value:calibLabel, sub:calibSub },
+      { label:'AI READINESS', value:aiRead.label, sub:aiRead.msg.substring(0,55)+'…' }
+    ].forEach((st,i)=>{
+      const sx = m + i*(sw+4);
+      doc.setFillColor(248,247,251); doc.setDrawColor(...g2);
+      doc.roundedRect(sx, y, sw, 28, 2, 2, 'FD');
+      doc.setFont('helvetica','bold'); doc.setFontSize(7); doc.setTextColor(...g6);
+      doc.text(st.label, sx+4, y+7);
+      doc.setFont('helvetica','bold'); doc.setFontSize(11); doc.setTextColor(...pu);
+      doc.text(st.value, sx+4, y+17);
+      doc.setFont('helvetica','normal'); doc.setFontSize(7); doc.setTextColor(...g6);
+      doc.text(doc.splitTextToSize(st.sub, sw-8)[0]||'', sx+4, y+23);
+    });
+    y+=34;
+
+    // — 3 insight cards —
+    y = secHead('Key Insights', y);
+    const cw3 = (cW-8)/3;
+
+    // Card 1: Where you shine
+    doc.setFillColor(240,253,244); doc.setDrawColor(134,239,172);
+    doc.roundedRect(m, y, cw3, 40, 2, 2, 'FD');
+    doc.setFont('helvetica','bold'); doc.setFontSize(8); doc.setTextColor(22,163,74);
+    doc.text('WHERE YOU SHINE', m+4, y+8);
+    let cy2=y+16;
+    strengths.forEach(s=>{
+      doc.setFont('helvetica','bold'); doc.setFontSize(8); doc.setTextColor(...g8);
+      doc.text(s.name.substring(0,22), m+4, cy2); cy2+=5;
+      doc.setFont('helvetica','normal'); doc.setFontSize(7); doc.setTextColor(...g6);
+      const atTgt = (state.skills[s.id]||0) >= tv;
+      doc.text(LEVEL_NAMES[state.skills[s.id]||0]+(atTgt?' · At target ✓':' · Strongest'), m+4, cy2); cy2+=7;
+    });
+
+    // Card 2: Biggest unlock
+    const c2x = m+cw3+4;
+    doc.setFillColor(255,251,235); doc.setDrawColor(253,230,138);
+    doc.roundedRect(c2x, y, cw3, 40, 2, 2, 'FD');
+    doc.setFont('helvetica','bold'); doc.setFontSize(8); doc.setTextColor(...or_);
+    doc.text('BIGGEST UNLOCK', c2x+4, y+8);
+    if(critGap){
+      doc.setFont('helvetica','bold'); doc.setFontSize(9); doc.setTextColor(...g8);
+      doc.text(critGap.skill.name.substring(0,20), c2x+4, y+17);
+      doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...or_);
+      doc.text((LEVEL_NAMES[critGap.self]||'—')+' → '+(LEVEL_NAMES[Math.round(tv)]||'—'), c2x+4, y+24);
+      doc.setFont('helvetica','normal'); doc.setFontSize(7); doc.setTextColor(...g6);
+      const rLines = doc.splitTextToSize(getRationale(critGap.skill.id), cw3-8);
+      doc.text(rLines.slice(0,2), c2x+4, y+31);
+    }
+
+    // Card 3: Skills vs Behaviours
+    const c3x = m+(cw3+4)*2;
+    doc.setFillColor(239,246,255); doc.setDrawColor(147,197,253);
+    doc.roundedRect(c3x, y, cw3, 40, 2, 2, 'FD');
+    doc.setFont('helvetica','bold'); doc.setFontSize(8); doc.setTextColor(37,99,235);
+    doc.text('SKILLS VS BEHAVIOURS', c3x+4, y+8);
+    const barW = cw3-12;
+    doc.setFont('helvetica','normal'); doc.setFontSize(7); doc.setTextColor(...g6);
+    doc.text('Craft', c3x+4, y+17);
+    doc.setFillColor(...g2); doc.rect(c3x+4, y+19, barW, 3, 'F');
+    doc.setFillColor(...pu); doc.rect(c3x+4, y+19, barW*(balance.skillPct/100), 3, 'F');
+    doc.setFont('helvetica','bold'); doc.setFontSize(7); doc.setTextColor(...pu);
+    doc.text(balance.skillPct+'%', c3x+cw3-4, y+21, {align:'right'});
+    doc.setFont('helvetica','normal'); doc.setFontSize(7); doc.setTextColor(...g6);
+    doc.text('Behaviours', c3x+4, y+28);
+    doc.setFillColor(...g2); doc.rect(c3x+4, y+30, barW, 3, 'F');
+    doc.setFillColor(245,208,40); doc.rect(c3x+4, y+30, barW*(balance.behPct/100), 3, 'F');
+    doc.setFont('helvetica','bold'); doc.setFontSize(7); doc.setTextColor(180,140,0);
+    doc.text(balance.behPct+'%', c3x+cw3-4, y+32, {align:'right'});
+    const bMsg = {'high-skills':'Craft ahead — build influence.','high-behaviours':'Maturity strong — close craft gaps.','both-low':'Focus on fundamentals first.','both-high':'Strong across both — ready to level up.','balanced':'Good balance — keep building both.'}[balance.type];
+    doc.setFont('helvetica','normal'); doc.setFontSize(7); doc.setTextColor(...g6);
+    doc.text(doc.splitTextToSize(bMsg, cw3-8)[0]||'', c3x+4, y+38);
+    y+=46;
+
+    // — One-level-up plan —
+    y = secHead('If You Only Do 3 Things', y);
+    const plans = [
+      critGap   ? { icon:'📚', type:'Practice this skill',       text:critGap.skill.name,  hint:(SKILL_RESOURCES[critGap.skill.id]||[])[0]?.title||'Take on one focused project in this area' } : null,
+      lowestBeh ? { icon:'🎯', type:'Strengthen this behaviour',  text:lowestBeh.name,      hint:behHints[lowestBeh.id]||'Make this a deliberate habit in your next sprint' } : null,
+      quickWin  ? { icon:'⚡', type:'Quick win',                  text:quickWin.s.name,     hint:'You\'re close — one real project will close this gap' } : null
+    ].filter(Boolean);
+    const pw3 = (cW-8)/3;
+    plans.forEach((p,i)=>{
+      const px = m + i*(pw3+4);
+      doc.setFillColor(248,247,251); doc.setDrawColor(...g2);
+      doc.roundedRect(px, y, pw3, 26, 2, 2, 'FD');
+      doc.setFont('helvetica','bold'); doc.setFontSize(7); doc.setTextColor(...pu);
+      doc.text(p.type.toUpperCase(), px+4, y+7);
+      doc.setFont('helvetica','bold'); doc.setFontSize(9); doc.setTextColor(...g8);
+      doc.text(p.text.substring(0,22), px+4, y+14);
+      doc.setFont('helvetica','normal'); doc.setFontSize(7); doc.setTextColor(...g6);
+      doc.text(doc.splitTextToSize(p.hint, pw3-8)[0]||'', px+4, y+20);
+    });
+    y+=32;
+    footer(doc,2,W,H,m,g6,pu);
+
+    // ════════════════════════════════════════════════════════════
+    // PAGE 3 — Learning Pathway
+    // ════════════════════════════════════════════════════════════
+    doc.addPage(); y=m;
+    pHead('Your Personalised Learning Pathway');
+    y=18;
+
+    // — Top 3 priority gaps —
+    y = secHead('Top Areas to Focus', y);
+    topGaps.forEach((g,i)=>{
+      doc.setFillColor(248,247,251); doc.setDrawColor(...g2);
+      doc.roundedRect(m, y, cW, 24, 2, 2, 'FD');
+      // rank circle
+      doc.setFillColor(...pu); doc.circle(m+7, y+12, 4.5, 'F');
+      doc.setFont('helvetica','bold'); doc.setFontSize(9); doc.setTextColor(255,255,255);
+      doc.text(String(i+1), m+7, y+15, {align:'center'});
+      // skill + gap
+      doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.setTextColor(...g8);
+      doc.text(g.skill.name, m+16, y+9);
+      doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...pu);
+      doc.text((LEVEL_NAMES[g.self]||'Not rated')+'  →  '+(LEVEL_NAMES[Math.round(tv)]||'')+' needed', m+16, y+16);
+      // rationale — right column
+      doc.setFont('helvetica','normal'); doc.setFontSize(7); doc.setTextColor(...g6);
+      const rLines = doc.splitTextToSize(getRationale(g.skill.id), cW-100);
+      rLines.slice(0,2).forEach((ln,li)=> doc.text(ln, m+100, y+9+li*5));
+      y+=28;
+    });
+    y+=6;
+
+    // — Resources —
+    y = secHead('Recommended Resources', y);
+    pwSkills.forEach(s=>{
+      const resources = SKILL_RESOURCES[s.id]||[];
+      if(!resources.length) return;
+      doc.setFont('helvetica','bold'); doc.setFontSize(9); doc.setTextColor(...pu);
+      doc.text(s.name, m, y); y+=5;
+      resources.forEach(r=>{
+        doc.setFillColor(234,224,255); doc.roundedRect(m, y, cW, 8, 1, 1, 'F');
+        doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...g8);
+        doc.text('› '+r.title, m+4, y+5.5);
+        y+=10;
+      });
+      y+=4;
+    });
+    footer(doc,3,W,H,m,g6,pu);
+
+    // ════════════════════════════════════════════════════════════
+    // PAGE 4 — Full Skill Breakdown + Behaviours
+    // ════════════════════════════════════════════════════════════
+    doc.addPage(); y=m;
+    pHead('Core Skills — Full Assessment');
+    y=18;
+    [['SKILL',m],['SELF',m+90],['TARGET',m+125],['GAP',m+158]].forEach(([t,x])=>{
+      doc.setFont('helvetica','bold'); doc.setFontSize(8); doc.setTextColor(...g6); doc.text(t,x,y);
+    }); y+=3;
+    doc.setDrawColor(...g2); doc.line(m,y,W-m,y); y+=5;
+    SKILLS.forEach((s,i)=>{
+      const sv=state.skills[s.id]||0, gap=tv-sv;
+      if(i%2===0){doc.setFillColor(248,247,251); doc.rect(m-2,y-3.5,cW+4,9,'F');}
+      doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(...g8);
+      doc.text(s.name, m, y); doc.text(LEVEL_NAMES[sv]||'—', m+90, y); doc.text(LEVEL_NAMES[Math.round(tv)]||'—', m+125, y);
+      doc.setTextColor(...(gap>0?pu:gr)); doc.text(gap>0?'+'+gap.toFixed(1):'✓', m+158, y); y+=9;
+    });
+    y+=8; doc.setDrawColor(...g2); doc.line(m,y,W-m,y); y+=8;
+    doc.setFont('helvetica','bold'); doc.setFontSize(11); doc.setTextColor(...g8);
+    doc.text('Operating Behaviours', m, y); y+=6;
+    BEHAVIOURS.forEach((b,i)=>{
+      const v=state.behaviours[b.id]||'developing';
+      if(i%2===0){doc.setFillColor(248,247,251); doc.rect(m-2,y-3.5,cW+4,9,'F');}
+      doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(...g8); doc.text(b.name,m,y);
+      doc.setFont('helvetica','bold'); doc.setTextColor(...pu);
+      doc.text({developing:'Developing',practising:'Practising',consistent:'Consistent'}[v], m+100, y); y+=9;
+    });
+    footer(doc,4,W,H,m,g6,pu);
+
+    doc.save('design-assessment-'+(state.name||'results').replace(/[^a-z0-9]/gi,'-').toLowerCase()+'.pdf');
+  } catch(e) { console.error(e); alert('PDF generation failed. Try again.'); }
+  finally { btn.innerHTML='⬇ Save My Results — Download PDF'; btn.disabled=false; }
+}
+
+function footer(doc,p,W,H,m,g6,pu) {
+  doc.setDrawColor(224,220,233); doc.line(m,H-14,W-m,H-14);
+  doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...g6);
+  doc.text('Winnie Nguyen · UX Product Designer & Mentor',m,H-8);
+  doc.setTextColor(...pu); doc.text('Page '+p,W-m,H-8,{align:'right'});
+}
+
+// ── INIT ─────────────────────────────────────────────────────────
+(function() {
+  const has = loadState();
+  if (has && state.name) {
+    restoreForm();
+    document.getElementById('resumeBanner').style.display = 'flex';
+  }
+  // Live floating label for selects
+  document.querySelectorAll('.select-field__input').forEach(sel => {
+    sel.addEventListener('change', () => {
+      sel.classList.toggle('has-value', !!sel.value);
+    });
+  });
+})();
+</script>
+</body>
+</html>

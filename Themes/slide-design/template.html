@@ -1,0 +1,1287 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<title>Winnie's Teaching — Slide Template</title>
+<link rel="stylesheet" href="../tokens.css?v=2"/>
+<style>
+  /* ==== Slide shell ==== */
+  .slide {
+    width: 1920px; height: 1080px;
+    background: var(--paper);
+    color: var(--ink);
+    padding: var(--slide-pad);
+    display: flex; flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font-body);
+  }
+  .slide--deeper { background: var(--paper-deeper); }
+  .slide--ink    { background: var(--ink); color: var(--paper); }
+  .slide--sienna { background: var(--sienna); color: var(--paper); }
+
+  /* Shared chrome: hidden — removed per design direction */
+  .chrome { display: none; }
+
+  /* ============================================================
+     LAYOUT 01 — COVER
+     ============================================================ */
+  .cover {
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+  }
+  .cover__left {
+    padding: var(--slide-pad);
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .cover__year {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-mono);
+    color: var(--sienna-deep);
+    display: flex; align-items: center; gap: 16px;
+  }
+  .cover__year::after {
+    content: ''; flex: 1; height: 1px; background: var(--ink-ghost);
+  }
+  .cover__day {
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    color: var(--ink-muted);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .cover__title {
+    font-family: var(--font-display);
+    font-size: 132px;
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin: 0;
+  }
+  .cover__title em {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--sienna);
+  }
+  .cover__sub {
+    font-family: var(--font-body);
+    font-size: var(--text-xl);
+    color: var(--ink-soft);
+    margin-top: 32px;
+    max-width: 740px;
+  }
+  .cover__right {
+    background: var(--sienna);
+    color: var(--paper);
+    padding: var(--slide-pad);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    position: relative;
+    overflow: hidden;
+    background-image: linear-gradient(180deg, rgba(34,22,16,0.25) 0%, rgba(34,22,16,0.55) 45%, rgba(34,22,16,0.92) 100%), url('https://images.unsplash.com/photo-1551836022-deb4988cc6c0?auto=format&fit=crop&w=1400&q=80');
+    background-size: cover;
+    background-position: center;
+  }
+  .cover__right::before {
+    content: none;
+  }
+  .cover__right::after {
+    content: ''; position: absolute;
+    bottom: -120px; left: -120px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: var(--ochre);
+    opacity: 0.35;
+    mix-blend-mode: screen;
+  }
+  .cover__author {
+    position: relative; z-index: 1;
+  }
+  .cover__name {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 56px;
+    line-height: 1.05;
+    margin: 0 0 16px;
+  }
+  .cover__credentials {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: 1.55;
+    opacity: 0.85;
+  }
+  .cover__credentials div + div { margin-top: 4px; }
+  .cover__badge {
+    position: absolute;
+    top: var(--slide-pad); right: var(--slide-pad);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+    color: var(--paper);
+    z-index: 1;
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(0,0,0,0.22);
+    padding: 10px 16px;
+    border-radius: 999px;
+    backdrop-filter: blur(8px);
+  }
+  .cover__badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--paper); }
+
+  /* ============================================================
+     LAYOUT 02 — SECTION / PART DIVIDER
+     ============================================================ */
+  .section-divider {
+    background: var(--paper-deeper);
+    align-items: center; justify-content: center; text-align: left;
+    padding: 0 var(--slide-pad);
+  }
+  .section-divider__inner { max-width: 1400px; width: 100%; }
+  .section-divider__kicker {
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+    color: var(--sienna);
+    display: flex; align-items: baseline; gap: 20px;
+    margin-bottom: 32px;
+  }
+  .section-divider__kicker .num {
+    font-family: var(--font-display);
+    font-size: 120px;
+    font-weight: 700;
+    color: var(--sienna);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .section-divider__title {
+    font-family: var(--font-display);
+    font-size: 144px;
+    font-weight: 700;
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin: 0;
+  }
+  .section-divider__sub {
+    font-family: var(--font-body);
+    font-size: var(--text-xl);
+    color: var(--ink-soft);
+    margin-top: 40px;
+    max-width: 900px;
+    line-height: var(--leading-relaxed);
+  }
+
+  /* ============================================================
+     LAYOUT 03 — STATEMENT / TITLE + LEAD
+     ============================================================ */
+  .statement {
+    justify-content: center;
+  }
+  .statement__kicker {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+    color: var(--sienna-deep);
+    margin-bottom: 32px;
+  }
+  .statement__title {
+    font-family: var(--font-display);
+    font-size: 96px;
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    max-width: 1560px;
+    margin: 0;
+  }
+  .statement__title em { font-style: normal; color: var(--sienna); font-weight: 700; }
+  .statement__lead {
+    font-family: var(--font-body);
+    font-size: var(--text-xl);
+    color: var(--ink-soft);
+    line-height: var(--leading-relaxed);
+    max-width: 1260px;
+    margin-top: 48px;
+  }
+
+  /* ============================================================
+     LAYOUT 04 — NUMBERED LIST (01 / 02 / 03 / 04)
+     ============================================================ */
+  .numbered {
+    display: flex; flex-direction: column;
+  }
+  .numbered__head { margin-bottom: 72px; }
+  .numbered__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 56px 88px;
+    flex: 1;
+  }
+  .numbered-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+  .numbered-item__num {
+    font-family: var(--font-display);
+    font-size: 72px;
+    font-weight: 700;
+    color: var(--sienna);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+  }
+  .numbered-item__body h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--text-xl);
+    color: var(--ink);
+    margin: 0 0 12px;
+    line-height: var(--leading-snug);
+  }
+  .numbered-item__body p {
+    font-family: var(--font-body);
+    font-size: var(--text-lg);
+    color: var(--ink-soft);
+    margin: 0;
+    line-height: var(--leading-relaxed);
+  }
+
+  /* ============================================================
+     LAYOUT 05 — COMPARE (two-up)
+     ============================================================ */
+  .compare {
+    display: flex; flex-direction: column;
+  }
+  .compare__head { margin-bottom: 56px; }
+  .compare__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    flex: 1;
+    border-top: var(--hairline);
+    border-bottom: var(--hairline);
+  }
+  .compare__col {
+    padding: 48px 56px;
+    display: flex; flex-direction: column; gap: 24px;
+  }
+  .compare__col + .compare__col { border-left: var(--hairline); }
+  .compare__label {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    align-self: flex-start;
+  }
+  .compare__label--pos { background: var(--sage-tint); color: var(--sage); }
+  .compare__label--neg { background: var(--sienna-tint); color: var(--sienna-deep); }
+  .compare__col h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--text-2xl);
+    color: var(--ink);
+    margin: 0;
+    line-height: var(--leading-snug);
+  }
+  .compare__col ul {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .compare__col li {
+    font-family: var(--font-body);
+    font-size: var(--text-lg);
+    color: var(--ink-soft);
+    line-height: var(--leading-relaxed);
+    padding-left: 32px;
+    position: relative;
+  }
+  .compare__col li::before {
+    content: ''; position: absolute;
+    left: 0; top: 0.65em;
+    width: 16px; height: 2px;
+    background: var(--ink-ghost);
+  }
+
+  /* ============================================================
+     LAYOUT 06 — PROCESS / FLOW
+     ============================================================ */
+  .process { display: flex; flex-direction: column; }
+  .process__head { margin-bottom: 56px; }
+  .process__track {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    flex: 1;
+    position: relative;
+  }
+  .process__step {
+    background: var(--paper-deeper);
+    border-radius: var(--radius-lg);
+    padding: 40px 36px;
+    display: flex; flex-direction: column;
+    position: relative;
+  }
+  .process__step--active {
+    background: var(--sienna);
+    color: var(--paper);
+  }
+  .process__step-num {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+    color: var(--sienna-deep);
+    margin-bottom: 20px;
+  }
+  .process__step--active .process__step-num { color: var(--paper); opacity: 0.75; }
+  .process__step h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 44px;
+    line-height: 1;
+    margin: 0 0 20px;
+    color: var(--ink);
+  }
+  .process__step--active h3 { color: var(--paper); }
+  .process__step ul {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .process__step li {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: var(--leading-snug);
+    color: var(--ink-soft);
+    padding-left: 18px;
+    position: relative;
+  }
+  .process__step li::before {
+    content: '·'; position: absolute; left: 0; top: -2px;
+    color: var(--sienna); font-weight: 700; font-size: 1.4em;
+  }
+  .process__step--active li { color: rgba(250,244,235,0.92); }
+  .process__step--active li::before { color: var(--paper); }
+  .process__arrow {
+    position: absolute; top: 50%;
+    width: 40px; height: 2px;
+    background: var(--ink-ghost);
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  /* ============================================================
+     LAYOUT 07 — TREE / HIERARCHY
+     ============================================================ */
+  .tree { display: flex; flex-direction: column; }
+  .tree__head { margin-bottom: 40px; }
+  .tree__canvas {
+    flex: 1;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 36px;
+    position: relative;
+  }
+  .tree-node {
+    background: var(--paper-deeper);
+    border-radius: var(--radius-md);
+    padding: 20px 28px;
+    max-width: 460px;
+    text-align: center;
+  }
+  .tree-node__label {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+    color: var(--sienna-deep);
+    margin-bottom: 8px;
+  }
+  .tree-node__text {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--ink);
+    line-height: var(--leading-snug);
+  }
+  .tree-node--root {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .tree-node--root .tree-node__label { color: var(--ochre); }
+  .tree-node--root .tree-node__text { color: var(--paper); font-weight: 500; }
+  .tree-node--opp {
+    background: var(--sienna-tint);
+  }
+  .tree-node--solution { background: var(--paper); border: 1px solid var(--ink-ghost); }
+
+  .tree-row {
+    display: flex; gap: 36px; justify-content: center; width: 100%;
+  }
+  .tree-row--3 > * { flex: 1; max-width: 420px; }
+
+  /* connectors via simple divs */
+  .tree-connector {
+    width: 2px; height: 28px; background: var(--ink-ghost);
+  }
+  .tree-branch {
+    height: 36px; position: relative; width: 80%;
+  }
+  .tree-branch::before {
+    content: ''; position: absolute;
+    top: 0; left: 50%; width: 2px; height: 100%;
+    background: var(--ink-ghost);
+  }
+  .tree-branch::after {
+    content: ''; position: absolute;
+    bottom: 0; left: 15%; right: 15%;
+    height: 2px; background: var(--ink-ghost);
+  }
+
+  /* ============================================================
+     LAYOUT 08 — QUOTE / CALLOUT
+     ============================================================ */
+  .quote {
+    background: var(--ink); color: var(--paper);
+    justify-content: center; align-items: flex-start;
+  }
+  .quote__mark {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 240px;
+    line-height: 0.6;
+    color: var(--sienna);
+    margin-bottom: -30px;
+  }
+  .quote__text {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 92px;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+    max-width: 1500px;
+    margin: 0;
+  }
+  .quote__author {
+    display: flex; align-items: center; gap: 24px;
+    margin-top: 56px;
+  }
+  .quote__avatar {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: var(--sienna); color: var(--paper);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-weight: 500; font-size: 32px;
+  }
+  .quote__who .name {
+    font-family: var(--font-body);
+    font-size: var(--text-lg);
+    color: var(--paper);
+    font-weight: 500;
+  }
+  .quote__who .role {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-wide);
+    color: var(--ochre);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ============================================================
+     LAYOUT 09 — EXAMPLE / CASE STUDY (image + caption)
+     ============================================================ */
+  .example { display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; }
+  .example__meta { display: flex; flex-direction: column; justify-content: center; }
+  .example__kicker {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+    color: var(--sienna-deep);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .example__kicker::before {
+    content: ''; width: 40px; height: 2px; background: var(--sienna);
+  }
+  .example__title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 72px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 32px;
+    color: var(--ink);
+  }
+  .example__body {
+    font-family: var(--font-body);
+    font-size: var(--text-lg);
+    color: var(--ink-soft);
+    line-height: var(--leading-relaxed);
+    margin: 0 0 32px;
+  }
+  .example__tags {
+    display: flex; gap: 12px; flex-wrap: wrap;
+  }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    background: var(--paper-deeper);
+    color: var(--ink-soft);
+  }
+  .tag--accent { background: var(--sienna-tint); color: var(--sienna-deep); }
+  .tag--caution { background: var(--ochre-tint); color: #8A6615; }
+
+  .example__visual {
+    background: var(--paper-deeper);
+    border-radius: var(--radius-lg);
+    display: flex; align-items: center; justify-content: center;
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .example__placeholder {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  /* ============================================================
+     LAYOUT 10 — MILESTONE / BIG MOMENT
+     ============================================================ */
+  .milestone {
+    background: var(--sienna); color: var(--paper);
+    justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .milestone::before {
+    content: ''; position: absolute;
+    top: -200px; right: -200px; width: 700px; height: 700px;
+    border-radius: 50%; background: var(--sienna-deep); opacity: 0.6;
+  }
+  .milestone::after {
+    content: ''; position: absolute;
+    bottom: -160px; left: -120px; width: 420px; height: 420px;
+    border-radius: 50%; background: var(--ochre); opacity: 0.45;
+  }
+  .milestone__inner { position: relative; z-index: 1; max-width: 1400px; }
+  .milestone__kicker {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+    color: var(--ochre-tint);
+    margin-bottom: 24px;
+  }
+  .milestone__num {
+    font-family: var(--font-display);
+    font-size: 280px;
+    font-weight: 700;
+    line-height: 0.85;
+    letter-spacing: -0.03em;
+    color: var(--paper);
+    margin: 0 0 16px;
+    opacity: 0.95;
+  }
+  .milestone__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 96px;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    margin: 0;
+    color: var(--paper);
+  }
+  .milestone__sub {
+    font-family: var(--font-body);
+    font-size: var(--text-xl);
+    line-height: var(--leading-relaxed);
+    color: rgba(250,244,235,0.85);
+    max-width: 1200px;
+    margin-top: 40px;
+  }
+
+  /* ============================================================
+     LAYOUT 11 — PRACTICE / ACTIVITY
+     ============================================================ */
+  .practice { display: flex; flex-direction: column; }
+  .practice__head { margin-bottom: 56px; }
+  .practice__grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+    flex: 1;
+  }
+  .practice__card {
+    background: var(--paper-deeper);
+    border: 2px solid var(--ink);
+    border-radius: var(--radius-lg);
+    padding: 48px 56px;
+    display: flex; flex-direction: column;
+    position: relative;
+  }
+  .practice__card-kicker {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+    color: var(--sienna-deep);
+    margin-bottom: 16px;
+  }
+  .practice__card h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 52px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 32px;
+    color: var(--ink);
+  }
+  .practice__card ul {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .practice__card li {
+    font-family: var(--font-body);
+    font-size: var(--text-lg);
+    color: var(--ink-soft);
+    line-height: var(--leading-snug);
+    padding-left: 32px;
+    position: relative;
+  }
+  .practice__card li::before {
+    content: '→';
+    position: absolute; left: 0; top: 0;
+    color: var(--sienna);
+    font-weight: 600;
+  }
+
+  /* ============================================================
+     LAYOUT 12 — END / THANK YOU
+     ============================================================ */
+  .end {
+    background: var(--paper-deeper);
+    justify-content: center; align-items: flex-start;
+    padding: 0 var(--slide-pad);
+  }
+  .end__inner { max-width: 1500px; }
+  .end__kicker {
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+    color: var(--sienna);
+    margin-bottom: 24px;
+  }
+  .end__title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-style: italic;
+    font-size: 220px;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin: 0;
+  }
+  .end__sign {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    color: var(--sienna-deep);
+    margin-top: 48px;
+    font-style: italic;
+  }
+  .end__contact {
+    margin-top: 32px;
+    font-family: var(--font-mono);
+    font-size: var(--text-base);
+    letter-spacing: var(--tracking-wide);
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    display: flex; gap: 48px;
+  }
+
+  /* heading helpers reused */
+  .slide-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 72px;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin: 0;
+    max-width: 1500px;
+  }
+  .slide-kicker {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+    color: var(--sienna-deep);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .slide-kicker::before {
+    content: ''; width: 40px; height: 2px; background: var(--sienna);
+  }
+  .slide-lead {
+    font-family: var(--font-body);
+    font-size: var(--text-xl);
+    color: var(--ink-soft);
+    line-height: var(--leading-relaxed);
+    max-width: 1400px;
+    margin-top: 28px;
+  }
+
+  /* ============================================================
+     LAYOUT — 2×2 MATRIX (priority / quadrant)
+     ============================================================ */
+  .matrix { display: flex; flex-direction: column; }
+  .matrix__head { margin-bottom: 48px; }
+  .matrix__stage {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    grid-template-rows: 140px 1fr;
+    gap: 0;
+    position: relative;
+  }
+  .matrix__y-axis, .matrix__x-axis {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .matrix__y-axis {
+    grid-column: 1; grid-row: 2;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    padding: 28px 0;
+  }
+  .matrix__x-axis {
+    grid-column: 2; grid-row: 1;
+    padding: 0 28px;
+    align-self: end;
+  }
+  .matrix__axis-pole {
+    color: var(--sienna-deep);
+    font-weight: 700;
+  }
+  .matrix__corner {
+    grid-column: 1; grid-row: 1;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    display: flex; align-items: flex-end; justify-content: flex-end;
+    padding: 0 16px 12px 0;
+  }
+  .matrix__grid {
+    grid-column: 2; grid-row: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2px;
+    background: var(--ink-ghost);
+    border: 2px solid var(--ink);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    position: relative;
+  }
+  .matrix__quadrant {
+    background: var(--paper);
+    padding: 44px 48px;
+    display: flex; flex-direction: column; gap: 18px;
+    position: relative;
+  }
+  .matrix__quadrant--hi    { background: var(--sienna-tint); }
+  .matrix__quadrant--hero  { background: var(--ink); color: var(--paper); }
+  .matrix__quadrant--hero .matrix__q-label { color: var(--ochre); }
+  .matrix__quadrant--hero .matrix__q-title { color: var(--paper); }
+  .matrix__quadrant--hero .matrix__q-desc  { color: rgba(250,244,235,0.82); }
+  .matrix__quadrant--low   { background: var(--paper-deeper); }
+
+  .matrix__q-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+    color: var(--sienna-deep);
+  }
+  .matrix__q-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 38px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0;
+  }
+  .matrix__q-desc {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: var(--leading-snug);
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .matrix__q-tag {
+    position: absolute; top: 24px; right: 28px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 42px;
+    color: var(--sienna);
+    opacity: 0.4;
+    letter-spacing: -0.02em;
+  }
+  .matrix__quadrant--hero .matrix__q-tag { color: var(--ochre); opacity: 0.5; }
+
+  /* ============================================================
+     ENTRANCE ANIMATIONS — subtle rise + fade on slide activation
+     ============================================================ */
+  @keyframes slideRise {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slideFade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes slideScale {
+    from { opacity: 0; transform: scale(0.985); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  /* animate children of the currently-active slide */
+  .slide[data-active] > *,
+  .slide[data-active] .animate-in {
+    animation: slideRise 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  .slide[data-active] > *:nth-child(1) { animation-delay: 0.05s; }
+  .slide[data-active] > *:nth-child(2) { animation-delay: 0.15s; }
+  .slide[data-active] > *:nth-child(3) { animation-delay: 0.25s; }
+  .slide[data-active] > *:nth-child(4) { animation-delay: 0.32s; }
+  .slide[data-active] > *:nth-child(5) { animation-delay: 0.40s; }
+
+  /* grid children (numbered items, compare cols, matrix quadrants, tree nodes) */
+  .slide[data-active] .numbered-item,
+  .slide[data-active] .compare__col,
+  .slide[data-active] .matrix__quadrant,
+  .slide[data-active] .practice__card,
+  .slide[data-active] .process__step,
+  .slide[data-active] .tree-node {
+    animation: slideRise 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  .slide[data-active] .numbered-item:nth-child(1),
+  .slide[data-active] .compare__col:nth-child(1),
+  .slide[data-active] .practice__card:nth-child(1),
+  .slide[data-active] .process__step:nth-child(1) { animation-delay: 0.20s; }
+  .slide[data-active] .numbered-item:nth-child(2),
+  .slide[data-active] .compare__col:nth-child(2),
+  .slide[data-active] .practice__card:nth-child(2),
+  .slide[data-active] .process__step:nth-child(2) { animation-delay: 0.30s; }
+  .slide[data-active] .numbered-item:nth-child(3),
+  .slide[data-active] .process__step:nth-child(3) { animation-delay: 0.40s; }
+  .slide[data-active] .numbered-item:nth-child(4),
+  .slide[data-active] .process__step:nth-child(4) { animation-delay: 0.50s; }
+
+  .slide[data-active] .matrix__quadrant:nth-child(1) { animation-delay: 0.25s; }
+  .slide[data-active] .matrix__quadrant:nth-child(2) { animation-delay: 0.35s; }
+  .slide[data-active] .matrix__quadrant:nth-child(3) { animation-delay: 0.45s; }
+  .slide[data-active] .matrix__quadrant:nth-child(4) { animation-delay: 0.55s; }
+
+  .slide[data-active].image-only .image-only__media {
+    animation: slideScale 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  .slide[data-active].cover .cover__right {
+    animation: slideFade 0.8s ease both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .slide[data-active] > *,
+    .slide[data-active] .animate-in,
+    .slide[data-active] .numbered-item,
+    .slide[data-active] .compare__col,
+    .slide[data-active] .matrix__quadrant,
+    .slide[data-active] .practice__card,
+    .slide[data-active] .process__step,
+    .slide[data-active] .tree-node,
+    .slide[data-active].image-only .image-only__media,
+    .slide[data-active].cover .cover__right {
+      animation: none;
+    }
+  }
+
+  /* ============================================================
+     LAYOUT 12 — IMAGE ONLY (full-bleed photo slide)
+     ============================================================ */
+  .image-only {
+    padding: 0;
+    background: var(--ink);
+    position: relative;
+  }
+  .image-only__media {
+    position: absolute; inset: 0;
+    background-size: cover;
+    background-position: center;
+  }
+  .image-only__caption {
+    position: absolute;
+    left: var(--slide-pad); bottom: var(--slide-pad);
+    right: var(--slide-pad);
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 40px;
+    z-index: 2;
+  }
+  .image-only__caption-left {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+    color: var(--paper);
+    background: rgba(15,15,16,0.55);
+    padding: 14px 22px;
+    border-radius: 999px;
+    backdrop-filter: blur(10px);
+  }
+  .image-only__caption-right {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+    color: rgba(250,244,235,0.7);
+  }
+  .image-only .chrome { display: none; }
+</style>
+</head>
+<body>
+
+<deck-stage width="1920" height="1080">
+
+  <!-- ══════════════════════════════════════════════════════════
+       01 · COVER
+       ══════════════════════════════════════════════════════════ -->
+  <section class="slide cover" data-label="Cover">
+    <div class="cover__left">
+      <div class="cover__year">2024 · Winnie Nguyen</div>
+      <div>
+        <div class="cover__day">Day 01</div>
+        <h1 class="cover__title">Design<br/>Thinking<br/><em>& Systems</em></h1>        <p class="cover__sub">For agency workflow — một quy trình linh hoạt để giải quyết đúng vấn đề, đúng cách.</p>
+      </div>
+    </div>
+    <div class="cover__right">
+      <div class="cover__badge"><span class="dot"></span>Lecture 01 · 7 days</div>
+      <div class="cover__author">
+        <h2 class="cover__name">Winnie<br/>Nguyen</h2>
+        <div class="cover__credentials">
+          <div>Senior Product Designer at NAB</div>
+          <div>Former Sr Product Designer at Go1</div>
+          <div>Former Product Design Instructor at StayLab</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       02 · SECTION / PART DIVIDER
+       ══════════════════════════════════════════════════════════ -->
+  <section class="slide section-divider" data-label="Section">
+    <div class="section-divider__inner">
+      <div class="section-divider__kicker"><span class="num">01</span><span>Phần Một · Part One</span></div>
+      <h2 class="section-divider__title">Design Thinking <em style="color:var(--sienna);font-weight:700;">cơ bản</em></h2>
+      <p class="section-divider__sub">Một phương pháp giải quyết vấn đề lấy con người làm trung tâm — giúp team hiểu nhu cầu của người dùng, thách thức các assumption, và tạo ra các giải pháp sáng tạo.</p>
+    </div>
+    <div class="chrome"><div class="mark"><span class="dot"></span>Winnie's Teaching</div><div>02 / 12</div></div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       03 · STATEMENT
+       ══════════════════════════════════════════════════════════ -->
+  <section class="slide statement" data-label="Statement">
+    <div class="statement__kicker">Câu hỏi chính · The big question</div>
+    <h2 class="statement__title">Chúng ta có đang giải quyết <em>đúng vấn đề</em> — và đúng cách hay không?</h2>
+    <p class="statement__lead">Đây là câu hỏi Double Diamond process được sinh ra để trả lời: một lộ trình từ giai đoạn tìm hiểu và khám phá vấn đề sang giai đoạn hình thành ý tưởng và phát triển sản phẩm.</p>
+    <div class="chrome"><div class="mark"><span class="dot"></span>Winnie's Teaching</div><div>03 / 12</div></div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       04 · NUMBERED LIST
+       ══════════════════════════════════════════════════════════ -->
+  <section class="slide numbered" data-label="Numbered">
+    <div class="numbered__head">
+      <div class="slide-kicker">Milestone 01 · Rip the Brief</div>
+      <h2 class="slide-title">Các activities khi kick-off project</h2>
+    </div>
+    <div class="numbered__grid">
+      <div class="numbered-item">
+        <div class="numbered-item__num">01</div>
+        <div class="numbered-item__body">
+          <h3>Phân tích client brief</h3>
+          <p>Là tài liệu do khách hàng cung cấp, nêu ra các yêu cầu, mong đợi và mục tiêu của họ cho dự án.</p>
+        </div>
+      </div>
+      <div class="numbered-item">
+        <div class="numbered-item__num">02</div>
+        <div class="numbered-item__body">
+          <h3>Desk Research</h3>
+          <p>Tái sử dụng các research đã được thực hiện trước đó về hành vi, nhu cầu và mong muốn của người dùng.</p>
+        </div>
+      </div>
+      <div class="numbered-item">
+        <div class="numbered-item__num">03</div>
+        <div class="numbered-item__body">
+          <h3>Interview stakeholders và client</h3>
+          <p>Để có được các insights dựa trên cách mà họ thấu hiểu và tương tác với customer hàng ngày.</p>
+        </div>
+      </div>
+      <div class="numbered-item">
+        <div class="numbered-item__num">04</div>
+        <div class="numbered-item__body">
+          <h3>Tổ chức các workshop liên quan</h3>
+          <p>Khai thác kiến thức chuyên môn của các thành viên trong nhóm hoặc chuyên gia tư vấn bên ngoài.</p>
+        </div>
+      </div>
+    </div>
+    <div class="chrome"><div class="mark"><span class="dot"></span>Winnie's Teaching</div><div>04 / 12</div></div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       05 · COMPARE (Ưu điểm / Nhược điểm)
+       ══════════════════════════════════════════════════════════ -->
+  <section class="slide compare" data-label="Compare">
+    <div class="compare__head">
+      <div class="slide-kicker">Heuristic Evaluation</div>
+      <h2 class="slide-title">Ưu điểm & nhược điểm của Heuristic Evaluation</h2>
+    </div>
+    <div class="compare__grid">
+      <div class="compare__col">
+        <span class="compare__label compare__label--pos">Ưu điểm · Strengths</span>
+        <ul>
+          <li>Giúp designer có thể highlight các usability issue sớm trong design process.</li>
+          <li>Nhanh và low budget nếu như so sánh các hình thức test khác.</li>
+          <li>Không cần phải test với real customer hoặc participants.</li>
+        </ul>
+      </div>
+      <div class="compare__col">
+        <span class="compare__label compare__label--neg">Nhược điểm · Trade-offs</span>
+        <ul>
+          <li>Phụ thuộc nhiều vào tính chất chuyên môn của các người đánh giá.</li>
+          <li>Các vấn đề được phát hiện bị giới hạn bởi trình độ kỹ năng của evaluator.</li>
+          <li>Testing sẽ có nhiều assumptions về usability standard khác nhau.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="chrome"><div class="mark"><span class="dot"></span>Winnie's Teaching</div><div>05 / 12</div></div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       06 · PROCESS / DOUBLE DIAMOND
+       ══════════════════════════════════════════════════════════ -->
+  <section class="slide process" data-label="Process">
+    <div class="process__head">
+      <div class="slide-kicker">Design Process · Double Diamond</div>
+      <h2 class="slide-title">Tìm đúng vấn đề để giải quyết — giải quyết vấn đề đúng cách</h2>
+    </div>
+    <div class="process__track">
+      <div class="process__step">
+        <div class="process__step-num">01 · Research</div>
+        <h3>Discover</h3>
+        <ul>
+          <li>Break the ice</li>
+          <li>Align với product outcomes</li>
+          <li>Phân tích dữ kiện</li>
+          <li>Brainstorm</li>
+        </ul>
+      </div>
+      <div class="process__step process__step--active">
+        <div class="process__step-num">02 · Synthesis</div>
+        <h3>Define</h3>
+        <ul>
+          <li>User research, interview</li>
+          <li>Journey mapping</li>
+          <li>Opportunity mapping</li>
+        </ul>
+      </div>
+      <div class="process__step">
+        <div class="process__step-num">03 · Ideation</div>
+        <h3>Develop</h3>
+        <ul>
+          <li>Solution workshop</li>
+          <li>Prototype</li>
+          <li>Các vòng lặp thiết kế</li>
+        </ul>
+      </div>
+      <div class="process__step">
+        <div class="process__step-num">04 · Implementation</div>
+        <h3>Deliver</h3>
+        <ul>
+          <li>Agile process</li>
+          <li>Ưu tiên solution hiệu quả</li>
+        </ul>
+      </div>
+    </div>
+    <div class="chrome"><div class="mark"><span class="dot"></span>Winnie's Teaching</div><div>06 / 12</div></div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       07 · TREE / OPPORTUNITY TREE
+       ══════════════════════════════════════════════════════════ -->
+  <section class="slide tree" data-label="Tree">
+    <div class="tree__head">
+      <div class="slide-kicker">Framework · Opportunity Tree</div>
+      <h2 class="slide-title">Tăng lượng khách tham quan quay trở lại Disney</h2>
+    </div>
+    <div class="tree__canvas">
+      <div class="tree-node tree-node--root">
+        <div class="tree-node__label">Product Outcome</div>
+        <div class="tree-node__text">Tăng lượng khách tham quan quay trở lại Disney</div>
+      </div>
+      <div class="tree-connector"></div>
+      <div class="tree-node tree-node--opp" style="max-width:720px;">
+        <div class="tree-node__label">Opportunity</div>
+        <div class="tree-node__text">Tôi muốn được dự đoán thời gian phù hợp để giảm chờ đợi và thuận tiện lên kế hoạch.</div>
+      </div>
+      <div class="tree-branch"></div>
+      <div class="tree-row tree-row--3">
+        <div class="tree-node tree-node--solution">
+          <div class="tree-node__label">Solution</div>
+          <div class="tree-node__text">Feature trong mobile app cho phép visitor xem trước thời gian chờ đợi.</div>
+        </div>
+        <div class="tree-node tree-node--solution">
+          <div class="tree-node__label">Solution</div>
+          <div class="tree-node__text">Map điện tử tương tác thể hiện thời gian chờ ở nhiều góc độ.</div>
+        </div>
+        <div class="tree-node tree-node--solution">
+          <div class="tree-node__label">Solution</div>
+          <div class="tree-node__text">Bảng hiệu điện tử trước mỗi trò chơi báo thời gian chờ.</div>
+        </div>
+      </div>
+    </div>
+    <div class="chrome"><div class="mark"><span class="dot"></span>Winnie's Teaching</div><div>07 / 12</div></div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       08 · QUOTE
+       ══════════════════════════════════════════════════════════ -->
+  <section class="slide quote" data-label="Quote">
+    <div class="quote__mark">"</div>
+    <blockquote class="quote__text">People don't know what they want until you show it to them.</blockquote>
+    <div class="quote__author">
+      <div class="quote__avatar">SJ</div>
+      <div class="quote__who">
+        <div class="name">Steve Jobs</div>
+        <div class="role">Founder & former CEO · Apple</div>
+      </div>
+    </div>
+    <div class="chrome"><div class="mark"><span class="dot" style="background:var(--paper);"></span>Winnie's Teaching</div><div style="color:rgba(250,244,235,0.55);">08 / 12</div></div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       09 · EXAMPLE / CASE STUDY
+       ══════════════════════════════════════════════════════════ -->
+  <section class="slide example" data-label="Example">
+    <div class="example__meta">
+      <div class="example__kicker">Ví dụ · Case study</div>
+      <h2 class="example__title">Go1 Content Curation</h2>
+      <p class="example__body">Làm thế nào để tạo độ tin cậy với stakeholders? Đề cập đến số liệu cụ thể — tỉ lệ conversion, thời gian tìm kiếm nội dung, feedback từ admins — để chứng minh impact thực tế của design iteration.</p>
+      <div class="example__tags">
+        <span class="tag tag--accent">Go1 · B2B</span>
+        <span class="tag">Content Curation</span>
+        <span class="tag tag--caution">Data-driven</span>
+      </div>
+    </div>
+    <div class="example__visual">
+      <div class="example__placeholder">[ screenshot placeholder ]<br/>1040 × 780</div>
+    </div>
+    <div class="chrome"><div class="mark"><span class="dot"></span>Winnie's Teaching</div><div>09 / 12</div></div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       10 · MILESTONE
+       ══════════════════════════════════════════════════════════ -->
+  <section class="slide milestone" data-label="Milestone">
+    <div class="milestone__inner">
+      <div class="milestone__kicker">Milestone · Chặng</div>
+      <div class="milestone__num">02</div>
+      <h2 class="milestone__title">Xác định Business<br/>và Product Outcomes</h2>
+      <p class="milestone__sub">Chuyển trọng tâm thảo luận sang làm thế nào có thể mang lại giá trị cho người dùng. Tập trung vào outcome — không phải output.</p>
+    </div>
+    <div class="chrome"><div class="mark"><span class="dot" style="background:var(--paper);"></span>Winnie's Teaching</div><div style="color:rgba(250,244,235,0.65);">10 / 12</div></div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       11 · PRACTICE
+       ══════════════════════════════════════════════════════════ -->
+  <section class="slide practice" data-label="Practice">
+    <div class="practice__head">
+      <div class="slide-kicker">Practice · Bài tập cuối buổi</div>
+      <h2 class="slide-title">Apply what you learned today</h2>
+    </div>
+    <div class="practice__grid">
+      <div class="practice__card">
+        <div class="practice__card-kicker">Task 01</div>
+        <h3>Design Process</h3>
+        <ul>
+          <li>Chọn và xây dựng một quy trình thiết kế cho project đang thực hiện.</li>
+          <li>Document lại từng giai đoạn trong Notion hoặc Google Sheet.</li>
+          <li>Share với team để align cách làm việc chung.</li>
+        </ul>
+      </div>
+      <div class="practice__card">
+        <div class="practice__card-kicker">Task 02</div>
+        <h3>Collect Information</h3>
+        <ul>
+          <li>Chọn một template đã học (Lean Canvas, Empathy Map, Journey Map).</li>
+          <li>Capture information đến từ client và team của bạn.</li>
+          <li>Chuẩn bị để share trong buổi tiếp theo.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="chrome"><div class="mark"><span class="dot"></span>Winnie's Teaching</div><div>11 / 13</div></div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       12 · IMAGE ONLY (full-bleed photo slide)
+       ══════════════════════════════════════════════════════════ -->
+  <section class="slide image-only" data-label="Image">
+    <div class="image-only__media" style="background-image:url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=2400&q=85');"></div>
+    <div class="image-only__caption">
+      <div class="image-only__caption-left">Workshop · Team brainstorming session</div>
+      <div class="image-only__caption-right">Source · Unsplash</div>
+    </div>
+    <div class="chrome"><div class="mark"><span class="dot"></span>Winnie's Teaching</div><div>12 / 13</div></div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       13 · END
+       ══════════════════════════════════════════════════════════ -->
+  <section class="slide end" data-label="End">
+    <div class="end__inner">
+      <div class="end__kicker">See you next class</div>
+      <h2 class="end__title">Cảm ơn!</h2>
+      <div class="end__sign">— Winnie Nguyen</div>
+      <div class="end__contact">
+        <span>Linkedin · winnie-nguyen</span>
+        <span>winnie@teaching.vn</span>
+      </div>
+    </div>
+    <div class="chrome"><div class="mark"><span class="dot"></span>Winnie's Teaching</div><div>13 / 13</div></div>
+  </section>
+
+</deck-stage>
+
+<script src="./deck-stage.js"></script>
+</body>
+</html>

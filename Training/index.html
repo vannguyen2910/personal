@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Winnie Nguyen — Training Hub</title>
+<!-- ── Design System ── -->
+  <link rel="stylesheet" href="../Themes/tokens.css">
+  <link rel="stylesheet" href="../Themes/components.css">
+  <style>
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background-color: var(--white);
+      color: var(--text-primary);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── SECTION LABEL OVERRIDE (removes border from components.css) */
+    .section-label {
+      border-bottom: none !important;
+      padding-bottom: 0 !important;
+      margin-top: 0 !important;
+    }
+
+    /* ── SCROLL-TRIGGERED ANIMATIONS ───────────── */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes lineGrow {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+
+    /* Elements start hidden and slide up — JS adds .is-visible on scroll */
+    .animate {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .animate.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .d1.is-visible { transition-delay: 0.0s; }
+    .d2.is-visible { transition-delay: 0.1s; }
+    .d3.is-visible { transition-delay: 0.2s; }
+    .d4.is-visible { transition-delay: 0.3s; }
+    .d5.is-visible { transition-delay: 0.4s; }
+    .d6.is-visible { transition-delay: 0.5s; }
+
+    /* Nav styling is inherited from the shared design system
+       (Themes/components.css) so this page's top nav matches Portfolio. */
+
+    /* ── HERO ─────────────────────────────────────── */
+    .hero {
+      padding: 96px 48px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 32px;
+      height: 1.5px;
+      background: var(--accent);
+      transform-origin: left;
+      animation: lineGrow 0.6s ease 0.3s both;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 28px;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      max-width: 440px;
+      margin-bottom: 40px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--white);
+      padding: 12px 28px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-ghost {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--accent); }
+    .btn-ghost::after { content: '→'; transition: transform 0.2s; }
+    .btn-ghost:hover::after { transform: translateX(4px); }
+
+    /* Hero Right — Visual Card Stack */
+    .hero-right {
+      position: relative;
+      height: 420px;
+    }
+
+    .hero-card {
+      position: absolute;
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .hero-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,.08);
+    }
+
+    .hero-card-main {
+      width: 300px;
+      top: 40px;
+      left: 40px;
+      z-index: 3;
+    }
+
+    .hero-card-secondary {
+      width: 240px;
+      top: 20px;
+      right: 0;
+      z-index: 2;
+      background: var(--accent-light);
+      border-color: var(--accent-mid);
+    }
+
+    .hero-card-tertiary {
+      width: 200px;
+      bottom: 30px;
+      right: 20px;
+      z-index: 1;
+      background: var(--off-white);
+    }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 12px;
+    }
+
+    .card-tag.green {
+      color: #2D6A4F;
+      background: #D8F3DC;
+    }
+
+    .card-tag.warm {
+      color: #7B4F2E;
+      background: #F5E6D8;
+    }
+
+    .hero-card h3 {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      color: var(--text-primary);
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .hero-card p {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .avatar-w { background: var(--accent); }
+    .avatar-s { background: #2D6A4F; }
+
+    .card-meta span {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    /* ── ABOUT ──────────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .about-text p:last-of-type { margin-bottom: 32px; }
+
+    .about-text strong { color: var(--text-primary); font-weight: 600; }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-photo-frame {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: var(--warm-gray);
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .about-badge {
+      position: absolute;
+      bottom: -16px;
+      left: -20px;
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 16px 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      z-index: 2;
+    }
+
+    .about-badge-number {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .about-badge-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    /* ── EXPERTISE PILLS ──────────────────────────── */
+    .expertise-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .pill {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-light);
+      border: 1px solid var(--accent-mid);
+      padding: 5px 14px;
+      border-radius: 100px;
+    }
+
+    /* ── RULE DIVIDER ─────────────────────────────── */
+    .section-divider {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+    .rule {
+      height: 1px;
+      background: var(--rule);
+    }
+
+    /* ── STATS STRIP ──────────────────────────────── */
+    .stats-strip {
+      background: var(--off-white);
+      padding: 40px 48px;
+    }
+
+    .stats-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: var(--serif);
+      font-size: 2.4rem;
+      color: var(--text-primary);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── SECTION COMMONS ──────────────────────────── */
+    section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 48px;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    /* ── FEATURED QUOTE ────────────────────────────── */
+    .quote-section {
+      background: var(--accent);
+      width: 100%;
+    }
+
+    .quote-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 48px;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .quote-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-mid);
+      margin-bottom: 16px;
+    }
+
+    .quote-side-title {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      color: var(--white);
+      line-height: 1.2;
+    }
+
+    .quote-text {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      color: var(--white);
+      line-height: 1.45;
+      font-style: italic;
+      position: relative;
+      padding-left: 28px;
+    }
+
+    .quote-text::before {
+      content: '"';
+      position: absolute;
+      left: -8px;
+      top: -12px;
+      font-size: 5rem;
+      color: var(--accent-mid);
+      line-height: 1;
+      font-family: var(--serif);
+    }
+
+    .quote-author {
+      margin-top: 24px;
+      font-size: 0.85rem;
+      color: var(--accent-mid);
+      font-weight: 500;
+    }
+
+    /* ── FOOTER ────────────────────────────────────── */
+    footer {
+      background: var(--text-primary);
+      color: var(--white);
+      padding: 60px 48px 40px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 64px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 36px;
+    }
+
+    .footer-brand h3 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+      max-width: 260px;
+    }
+
+    .footer-col h4 {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul { list-style: none; }
+
+    .footer-col ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-col ul li a {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover { color: var(--white); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-bottom p {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    .social-link {
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+    }
+
+    .social-link:hover {
+      border-color: rgba(255,255,255,0.4);
+      color: var(--white);
+    }
+
+    /* ── RECOGNITION ──────────────────────────────── */
+    .recognition {
+      background: var(--white);
+      padding: 100px 0;
+    }
+    .recognition-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+    .rec-header {
+      text-align: center;
+      max-width: 540px;
+      margin: 0 auto 60px;
+    }
+    .rec-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .rec-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 14px;
+    }
+    .rec-subtitle {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+    .rec-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .rec-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 36px 32px 32px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04);
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .rec-card:hover {
+      box-shadow: 0 16px 48px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.05);
+      transform: translateY(-4px);
+    }
+    .rec-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+    }
+    .rec-icon svg { width: 26px; height: 26px; stroke: var(--accent); }
+    .rec-card h3 {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .rec-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+
+    /* ── WHAT A MENTOR ADDS ───────────────────────── */
+    .mentor-value {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 48px;
+    }
+    .mv-header {
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto 52px;
+    }
+    .mv-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .mv-item {
+      padding: 40px 36px 44px;
+      border-right: 1px solid var(--rule);
+    }
+    .mv-item:last-child {
+      border-right: none;
+    }
+    .mv-num {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      color: var(--accent-mid);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .mv-item h3 {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .mv-item p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+
+    /* ── HOW IT WORKS ─────────────────────────────── */
+    .how-it-works {
+      background: var(--off-white);
+      padding: 80px 0;
+    }
+    .hiw-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+    .hiw-header {
+      max-width: 480px;
+      margin-bottom: 52px;
+    }
+    .hiw-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .hiw-steps::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: calc(16.67% + 20px);
+      right: calc(16.67% + 20px);
+      height: 1.5px;
+      background: var(--rule);
+    }
+    .hiw-step {
+      padding-right: 32px;
+    }
+    .step-num {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--white);
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .hiw-step h3 {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .hiw-step p {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+    .step-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 12px;
+    }
+    .hiw-cta {
+      margin-top: 48px;
+    }
+
+    /* ── TESTIMONIALS ─────────────────────────────── */
+    .testimonials {
+      background: var(--text-primary);
+      padding: 96px 0;
+    }
+    .testi-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .testi-left { position: sticky; top: 96px; }
+    .testi-left .section-label { color: rgba(255,255,255,0.38); }
+    .testi-heading {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3vw, 2.3rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 14px;
+    }
+    .testi-desc {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+    .testi-adp-link {
+      font-size: 0.875rem;
+      color: var(--accent-mid);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .testi-adp-link::after { content: '→'; transition: transform 0.2s; }
+    .testi-adp-link:hover { color: var(--white); }
+    .testi-adp-link:hover::after { transform: translateX(4px); }
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .testi-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 28px 26px 24px;
+      display: flex;
+      flex-direction: column;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .testi-card:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.14);
+    }
+    .testi-card.featured { grid-column: 1 / -1; }
+    .testi-quote {
+      font-family: var(--serif);
+      font-size: 2.8rem;
+      color: rgba(255,255,255,0.12);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .testi-text {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.8;
+      flex: 1;
+      margin-bottom: 20px;
+    }
+    .testi-author {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 14px;
+    }
+    .testi-name {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+    .testi-role {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.42);
+    }
+
+    /* ── FINAL CTA ────────────────────────────────── */
+    .final-cta {
+      background: var(--off-white);
+      padding: 80px 0;
+    }
+    .final-cta-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 48px;
+      text-align: center;
+    }
+    .final-cta-inner .section-label { justify-content: center; display: flex; }
+    .final-cta h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+    .final-cta p {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 36px;
+    }
+    .final-cta-actions {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .cta-note {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-top: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo"><img src="assets/Logo.svg" alt="Winnie Nguyen" /></a>
+    <div class="nav-links">
+      <a href="../Portfolio/index.html">Portfolio</a>
+      <a href="#about">About</a>
+      <a href="self-assessment.html" class="btn btn--contained btn--primary btn--sm">Run Self-assessment</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="hero">
+      <div class="hero-left">
+        <p class="hero-eyebrow animate d1">UX Educator · Product Trainer</p>
+        <h1 class="hero-title animate d2">
+          Designing<br /><em>better</em><br />designers.
+        </h1>
+        <p class="hero-desc animate d3">
+          A hands-on training experience built for designers who want to develop real UX intuition — not just surface-level skills.
+        </p>
+        <div class="hero-actions animate d4">
+          <a href="self-assessment.html" class="btn-primary">Run Self-assessment</a>
+          <a href="https://adplist.org/mentors/winnie-nguyen" target="_blank" rel="noopener" class="btn-ghost">Connect on ADPList</a>
+        </div>
+      </div>
+
+      <div class="hero-right animate d3">
+        <!-- Card 1 — main -->
+        <div class="hero-card hero-card-main">
+          <span class="card-tag">Lesson · UX Research</span>
+          <h3>Mental Models in UX Design</h3>
+          <p>How users build expectations — and how we design for them.</p>
+        </div>
+        <!-- Card 2 — secondary -->
+        <div class="hero-card hero-card-secondary">
+          <span class="card-tag green">Self-assessment</span>
+          <h3>Where are you right now?</h3>
+          <p>Map your current skills and identify your next growth area.</p>
+        </div>
+        <!-- Card 3 — tertiary -->
+        <div class="hero-card hero-card-tertiary">
+          <span class="card-tag warm">Framework</span>
+          <h3>UX Design Principles</h3>
+          <p>Core reference sheet — 12 principles.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECOGNITION -->
+  <div class="recognition">
+    <div class="recognition-inner">
+      <div class="rec-header animate d1">
+        <p class="rec-eyebrow">You're not alone</p>
+        <h2 class="rec-title">Sound familiar?</h2>
+        <p class="rec-subtitle">Most designers hit these moments at some point. Recognising where you're stuck is the first step to moving forward.</p>
+      </div>
+      <div class="rec-grid">
+
+        <div class="rec-card animate d2">
+          <div class="rec-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/></svg>
+          </div>
+          <h3>Stuck at mid-level for longer than expected</h3>
+          <p>You're shipping good work and hitting your goals. But Senior keeps feeling out of reach, and no one is giving you clear, specific feedback on what's actually holding you back.</p>
+        </div>
+
+        <div class="rec-card animate d3">
+          <div class="rec-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
+          </div>
+          <h3>No senior designer around you to learn from</h3>
+          <p>You're the most experienced designer on your team — or close to it. Feedback comes from PMs, not designers. You're growing, but you're mostly figuring it out alone.</p>
+        </div>
+
+        <div class="rec-card animate d4">
+          <div class="rec-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z"/></svg>
+          </div>
+          <h3>Your portfolio exists — but it's not converting</h3>
+          <p>You've done real, solid work. But interviews aren't coming, or they stall at the portfolio review. You can't tell if it's the work itself, the framing, or how the story is told.</p>
+        </div>
+
+        <div class="rec-card animate d5">
+          <div class="rec-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
+          </div>
+          <h3>Unsure what AI actually means for your design career</h3>
+          <p>Everyone's saying AI is changing everything. You want to stay relevant and future-proof your skills — but you're not sure which direction to go, or where to start.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT A MENTOR ADDS -->
+  <div>
+    <div class="mentor-value">
+      <div class="mv-header animate d1">
+        <p class="section-label" style="text-align:center; display:block;">What changes</p>
+        <h2 class="section-title" style="margin-bottom:14px; text-align:center;">What shifts when you have someone in your corner</h2>
+        <p style="font-size:1rem; color:var(--text-secondary); line-height:1.75; text-align:center;">There's no shortage of great design resources, courses, and communities. A mentor works differently — focused entirely on your situation, your work, and your next move.</p>
+      </div>
+      <div class="mv-grid">
+        <div class="mv-item animate d2">
+          <div class="mv-num">01</div>
+          <h3>Guidance applied to your specific situation</h3>
+          <p>You don't need more frameworks. You need someone who can look at your actual work, your specific career challenge, and tell you what to do next — not what works in general.</p>
+        </div>
+        <div class="mv-item animate d3">
+          <div class="mv-num">02</div>
+          <h3>The honest feedback that's hard to get elsewhere</h3>
+          <p>A mentor gives you the kind of direct, specific feedback that's rare in most workplaces — grounded in real product design experience, with your growth as the only agenda.</p>
+        </div>
+        <div class="mv-item animate d4">
+          <div class="mv-num">03</div>
+          <h3>Accountability that keeps you moving forward</h3>
+          <p>Regular sessions with someone genuinely invested in your progress create momentum that self-study rarely does — even when the day-to-day gets in the way.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="how-it-works">
+    <div class="hiw-inner">
+      <div class="hiw-header animate d1">
+        <p class="section-label">The process</p>
+        <h2 class="section-title" style="margin-bottom:12px;">How it works</h2>
+        <p style="font-size:1rem; color:var(--text-secondary); line-height:1.75;">Three steps, no commitment until you're ready.</p>
+      </div>
+      <div class="hiw-steps">
+        <div class="hiw-step animate d2">
+          <div class="step-num">1</div>
+          <span class="step-tag">Free · 15 min</span>
+          <h3>Take the self-assessment</h3>
+          <p>Map your skills across 9 core design areas and 6 professional behaviours. See exactly where you stand — and where the gaps are — before we even talk.</p>
+        </div>
+        <div class="hiw-step animate d3">
+          <div class="step-num">2</div>
+          <span class="step-tag">Free · 20 min</span>
+          <h3>Book a discovery call</h3>
+          <p>We'll talk through your results, your goals, and what's been holding you back. No pitch, no commitment. Just a clear-eyed look at where you want to go.</p>
+        </div>
+        <div class="hiw-step animate d4">
+          <div class="step-num">3</div>
+          <span class="step-tag">Structured program</span>
+          <h3>Build your growth plan</h3>
+          <p>Get a tailored roadmap with regular sessions, real feedback on your actual work, and accountability built in — so growth stops being something you plan and starts being something you do.</p>
+        </div>
+      </div>
+      <div class="hiw-cta animate d5">
+        <a href="self-assessment.html" class="btn-primary">Start with the free assessment</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-text animate d1">
+        <p class="section-label">About</p>
+        <h2 class="section-title" style="margin-bottom:28px;">Training that <em>sticks.</em></h2>
+        <p>
+          I'm a <strong>UX educator and product trainer</strong> based in Vietnam, helping designers and teams build genuine design intuition — not just surface-level skills.
+        </p>
+        <p>
+          With 10+ years as a UX product designer and experience mentoring 50+ designers through ADPList and private programs, I've developed a practical, human-centred approach to teaching design — one that bridges real-world product work with structured learning.
+        </p>
+        <div class="expertise-pills animate d2">
+          <span class="pill">UX Research</span>
+          <span class="pill">Product Thinking</span>
+          <span class="pill">Mental Models</span>
+          <span class="pill">Prototyping</span>
+          <span class="pill">Design Systems</span>
+          <span class="pill">1:1 Coaching</span>
+        </div>
+      </div>
+
+      <div class="about-visual animate d3">
+        <div class="about-photo-frame">
+          <img src="assets/GV5.jpg" alt="Winnie Nguyen" />
+        </div>
+        <div class="about-badge">
+          <div class="about-badge-number">50+</div>
+          <div class="about-badge-label">designers mentored</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div class="stats-inner">
+      <div class="stat animate d1">
+        <div class="stat-number" data-target="10" data-suffix="+">10+</div>
+        <div class="stat-label">Years in UX</div>
+      </div>
+      <div class="stat animate d2">
+        <div class="stat-number" data-target="50" data-suffix="+">50+</div>
+        <div class="stat-label">Designers Mentored</div>
+      </div>
+      <div class="stat animate d3">
+        <div class="stat-number">Top 30%</div>
+        <div class="stat-label">ADPList Mentor</div>
+      </div>
+      <div class="stat animate d4">
+        <div class="stat-number" data-target="2">2</div>
+        <div class="stat-label">Active Programs</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div class="testimonials">
+    <div class="testi-inner">
+
+      <div class="testi-left animate d1">
+        <p class="section-label">What designers say</p>
+        <h2 class="testi-heading">Words from people I've worked with</h2>
+        <p class="testi-desc">Designers at different stages of their careers, working towards different goals — all mentored through ADPList.</p>
+        <a href="https://adplist.org/mentors/winnie-nguyen" target="_blank" rel="noopener" class="testi-adp-link">Read all reviews on ADPList</a>
+      </div>
+
+      <div class="testi-grid">
+
+        <div class="testi-card animate d2">
+          <div class="testi-quote">&ldquo;</div>
+          <p class="testi-text">She created an encouraging atmosphere where learning felt both joyful and insightful. Her advice on leadership combined practical experience with strong academic grounding, making every session meaningful and applicable.</p>
+          <div class="testi-author">
+            <div class="testi-name">William Nguyen</div>
+            <div class="testi-role">Product Designer · CDG Group</div>
+          </div>
+        </div>
+
+        <div class="testi-card animate d3">
+          <div class="testi-quote">&ldquo;</div>
+          <p class="testi-text">Winnie gave me insightful suggestions and clear direction, which really helped me reflect on how to improve. She shared lots of helpful resources that will definitely support me in growing my skillset. Highly recommended!</p>
+          <div class="testi-author">
+            <div class="testi-name">Wendy Lin</div>
+            <div class="testi-role">UI/UX Designer</div>
+          </div>
+        </div>
+
+        <div class="testi-card featured animate d4">
+          <div class="testi-quote">&ldquo;</div>
+          <p class="testi-text">She guided me through my questions to clarify my career path and how to grow myself. She kindly shared her experiences and introduced me to useful ways to gain skill sets to move closer to my goal of becoming a Product Designer. I feel thankful and I'm looking forward to talking to her more.</p>
+          <div class="testi-author">
+            <div class="testi-name">Uyen Dong Thi My</div>
+            <div class="testi-role">UI/UX Designer</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="quote-section">
+    <div class="quote-inner">
+      <div>
+        <p class="quote-label">Philosophy</p>
+        <h3 class="quote-side-title">What I believe about design education</h3>
+      </div>
+      <div>
+        <p class="quote-text">
+          Good design education doesn't just teach tools or processes — it teaches people how to see. My job is to build that vision in every student I work with.
+        </p>
+        <p class="quote-author">— Winnie Nguyen, UX Educator</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div class="final-cta">
+    <div class="final-cta-inner">
+      <p class="section-label">Ready to start?</p>
+      <h2>See where you stand — it takes 15 minutes</h2>
+      <p>The self-assessment is free, takes about 15 minutes, and gives you a personalised skills map with a learning pathway before you ever speak to me. It's the best first step.</p>
+      <div class="final-cta-actions">
+        <a href="self-assessment.html" class="btn-primary">Run self-assessment — free</a>
+        <a href="https://adplist.org/mentors/winnie-nguyen" target="_blank" rel="noopener" class="btn-ghost">Or connect on ADPList</a>
+      </div>
+      <p class="cta-note">No account needed · Results shown instantly · Takes ~15 min</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <h3>Winnie Nguyen</h3>
+          <p>UX Educator & Product Trainer — building genuine design intuition in every student I work with.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="self-assessment.html">Self-assessment</a></li>
+            <li><a href="mailto:nguyenphuctuongvan@gmail.com">Get in Touch</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="https://adplist.org/mentors/winnie-nguyen" target="_blank" rel="noopener">ADPList Profile</a></li>
+            <li><a href="mailto:nguyenphuctuongvan@gmail.com">nguyenphuctuongvan@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Winnie Nguyen. All rights reserved.</p>
+        <div class="social-links">
+          <a href="https://adplist.org/mentors/winnie-nguyen" target="_blank" rel="noopener" class="social-link" title="ADPList">adp</a>
+          <a href="mailto:nguyenphuctuongvan@gmail.com" class="social-link" title="Email">✉</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Scroll-triggered reveal ──────────────────────────────
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -48px 0px' });
+
+    document.querySelectorAll('.animate').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    // ── Stat counter animation ───────────────────────────────
+    function runCounter(el) {
+      const raw = el.dataset.target;
+      const isPrefix = el.dataset.prefix || '';
+      const isSuffix = el.dataset.suffix || '';
+      const target = parseFloat(raw);
+      const duration = 1600;
+      const start = performance.now();
+
+      const tick = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        const value = Math.round(ease * target);
+        el.textContent = isPrefix + value + isSuffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }
+
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          runCounter(entry.target);
+          statObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('[data-target]').forEach(el => {
+      statObserver.observe(el);
+    });
+  </script>
+</body>
+</html>

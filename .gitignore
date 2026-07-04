@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Figma source file — 135MB, exceeds GitHub's 100MB limit. Kept in Google Drive.
+*.fig
+
+# Local preview tooling (machine-specific absolute paths)
+.claude/
