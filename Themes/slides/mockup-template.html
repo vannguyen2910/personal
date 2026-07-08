@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Winnie's Teaching — Mockup Slides</title>
+<link rel="stylesheet" href="../tokens.css"/>
+<style>
+  /* ==== Slide shell ==== */
+  .slide {
+    width: 1920px; height: 1080px;
+    background: var(--paper);
+    color: var(--ink);
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font-body);
+    display: flex;
+  }
+
+  /* ============================================================
+     DEVICE FRAMES — brand-matched, reusable
+     ============================================================ */
+
+  /* ── Phone ─────────────────────────────────────────────────── */
+  .phone {
+    width: 404px; height: 858px;
+    background: #0E0918;
+    border-radius: 56px;
+    padding: 13px;
+    box-shadow:
+      0 2px 3px rgba(14,9,24,0.4),
+      0 30px 70px rgba(30,18,60,0.35),
+      inset 0 0 0 2px rgba(255,255,255,0.06);
+    position: relative;
+    flex: none;
+  }
+  .phone__screen {
+    width: 100%; height: 100%;
+    border-radius: 44px;
+    overflow: hidden;
+    background: var(--paper);
+    position: relative;
+  }
+  .phone__screen image-slot { width: 100%; height: 100%; display: block; }
+  .phone__island {
+    position: absolute; top: 20px; left: 50%;
+    transform: translateX(-50%);
+    width: 108px; height: 31px;
+    background: #0E0918;
+    border-radius: 999px;
+    z-index: 4;
+    pointer-events: none;
+  }
+  .phone--lg { width: 452px; height: 960px; border-radius: 62px; padding: 14px; }
+  .phone--lg .phone__screen { border-radius: 49px; }
+
+  /* ── Browser / desktop ─────────────────────────────────────── */
+  .browser {
+    width: 100%; max-width: 900px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--paper);
+    box-shadow:
+      0 2px 4px rgba(30,18,60,0.10),
+      0 34px 80px rgba(30,18,60,0.30);
+    border: 1px solid rgba(255,255,255,0.5);
+    flex: none;
+  }
+  .browser__bar {
+    height: 58px;
+    background: var(--paper-deeper);
+    border-bottom: 1px solid var(--ink-ghost);
+    display: flex; align-items: center; gap: 22px;
+    padding: 0 24px;
+  }
+  .browser__dots { display: flex; gap: 9px; flex: none; }
+  .browser__dots i {
+    width: 13px; height: 13px; border-radius: 50%;
+    background: var(--ink-ghost);
+    display: block;
+  }
+  .browser__url {
+    flex: 1;
+    height: 34px;
+    background: var(--paper);
+    border: 1px solid var(--ink-ghost);
+    border-radius: 999px;
+    display: flex; align-items: center; gap: 12px;
+    padding: 0 20px;
+    font-family: var(--font-mono);
+    font-size: 17px;
+    color: var(--ink-muted);
+    max-width: 520px;
+  }
+  .browser__url span { width: 13px; height: 13px; border-radius: 3px; border: 2px solid var(--ink-ghost); flex: none; }
+  .browser__screen {
+    aspect-ratio: 16 / 10;
+    background: var(--paper);
+    position: relative;
+  }
+  .browser__screen image-slot { width: 100%; height: 100%; display: block; }
+  .browser--lg { max-width: 1280px; }
+
+  /* ============================================================
+     SPLIT LAYOUT — content + device stage
+     ============================================================ */
+  .split { padding: 0; }
+  .split__stage {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: var(--slide-pad);
+  }
+  .split__content {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: var(--slide-pad) 112px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  /* stage backgrounds */
+  .stage--purple { background: var(--purple); }
+  .stage--lavender { background: var(--paper-deeper); }
+  .stage--ink { background: var(--ink); }
+  /* decorative blobs on colored stages */
+  .stage--purple::before {
+    content: ''; position: absolute;
+    top: -160px; right: -120px; width: 460px; height: 460px;
+    border-radius: 50%; background: var(--purple-deep); opacity: 0.55;
+  }
+  .stage--purple::after {
+    content: ''; position: absolute;
+    bottom: -150px; left: -120px; width: 300px; height: 300px;
+    border-radius: 50%; background: var(--yellow);
+  }
+  .stage--lavender::after {
+    content: ''; position: absolute;
+    top: -110px; left: -90px; width: 300px; height: 300px;
+    border-radius: 50%; background: var(--purple-tint); opacity: 0.9;
+  }
+  /* give the desktop split more room for the wider frame */
+  .split--desktop .split__stage { flex: 1.22 1 0; }
+  .split--desktop .split__content { padding: var(--slide-pad) 96px; }
+
+  /* ── Content typography (device slides) ────────────────────── */
+  .m-kicker {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+    color: var(--purple);
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 28px;
+  }
+  .m-kicker::before { content: ''; width: 40px; height: 2px; background: var(--purple); flex: none; }
+  .m-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 76px;
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin: 0;
+  }
+  .m-title em { font-style: normal; color: var(--purple); }
+  .m-lead {
+    font-family: var(--font-body);
+    font-size: var(--text-xl);
+    color: var(--ink-soft);
+    line-height: var(--leading-relaxed);
+    margin: 32px 0 0;
+    max-width: 640px;
+  }
+  .m-list {
+    list-style: none; padding: 0;
+    margin: 48px 0 0;
+    display: flex; flex-direction: column; gap: 24px;
+  }
+  .m-list li {
+    display: grid; grid-template-columns: auto 1fr; gap: 20px;
+    align-items: start;
+  }
+  .m-list__num {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-mono);
+    color: var(--purple-deep);
+    padding-top: 6px;
+  }
+  .m-list__body h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-lg);
+    color: var(--ink);
+    margin: 0 0 6px;
+    line-height: var(--leading-snug);
+  }
+  .m-list__body p {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--ink-soft);
+    line-height: var(--leading-normal);
+    margin: 0;
+  }
+
+  /* ============================================================
+     FULL-BLEED — single hero device
+     ============================================================ */
+  .full {
+    padding: 0;
+    align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .full--purple { background: var(--purple); }
+  .full--purple::before {
+    content: ''; position: absolute;
+    top: -220px; right: -160px; width: 640px; height: 640px;
+    border-radius: 50%; background: var(--purple-deep); opacity: 0.5;
+  }
+  .full--purple::after {
+    content: ''; position: absolute;
+    bottom: -210px; left: -150px; width: 440px; height: 440px;
+    border-radius: 50%; background: var(--yellow);
+  }
+  .full--lavender { background: var(--paper-deeper); }
+  .full--lavender::before {
+    content: ''; position: absolute;
+    top: -180px; left: -140px; width: 520px; height: 520px;
+    border-radius: 50%; background: var(--purple-tint); opacity: 0.85;
+  }
+  .full__device { position: relative; z-index: 2; }
+
+  /* combo keeps a centered device, just clears the header */
+  .slide.combo { padding-top: 150px; }
+
+  /* gallery slides: header sits in normal flow, devices fill the rest —
+     no absolute overlap regardless of how the title wraps */
+  .slide.gallery, .slide.gallery-desk {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 64px 96px 80px;
+  }
+  .slide.gallery .full-head, .slide.gallery-desk .full-head {
+    position: static; inset: auto;
+    margin-bottom: 28px;
+  }
+  .slide.gallery .gallery__row, .slide.gallery-desk .gallery-desk__row {
+    flex: 1; margin-top: 0;
+  }
+
+  /* floating caption card */
+  .caption-card {
+    position: absolute; z-index: 3;
+    background: var(--paper);
+    border-radius: var(--radius-lg);
+    padding: 32px 40px;
+    box-shadow: var(--shadow-lg);
+    max-width: 460px;
+  }
+  .caption-card--tl { top: 96px; left: 96px; }
+  .caption-card--br { bottom: 96px; right: 96px; }
+  .caption-card__kicker {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 12px;
+  }
+  .caption-card__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0 0 12px;
+  }
+  .caption-card__desc {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--ink-soft);
+    line-height: var(--leading-normal);
+    margin: 0;
+  }
+
+  /* ── Full-bleed header (for combo / gallery) ───────────────── */
+  .full-head {
+    position: absolute; top: 96px; left: 96px; right: 96px;
+    z-index: 3;
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 48px;
+  }
+  .full-head__kicker {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 18px;
+  }
+  .full-head__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    color: var(--paper);
+    margin: 0;
+    max-width: 1100px;
+  }
+  .full-head__meta {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.72);
+    text-align: right;
+    flex: none;
+    padding-bottom: 6px;
+  }
+
+  /* ============================================================
+     COMBO — desktop + mobile together
+     ============================================================ */
+  .combo__stage {
+    position: relative;
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .combo__browser {
+    position: relative;
+    width: 1180px;
+    max-width: none;
+    transform: translateX(-90px);
+    z-index: 1;
+  }
+  .combo__phone {
+    position: absolute;
+    right: 210px; bottom: 96px;
+    width: 358px; height: 760px;
+    z-index: 2;
+    box-shadow:
+      0 3px 6px rgba(14,9,24,0.4),
+      0 40px 90px rgba(30,18,60,0.5),
+      inset 0 0 0 2px rgba(255,255,255,0.06);
+  }
+  .combo__phone .phone__screen { border-radius: 40px; }
+
+  /* ============================================================
+     GALLERY — three-phone fan
+     ============================================================ */
+  .gallery__row {
+    position: relative; z-index: 2;
+    display: flex; align-items: center; justify-content: center;
+    gap: 56px;
+    margin-top: 40px;
+  }
+  .gallery__row .phone {
+    width: 300px; height: 638px;
+    border-radius: 44px; padding: 11px;
+  }
+  .gallery__row .phone__screen { border-radius: 34px; }
+  .gallery__row .phone--hero {
+    width: 334px; height: 710px;
+    border-radius: 48px;
+    z-index: 3;
+    box-shadow:
+      0 3px 6px rgba(14,9,24,0.4),
+      0 44px 100px rgba(30,18,60,0.5),
+      inset 0 0 0 2px rgba(255,255,255,0.06);
+  }
+  .gallery__row .phone--side { opacity: 0.96; }
+
+  /* ── Desktop gallery — three-browser flow ──────────────────── */
+  .gallery-desk__row {
+    position: relative; z-index: 2;
+    display: flex; align-items: center; justify-content: center;
+    gap: 44px; width: 100%;
+  }
+  .gallery-desk__row .browser { width: 512px; max-width: none; }
+  .gallery-desk__row .browser--hero {
+    width: 588px; z-index: 3;
+    box-shadow:
+      0 3px 6px rgba(14,9,24,0.4),
+      0 44px 100px rgba(30,18,60,0.5);
+  }
+  .gallery-desk__row .browser--side { opacity: 0.96; }
+
+  /* ============================================================
+     ENTRANCE ANIMATIONS
+     ============================================================ */
+  @keyframes mRise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes mScale { from { opacity: 0; transform: scale(0.94); } to { opacity: 1; transform: scale(1); } }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .slide[data-deck-active] .split__content > * { animation: mRise 0.6s var(--ease-out) both; }
+    .slide[data-deck-active] .split__content > *:nth-child(1) { animation-delay: 0.10s; }
+    .slide[data-deck-active] .split__content > *:nth-child(2) { animation-delay: 0.18s; }
+    .slide[data-deck-active] .split__content > *:nth-child(3) { animation-delay: 0.26s; }
+    .slide[data-deck-active] .split__content > *:nth-child(4) { animation-delay: 0.34s; }
+
+    .slide[data-deck-active] .phone,
+    .slide[data-deck-active] .browser,
+    .slide[data-deck-active] .full__device,
+    .slide[data-deck-active] .caption-card { animation: mScale 0.7s var(--ease-out) both; animation-delay: 0.12s; }
+    .slide[data-deck-active] .caption-card { animation-name: mRise; animation-delay: 0.32s; }
+
+    .slide[data-deck-active] .gallery__row .phone:nth-child(1) { animation-delay: 0.14s; }
+    .slide[data-deck-active] .gallery__row .phone:nth-child(2) { animation-delay: 0.24s; }
+    .slide[data-deck-active] .gallery__row .phone:nth-child(3) { animation-delay: 0.34s; }
+    .slide[data-deck-active] .combo__phone { animation-delay: 0.28s; }
+    .slide[data-deck-active] .gallery-desk__row .browser:nth-child(1) { animation-delay: 0.14s; }
+    .slide[data-deck-active] .gallery-desk__row .browser:nth-child(2) { animation-delay: 0.24s; }
+    .slide[data-deck-active] .gallery-desk__row .browser:nth-child(3) { animation-delay: 0.34s; }
+  }
+</style>
+</head>
+<body>
+
+<deck-stage width="1920" height="1080">
+
+  <!-- ══════════════════════════════════════════════════════════
+       01 · MOBILE — mockup LEFT, content RIGHT
+       ══════════════════════════════════════════════════════════ -->
+  <section class="slide split" data-label="Mobile · Left" data-screen-label="01">
+    <div class="split__stage stage--purple">
+      <div class="phone">
+        <div class="phone__screen">
+          <image-slot id="mk-mobile-left" shape="rect" placeholder="Drop a mobile screen (≈9:19.5)"></image-slot>
+          <div class="phone__island"></div>
+        </div>
+      </div>
+    </div>
+    <div class="split__content">
+      <div class="m-kicker">Case Study · Mobile</div>
+      <h2 class="m-title">Go1 learning app — <em>content curation</em></h2>
+      <p class="m-lead">A focused mobile flow that helps admins assemble a learning path in minutes, not hours.</p>
+      <ul class="m-list">
+        <li>
+          <div class="m-list__num">01</div>
+          <div class="m-list__body"><h4>Search that understands intent</h4><p>Surfaces relevant courses from the first keystroke.</p></div>
+        </li>
+        <li>
+          <div class="m-list__num">02</div>
+          <div class="m-list__body"><h4>One-tap add to path</h4><p>Curate without leaving the results screen.</p></div>
+        </li>
+        <li>
+          <div class="m-list__num">03</div>
+          <div class="m-list__body"><h4>Preview before publish</h4><p>See the learner's view before sharing with the team.</p></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       02 · MOBILE — content LEFT, mockup RIGHT
+       ══════════════════════════════════════════════════════════ -->
+  <section class="slide split" data-label="Mobile · Right" data-screen-label="02">
+    <div class="split__content">
+      <div class="m-kicker">Before / After</div>
+      <h2 class="m-title">Redesigning the <em>onboarding</em> flow</h2>
+      <p class="m-lead">We cut five steps down to two and moved the value proposition above the fold. Activation rose without adding a single new feature.</p>
+      <ul class="m-list">
+        <li>
+          <div class="m-list__num">↗</div>
+          <div class="m-list__body"><h4>+34% completion</h4><p>More new users reach their first "aha" moment.</p></div>
+        </li>
+        <li>
+          <div class="m-list__num">↘</div>
+          <div class="m-list__body"><h4>−48s time to value</h4><p>Fewer fields, clearer defaults, less thinking.</p></div>
+        </li>
+      </ul>
+    </div>
+    <div class="split__stage stage--lavender">
+      <div class="phone">
+        <div class="phone__screen">
+          <image-slot id="mk-mobile-right" shape="rect" placeholder="Drop a mobile screen (≈9:19.5)"></image-slot>
+          <div class="phone__island"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       03 · DESKTOP — mockup LEFT, content RIGHT
+       ══════════════════════════════════════════════════════════ -->
+  <section class="slide split split--desktop" data-label="Desktop · Left" data-screen-label="03">
+    <div class="split__stage stage--purple">
+      <div class="browser">
+        <div class="browser__bar">
+          <div class="browser__dots"><i></i><i></i><i></i></div>
+          <div class="browser__url"><span></span>app.example.com/dashboard</div>
+        </div>
+        <div class="browser__screen">
+          <image-slot id="mk-desktop-left" shape="rect" placeholder="Drop a desktop screen (16:10)"></image-slot>
+        </div>
+      </div>
+    </div>
+    <div class="split__content">
+      <div class="m-kicker">Case Study · Web</div>
+      <h2 class="m-title">NAB admin <em>dashboard</em></h2>
+      <p class="m-lead">A data-dense console rebuilt around the three tasks admins actually do every day — so the important controls are never more than one click away.</p>
+      <ul class="m-list">
+        <li>
+          <div class="m-list__num">01</div>
+          <div class="m-list__body"><h4>Glanceable metrics</h4><p>Key numbers sit at the top, always visible.</p></div>
+        </li>
+        <li>
+          <div class="m-list__num">02</div>
+          <div class="m-list__body"><h4>Bulk actions</h4><p>Handle dozens of records with a single gesture.</p></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       04 · DESKTOP — content LEFT, mockup RIGHT
+       ══════════════════════════════════════════════════════════ -->
+  <section class="slide split split--desktop" data-label="Desktop · Right" data-screen-label="04">
+    <div class="split__content">
+      <div class="m-kicker">Design System</div>
+      <h2 class="m-title">A component library that <em>scales</em></h2>
+      <p class="m-lead">One source of truth for color, type, and spacing — so every team ships screens that look like they belong together.</p>
+      <ul class="m-list">
+        <li>
+          <div class="m-list__num">01</div>
+          <div class="m-list__body"><h4>Tokens, not hex codes</h4><p>Change a value once; it updates everywhere.</p></div>
+        </li>
+        <li>
+          <div class="m-list__num">02</div>
+          <div class="m-list__body"><h4>Documented in place</h4><p>Every component ships with usage and do/don't.</p></div>
+        </li>
+      </ul>
+    </div>
+    <div class="split__stage stage--lavender">
+      <div class="browser">
+        <div class="browser__bar">
+          <div class="browser__dots"><i></i><i></i><i></i></div>
+          <div class="browser__url"><span></span>system.example.com/components</div>
+        </div>
+        <div class="browser__screen">
+          <image-slot id="mk-desktop-right" shape="rect" placeholder="Drop a desktop screen (16:10)"></image-slot>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       05 · FULL-BLEED — single mobile hero
+       ══════════════════════════════════════════════════════════ -->
+  <section class="slide full full--purple" data-label="Full · Mobile" data-screen-label="05">
+    <div class="full__device">
+      <div class="phone phone--lg">
+        <div class="phone__screen">
+          <image-slot id="mk-full-mobile" shape="rect" placeholder="Drop the hero mobile screen"></image-slot>
+          <div class="phone__island"></div>
+        </div>
+      </div>
+    </div>
+    <div class="caption-card caption-card--tl">
+      <div class="caption-card__kicker">Final UI · iOS</div>
+      <h3 class="caption-card__title">The finished home screen</h3>
+      <p class="caption-card__desc">Everything a returning learner needs, one thumb-reach away.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       06 · FULL-BLEED — single desktop hero
+       ══════════════════════════════════════════════════════════ -->
+  <section class="slide full full--lavender" data-label="Full · Desktop" data-screen-label="06">
+    <div class="full__device">
+      <div class="browser browser--lg">
+        <div class="browser__bar">
+          <div class="browser__dots"><i></i><i></i><i></i></div>
+          <div class="browser__url"><span></span>app.example.com</div>
+        </div>
+        <div class="browser__screen">
+          <image-slot id="mk-full-desktop" shape="rect" placeholder="Drop the hero desktop screen (16:10)"></image-slot>
+        </div>
+      </div>
+    </div>
+    <div class="caption-card caption-card--br">
+      <div class="caption-card__kicker">Final UI · Web</div>
+      <h3 class="caption-card__title">The full workspace</h3>
+      <p class="caption-card__desc">Dense, but calm — hierarchy does the heavy lifting.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       07 · COMBO — desktop + mobile together
+       ══════════════════════════════════════════════════════════ -->
+  <section class="slide full full--purple combo" data-label="Combo · Web + Mobile" data-screen-label="07">
+    <div class="full-head">
+      <div>
+        <div class="full-head__kicker">Responsive</div>
+        <h2 class="full-head__title">One product, every screen</h2>
+      </div>
+      <div class="full-head__meta">Web · iOS<br/>1440 &amp; 390 px</div>
+    </div>
+    <div class="combo__stage">
+      <div class="browser combo__browser">
+        <div class="browser__bar">
+          <div class="browser__dots"><i></i><i></i><i></i></div>
+          <div class="browser__url"><span></span>app.example.com</div>
+        </div>
+        <div class="browser__screen">
+          <image-slot id="mk-combo-desktop" shape="rect" placeholder="Drop the desktop screen (16:10)"></image-slot>
+        </div>
+      </div>
+      <div class="phone combo__phone">
+        <div class="phone__screen">
+          <image-slot id="mk-combo-mobile" shape="rect" placeholder="Drop the mobile screen"></image-slot>
+          <div class="phone__island"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       08 · GALLERY — three-phone flow
+       ══════════════════════════════════════════════════════════ -->
+  <section class="slide full full--purple gallery" data-label="Gallery · 3 Mobile" data-screen-label="08">
+    <div class="full-head">
+      <div>
+        <div class="full-head__kicker">Flow</div>
+        <h2 class="full-head__title">From search to enrolled — three taps</h2>
+      </div>
+      <div class="full-head__meta">iOS · 390 px<br/>3 screens</div>
+    </div>
+    <div class="gallery__row">
+      <div class="phone phone--side">
+        <div class="phone__screen">
+          <image-slot id="mk-gallery-1" shape="rect" placeholder="Screen 1"></image-slot>
+          <div class="phone__island"></div>
+        </div>
+      </div>
+      <div class="phone phone--hero">
+        <div class="phone__screen">
+          <image-slot id="mk-gallery-2" shape="rect" placeholder="Screen 2"></image-slot>
+          <div class="phone__island"></div>
+        </div>
+      </div>
+      <div class="phone phone--side">
+        <div class="phone__screen">
+          <image-slot id="mk-gallery-3" shape="rect" placeholder="Screen 3"></image-slot>
+          <div class="phone__island"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       09 · GALLERY — three-desktop flow
+       ══════════════════════════════════════════════════════════ -->
+  <section class="slide full full--purple gallery-desk" data-label="Gallery · 3 Desktop" data-screen-label="09">
+    <div class="full-head">
+      <div>
+        <div class="full-head__kicker">Flow</div>
+        <h2 class="full-head__title">The whole journey, screen by screen</h2>
+      </div>
+      <div class="full-head__meta">Web · 1440 px<br/>3 screens</div>
+    </div>
+    <div class="gallery-desk__row">
+      <div class="browser browser--side">
+        <div class="browser__bar">
+          <div class="browser__dots"><i></i><i></i><i></i></div>
+          <div class="browser__url"><span></span>app.example.com/discover</div>
+        </div>
+        <div class="browser__screen">
+          <image-slot id="mk-gallery-desk-1" shape="rect" placeholder="Screen 1"></image-slot>
+        </div>
+      </div>
+      <div class="browser browser--hero">
+        <div class="browser__bar">
+          <div class="browser__dots"><i></i><i></i><i></i></div>
+          <div class="browser__url"><span></span>app.example.com/course</div>
+        </div>
+        <div class="browser__screen">
+          <image-slot id="mk-gallery-desk-2" shape="rect" placeholder="Screen 2"></image-slot>
+        </div>
+      </div>
+      <div class="browser browser--side">
+        <div class="browser__bar">
+          <div class="browser__dots"><i></i><i></i><i></i></div>
+          <div class="browser__url"><span></span>app.example.com/enrolled</div>
+        </div>
+        <div class="browser__screen">
+          <image-slot id="mk-gallery-desk-3" shape="rect" placeholder="Screen 3"></image-slot>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</deck-stage>
+
+<script src="image-slot.js"></script>
+<script src="deck-stage.js"></script>
+</body>
+</html>

@@ -27,6 +27,15 @@
   font-display: swap;
 }
 
+/* ── Syne variable font (self-hosted — display headings) ──── */
+@font-face {
+  font-family: 'Syne';
+  src: url('./assets/fonts/Syne-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ── JetBrains Mono (Google Fonts — code/mono only) ─────── */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
 
@@ -111,7 +120,7 @@
   --ink-ghost:        #DDD7E6;
 
   /* ── Typography ───────────────────────────────────────────── */
-  --font-display:  'Public Sans', system-ui, sans-serif;
+  --font-display:  'Syne', 'Public Sans', system-ui, sans-serif;
   --font-body:     'Public Sans', system-ui, sans-serif;
   --font-mono:     'JetBrains Mono', 'SF Mono', Menlo, monospace;
 

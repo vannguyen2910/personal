@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Kultii — Winnie Nguyen</title>
+<meta name="description" content="Kultii — a community platform for discovering, reviewing and sharing everyday products. Solo product design case study by Winnie Nguyen."/>
+<link rel="stylesheet" href="../../themes/tokens.css"/>
+<style>
+  /* ==== Slide shell (shared shape, from themes/slides/template.html) ==== */
+  .slide {
+    width: 1920px; height: 1080px;
+    background: var(--paper);
+    color: var(--ink);
+    padding: var(--slide-pad);
+    display: flex; flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font-body);
+  }
+  .slide--deeper { background: var(--paper-deeper); }
+  .slide--ink    { background: var(--ink); color: var(--paper); }
+  .slide--sienna { background: var(--sienna); color: var(--paper); }
+
+  /* heading helpers reused across layouts */
+  .slide-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 72px;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin: 0;
+    max-width: 1500px;
+  }
+  .slide-kicker {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+    color: var(--sienna-deep);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .slide-kicker::before {
+    content: ''; width: 40px; height: 2px; background: var(--sienna);
+  }
+  .slide-lead {
+    font-family: var(--font-body);
+    font-size: var(--text-xl);
+    color: var(--ink-soft);
+    line-height: var(--leading-relaxed);
+    max-width: 1400px;
+    margin-top: 28px;
+  }
+
+  /* ============================================================
+     LAYOUT — COVER
+     ============================================================ */
+  .cover { padding: 0; display: grid; grid-template-columns: 1.1fr 1fr; }
+  .cover__left { padding: var(--slide-pad); display: flex; flex-direction: column; justify-content: space-between; }
+  .cover__year {
+    font-family: var(--font-mono); font-size: var(--text-sm);
+    letter-spacing: var(--tracking-mono); color: var(--sienna-deep);
+    display: flex; align-items: center; gap: 16px;
+  }
+  .cover__year::after { content: ''; flex: 1; height: 1px; background: var(--ink-ghost); }
+  .cover__title {
+    font-family: var(--font-display); font-size: 132px; font-weight: 700;
+    line-height: 0.95; letter-spacing: -0.03em; color: var(--ink); margin: 24px 0 0;
+  }
+  .cover__sub {
+    font-family: var(--font-body); font-size: var(--text-xl); color: var(--ink-soft);
+    margin-top: 32px; max-width: 740px;
+  }
+  .cover__meta {
+    font-family: var(--font-mono); font-size: var(--text-base); color: var(--ink-muted);
+    letter-spacing: var(--tracking-wide); text-transform: uppercase;
+  }
+  .cover__right {
+    background: var(--paper-deeper);
+    padding: var(--slide-pad);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px;
+    position: relative; overflow: hidden;
+  }
+  .cover__right::before {
+    content: ''; position: absolute; top: -160px; right: -160px;
+    width: 420px; height: 420px; border-radius: 50%; background: var(--purple-tint); opacity: 0.7;
+  }
+  .cover__right image-slot { position: relative; z-index: 1; width: 560px; height: 290px; }
+  .cover__wordmark { position: relative; z-index: 1; width: 200px; opacity: 0.85; }
+
+  /* ============================================================
+     LAYOUT — STATEMENT
+     ============================================================ */
+  .statement { justify-content: center; }
+  .statement__title {
+    font-family: var(--font-display); font-size: 88px; font-weight: 700;
+    line-height: 1.05; letter-spacing: -0.025em; color: var(--ink); max-width: 1400px; margin: 0;
+  }
+
+  /* ============================================================
+     LAYOUT — NUMBERED LIST
+     ============================================================ */
+  .numbered { display: flex; flex-direction: column; }
+  .numbered__head { margin-bottom: 72px; }
+  .numbered__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 56px 88px; flex: 1; }
+  .numbered-item { display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: start; }
+  .numbered-item__num {
+    font-family: var(--font-display); font-size: 72px; font-weight: 700;
+    color: var(--sienna); line-height: 0.9; letter-spacing: -0.02em;
+  }
+  .numbered-item__body h3 {
+    font-family: var(--font-display); font-weight: 500; font-size: var(--text-xl);
+    color: var(--ink); margin: 0 0 12px; line-height: var(--leading-snug);
+  }
+  .numbered-item__body p {
+    font-family: var(--font-body); font-size: var(--text-lg); color: var(--ink-soft);
+    margin: 0; line-height: var(--leading-relaxed);
+  }
+
+  /* ============================================================
+     LAYOUT — EXAMPLE (diagram + caption)
+     ============================================================ */
+  .example { display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: center; }
+  .example__meta { display: flex; flex-direction: column; justify-content: center; }
+  .example__title {
+    font-family: var(--font-display); font-weight: 700; font-size: 60px;
+    line-height: 1.08; letter-spacing: -0.02em; margin: 0 0 28px; color: var(--ink);
+  }
+  .example__body {
+    font-family: var(--font-body); font-size: var(--text-lg); color: var(--ink-soft);
+    line-height: var(--leading-relaxed); margin: 0;
+  }
+  .example__visual {
+    background: var(--paper-deeper); border-radius: var(--radius-lg);
+    display: flex; align-items: center; justify-content: center;
+    padding: 48px; position: relative; overflow: hidden; height: 640px;
+  }
+  .example__visual image-slot { width: 100%; height: 100%; }
+
+  /* two-up variant — two example-style visuals side by side */
+  .two-up__row { display: flex; gap: 40px; flex: 1; align-items: stretch; }
+  .two-up__col { flex: 1; display: flex; flex-direction: column; }
+  .two-up__label {
+    font-family: var(--font-mono); font-size: var(--text-sm); letter-spacing: var(--tracking-mono);
+    text-transform: uppercase; color: var(--sienna-deep); margin-bottom: 16px;
+  }
+
+  /* ============================================================
+     LAYOUT — SECTION DIVIDER
+     ============================================================ */
+  .section-divider { background: var(--paper-deeper); align-items: center; justify-content: center; text-align: left; padding: 0 var(--slide-pad); }
+  .section-divider__inner { max-width: 1400px; width: 100%; }
+  .section-divider__kicker {
+    font-family: var(--font-mono); font-size: var(--text-lg); letter-spacing: var(--tracking-mono);
+    text-transform: uppercase; color: var(--sienna); display: flex; align-items: baseline; gap: 20px; margin-bottom: 32px;
+  }
+  .section-divider__kicker .num {
+    font-family: var(--font-display); font-size: 120px; font-weight: 700; color: var(--sienna);
+    letter-spacing: -0.03em; line-height: 1;
+  }
+  .section-divider__title {
+    font-family: var(--font-display); font-size: 128px; font-weight: 700; line-height: 0.98;
+    letter-spacing: -0.03em; color: var(--ink); margin: 0;
+  }
+  .section-divider__sub {
+    font-family: var(--font-body); font-size: var(--text-xl); color: var(--ink-soft);
+    margin-top: 40px; max-width: 900px; line-height: var(--leading-relaxed);
+  }
+
+  /* ============================================================
+     PLAIN SHOWCASE — screenshots with no device chrome, no frame
+     ============================================================ */
+  .plain { display: flex; flex-direction: column; }
+  .plain__head { margin-bottom: 48px; }
+  .plain__row { flex: 1; display: flex; align-items: center; justify-content: center; gap: 56px; }
+  .plain__row image-slot { height: 100%; max-height: 720px; }
+  .plain__grid { flex: 1; display: grid; grid-template-columns: repeat(5, 1fr); gap: 28px; align-items: center; }
+  .plain__grid image-slot { width: 100%; height: 260px; }
+  .plain__wide { flex: 1; display: flex; align-items: center; justify-content: center; }
+  .plain__wide image-slot { width: 100%; max-width: 1500px; height: 320px; }
+
+  /* content + hero visual + thumbnail stack (Post Details / Personal Profile) */
+  .split-plain { display: flex; gap: 64px; align-items: center; }
+  .split-plain__content { flex: 0 0 34%; display: flex; flex-direction: column; justify-content: center; }
+  .split-plain__visuals { flex: 1; display: flex; gap: 24px; align-items: center; justify-content: center; }
+  .split-plain__hero { height: 760px; }
+  .split-plain__thumbs { display: flex; flex-direction: column; gap: 20px; }
+  .split-plain__thumbs image-slot { width: 300px; height: 220px; }
+
+  /* ============================================================
+     LAYOUT — FULL-BLEED single device hero (from mockup-template.html)
+     ============================================================ */
+  .full { padding: 0; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .full--lavender { background: var(--paper-deeper); }
+  .full--lavender::before {
+    content: ''; position: absolute; top: -180px; left: -140px; width: 520px; height: 520px;
+    border-radius: 50%; background: var(--purple-tint); opacity: 0.85;
+  }
+  .full__device { position: relative; z-index: 2; }
+
+  .phone {
+    width: 452px; height: 960px; background: #0E0918; border-radius: 62px; padding: 14px;
+    box-shadow: 0 2px 3px rgba(14,9,24,0.4), 0 30px 70px rgba(30,18,60,0.35), inset 0 0 0 2px rgba(255,255,255,0.06);
+    position: relative; flex: none;
+  }
+  .phone__screen { width: 100%; height: 100%; border-radius: 49px; overflow: hidden; background: var(--paper); position: relative; }
+  .phone__screen image-slot { width: 100%; height: 100%; display: block; }
+  .phone__island {
+    position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+    width: 108px; height: 31px; background: #0E0918; border-radius: 999px; z-index: 4; pointer-events: none;
+  }
+
+  .caption-card {
+    position: absolute; z-index: 3; background: var(--paper); border-radius: var(--radius-lg);
+    padding: 32px 40px; box-shadow: var(--shadow-lg); max-width: 460px;
+  }
+  .caption-card--tl { top: 96px; left: 96px; }
+  .caption-card__kicker {
+    font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: var(--tracking-mono);
+    text-transform: uppercase; color: var(--purple); margin-bottom: 12px;
+  }
+  .caption-card__title {
+    font-family: var(--font-display); font-weight: 700; font-size: 40px; line-height: 1.05;
+    letter-spacing: -0.02em; color: var(--ink); margin: 0 0 12px;
+  }
+  .caption-card__desc { font-family: var(--font-body); font-size: var(--text-base); color: var(--ink-soft); line-height: var(--leading-normal); margin: 0; }
+
+  /* ============================================================
+     LAYOUT — END
+     ============================================================ */
+  .end { background: var(--paper-deeper); justify-content: center; align-items: flex-start; padding: 0 var(--slide-pad); }
+  .end__inner { max-width: 1500px; }
+  .end__kicker {
+    font-family: var(--font-mono); font-size: var(--text-lg); letter-spacing: var(--tracking-mono);
+    text-transform: uppercase; color: var(--sienna); margin-bottom: 24px;
+  }
+  .end__title {
+    font-family: var(--font-display); font-weight: 500; font-style: italic; font-size: 180px;
+    line-height: 0.95; letter-spacing: -0.03em; color: var(--ink); margin: 0;
+  }
+  .end__body {
+    font-family: var(--font-body); font-size: var(--text-xl); color: var(--ink-soft);
+    line-height: var(--leading-relaxed); margin-top: 40px; max-width: 1100px;
+  }
+  .end__link {
+    display: inline-block; margin-top: 32px; font-family: var(--font-display); font-weight: 600;
+    font-size: var(--text-2xl); color: var(--sienna-deep); text-decoration: none;
+    border-bottom: 2px solid var(--sienna-tint);
+  }
+  .end__link:hover { border-bottom-color: var(--sienna); }
+
+  /* ============================================================
+     ENTRANCE ANIMATIONS
+     ============================================================ */
+  @keyframes slideRise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes slideScale { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+  @media (prefers-reduced-motion: no-preference) {
+    .slide[data-deck-active] > * { animation: slideRise 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+    .slide[data-deck-active] > *:nth-child(1) { animation-delay: 0.05s; }
+    .slide[data-deck-active] > *:nth-child(2) { animation-delay: 0.15s; }
+    .slide[data-deck-active] > *:nth-child(3) { animation-delay: 0.25s; }
+    .slide[data-deck-active] .numbered-item,
+    .slide[data-deck-active] .two-up__col,
+    .slide[data-deck-active] .split-plain__thumbs image-slot { animation: slideRise 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+    .slide[data-deck-active] .phone,
+    .slide[data-deck-active] .full__device { animation: slideScale 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both; animation-delay: 0.12s; }
+    .slide[data-deck-active] .caption-card { animation: slideRise 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both; animation-delay: 0.32s; }
+  }
+</style>
+</head>
+<body>
+
+<deck-stage width="1920" height="1080">
+
+  <!-- 01 · COVER -->
+  <section class="slide cover" data-label="Cover">
+    <div class="cover__left">
+      <div class="cover__year">Kultii · 2019</div>
+      <div>
+        <h1 class="cover__title">Kultii</h1>
+        <p class="cover__sub">Discover, experience and share the products you love — effortlessly, faster, with the Kultii community.</p>
+      </div>
+      <div class="cover__meta">Product Designer · Solo project</div>
+    </div>
+    <div class="cover__right">
+      <image-slot id="kt-cover" fit="contain" shape="rect" src="https://static.wixstatic.com/media/89f413_60eb89a9697840329a15f36c8655afcd~mv2_d_4656_2415_s_4_2.png/v1/fill/w_975,h_504,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/KT_02.png"></image-slot>
+      <img class="cover__wordmark" src="https://static.wixstatic.com/media/89f413_1f8bdcfcd14d4db388674556ff6ee430~mv2.png/v1/fill/w_208,h_83,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/89f413_1f8bdcfcd14d4db388674556ff6ee430~mv2.png" alt="Kultii wordmark"/>
+    </div>
+  </section>
+
+  <!-- 02 · STATEMENT — What is Kultii -->
+  <section class="slide statement" data-label="Overview">
+    <div class="slide-kicker">Overview</div>
+    <h2 class="statement__title">A community built around real product experiences</h2>
+    <p class="slide-lead">Kultii is a community platform for discovering, reviewing and sharing everyday products — from skincare to daily essentials — where recommendations come from real people, not algorithms alone.</p>
+  </section>
+
+  <!-- 03 · NUMBERED — My Role -->
+  <section class="slide numbered" data-label="My Role">
+    <div class="numbered__head">
+      <div class="slide-kicker">My role</div>
+      <h2 class="slide-title">Solo product designer, start to finish</h2>
+    </div>
+    <div class="numbered__grid">
+      <div class="numbered-item">
+        <div class="numbered-item__num">01</div>
+        <div class="numbered-item__body"><h3>Flow mapping</h3><p>Mapped the core loop — discover, review, post — before drawing a single screen.</p></div>
+      </div>
+      <div class="numbered-item">
+        <div class="numbered-item__num">02</div>
+        <div class="numbered-item__body"><h3>Wireframing</h3><p>Outlined layout and detail behind every core feature ahead of visual design.</p></div>
+      </div>
+      <div class="numbered-item">
+        <div class="numbered-item__num">03</div>
+        <div class="numbered-item__body"><h3>Design system &amp; grid</h3><p>Built a custom grid system rather than relying on Bootstrap or a CSS framework.</p></div>
+      </div>
+      <div class="numbered-item">
+        <div class="numbered-item__num">04</div>
+        <div class="numbered-item__body"><h3>Visual design, full app</h3><p>Delivered the complete UI — home, search, product, post and profile.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · EXAMPLE — Flowchart -->
+  <section class="slide example" data-label="Flowchart">
+    <div class="example__meta">
+      <div class="slide-kicker">Process · 01/04</div>
+      <h2 class="example__title">Flowchart</h2>
+      <p class="example__body">Before any screen was drawn, I mapped the core loop — how people discover, review and post — to make sure the structure held together end to end.</p>
+    </div>
+    <div class="example__visual">
+      <image-slot id="kt-flowchart" fit="contain" src="https://static.wixstatic.com/media/89f413_d6e8360eca054ee5ab8ee3567cf83593~mv2_d_3438_1876_s_2.png/v1/fill/w_1800,h_982,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/89f413_d6e8360eca054ee5ab8ee3567cf83593~mv2_d_3438_1876_s_2.png"></image-slot>
+    </div>
+  </section>
+
+  <!-- 05 · EXAMPLE — Wireframing -->
+  <section class="slide example" data-label="Wireframing">
+    <div class="example__meta">
+      <div class="slide-kicker">Process · 02/04</div>
+      <h2 class="example__title">Wireframing</h2>
+      <p class="example__body">After the flowchart, wireframes outlined the layout and detail behind each core feature ahead of full visual design.</p>
+    </div>
+    <div class="example__visual">
+      <image-slot id="kt-wireframe" fit="contain" src="https://static.wixstatic.com/media/89f413_b4ef852a40764beb8a207471ac9f09f1~mv2_d_4458_1944_s_2.png/v1/fill/w_1494,h_650,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/KT_05.png"></image-slot>
+    </div>
+  </section>
+
+  <!-- 06 · TWO-UP — Design System & Grid -->
+  <section class="slide numbered" data-label="Design System & Grid">
+    <div class="numbered__head">
+      <div class="slide-kicker">Process · 03/04 – 04/04</div>
+      <h2 class="slide-title">Design system &amp; grid</h2>
+      <p class="slide-lead" style="margin-top:16px;font-size:var(--text-lg);">Rather than build on Bootstrap or an existing CSS framework, I designed a custom grid system suited to Kultii's own layout needs.</p>
+    </div>
+    <div class="two-up__row">
+      <div class="two-up__col">
+        <div class="two-up__label">Design system</div>
+        <div class="example__visual" style="flex:1;height:auto;">
+          <image-slot id="kt-design-system" fit="contain" src="https://static.wixstatic.com/media/89f413_e88dfdc91edb4468b70f144d7334c3ef~mv2_d_2896_1714_s_2.png/v1/fill/w_973,h_573,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/89f413_e88dfdc91edb4468b70f144d7334c3ef~mv2_d_2896_1714_s_2.png"></image-slot>
+        </div>
+      </div>
+      <div class="two-up__col">
+        <div class="two-up__label">Grid system</div>
+        <div class="example__visual" style="flex:1;height:auto;">
+          <image-slot id="kt-grid-system" fit="contain" src="https://static.wixstatic.com/media/89f413_b6e81a01955648c8bb10a81b3287928e~mv2_d_3462_2062_s_2.png/v1/fill/w_978,h_579,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/89f413_b6e81a01955648c8bb10a81b3287928e~mv2_d_3462_2062_s_2.png"></image-slot>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 · SECTION DIVIDER — Visual Design -->
+  <section class="slide section-divider" data-label="Visual Design">
+    <div class="section-divider__inner">
+      <div class="section-divider__kicker"><span class="num">02</span><span>Visual design</span></div>
+      <h2 class="section-divider__title">One system, applied <em style="font-style:normal;color:var(--sienna);">across the app</em></h2>
+      <p class="section-divider__sub">A unified design system meant every screen — home, search, product, post and profile — reads as one cohesive product, not six separate ideas stitched together.</p>
+    </div>
+  </section>
+
+  <!-- 08 · PLAIN — Homepage -->
+  <section class="slide plain" data-label="Homepage">
+    <div class="plain__head">
+      <div class="slide-kicker">Screen · Homepage</div>
+      <h2 class="slide-title">Homepage</h2>
+      <p class="slide-lead" style="font-size:var(--text-lg);margin-top:12px;">Auto-complete suggestions for products, brands and posts help people find what they're looking for fast.</p>
+    </div>
+    <div class="plain__row">
+      <image-slot id="kt-home-1" fit="contain" src="https://static.wixstatic.com/media/89f413_535186e112f9417a9370212e87c662b5~mv2_d_3172_3729_s_4_2.png/v1/fill/w_761,h_888,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/89f413_535186e112f9417a9370212e87c662b5~mv2_d_3172_3729_s_4_2.png"></image-slot>
+      <image-slot id="kt-home-2" fit="contain" src="https://static.wixstatic.com/media/89f413_5d0bfea6de8546dc9f66d728275efa9e~mv2_d_4790_4928_s_4_2.png/v1/fill/w_1112,h_1135,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/89f413_5d0bfea6de8546dc9f66d728275efa9e~mv2_d_4790_4928_s_4_2.png"></image-slot>
+    </div>
+  </section>
+
+  <!-- 09 · FULL + PHONE — New Post Popup -->
+  <section class="slide full full--lavender" data-label="New Post Popup">
+    <div class="full__device">
+      <div class="phone">
+        <div class="phone__screen">
+          <image-slot id="kt-new-post" fit="cover" src="https://static.wixstatic.com/media/89f413_b7b719e8d3124a859a995d6aebc56d68~mv2_d_3150_6202_s_4_2.png/v1/fill/w_667,h_1296,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/89f413_b7b719e8d3124a859a995d6aebc56d68~mv2_d_3150_6202_s_4_2.png"></image-slot>
+          <div class="phone__island"></div>
+        </div>
+      </div>
+    </div>
+    <div class="caption-card caption-card--tl">
+      <div class="caption-card__kicker">Screen · New post</div>
+      <h3 class="caption-card__title">New post popup</h3>
+      <p class="caption-card__desc">A quick way to compose a review or a post, so people can write from anywhere in the app.</p>
+    </div>
+  </section>
+
+  <!-- 10 · PLAIN GRID — Product Pages -->
+  <section class="slide plain" data-label="Product Pages">
+    <div class="plain__head">
+      <div class="slide-kicker">Screen · Product pages</div>
+      <h2 class="slide-title">Product pages</h2>
+      <p class="slide-lead" style="font-size:var(--text-lg);margin-top:12px;">To know which product it is, where it's from, how much it costs and what rating it has.</p>
+    </div>
+    <div class="plain__grid">
+      <image-slot id="kt-product-1" fit="contain" src="https://static.wixstatic.com/media/89f413_d74c4046671a4e92885a8706a88da68c~mv2_d_1984_1598_s_2.png/v1/fill/w_489,h_389,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/89f413_d74c4046671a4e92885a8706a88da68c~mv2_d_1984_1598_s_2.png"></image-slot>
+      <image-slot id="kt-product-2" fit="contain" src="https://static.wixstatic.com/media/89f413_11a7dabdaba64bb98d8e7da7e16b5fb7~mv2_d_2132_1716_s_2.png/v1/fill/w_492,h_389,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/89f413_11a7dabdaba64bb98d8e7da7e16b5fb7~mv2_d_2132_1716_s_2.png"></image-slot>
+      <image-slot id="kt-product-3" fit="contain" src="https://static.wixstatic.com/media/89f413_144d6fc31f3e4c81a1f231ce1d630b46~mv2.png/v1/fill/w_383,h_223,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/89f413_144d6fc31f3e4c81a1f231ce1d630b46~mv2.png"></image-slot>
+      <image-slot id="kt-product-4" fit="contain" src="https://static.wixstatic.com/media/89f413_c03e4d2b9f5f4d8f85f5a5beb6fc50f5~mv2_d_2184_1501_s_2.png/v1/fill/w_499,h_337,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/89f413_c03e4d2b9f5f4d8f85f5a5beb6fc50f5~mv2_d_2184_1501_s_2.png"></image-slot>
+      <image-slot id="kt-product-5" fit="contain" src="https://static.wixstatic.com/media/89f413_fdb080f4a39b4859a751c4f0d5a3d950~mv2_d_1858_1284_s_2.png/v1/fill/w_503,h_345,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/89f413_fdb080f4a39b4859a751c4f0d5a3d950~mv2_d_1858_1284_s_2.png"></image-slot>
+    </div>
+  </section>
+
+  <!-- 11 · PLAIN WIDE — Search -->
+  <section class="slide plain" data-label="Search">
+    <div class="plain__head">
+      <div class="slide-kicker">Screen · Search</div>
+      <h2 class="slide-title">Search</h2>
+      <p class="slide-lead" style="font-size:var(--text-lg);margin-top:12px;">Knowing which suggestions are products, brands or posts — able to tell people exactly what they're looking for.</p>
+    </div>
+    <div class="plain__wide">
+      <image-slot id="kt-search" fit="contain" src="https://static.wixstatic.com/media/89f413_a2ab724af2cd4f7f87ed405c959c2d32~mv2.png/v1/fill/w_974,h_243,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/89f413_a2ab724af2cd4f7f87ed405c959c2d32~mv2.png"></image-slot>
+    </div>
+  </section>
+
+  <!-- 12 · SPLIT PLAIN — Post Details -->
+  <section class="slide split-plain" data-label="Post Details">
+    <div class="split-plain__content">
+      <div class="slide-kicker">Screen · Post details</div>
+      <h2 class="slide-title" style="font-size:60px;">Post details</h2>
+      <p class="slide-lead" style="font-size:var(--text-lg);">Bringing discussion on post ideas, questions and experiences together — a place to make friends and community connections.</p>
+    </div>
+    <div class="split-plain__visuals">
+      <image-slot id="kt-post-hero" class="split-plain__hero" fit="contain" src="https://static.wixstatic.com/media/89f413_ff28096acb774d82a8da91a5f5c23651~mv2_d_3608_4245_s_4_2.png/v1/fill/w_842,h_981,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/89f413_ff28096acb774d82a8da91a5f5c23651~mv2_d_3608_4245_s_4_2.png"></image-slot>
+      <div class="split-plain__thumbs">
+        <image-slot id="kt-post-thumb-1" fit="contain" src="https://static.wixstatic.com/media/89f413_c8cff3b5866d43b0a095560bbff6a88e~mv2_d_1612_1258_s_2.png/v1/fill/w_463,h_359,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/89f413_c8cff3b5866d43b0a095560bbff6a88e~mv2_d_1612_1258_s_2.png"></image-slot>
+        <image-slot id="kt-post-thumb-2" fit="contain" src="https://static.wixstatic.com/media/89f413_355ecb57a3bc4fbfb28c8291bc17204e~mv2_d_1476_1422_s_2.png/v1/fill/w_422,h_402,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/89f413_355ecb57a3bc4fbfb28c8291bc17204e~mv2_d_1476_1422_s_2.png"></image-slot>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 · SPLIT PLAIN — Personal Profile -->
+  <section class="slide split-plain" data-label="Personal Profile">
+    <div class="split-plain__content">
+      <div class="slide-kicker">Screen · Profile</div>
+      <h2 class="slide-title" style="font-size:60px;">Personal profile</h2>
+      <p class="slide-lead" style="font-size:var(--text-lg);">Bringing everything someone wants to share — routine, product concerns and feed — into one page.</p>
+    </div>
+    <div class="split-plain__visuals">
+      <image-slot id="kt-profile-hero" class="split-plain__hero" fit="contain" src="https://static.wixstatic.com/media/89f413_ba721ff443d943d7b3d6d5b4588c21d0~mv2_d_3832_3237_s_4_2.png/v1/fill/w_892,h_720,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/89f413_ba721ff443d943d7b3d6d5b4588c21d0~mv2_d_3832_3237_s_4_2.png"></image-slot>
+      <div class="split-plain__thumbs">
+        <image-slot id="kt-profile-thumb-1" fit="contain" src="https://static.wixstatic.com/media/89f413_17675d750e6540a782d712409685ae11~mv2_d_1954_1221_s_2.png/v1/fill/w_431,h_267,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/89f413_17675d750e6540a782d712409685ae11~mv2_d_1954_1221_s_2.png"></image-slot>
+        <image-slot id="kt-profile-thumb-2" fit="contain" src="https://static.wixstatic.com/media/89f413_c3dc530279d6479991c7b8ec1439e76a~mv2_d_1954_1213_s_2.png/v1/fill/w_438,h_267,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/89f413_c3dc530279d6479991c7b8ec1439e76a~mv2_d_1954_1213_s_2.png"></image-slot>
+        <image-slot id="kt-profile-thumb-3" fit="contain" src="https://static.wixstatic.com/media/89f413_1c7a3990fe8f4357a1a0e20de376b11b~mv2.png/v1/fill/w_297,h_203,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/89f413_1c7a3990fe8f4357a1a0e20de376b11b~mv2.png"></image-slot>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 · END -->
+  <section class="slide end" data-label="Closing">
+    <div class="end__inner">
+      <div class="end__kicker">Closing</div>
+      <h2 class="end__title">Thank you.</h2>
+      <p class="end__body">An early solo project that took a product from a rough flow to a fully considered system — research, structure and visual design, all in one hand.</p>
+      <a class="end__link" href="https://kultii.com/" target="_blank" rel="noopener">Visit Kultii.com ↗</a>
+    </div>
+  </section>
+
+</deck-stage>
+
+<script src="../../themes/slides/image-slot.js"></script>
+<script src="../../themes/slides/deck-stage.js"></script>
+</body>
+</html>
