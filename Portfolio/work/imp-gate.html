@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Password required — Intelligent Mortgage Platform</title>
+<meta name="robots" content="noindex"/>
+<link rel="stylesheet" href="../css/tokens.css"/>
+<link rel="stylesheet" href="../css/components.css"/>
+<link rel="stylesheet" href="../css/site.css"/>
+<style>
+  .gate-card__input { width: 100%; padding: 13px 15px; font-size: var(--text-base); border: 1.5px solid var(--border-default); border-radius: var(--radius-md); outline: none; font-family: inherit; transition: border-color .15s; }
+  .gate-card__input:focus { border-color: var(--purple); }
+  .gate-card__back { display: inline-block; margin-top: var(--space-6); font-size: var(--text-sm); color: var(--text-tertiary); text-decoration: none; }
+  .gate-card__back:hover { color: var(--purple); }
+</style>
+</head>
+<body>
+
+<div class="gate">
+  <div class="gate-card card card--z2">
+    <div class="gate-card__icon">🔒</div>
+    <h1>Intelligent Mortgage Platform</h1>
+    <p>This case study is password-protected. Enter the password to continue — or reach out if you need it.</p>
+    <form id="gateForm" autocomplete="off">
+      <input id="gatePw" class="gate-card__input" type="password" placeholder="Enter password" aria-label="Password" autofocus/>
+      <button type="submit" class="btn btn--contained btn--primary btn--lg">View case study</button>
+    </form>
+    <div id="gateError" class="gate-error">Incorrect password — please try again.</div>
+    <a href="../work.html" class="gate-card__back">← Back to work</a>
+  </div>
+</div>
+
+<script>
+  // SHA-256 of the password. The plain text is never stored in this page.
+  var EXPECTED_HASH = "707b661a9311100793100982807b8f0acfabbef584d85da4d240da4716aec1ca";
+  var TARGET = "imp.html";
+
+  async function sha256(text) {
+    var buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+    return Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, "0"); }).join("");
+  }
+
+  var form = document.getElementById("gateForm");
+  var input = document.getElementById("gatePw");
+  var error = document.getElementById("gateError");
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    error.classList.remove("show");
+    var hash = await sha256(input.value);
+    if (hash === EXPECTED_HASH) {
+      try { sessionStorage.setItem("imp_unlocked", "1"); } catch (err) {}
+      window.location.href = TARGET;
+    } else {
+      error.classList.add("show");
+      input.value = "";
+      input.focus();
+    }
+  });
+</script>
+
+</body>
+</html>
