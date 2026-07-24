@@ -293,6 +293,33 @@
     .opt.selected .opt-title { color: var(--purple); }
     .opt.selected .opt-desc  { color: var(--purple-deep); }
 
+    /* Notes box (shown under each question) — neutral, no border */
+    .q-notes { margin-top: 20px; padding: 16px 18px; background: var(--surface-page); border-radius: var(--radius-md, 12px); }
+    .q-notes-label { display: block; font-family: var(--font-body); font-size: var(--text-sm); font-weight: 700; color: var(--text-secondary); margin-bottom: 8px; }
+    .q-notes-label span { font-weight: 500; color: var(--text-tertiary); }
+    .q-notes-input { width: 100%; box-sizing: border-box; min-height: 74px; padding: 10px 12px; font-family: var(--font-body); font-size: var(--text-sm); line-height: 1.5; color: var(--text-primary); background: #fff; border: 1px solid var(--border-default); border-radius: 10px; resize: vertical; }
+    .q-notes-input:focus { outline: none; border-color: var(--text-tertiary); box-shadow: 0 0 0 3px rgba(0,0,0,0.05); }
+    .q-notes-input::placeholder { color: var(--text-tertiary); }
+
+    /* Notes summary (results screen) — each note, with its advice attached inline if it matched */
+    #coachingNotes { column-count: 2; column-gap: 12px; }
+    .cn-item { padding: 14px 16px; border: 1px solid var(--border-default); border-radius: 12px; margin: 0 0 12px; background: var(--surface-page); break-inside: avoid; -webkit-column-break-inside: avoid; }
+    .cn-item.has-advice { border-color: var(--purple-mid); }
+    .cn-skill { font-family: var(--font-display); font-size: var(--text-base); font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
+    .cn-level { font-size: var(--text-xs); font-weight: 600; color: var(--text-tertiary); margin-bottom: 6px; }
+    .cn-note  { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.55; white-space: pre-wrap; }
+
+    /* Advice attached to a note (nested inside .cn-item) */
+    .cn-advice { margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border-default); }
+    .cn-advice-theme { font-family: var(--font-display); font-size: var(--text-base); font-weight: 700; color: var(--purple-deep); margin-bottom: 8px; }
+    .cn-advice-diag { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.55; margin-bottom: 10px; }
+    .cn-advice-movelabel { font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--purple); margin-bottom: 6px; }
+    .cn-advice-moves { margin: 0 0 10px; padding-left: 18px; }
+    .cn-advice-moves li { font-size: var(--text-sm); color: var(--text-primary); line-height: 1.5; margin-bottom: 5px; }
+    .cn-advice-meta { font-size: var(--text-xs); color: var(--text-secondary); margin-bottom: 8px; }
+    .cn-advice-meta div { margin-bottom: 2px; }
+    .cn-advice-plan { font-size: var(--text-sm); color: var(--text-primary); background: var(--purple-tint); border-radius: 8px; padding: 10px 12px; line-height: 1.5; }
+
     /* ════════════════════════════════════════════════════
        RESULTS
     ════════════════════════════════════════════════════ */
@@ -541,6 +568,7 @@
       .welcome-wrap { grid-template-columns: 1fr; gap: 40px; padding: 40px 24px 60px; }
       .skill-options { grid-template-columns: 1fr; }
       .beh-options   { grid-template-columns: 1fr; }
+      #coachingNotes { column-count: 1; }
       .q-wrap        { padding: 36px 24px 60px; }
       .form-row      { grid-template-columns: 1fr; }
     }
@@ -792,6 +820,12 @@
 
     <div class="res-section-head"><h3>Operating behaviours summary</h3></div>
     <div id="behaviourSummary" class="beh-summary"></div>
+
+    <div class="res-section-head" id="coachingNotesHead" style="display:none">
+      <h3>Your notes</h3>
+      <p>The context and examples you added — with tailored advice where a note points to something specific.</p>
+    </div>
+    <div id="coachingNotes"></div>
 
     <div class="cta-block">
       <div class="cta-eyebrow">Ready to level up?</div>
@@ -1079,7 +1113,7 @@ const TOTAL_Q = SKILLS.length + BEHAVIOURS.length; // 15
 
 // ── STATE ────────────────────────────────────────────────────────
 const STORAGE_KEY = 'winnie_assessment_v4';
-let state = { name:'', email:'', experience:'', target:'', skills:{}, behaviours:{}, directions:[], deprioritised:[] };
+let state = { name:'', email:'', experience:'', target:'', skills:{}, behaviours:{}, directions:[], deprioritised:[], notes:{} };
 let questionIndex = 0;
 let currentScreenId = 'screen-0';
 
@@ -1116,7 +1150,7 @@ function restoreForm() {
 function clearAndRestart() {
   if (!confirm('Clear all saved answers and start fresh?')) return;
   localStorage.removeItem(STORAGE_KEY);
-  state = { name:'', email:'', experience:'', target:'', skills:{}, behaviours:{}, directions:[], deprioritised:[] };
+  state = { name:'', email:'', experience:'', target:'', skills:{}, behaviours:{}, directions:[], deprioritised:[], notes:{} };
   questionIndex = 0;
   restoreForm();
   document.getElementById('resumeBanner').style.display = 'none';
@@ -1197,7 +1231,6 @@ function renderQuestion(idx) {
         saveState();
         grid.querySelectorAll('.opt').forEach((el, j) => el.classList.toggle('selected', j === i));
         setNextEnabled(true);
-        setTimeout(nextQuestion, 380);
       };
       grid.appendChild(d);
     });
@@ -1222,7 +1255,6 @@ function renderQuestion(idx) {
         saveState();
         grid.querySelectorAll('.opt').forEach((el, j) => el.classList.toggle('selected', j === i));
         setNextEnabled(true);
-        setTimeout(nextQuestion, 380);
       };
       grid.appendChild(d);
     });
@@ -1230,6 +1262,23 @@ function renderQuestion(idx) {
     container.appendChild(grid);
     setNextEnabled(cur !== undefined);
   }
+
+  // ── Coaching notes box (per skill / behaviour) ──────────────────
+  const noteWrap = document.createElement('div');
+  noteWrap.className = 'q-notes';
+  const label = document.createElement('label');
+  label.className = 'q-notes-label';
+  label.setAttribute('for', 'qNoteField');
+  label.innerHTML = '📝 Add a note <span>— what this level means in your context, and a real example (optional)</span>';
+  const ta = document.createElement('textarea');
+  ta.id = 'qNoteField';
+  ta.className = 'q-notes-input';
+  ta.placeholder = 'e.g. what "' + item.name + '" looks like in your work, what you expect at this level, and a real project example…';
+  ta.value = state.notes[item.id] || '';
+  ta.oninput = () => { state.notes[item.id] = ta.value; saveState(); };
+  noteWrap.appendChild(label);
+  noteWrap.appendChild(ta);
+  container.appendChild(noteWrap);
 
   // Next button label
   document.getElementById('qNextLabel').textContent = idx === TOTAL_Q - 1 ? 'See my results' : 'Next';
@@ -1362,6 +1411,114 @@ function buildResults() {
   buildPriorityGaps();
   buildPathway();
   buildBehaviourSummary();
+  buildCoachingNotes();
+}
+
+function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ── Note playbook: match a student's free-text notes to coaching advice ──
+// Edit content in coaching-playbook.md and keep this in sync.
+const PLAYBOOK = [
+  { id:'hold-ground', theme:'Hold your ground on evidence',
+    triggers:['push back','pushback','convince','hold my ground','hold her ground','technical preference','technical preferences','hesitate','hesitant','won\'t budge','overrule','stand my ground','lead with research'],
+    diagnosis:'Working closely with a technical or delivery team is a real strength — you understand constraints deeply. The risk is letting technical preference override design when they genuinely conflict. Leading with research, and holding your ground when the evidence supports a different call, is exactly the Mid → Senior shift.',
+    moves:['Separate constraint from preference — ask "is this technically impossible, or just not preferred?" Only the first should overrule the design.','Turn disagreement into a trade-off, not an opinion clash: "Research shows users need X — what\'s the technical cost of supporting it?"','Practise on one low-risk decision: write your evidence-based rationale before the meeting, and hold it.'],
+    skills:'Stakeholder Management · User Research · Storytelling', resource:'Influencing Without Authority',
+    plan:'On the next design–tech conflict, bring a written, research-backed recommendation framed as a trade-off. Success: you held a research-based call at least once.' },
+  { id:'user-access', theme:'When you can\'t reach real users',
+    triggers:['find user','reach user','user access','access to user','recruit','overseas','can\'t interview','hard to interview','through the po','product owner','no users','talk to users'],
+    diagnosis:'Direct user access is often gated — overseas clients, or a PO who controls contact. That\'s real, but it\'s not a dead end. Proxy sources get you most of the way and are a completely valid place to start.',
+    moves:['Interview internal stakeholders (PO, support, sales, CS) — they carry a lot of proxy knowledge about user pain points.','Mine evidence that already exists: support tickets, reviews, analytics, and past research.','Ask the PO for recordings or notes from their user contact, even when you can\'t attend live.'],
+    skills:'User Research · Service Design · Customer Understanding', resource:'Interviewing Users Effectively',
+    plan:'Run 2 proxy interviews this cycle and synthesise 3 grounded insights. Success: insights based on evidence, not assumption.' },
+  { id:'system-fit', theme:'Fit the system, raise the finish',
+    triggers:['design system','guideline','guidelines','consistency','consistent','inconsistent','polish','doesn\'t fit','not fit','finish','pattern','tokens'],
+    diagnosis:'Strong ideas sometimes drift from the design system or project constraints, which costs trust and rework. Consistency and finish are how senior work signals reliability.',
+    moves:['Before sharing, self-audit against the design system — components, tokens, spacing, patterns. A 10-minute checklist catches most drift.','When you deviate on purpose, say why: "I\'m breaking the pattern here because…". Unintentional inconsistency reads as careless; intentional deviation reads as judgement.','Pair with a design-system owner early on ambiguous components.'],
+    skills:'Visual Design · System Design · Interaction Design', resource:'Refactoring UI — Visual Design Patterns',
+    plan:'Ship one proposal that passes a design-system self-audit with zero unflagged inconsistencies.' },
+  { id:'drive', theme:'Drive, don\'t just react',
+    triggers:['reactive','wait to be told','take initiative','take more initiative','proactive','proactiv','drive discussion','driving','arrange meeting','unprompted','initiative','coordination'],
+    diagnosis:'Waiting for direction is a Mid-level habit; Seniors create the direction — they convene people, surface issues early, and bring suggestions before being asked.',
+    moves:['Convene, don\'t wait: when something\'s unclear, you schedule the 20-minute alignment — don\'t wait for the PM.','Come to discussions with a point of view and one recommendation, not just questions.','Flag risks early — "I think we\'ll hit X" — rather than reacting once it happens.'],
+    skills:'Stakeholder Management · Storytelling · Shared Responsibility', resource:'Presenting Design Work to Stakeholders',
+    plan:'This cycle, initiate at least 2 cross-functional conversations and bring a recommendation to each.' },
+  { id:'prototyping', theme:'Prototyping & ambiguous briefs',
+    triggers:['prototyp','interactive flow','navigation demo','conceptual','open-ended','open ended','ambiguous','ambiguity','high-fidelity','hi-fi','not sure how to approach'],
+    diagnosis:'Two related growth edges — making ideas tangible with interactive prototypes, and handling briefs that are conceptual rather than spec\'d. Both are how you move from executing a brief to defining the work.',
+    moves:['Build one clickable prototype for a real flow (not just screens) — even low-fidelity — and test it.','For ambiguous briefs, start by framing: write the problem, the assumptions, and 2–3 directions before designing. Structure handles ambiguity, not more pixels.','Use AI to generate divergent concept directions fast, then curate the strongest.'],
+    skills:'Prototyping · Interaction Design · Define Success', resource:'Figma Prototyping — Official Learning',
+    plan:'Deliver one interactive prototype and one framing doc for an open-ended brief.' },
+  { id:'process', theme:'Cross-functional process habits',
+    triggers:['jira','ticket','handoff','hand-off','link design','collaborate earlier','front-end','frontend','accessibility','a11y','test app','process','engineer'],
+    diagnosis:'Craft is only as good as it ships. Consistent process habits — traceable handoff, early engineering collaboration, and testing behaviour and accessibility — are what make design reliable at senior level.',
+    moves:['Link every updated design to its Jira ticket so the work is traceable.','Loop front-end engineers in at design time, not at handoff, to catch UI issues early.','Add a self-check pass: test real app behaviour and run a quick accessibility check (contrast, keyboard, labels) before calling it done.'],
+    skills:'Frontend Development · Interaction Design · Iterate Towards Success', resource:'MDN Web Docs — HTML & CSS for Designers',
+    plan:'For the next feature, engineers are looped in before handoff and the design passes a basic accessibility check.' },
+  { id:'ai', theme:'Build AI into your practice',
+    triggers:['ai tool','ai in design','use ai','using ai','ai workflow','ai feature','chatgpt','copilot','llm','artificial intelligence','new to ai','haven\'t used ai','limited ai'],
+    diagnosis:'AI fluency is fast becoming a baseline senior expectation. Low exposure is a monitorable risk — but an easy one to close, because the leverage is high.',
+    moves:['Pick one repeatable task (research synthesis, first-draft copy, concept divergence) and do it with AI this week.','Build a small personal workflow and notice where AI helped versus needed rework.','Share one AI-assisted result with your team to normalise it.'],
+    skills:'AI-Assisted Workflow · Designing for AI Features · Learning Agility', resource:'AI Tools for Designers — Getting Started',
+    plan:'Adopt AI into one weekly task and share one result with the team.' }
+];
+
+// Scan notes, return up to 2 matched advice themes, each tagged with the note (skill/behaviour id) that triggered it.
+function getPlaybookMatches() {
+  const notesArr = [
+    ...SKILLS.map(s => ({ id:s.id, name:s.name, note:(state.notes[s.id]||'').trim() })),
+    ...BEHAVIOURS.map(b => ({ id:b.id, name:b.name, note:(state.notes[b.id]||'').trim() }))
+  ].filter(x => x.note);
+  const matches = [];
+  const used = new Set();
+  for (const n of notesArr) {
+    const lc = n.note.toLowerCase();
+    for (const p of PLAYBOOK) {
+      if (used.has(p.id)) continue;
+      if (p.triggers.some(t => lc.includes(t))) {
+        matches.push({ ...p, sourceId:n.id, sourceSkill:n.name, sourceNote:n.note });
+        used.add(p.id);
+        break;
+      }
+    }
+    if (matches.length >= 2) break;
+  }
+  return matches;
+}
+
+// ── Notes summary (only shows if any notes were captured) ──
+// Advice is attached directly under the note that triggered it — not shown as a separate section,
+// so a note's text and its match never appear twice on the page.
+function buildCoachingNotes() {
+  const head = document.getElementById('coachingNotesHead');
+  const el   = document.getElementById('coachingNotes');
+  const items = [
+    ...SKILLS.map(s => ({ id:s.id, name: s.name, note: (state.notes[s.id]||'').trim(), level: LEVEL_NAMES[state.skills[s.id]||0] || 'Not rated' })),
+    ...BEHAVIOURS.map(b => ({ id:b.id, name: b.name, note: (state.notes[b.id]||'').trim(), level: ({developing:'Developing',practising:'Practising',consistent:'Consistent'}[state.behaviours[b.id]]) || 'Not rated' }))
+  ].filter(x => x.note);
+  if (!items.length) { head.style.display = 'none'; el.innerHTML = ''; return; }
+  head.style.display = '';
+  const matchById = {};
+  getPlaybookMatches().forEach(m => { matchById[m.sourceId] = m; });
+  el.innerHTML = items.map(x => {
+    const m = matchById[x.id];
+    const adviceHtml = !m ? '' : `
+      <div class="cn-advice">
+        <div class="cn-advice-theme">🗣️ ${escapeHtml(m.theme)}</div>
+        <div class="cn-advice-diag">${escapeHtml(m.diagnosis)}</div>
+        <div class="cn-advice-movelabel">Try this</div>
+        <ul class="cn-advice-moves">${m.moves.map(mv => `<li>${escapeHtml(mv)}</li>`).join('')}</ul>
+        <div class="cn-advice-meta"><div><strong>Grows:</strong> ${escapeHtml(m.skills)}</div><div><strong>Resource:</strong> ${escapeHtml(m.resource)}</div></div>
+        <div class="cn-advice-plan"><strong>In your plan:</strong> ${escapeHtml(m.plan)}</div>
+      </div>`;
+    return `
+    <div class="cn-item${m ? ' has-advice' : ''}">
+      <div class="cn-skill">${escapeHtml(x.name)}</div>
+      <div class="cn-level">${escapeHtml(x.level)}</div>
+      <div class="cn-note">${escapeHtml(x.note)}</div>
+      ${adviceHtml}
+    </div>`;
+  }).join('');
 }
 
 // ── INSIGHTS ENGINE ──────────────────────────────────────────────
@@ -2079,6 +2236,63 @@ async function downloadPDF() {
       doc.text({developing:'Developing',practising:'Practising',consistent:'Consistent'}[v], m+100, y); y+=9;
     });
     footer(doc,4,W,H,m,g6,pu);
+
+    // ════════════════════════════════════════════════════════════
+    // PAGE 5 — Coaching Notes (only if any were captured)
+    // ════════════════════════════════════════════════════════════
+    const noteItems = [
+      ...SKILLS.map(s=>({ id:s.id, name:s.name, note:(state.notes[s.id]||'').trim(), level:LEVEL_NAMES[state.skills[s.id]||0]||'Not rated' })),
+      ...BEHAVIOURS.map(b=>({ id:b.id, name:b.name, note:(state.notes[b.id]||'').trim(), level:({developing:'Developing',practising:'Practising',consistent:'Consistent'}[state.behaviours[b.id]])||'Not rated' }))
+    ].filter(x=>x.note);
+    const adviceById = {}; getPlaybookMatches().forEach(a=>{ adviceById[a.sourceId]=a; });
+    let pageNo = 4;
+    if (noteItems.length) {
+      doc.addPage(); pageNo=5; y=m;
+      pHead('Your Notes'); y=20;
+      doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...g6);
+      doc.text('The context you added while rating each area — with tailored advice where it applies.', m, y); y+=8;
+
+      noteItems.forEach(x=>{
+        const a = adviceById[x.id];
+        const noteLines = doc.splitTextToSize(x.note, cW-4);
+        let diagLines=[], moveLines=[], planLines=[];
+        let blockH = 12 + noteLines.length*4.6 + 6;
+        if (a) {
+          diagLines = doc.splitTextToSize(a.diagnosis, cW-4);
+          moveLines = a.moves.map(mv=>doc.splitTextToSize('•  '+mv, cW-8));
+          planLines = doc.splitTextToSize('In your plan: '+a.plan, cW-14);
+          blockH += 8 + diagLines.length*4.4 + 6 + moveLines.reduce((s,l)=>s+l.length*4.4,0) + 6 + planLines.length*4.4 + 8;
+        }
+        if (y + blockH > H-18) { footer(doc,pageNo,W,H,m,g6,pu); doc.addPage(); pageNo++; y=m; pHead('Your Notes'); y=20; }
+
+        doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.setTextColor(...g8);
+        doc.text(x.name, m, y);
+        doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...pu);
+        doc.text(x.level, W-m, y, {align:'right'}); y+=6;
+        doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(...g6);
+        noteLines.forEach(ln=>{ doc.text(ln, m, y); y+=4.6; });
+
+        if (a) {
+          y+=3;
+          doc.setFont('helvetica','bold'); doc.setFontSize(9); doc.setTextColor(...pu);
+          doc.text(a.theme, m, y); y+=5.5;
+          doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...g6);
+          diagLines.forEach(ln=>{ doc.text(ln, m, y); y+=4.4; }); y+=2;
+          doc.setFont('helvetica','bold'); doc.setFontSize(8); doc.setTextColor(...g8); doc.text('Try this:', m, y); y+=5;
+          doc.setFont('helvetica','normal'); doc.setTextColor(...g6);
+          moveLines.forEach(lines=>{ lines.forEach(ln=>{ doc.text(ln, m+2, y); y+=4.4; }); }); y+=2;
+          doc.setFont('helvetica','bold'); doc.setFontSize(8); doc.setTextColor(...g8);
+          doc.text('Grows: ', m, y); doc.setFont('helvetica','normal'); doc.setTextColor(...g6); doc.text(a.skills, m+14, y); y+=5;
+          doc.setFont('helvetica','bold'); doc.setTextColor(...g8); doc.text('Resource: ', m, y); doc.setFont('helvetica','normal'); doc.setTextColor(...g6); doc.text(a.resource, m+19, y); y+=6;
+          doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...pu);
+          planLines.forEach(ln=>{ doc.text(ln, m, y); y+=4.4; });
+          y+=4;
+        }
+
+        y+=3; doc.setDrawColor(...g2); doc.line(m, y, W-m, y); y+=7;
+      });
+      footer(doc,pageNo,W,H,m,g6,pu);
+    }
 
     doc.save('design-assessment-'+(state.name||'results').replace(/[^a-z0-9]/gi,'-').toLowerCase()+'.pdf');
   } catch(e) { console.error(e); alert('PDF generation failed. Try again.'); }
