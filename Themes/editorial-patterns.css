@@ -141,3 +141,47 @@
   content: ''; position: absolute; left: 0; top: .55em;
   width: 5px; height: 5px; border-radius: 50%; background: var(--session-accent-color, currentColor);
 }
+
+
+/* ── About mentor — photo, bio, expertise pills, profile link ─────
+   Usage:
+   <div class="mentor-grid">
+     <div class="mentor-photo-wrap">
+       <div class="mentor-ring"></div>
+       <img class="mentor-photo" src="…">
+       <div class="mentor-badge"><strong>50+</strong><span>label</span></div>
+     </div>
+     <div class="mentor-text">
+       <h2>…</h2><p>…</p>
+       <div class="mentor-pills"><span class="mentor-pill">Tag</span>…</div>
+       <a class="mentor-link" href="…">Label <svg>…</svg></a>
+     </div>
+   </div>
+   Themeable via: --mentor-badge-bg, --mentor-badge-text, --mentor-badge-text-soft,
+                  --mentor-badge-accent, --mentor-ring-color, --mentor-heading-color,
+                  --mentor-body-color, --mentor-pill-border                          */
+.mentor-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 3.5rem; align-items: center; }
+@media (max-width: 820px) { .mentor-grid { grid-template-columns: 1fr; } }
+
+.mentor-photo-wrap { position: relative; }
+.mentor-photo {
+  width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 6px;
+  filter: grayscale(.12) contrast(1.03);
+}
+.mentor-badge {
+  position: absolute; bottom: -1.2rem; left: -1.2rem;
+  background: var(--mentor-badge-bg, #16140F); color: var(--mentor-badge-text, #fff);
+  border-radius: 6px; padding: 1rem 1.3rem; box-shadow: 0 16px 32px rgba(10,10,10,.18);
+}
+.mentor-badge strong { display: block; font-family: var(--font-display, 'Manrope', sans-serif); font-weight: 800; font-size: 1.6rem; color: var(--mentor-badge-accent, currentColor); line-height: 1; }
+.mentor-badge span { font-size: .72rem; color: var(--mentor-badge-text-soft, rgba(255,255,255,.7)); }
+.mentor-ring { position: absolute; top: -1.4rem; right: -1.4rem; width: 66px; height: 66px; border: 1px dashed var(--mentor-ring-color, rgba(0,0,0,.3)); border-radius: 50%; }
+
+.mentor-text h2 { font-family: var(--font-display, 'Manrope', sans-serif); font-weight: 800; letter-spacing: -.02em; font-size: clamp(1.9rem,3.8vw,2.8rem); line-height: 1.15; margin-bottom: 1.3rem; }
+.mentor-text p { font-size: .98rem; color: var(--mentor-body-color, inherit); line-height: 1.7; margin-bottom: 1rem; max-width: 52ch; }
+.mentor-text strong { color: var(--mentor-heading-color, inherit); }
+.mentor-pills { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.4rem; }
+.mentor-pill { font-size: .74rem; font-weight: 700; padding: .4rem .85rem; border-radius: 999px; border: 1px solid var(--mentor-pill-border, rgba(0,0,0,.14)); color: var(--mentor-body-color, inherit); }
+.mentor-link { display: inline-flex; align-items: center; gap: .4rem; margin-top: 1.6rem; font-size: .88rem; font-weight: 700; color: var(--mentor-heading-color, inherit); text-decoration: none; }
+.mentor-link svg { width: 13px; height: 13px; transition: transform .25s ease; }
+.mentor-link:hover svg { transform: translate(3px,-3px); }

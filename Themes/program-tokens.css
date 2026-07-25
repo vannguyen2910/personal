@@ -45,6 +45,7 @@
   /* bold grotesk for both display and body */
   --serif: "Manrope", "Helvetica Neue", sans-serif;
   --sans:  "Manrope", "Helvetica Neue", sans-serif;
+  --font-display: var(--serif); /* alias so shared editorial-patterns.css rules can use one name on both systems */
 
   /* ── Theming for the shared patterns in editorial-patterns.css ─── */
   --mark-color:    var(--lime);
@@ -65,4 +66,13 @@
   --session-text-color:    var(--ink-70);
   --session-line-color:    var(--line);
   --session-accent-color:  var(--coral);
+
+  --mentor-badge-bg:        var(--forest);
+  --mentor-badge-text:      var(--cream);
+  --mentor-badge-text-soft: rgba(245,239,226,.7);
+  --mentor-badge-accent:    var(--lime);
+  --mentor-ring-color:      var(--ink-50);
+  --mentor-heading-color:   var(--ink);
+  --mentor-body-color:      var(--ink-70);
+  --mentor-pill-border:     var(--line);
 }

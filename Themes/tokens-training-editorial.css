@@ -63,6 +63,15 @@
   --session-text-color:    var(--text-secondary);
   --session-line-color:    var(--border-default);
   --session-accent-color:  var(--purple);
+
+  --mentor-badge-bg:        var(--text-primary);
+  --mentor-badge-text:      var(--white);
+  --mentor-badge-text-soft: rgba(255,255,255,.7);
+  --mentor-badge-accent:    var(--yellow);
+  --mentor-ring-color:      var(--border-default);
+  --mentor-heading-color:   var(--text-primary);
+  --mentor-body-color:      var(--text-secondary);
+  --mentor-pill-border:     var(--rule);
 }
 
 

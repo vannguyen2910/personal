@@ -291,88 +291,14 @@
       color: var(--text-secondary);
     }
 
-    /* ── ABOUT ──────────────────────────────────────── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .about-text p {
-      font-size: 1rem;
-      color: var(--text-secondary);
-      line-height: 1.8;
-      margin-bottom: 20px;
-    }
-
-    .about-text p:last-of-type { margin-bottom: 32px; }
-
-    .about-text strong { color: var(--text-primary); font-weight: 600; }
-
-    .about-visual {
-      position: relative;
-    }
-
-    .about-photo-frame {
-      width: 100%;
-      aspect-ratio: 4/5;
-      background: var(--warm-gray);
-      border-radius: 12px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .about-photo-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
-    }
-
-    .about-badge {
-      position: absolute;
-      bottom: -16px;
-      left: -20px;
-      background: var(--white);
-      border: 1px solid var(--rule);
-      border-radius: 10px;
-      padding: 16px 20px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-      z-index: 2;
-    }
-
-    .about-badge-number {
-      font-family: var(--serif);
-      font-size: 1.8rem;
-      color: var(--accent);
-      line-height: 1;
-    }
-
-    .about-badge-label {
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-      margin-top: 2px;
-    }
-
-    /* ── EXPERTISE PILLS ──────────────────────────── */
-    .expertise-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 8px;
-    }
-
-    .pill {
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--accent);
-      background: var(--accent-light);
-      border: 1px solid var(--accent-mid);
-      padding: 5px 14px;
-      border-radius: 100px;
-    }
+    /* ── ABOUT ──────────────────────────────────────────
+       Reuses the shared .mentor component (Themes/editorial-patterns.css)
+       that also powers the program pages' "About your mentor" section —
+       themed here via the --mentor-* properties in tokens-training-editorial.css.
+       This override just keeps the heading the same size as this page's
+       other section titles (the shared rule sizes it for program pages). */
+    .mentor { padding: 100px 0; }
+    .mentor-text h2.section-title { font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 28px; }
 
     /* ── RULE DIVIDER ─────────────────────────────── */
     .section-divider {
@@ -875,6 +801,102 @@
       color: rgba(255,255,255,0.42);
     }
 
+    /* ── IN THE ROOM — Instagram-style class photo gallery ── */
+    .gallery {
+      padding: 96px 0;
+    }
+    .gallery-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+    .gallery-head {
+      max-width: 560px;
+      margin-bottom: 44px;
+    }
+    .gallery-track-wrap {
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent, black 48px, black calc(100% - 48px), transparent);
+      mask-image: linear-gradient(to right, transparent, black 48px, black calc(100% - 48px), transparent);
+    }
+    .gallery-track {
+      display: flex;
+      gap: 24px;
+      width: max-content;
+      animation: gallery-scroll 50s linear infinite;
+    }
+    .gallery-track-wrap:hover .gallery-track { animation-play-state: paused; }
+    @keyframes gallery-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .gallery-track { animation: none; }
+      .gallery-track-wrap { overflow-x: auto; }
+    }
+    .ig-card {
+      width: 300px;
+      flex-shrink: 0;
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .ig-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+    }
+    .ig-card-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .ig-card-handle {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .ig-card-photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+      background: var(--off-white);
+    }
+    .ig-card-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 14px 4px;
+    }
+    .ig-card-actions svg {
+      width: 22px;
+      height: 22px;
+      color: var(--text-primary);
+    }
+    .ig-card-bookmark { margin-left: auto; }
+    .ig-card-likes {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      padding: 6px 14px 0;
+    }
+    .ig-card-caption {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      padding: 4px 14px 16px;
+    }
+    .ig-card-caption strong {
+      color: var(--text-primary);
+      font-weight: 600;
+      margin-right: 5px;
+    }
+
     /* ── FINAL CTA ────────────────────────────────── */
     .final-cta {
       background: var(--off-white);
@@ -1107,27 +1129,38 @@
   </div>
 
   <!-- ABOUT -->
-  <section id="about">
-    <div class="about-grid">
-      <div class="about-text animate d1">
-        <p class="section-label">About</p>
-        <h2 class="section-title" style="margin-bottom:28px;">Training that <em>sticks.</em></h2>
-        <p>
-          I'm a <strong>UX educator and product trainer</strong> based in Vietnam, helping designers and teams build genuine design intuition — not just surface-level skills.
-        </p>
-        <p>
-          With 10+ years as a UX product designer and experience mentoring 50+ designers through ADPList and private programs, I've developed a practical, human-centred approach to teaching design — one that bridges real-world product work with structured learning.
-        </p>
+  <section class="mentor" id="about">
+    <div class="mentor-grid">
+      <div class="mentor-photo-wrap animate d3">
+        <div class="mentor-ring float-a"></div>
+        <img src="assets/GV5.jpg" alt="Winnie Nguyen" class="mentor-photo" />
+        <div class="mentor-badge">
+          <strong>50+</strong>
+          <span>designers mentored</span>
+        </div>
       </div>
 
-      <div class="about-visual animate d3">
-        <div class="about-photo-frame">
-          <img src="assets/GV5.jpg" alt="Winnie Nguyen" />
+      <div class="mentor-text animate d1">
+        <p class="section-label">About</p>
+        <h2 class="section-title" style="margin-top:10px;">Training that <em>sticks.</em></h2>
+        <p>
+          I'm a <strong>UX educator and product trainer</strong> based in Vietnam, helping designers and teams build genuine design intuition, not just surface-level skills.
+        </p>
+        <p>
+          With 10+ years as a UX product designer and experience mentoring 50+ designers through ADPList and private programs, I've developed a practical, human-centred approach to teaching design, one that bridges real-world product work with structured learning.
+        </p>
+        <div class="mentor-pills">
+          <span class="mentor-pill">UX Research</span>
+          <span class="mentor-pill">Product Thinking</span>
+          <span class="mentor-pill">Mental Models</span>
+          <span class="mentor-pill">AI Prototyping</span>
+          <span class="mentor-pill">Design Systems</span>
+          <span class="mentor-pill">1:1 Coaching</span>
         </div>
-        <div class="about-badge">
-          <div class="about-badge-number">50+</div>
-          <div class="about-badge-label">designers mentored</div>
-        </div>
+        <a href="https://adplist.org/mentors/winnie-nguyen" target="_blank" rel="noopener" class="mentor-link">
+          See my profile on ADPList
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4V11"/></svg>
+        </a>
       </div>
     </div>
   </section>
@@ -1194,6 +1227,343 @@
           </div>
         </div>
 
+      </div>
+    </div>
+  </div>
+
+  <!-- IN THE ROOM -->
+  <div class="gallery">
+    <div class="gallery-inner">
+      <div class="gallery-head animate d1">
+        <p class="section-label">In the room</p>
+        <h2 class="section-title" style="margin-bottom:12px;">Moments from past sessions</h2>
+        <p style="font-size:1rem; color:var(--text-secondary); line-height:1.75;">Workshops, talks, and classes I've run over the years, remote and in person.</p>
+      </div>
+
+      <div class="gallery-track-wrap">
+      <div class="gallery-track">
+
+        <div class="ig-card animate d1">
+          <div class="ig-card-header">
+            <img src="assets/avatar.png" alt="Winnie Nguyen" class="ig-card-avatar">
+            <span class="ig-card-handle">winwinnie2910</span>
+          </div>
+          <img src="assets/class%20image/IMG_0030.JPG" alt="Remote sketching workshop" class="ig-card-photo" style="object-position:15% 15%;">
+          <div class="ig-card-actions">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H12l-5 3 .9-4.5A8.5 8.5 0 1 1 21 11.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            <svg class="ig-card-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          </div>
+          <div class="ig-card-likes">84 likes</div>
+          <p class="ig-card-caption"><strong>winwinnie2910</strong>Everyone holding up their sketches at once on a remote workshop night.</p>
+        </div>
+
+        <div class="ig-card animate d2">
+          <div class="ig-card-header">
+            <img src="assets/avatar.png" alt="Winnie Nguyen" class="ig-card-avatar">
+            <span class="ig-card-handle">winwinnie2910</span>
+          </div>
+          <img src="assets/class%20image/IMG_3508.JPG" alt="User persona workshop" class="ig-card-photo" style="object-position:35% 20%;">
+          <div class="ig-card-actions">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H12l-5 3 .9-4.5A8.5 8.5 0 1 1 21 11.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            <svg class="ig-card-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          </div>
+          <div class="ig-card-likes">132 likes</div>
+          <p class="ig-card-caption"><strong>winwinnie2910</strong>Running a user persona exercise with a small design team.</p>
+        </div>
+
+        <div class="ig-card animate d3">
+          <div class="ig-card-header">
+            <img src="assets/avatar.png" alt="Winnie Nguyen" class="ig-card-avatar">
+            <span class="ig-card-handle">winwinnie2910</span>
+          </div>
+          <img src="assets/class%20image/IMG_4940.JPG" alt="What is UX talk" class="ig-card-photo" style="object-position:78% 25%;">
+          <div class="ig-card-actions">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H12l-5 3 .9-4.5A8.5 8.5 0 1 1 21 11.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            <svg class="ig-card-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          </div>
+          <div class="ig-card-likes">96 likes</div>
+          <p class="ig-card-caption"><strong>winwinnie2910</strong>Talking through where tech, business, and user needs actually meet.</p>
+        </div>
+
+        <div class="ig-card animate d4">
+          <div class="ig-card-header">
+            <img src="assets/avatar.png" alt="Winnie Nguyen" class="ig-card-avatar">
+            <span class="ig-card-handle">winwinnie2910</span>
+          </div>
+          <img src="assets/class%20image/IMG_4941.JPG" alt="Coder School talk" class="ig-card-photo" style="object-position:62% 25%;">
+          <div class="ig-card-actions">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H12l-5 3 .9-4.5A8.5 8.5 0 1 1 21 11.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            <svg class="ig-card-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          </div>
+          <div class="ig-card-likes">158 likes</div>
+          <p class="ig-card-caption"><strong>winwinnie2910</strong>Speaking at Coder School about guiding designers, not just instructing them.</p>
+        </div>
+
+        <div class="ig-card animate d5">
+          <div class="ig-card-header">
+            <img src="assets/avatar.png" alt="Winnie Nguyen" class="ig-card-avatar">
+            <span class="ig-card-handle">winwinnie2910</span>
+          </div>
+          <img src="assets/class%20image/496B9E18-E77B-43FC-B2B1-85A179436076.jpg" alt="UI/UX Hackathon warmup" class="ig-card-photo" style="object-position:center 25%;">
+          <div class="ig-card-actions">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H12l-5 3 .9-4.5A8.5 8.5 0 1 1 21 11.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            <svg class="ig-card-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          </div>
+          <div class="ig-card-likes">210 likes</div>
+          <p class="ig-card-caption"><strong>winwinnie2910</strong>Wrapping up the UI/UX Hackathon warmup with this year's cohort.</p>
+        </div>
+
+        <div class="ig-card animate d6">
+          <div class="ig-card-header">
+            <img src="assets/avatar.png" alt="Winnie Nguyen" class="ig-card-avatar">
+            <span class="ig-card-handle">winwinnie2910</span>
+          </div>
+          <img src="assets/class%20image/4EDAED0F-BBC9-4FDE-87BC-DCF8EEA37851.jpg" alt="FabLab working session" class="ig-card-photo" style="object-position:35% 20%;">
+          <div class="ig-card-actions">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H12l-5 3 .9-4.5A8.5 8.5 0 1 1 21 11.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            <svg class="ig-card-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          </div>
+          <div class="ig-card-likes">73 likes</div>
+          <p class="ig-card-caption"><strong>winwinnie2910</strong>A working session at FabLab with a few of the mentees.</p>
+        </div>
+
+        <div class="ig-card animate d1">
+          <div class="ig-card-header">
+            <img src="assets/avatar.png" alt="Winnie Nguyen" class="ig-card-avatar">
+            <span class="ig-card-handle">winwinnie2910</span>
+          </div>
+          <img src="assets/class%20image/_MG_3033-2.jpg" alt="Hackathon warmup day" class="ig-card-photo" style="object-position:40% 30%;">
+          <div class="ig-card-actions">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H12l-5 3 .9-4.5A8.5 8.5 0 1 1 21 11.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            <svg class="ig-card-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          </div>
+          <div class="ig-card-likes">121 likes</div>
+          <p class="ig-card-caption"><strong>winwinnie2910</strong>Behind the scenes on Hackathon warmup day.</p>
+        </div>
+
+        <div class="ig-card animate d2">
+          <div class="ig-card-header">
+            <img src="assets/avatar.png" alt="Winnie Nguyen" class="ig-card-avatar">
+            <span class="ig-card-handle">winwinnie2910</span>
+          </div>
+          <img src="assets/class%20image/IMG_0600.jpg" alt="English class" class="ig-card-photo" style="object-position:center 15%;">
+          <div class="ig-card-actions">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H12l-5 3 .9-4.5A8.5 8.5 0 1 1 21 11.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            <svg class="ig-card-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          </div>
+          <div class="ig-card-likes">64 likes</div>
+          <p class="ig-card-caption"><strong>winwinnie2910</strong>Still a student myself. Practicing grammar in an English class.</p>
+        </div>
+
+        <div class="ig-card animate d3">
+          <div class="ig-card-header">
+            <img src="assets/avatar.png" alt="Winnie Nguyen" class="ig-card-avatar">
+            <span class="ig-card-handle">winwinnie2910</span>
+          </div>
+          <img src="assets/class%20image/IMG_8591.jpg" alt="Design Thinking workshop" class="ig-card-photo" style="object-position:32% 30%;">
+          <div class="ig-card-actions">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H12l-5 3 .9-4.5A8.5 8.5 0 1 1 21 11.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            <svg class="ig-card-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          </div>
+          <div class="ig-card-likes">189 likes</div>
+          <p class="ig-card-caption"><strong>winwinnie2910</strong>Walking a team through what design thinking actually means.</p>
+        </div>
+
+        <div class="ig-card animate d4">
+          <div class="ig-card-header">
+            <img src="assets/avatar.png" alt="Winnie Nguyen" class="ig-card-avatar">
+            <span class="ig-card-handle">winwinnie2910</span>
+          </div>
+          <img src="assets/class%20image/_DSC8210.jpg" alt="Team photo after a workshop" class="ig-card-photo" style="object-position:center 20%;">
+          <div class="ig-card-actions">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H12l-5 3 .9-4.5A8.5 8.5 0 1 1 21 11.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            <svg class="ig-card-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          </div>
+          <div class="ig-card-likes">142 likes</div>
+          <p class="ig-card-caption"><strong>winwinnie2910</strong>Team photo after wrapping a workshop.</p>
+        </div>
+
+        <div class="ig-card" aria-hidden="true">
+          <div class="ig-card-header">
+            <img src="assets/avatar.png" alt="" class="ig-card-avatar">
+            <span class="ig-card-handle">winwinnie2910</span>
+          </div>
+          <img src="assets/class%20image/IMG_0030.JPG" alt="" class="ig-card-photo" style="object-position:15% 15%;">
+          <div class="ig-card-actions">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H12l-5 3 .9-4.5A8.5 8.5 0 1 1 21 11.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            <svg class="ig-card-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          </div>
+          <div class="ig-card-likes">84 likes</div>
+          <p class="ig-card-caption"><strong>winwinnie2910</strong>Everyone holding up their sketches at once on a remote workshop night.</p>
+        </div>
+
+        <div class="ig-card" aria-hidden="true">
+          <div class="ig-card-header">
+            <img src="assets/avatar.png" alt="" class="ig-card-avatar">
+            <span class="ig-card-handle">winwinnie2910</span>
+          </div>
+          <img src="assets/class%20image/IMG_3508.JPG" alt="" class="ig-card-photo" style="object-position:35% 20%;">
+          <div class="ig-card-actions">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H12l-5 3 .9-4.5A8.5 8.5 0 1 1 21 11.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            <svg class="ig-card-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          </div>
+          <div class="ig-card-likes">132 likes</div>
+          <p class="ig-card-caption"><strong>winwinnie2910</strong>Running a user persona exercise with a small design team.</p>
+        </div>
+
+        <div class="ig-card" aria-hidden="true">
+          <div class="ig-card-header">
+            <img src="assets/avatar.png" alt="" class="ig-card-avatar">
+            <span class="ig-card-handle">winwinnie2910</span>
+          </div>
+          <img src="assets/class%20image/IMG_4940.JPG" alt="" class="ig-card-photo" style="object-position:78% 25%;">
+          <div class="ig-card-actions">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H12l-5 3 .9-4.5A8.5 8.5 0 1 1 21 11.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            <svg class="ig-card-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          </div>
+          <div class="ig-card-likes">96 likes</div>
+          <p class="ig-card-caption"><strong>winwinnie2910</strong>Talking through where tech, business, and user needs actually meet.</p>
+        </div>
+
+        <div class="ig-card" aria-hidden="true">
+          <div class="ig-card-header">
+            <img src="assets/avatar.png" alt="" class="ig-card-avatar">
+            <span class="ig-card-handle">winwinnie2910</span>
+          </div>
+          <img src="assets/class%20image/IMG_4941.JPG" alt="" class="ig-card-photo" style="object-position:62% 25%;">
+          <div class="ig-card-actions">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H12l-5 3 .9-4.5A8.5 8.5 0 1 1 21 11.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            <svg class="ig-card-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          </div>
+          <div class="ig-card-likes">158 likes</div>
+          <p class="ig-card-caption"><strong>winwinnie2910</strong>Speaking at Coder School about guiding designers, not just instructing them.</p>
+        </div>
+
+        <div class="ig-card" aria-hidden="true">
+          <div class="ig-card-header">
+            <img src="assets/avatar.png" alt="" class="ig-card-avatar">
+            <span class="ig-card-handle">winwinnie2910</span>
+          </div>
+          <img src="assets/class%20image/496B9E18-E77B-43FC-B2B1-85A179436076.jpg" alt="" class="ig-card-photo" style="object-position:center 25%;">
+          <div class="ig-card-actions">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H12l-5 3 .9-4.5A8.5 8.5 0 1 1 21 11.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            <svg class="ig-card-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          </div>
+          <div class="ig-card-likes">210 likes</div>
+          <p class="ig-card-caption"><strong>winwinnie2910</strong>Wrapping up the UI/UX Hackathon warmup with this year's cohort.</p>
+        </div>
+
+        <div class="ig-card" aria-hidden="true">
+          <div class="ig-card-header">
+            <img src="assets/avatar.png" alt="" class="ig-card-avatar">
+            <span class="ig-card-handle">winwinnie2910</span>
+          </div>
+          <img src="assets/class%20image/4EDAED0F-BBC9-4FDE-87BC-DCF8EEA37851.jpg" alt="" class="ig-card-photo" style="object-position:35% 20%;">
+          <div class="ig-card-actions">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H12l-5 3 .9-4.5A8.5 8.5 0 1 1 21 11.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            <svg class="ig-card-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          </div>
+          <div class="ig-card-likes">73 likes</div>
+          <p class="ig-card-caption"><strong>winwinnie2910</strong>A working session at FabLab with a few of the mentees.</p>
+        </div>
+
+        <div class="ig-card" aria-hidden="true">
+          <div class="ig-card-header">
+            <img src="assets/avatar.png" alt="" class="ig-card-avatar">
+            <span class="ig-card-handle">winwinnie2910</span>
+          </div>
+          <img src="assets/class%20image/_MG_3033-2.jpg" alt="" class="ig-card-photo" style="object-position:40% 30%;">
+          <div class="ig-card-actions">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H12l-5 3 .9-4.5A8.5 8.5 0 1 1 21 11.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            <svg class="ig-card-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          </div>
+          <div class="ig-card-likes">121 likes</div>
+          <p class="ig-card-caption"><strong>winwinnie2910</strong>Behind the scenes on Hackathon warmup day.</p>
+        </div>
+
+        <div class="ig-card" aria-hidden="true">
+          <div class="ig-card-header">
+            <img src="assets/avatar.png" alt="" class="ig-card-avatar">
+            <span class="ig-card-handle">winwinnie2910</span>
+          </div>
+          <img src="assets/class%20image/IMG_0600.jpg" alt="" class="ig-card-photo" style="object-position:center 15%;">
+          <div class="ig-card-actions">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H12l-5 3 .9-4.5A8.5 8.5 0 1 1 21 11.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            <svg class="ig-card-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          </div>
+          <div class="ig-card-likes">64 likes</div>
+          <p class="ig-card-caption"><strong>winwinnie2910</strong>Still a student myself. Practicing grammar in an English class.</p>
+        </div>
+
+        <div class="ig-card" aria-hidden="true">
+          <div class="ig-card-header">
+            <img src="assets/avatar.png" alt="" class="ig-card-avatar">
+            <span class="ig-card-handle">winwinnie2910</span>
+          </div>
+          <img src="assets/class%20image/IMG_8591.jpg" alt="" class="ig-card-photo" style="object-position:32% 30%;">
+          <div class="ig-card-actions">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H12l-5 3 .9-4.5A8.5 8.5 0 1 1 21 11.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            <svg class="ig-card-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          </div>
+          <div class="ig-card-likes">189 likes</div>
+          <p class="ig-card-caption"><strong>winwinnie2910</strong>Walking a team through what design thinking actually means.</p>
+        </div>
+
+        <div class="ig-card" aria-hidden="true">
+          <div class="ig-card-header">
+            <img src="assets/avatar.png" alt="" class="ig-card-avatar">
+            <span class="ig-card-handle">winwinnie2910</span>
+          </div>
+          <img src="assets/class%20image/_DSC8210.jpg" alt="" class="ig-card-photo" style="object-position:center 20%;">
+          <div class="ig-card-actions">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H12l-5 3 .9-4.5A8.5 8.5 0 1 1 21 11.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            <svg class="ig-card-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          </div>
+          <div class="ig-card-likes">142 likes</div>
+          <p class="ig-card-caption"><strong>winwinnie2910</strong>Team photo after wrapping a workshop.</p>
+        </div>
+
+      </div>
       </div>
     </div>
   </div>

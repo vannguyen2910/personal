@@ -187,33 +187,11 @@ section{ position:relative; }
 .who-card .num{ font-family:var(--serif); font-size:2.8rem; font-weight:800; color:var(--coral); line-height:1; margin-bottom:.7rem; }
 .who-card p{ font-size:.92rem; color:var(--ink-70); line-height:1.6; max-width:30ch; }
 
-/* ============ ABOUT MENTOR ============ */
-.mentor{ padding:clamp(4rem,9vw,7rem) 0; }
-.mentor-grid{ display:grid; grid-template-columns:.85fr 1.15fr; gap:3.5rem; align-items:center; }
-@media (max-width:820px){ .mentor-grid{ grid-template-columns:1fr; } }
-
-.mentor-photo-wrap{ position:relative; }
-.mentor-photo{
-  width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:6px;
-  filter:grayscale(.12) contrast(1.03);
-}
-.mentor-badge{
-  position:absolute; bottom:-1.2rem; left:-1.2rem;
-  background:var(--forest); color:var(--cream);
-  border-radius:6px; padding:1rem 1.3rem; box-shadow:0 16px 32px rgba(10,10,10,.18);
-}
-.mentor-badge strong{ display:block; font-family:var(--serif); font-weight:800; font-size:1.6rem; color:var(--lime); line-height:1; }
-.mentor-badge span{ font-size:.72rem; color:rgba(245,239,226,.7); }
-.mentor-ring{ position:absolute; top:-1.4rem; right:-1.4rem; width:66px; height:66px; border:1px dashed var(--ink-50); border-radius:50%; }
-
-.mentor-text h2{ font-family:var(--serif); font-weight:800; letter-spacing:-.02em; font-size:clamp(1.9rem,3.8vw,2.8rem); line-height:1.15; margin-bottom:1.3rem; }
-.mentor-text p{ font-size:.98rem; color:var(--ink-70); line-height:1.7; margin-bottom:1rem; max-width:52ch; }
-.mentor-text strong{ color:var(--ink); }
-.mentor-pills{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.4rem; }
-.mentor-pill{ font-size:.74rem; font-weight:700; padding:.4rem .85rem; border-radius:999px; border:1px solid var(--line); color:var(--ink-70); }
-.mentor-link{ display:inline-flex; align-items:center; gap:.4rem; margin-top:1.6rem; font-size:.88rem; font-weight:700; color:var(--ink); }
-.mentor-link svg{ width:13px; height:13px; transition:transform .25s ease; }
-.mentor-link:hover svg{ transform:translate(3px,-3px); }
+/* ============ ABOUT MENTOR ============
+   .mentor / .mentor-grid / .mentor-photo-wrap / .mentor-badge / .mentor-pills /
+   .mentor-link live in the shared Themes/editorial-patterns.css, themed by
+   the --mentor-* custom properties in program-tokens.css. Reused as-is by
+   the Training Hub's About section via tokens-training-editorial.css. */
 
 /* ============ CURRICULUM — numbered session accordion ============ */
 .curriculum{ padding:clamp(4rem,9vw,7rem) 0; }
