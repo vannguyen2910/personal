@@ -6,6 +6,8 @@
   <title>Product Designer Self-Assessment — Winnie Nguyen</title>
   <link rel="stylesheet" href="../Themes/tokens.css">
   <link rel="stylesheet" href="../Themes/components.css">
+  <link rel="stylesheet" href="../Themes/tokens-training-editorial.css">
+  <link rel="stylesheet" href="../Themes/editorial-patterns.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
@@ -798,8 +800,8 @@
     <div class="chart-card">
       <canvas id="radarChart"></canvas>
       <div class="chart-legend">
-        <span><span class="legend-dot" style="background:rgba(107,63,238,0.7)"></span>Your rating</span>
-        <span><span class="legend-dot" style="background:var(--yellow);border:2px dashed #C9A800"></span>Target level</span>
+        <span><span class="legend-dot" style="background:var(--purple)"></span>Your rating</span>
+        <span><span class="legend-dot" style="background:var(--yellow);border:2px dashed var(--yellow-deep)"></span>Target level</span>
       </div>
     </div>
 
@@ -1798,7 +1800,23 @@ function buildInsights() {
   }
 }
 
+function hexToRgba(hex, alpha) {
+  hex = (hex || '').trim().replace('#', '');
+  if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+  if (hex.length !== 6) return `rgba(107,63,238,${alpha})`;
+  const r = parseInt(hex.substring(0,2), 16), g = parseInt(hex.substring(2,4), 16), b = parseInt(hex.substring(4,6), 16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
 function buildRadar() {
+  // Read the active theme's colors so the chart matches whichever tokens file is loaded
+  // (default purple/yellow, or the training-editorial terracotta/lime override).
+  const cs = getComputedStyle(document.documentElement);
+  const purple     = (cs.getPropertyValue('--purple') || '#6B3FEE').trim();
+  const yellowDeep = (cs.getPropertyValue('--yellow-deep') || '#C9A400').trim();
+  const fontBody   = (cs.getPropertyValue('--font-body') || "'Public Sans', system-ui").trim() || "'Public Sans', system-ui";
+  const textSecondary = (cs.getPropertyValue('--text-secondary') || '#6B6084').trim();
+
   const SHORT_LABELS = {
     'user-research':            'User Research',
     'information-architecture': 'Info Arch',
@@ -1823,13 +1841,13 @@ function buildRadar() {
     data: {
       labels,
       datasets: [
-        { label: 'Your rating', data: selfData, backgroundColor: 'rgba(107,63,238,0.2)', borderColor: 'rgba(107,63,238,0.9)', borderWidth: 2.5, pointBackgroundColor: '#6B3FEE', pointRadius: 4 },
-        { label: 'Target',      data: SKILLS.map(() => tv), backgroundColor: 'rgba(245,208,40,0.08)', borderColor: '#F5D028', borderWidth: 2, borderDash: [5,4], pointBackgroundColor: '#F5D028', pointRadius: 3 }
+        { label: 'Your rating', data: selfData, backgroundColor: hexToRgba(purple, 0.2), borderColor: hexToRgba(purple, 0.9), borderWidth: 2.5, pointBackgroundColor: purple, pointRadius: 4 },
+        { label: 'Target',      data: SKILLS.map(() => tv), backgroundColor: hexToRgba(yellowDeep, 0.08), borderColor: yellowDeep, borderWidth: 2, borderDash: [5,4], pointBackgroundColor: yellowDeep, pointRadius: 3 }
       ]
     },
     options: {
       responsive: true,
-      scales: { r: { min:0, max:4, ticks:{ stepSize:1, display:false }, grid:{ color:'rgba(0,0,0,0.06)' }, angleLines:{ color:'rgba(0,0,0,0.06)' }, pointLabels:{ font:{ family:"'Public Sans', system-ui", size:11, weight:'500' }, color:'#6B6084' } } },
+      scales: { r: { min:0, max:4, ticks:{ stepSize:1, display:false }, grid:{ color:'rgba(0,0,0,0.06)' }, angleLines:{ color:'rgba(0,0,0,0.06)' }, pointLabels:{ font:{ family:fontBody, size:11, weight:'500' }, color:textSecondary } } },
       plugins: { legend: { display: false } },
       animation: { duration: 800 }
     }
@@ -1950,7 +1968,18 @@ async function downloadPDF() {
     const doc = new jsPDF({ orientation:'portrait', unit:'mm', format:'a4' });
     const W=210, H=297, m=18, cW=W-m*2;
     const tv  = TARGET_LEVELS[state.target] || 2;
-    const pu=[107,63,238], ye=[245,208,40], g8=[45,37,70], g6=[107,96,132], g2=[224,220,233];
+    // Read the active theme's colors so the PDF matches whichever tokens file is
+    // loaded (default purple/yellow, or the training-editorial terracotta/lime override) —
+    // jsPDF draws to its own canvas and can't read CSS, so this has to happen once, here.
+    const _cs = getComputedStyle(document.documentElement);
+    const _rgb = (name, fallback) => {
+      let hex = (_cs.getPropertyValue(name) || '').trim().replace('#', '');
+      if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+      if (hex.length !== 6) return fallback;
+      return [parseInt(hex.substring(0,2),16), parseInt(hex.substring(2,4),16), parseInt(hex.substring(4,6),16)];
+    };
+    const pu = _rgb('--purple', [107,63,238]), ye = _rgb('--yellow', [245,208,40]);
+    const g8 = _rgb('--text-primary', [45,37,70]), g6 = _rgb('--text-secondary', [107,96,132]), g2 = _rgb('--border-default', [224,220,233]);
     const gr=[16,185,129], or_=[217,119,6];
 
     // ── Pre-compute insights ────────────────────────────────────

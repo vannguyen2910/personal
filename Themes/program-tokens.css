@@ -1,0 +1,68 @@
+/* ================================================================
+   PROGRAM-TOKENS.CSS — Program Page Design System
+   Terracotta / lime editorial palette + Manrope type.
+   Single source of truth for program page design values.
+
+   Used by:
+     - Themes/program-components.css
+     - training/programs/*.html (program page template)
+
+   This is a SEPARATE system from the main Themes/tokens.css
+   (Purple/Yellow, used by the homepage, Portfolio, and Training Hub).
+   It exists so program pages can carry their own editorial identity
+   without affecting the rest of the site.
+
+   Edit values here → every program page inherits automatically.
+   DO NOT add component styles here — use program-components.css.
+================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --cream:    #FFFFFF;
+  --paper:    #FFFDF7;
+  --ink:      #16140F;
+  --ink-70:   rgba(22,20,15,.7);
+  --ink-50:   rgba(22,20,15,.5);
+  --line:     rgba(22,20,15,.14);
+
+  /* near-black navy — dark sections stay charcoal, not green */
+  --forest:   #15181C;
+  --forest-2: #0D0F12;
+
+  /* true kelly/spring green accent */
+  --lime:     #3FCF6E;
+  --lime-dim: #2FA85A;
+
+  /* muted terracotta text accent */
+  --coral:      #D9713F;
+  --coral-tint: #F7D9C4;
+
+  /* soft mustard — warm pastel range for reference cards */
+  --lavender:      #E7C468;
+  --lavender-tint: #F5E2A6;
+
+  /* bold grotesk for both display and body */
+  --serif: "Manrope", "Helvetica Neue", sans-serif;
+  --sans:  "Manrope", "Helvetica Neue", sans-serif;
+
+  /* ── Theming for the shared patterns in editorial-patterns.css ─── */
+  --mark-color:    var(--lime);
+  --mark-delay-1:  1.1s;
+  --mark-delay-2:  1.2s;
+
+  --pain-list-idx-width:       70px;
+  --pain-list-border:          rgba(245,239,226,.16);
+  --pain-list-number-color:    var(--lime);
+  --pain-list-heading-color:   #fff;
+  --pain-list-text-color:      rgba(245,239,226,.86);
+  --pain-list-text-color-soft: rgba(245,239,226,.65);
+
+  --session-idx-width:     64px;
+  --session-idx-color:     var(--coral);
+  --session-idx-bg:        var(--cream);
+  --session-heading-color: var(--ink);
+  --session-text-color:    var(--ink-70);
+  --session-line-color:    var(--line);
+  --session-accent-color:  var(--coral);
+}

@@ -1,0 +1,76 @@
+/* ================================================================
+   TOKENS-TRAINING-EDITORIAL.CSS
+   Training-only visual variant — "Editorial" palette + Manrope type,
+   ported from training/programs/concept 2.html.
+
+   Load this ONLY on training/*.html pages, AFTER tokens.css and
+   components.css, and BEFORE Themes/editorial-patterns.css. It only
+   overrides token VALUES and adds a few new utility classes — it
+   never edits tokens.css or components.css. Because every component
+   in components.css is built from these variables (never a
+   hardcoded color), every existing button, chip, card, and nav link
+   on training pages re-skins automatically.
+
+   The .mark / .pain-list / .session-list patterns used to be
+   reimplemented here in full. They now live in the shared
+   Themes/editorial-patterns.css (also used by program pages) —
+   this file just supplies the custom properties that theme them.
+
+   Portfolio, the homepage, style-guide.html, and the teaching slide
+   decks do not load this file and are completely unaffected.
+================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* ── Editorial palette — was Purple ─────────────────────────── */
+  --purple:        #D9713F;   /* muted terracotta — primary accent */
+  --purple-deep:   #B85A2E;
+  --purple-mid:    #E89A6C;
+  --purple-tint:   #F7D9C4;
+  --purple-subtle: #FBEADD;
+
+  /* ── Editorial palette — was Yellow ──────────────────────────── */
+  --yellow:        #3FCF6E;   /* kelly/spring green — secondary accent */
+  --yellow-deep:   #2FA85A;
+  --yellow-mid:    #7EE39D;
+  --yellow-tint:   #C9F5D9;
+  --yellow-subtle: #E9FBF0;
+
+  /* ── Warmer near-black (was a cool purple-black) ─────────────── */
+  --gray-900: #16140F;
+
+  /* ── Editorial type ───────────────────────────────────────────── */
+  --font-display: 'Manrope', 'Public Sans', system-ui, sans-serif;
+  --font-body:    'Manrope', 'Public Sans', system-ui, sans-serif;
+
+  /* ── Theming for the shared patterns in editorial-patterns.css ─── */
+  --mark-color:    var(--yellow);
+  --mark-delay-1:  .3s;
+  --mark-delay-2:  .4s;
+
+  --pain-list-idx-width:       56px;
+  --pain-list-border:          rgba(255,255,255,.16);
+  --pain-list-number-color:    var(--yellow);
+  --pain-list-heading-color:   #fff;
+  --pain-list-text-color:      rgba(255,255,255,.86);
+  --pain-list-text-color-soft: rgba(255,255,255,.65);
+
+  --session-idx-width:     48px;
+  --session-idx-color:     var(--purple);
+  --session-idx-bg:        var(--surface-page);
+  --session-heading-color: var(--text-primary);
+  --session-text-color:    var(--text-secondary);
+  --session-line-color:    var(--border-default);
+  --session-accent-color:  var(--purple);
+}
+
+
+/* ── Dark full-bleed section wrapper ──────────────────────────────
+   Usage: add class="editorial-dark" alongside a section's own class */
+.editorial-dark { background: var(--gray-900); color: rgba(255,255,255,.86); }
+.editorial-dark .section-label { color: var(--yellow); }
+
+/* .mark, .pain-list, .session-list/.session-row/.phase-label are
+   defined once in the shared Themes/editorial-patterns.css, themed
+   by the custom properties above. Load that file after this one. */

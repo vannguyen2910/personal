@@ -7,6 +7,8 @@
 <!-- ── Design System ── -->
   <link rel="stylesheet" href="../Themes/tokens.css">
   <link rel="stylesheet" href="../Themes/components.css">
+  <link rel="stylesheet" href="../Themes/tokens-training-editorial.css">
+  <link rel="stylesheet" href="../Themes/editorial-patterns.css">
   <style>
     html { scroll-behavior: smooth; }
 
@@ -54,7 +56,22 @@
     .d6.is-visible { transition-delay: 0.5s; }
 
     /* Nav styling is inherited from the shared design system
-       (Themes/components.css) so this page's top nav matches Portfolio. */
+       (Themes/components.css) so this page's top nav matches Portfolio.
+       The shared nav has no inner max-width wrapper, so its content sits
+       flush at the gutter instead of aligning with the 1200px content
+       column used everywhere else on this page — nav-inner fixes that. */
+    nav { padding: 0; }
+    .nav-inner {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+      box-sizing: border-box;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
     /* ── HERO ─────────────────────────────────────── */
     .hero {
@@ -117,37 +134,68 @@
       align-items: center;
     }
 
-    .btn-primary {
-      background: var(--accent);
-      color: var(--white);
-      padding: 12px 28px;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      font-weight: 600;
+    .btn-primary, .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.7rem 1.3rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
       text-decoration: none;
-      transition: opacity 0.2s, transform 0.2s;
-      display: inline-block;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
     }
-    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-primary svg, .btn-ghost svg {
+      width: 13px;
+      height: 13px;
+      transition: transform 0.25s ease;
+    }
+    .btn-primary:hover svg, .btn-ghost:hover svg { transform: translate(3px, -3px); }
+
+    .btn-primary {
+      background: var(--text-primary);
+      color: var(--white);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(22,20,15,0.25); }
+    /* .nav-links a in the shared components.css (0,1,1) otherwise beats .btn-primary's color (0,1,0) */
+    .nav-links a.btn-primary,
+    .nav-links a.btn-primary:hover { color: var(--white); }
 
     .btn-ghost {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      font-weight: 500;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: color 0.2s;
+      border: 1.5px solid var(--text-primary);
+      color: var(--text-primary);
+      background: transparent;
     }
-    .btn-ghost:hover { color: var(--accent); }
-    .btn-ghost::after { content: '→'; transition: transform 0.2s; }
-    .btn-ghost:hover::after { transform: translateX(4px); }
+    .btn-ghost:hover { background: var(--text-primary); color: var(--white); transform: translateY(-2px); }
 
     /* Hero Right — Visual Card Stack */
     .hero-right {
       position: relative;
       height: 420px;
+    }
+
+    /* Ambient decorative shapes — subtle motion behind the card stack */
+    .hero-shapes { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+    .shape-ring {
+      position: absolute;
+      width: 210px; height: 210px;
+      border: 1px dashed var(--rule);
+      border-radius: 50%;
+      top: -36px; right: -24px;
+    }
+    .shape-blob {
+      position: absolute;
+      width: 130px; height: 130px;
+      background: var(--yellow);
+      opacity: 0.3;
+      border-radius: 62% 38% 55% 45% / 48% 45% 55% 52%;
+      top: 6px; right: 30px;
+    }
+    @keyframes floatA { 0%, 100% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(6px,-14px) rotate(4deg); } }
+    .float-a { animation: floatA 7s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) {
+      .float-a { animation: none; }
     }
 
     .hero-card {
@@ -194,21 +242,12 @@
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--accent);
-      background: var(--accent-light);
+      color: var(--text-secondary);
+      background: transparent;
+      border: 1px solid var(--rule);
       padding: 3px 10px;
       border-radius: 100px;
       margin-bottom: 12px;
-    }
-
-    .card-tag.green {
-      color: #2D6A4F;
-      background: #D8F3DC;
-    }
-
-    .card-tag.warm {
-      color: #7B4F2E;
-      background: #F5E6D8;
     }
 
     .hero-card h3 {
@@ -561,9 +600,9 @@
       color: var(--white);
     }
 
-    /* ── RECOGNITION ──────────────────────────────── */
+    /* ── RECOGNITION — dark editorial pain-point list ─────── */
     .recognition {
-      background: var(--white);
+      background: var(--gray-900);
       padding: 100px 0;
     }
     .recognition-inner {
@@ -581,7 +620,7 @@
       font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--yellow);
       margin-bottom: 10px;
     }
     .rec-title {
@@ -589,51 +628,12 @@
       font-size: clamp(1.8rem, 3vw, 2.4rem);
       line-height: 1.15;
       letter-spacing: -0.02em;
-      color: var(--text-primary);
+      color: #fff;
       margin-bottom: 14px;
     }
     .rec-subtitle {
       font-size: 1rem;
-      color: var(--text-secondary);
-      line-height: 1.75;
-    }
-    .rec-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-    }
-    .rec-card {
-      background: var(--white);
-      border-radius: 16px;
-      padding: 36px 32px 32px;
-      box-shadow: 0 2px 20px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04);
-      transition: box-shadow 0.25s, transform 0.25s;
-    }
-    .rec-card:hover {
-      box-shadow: 0 16px 48px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.05);
-      transform: translateY(-4px);
-    }
-    .rec-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 14px;
-      background: var(--accent-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 22px;
-    }
-    .rec-icon svg { width: 26px; height: 26px; stroke: var(--accent); }
-    .rec-card h3 {
-      font-family: var(--serif);
-      font-size: 1.15rem;
-      color: var(--text-primary);
-      margin-bottom: 10px;
-      line-height: 1.3;
-    }
-    .rec-card p {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
+      color: rgba(255,255,255,0.6);
       line-height: 1.75;
     }
 
@@ -696,60 +696,15 @@
       max-width: 480px;
       margin-bottom: 52px;
     }
-    .hiw-steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      position: relative;
-    }
-    .hiw-steps::before {
-      content: '';
-      position: absolute;
-      top: 20px;
-      left: calc(16.67% + 20px);
-      right: calc(16.67% + 20px);
-      height: 1.5px;
-      background: var(--rule);
-    }
-    .hiw-step {
-      padding-right: 32px;
-    }
-    .step-num {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--accent);
-      color: var(--white);
-      font-family: var(--serif);
-      font-size: 1rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-      position: relative;
-      z-index: 1;
-    }
-    .hiw-step h3 {
-      font-family: var(--serif);
-      font-size: 1.05rem;
-      color: var(--text-primary);
-      margin-bottom: 8px;
-      line-height: 1.3;
-    }
-    .hiw-step p {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-      line-height: 1.75;
-    }
     .step-tag {
       display: inline-block;
       font-size: 0.68rem;
       font-weight: 600;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: var(--accent);
-      background: var(--accent-light);
+      color: var(--text-secondary);
+      background: transparent;
+      border: 1px solid var(--rule);
       padding: 3px 10px;
       border-radius: 100px;
       margin-bottom: 12px;
@@ -757,6 +712,77 @@
     .hiw-cta {
       margin-top: 48px;
     }
+
+    /* ── PROGRAMS ──────────────────────────────────── */
+    .programs {
+      background: var(--off-white);
+      padding: 100px 0;
+    }
+    .programs-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+    .programs-head {
+      max-width: 560px;
+      margin-bottom: 44px;
+    }
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .program-card {
+      display: block;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04);
+      text-decoration: none;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .program-card:hover {
+      box-shadow: 0 16px 48px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.05);
+      transform: translateY(-4px);
+    }
+    .program-card-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      background: transparent;
+      border: 1px solid var(--rule);
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+    .program-card h3 {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .program-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .program-card-link {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .program-card-link::after { content: '→'; transition: transform 0.2s; }
+    .program-card:hover .program-card-link { color: var(--accent); }
+    .program-card:hover .program-card-link::after { transform: translateX(4px); }
 
     /* ── TESTIMONIALS ─────────────────────────────── */
     .testimonials {
@@ -893,11 +919,13 @@
 
   <!-- NAV -->
   <nav>
-    <a href="index.html" class="nav-logo"><img src="assets/Logo.svg" alt="Winnie Nguyen" /></a>
-    <div class="nav-links">
-      <a href="../Portfolio/index.html">Portfolio</a>
-      <a href="#about">About</a>
-      <a href="self-assessment.html" class="btn btn--contained btn--primary btn--sm">Run Self-assessment</a>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><img src="assets/Logo.svg" alt="Winnie Nguyen" /></a>
+      <div class="nav-links">
+        <a href="../Portfolio/index.html">Portfolio</a>
+        <a href="#about">About</a>
+        <a href="self-assessment.html" class="btn-primary">Run Self-assessment <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4V11"/></svg></a>
+      </div>
     </div>
   </nav>
 
@@ -907,33 +935,37 @@
       <div class="hero-left">
         <p class="hero-eyebrow animate d1">UX Educator · Product Trainer</p>
         <h1 class="hero-title animate d2">
-          Designing<br /><em>better</em><br />designers.
+          Designing<br /><em>better</em><br /><span class="mark"><span>designers.</span></span>
         </h1>
         <p class="hero-desc animate d3">
           A hands-on training experience built for designers who want to develop real UX intuition — not just surface-level skills.
         </p>
         <div class="hero-actions animate d4">
-          <a href="self-assessment.html" class="btn-primary">Run Self-assessment</a>
-          <a href="https://adplist.org/mentors/winnie-nguyen" target="_blank" rel="noopener" class="btn-ghost">Connect on ADPList</a>
+          <a href="self-assessment.html" class="btn-primary">Run Self-assessment <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4V11"/></svg></a>
+          <a href="https://adplist.org/mentors/winnie-nguyen" target="_blank" rel="noopener" class="btn-ghost">Connect on ADPList <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4V11"/></svg></a>
         </div>
       </div>
 
       <div class="hero-right animate d3">
+        <div class="hero-shapes" aria-hidden="true">
+          <span class="shape-ring"></span>
+          <span class="shape-blob float-a"></span>
+        </div>
         <!-- Card 1 — main -->
         <div class="hero-card hero-card-main">
           <span class="card-tag">Lesson · UX Research</span>
           <h3>Mental Models in UX Design</h3>
-          <p>How users build expectations — and how we design for them.</p>
+          <p>How users build expectations, and how we design for them.</p>
         </div>
         <!-- Card 2 — secondary -->
         <div class="hero-card hero-card-secondary">
-          <span class="card-tag green">Self-assessment</span>
+          <span class="card-tag">Self-assessment</span>
           <h3>Where are you right now?</h3>
           <p>Map your current skills and identify your next growth area.</p>
         </div>
         <!-- Card 3 — tertiary -->
         <div class="hero-card hero-card-tertiary">
-          <span class="card-tag warm">Framework</span>
+          <span class="card-tag">Framework</span>
           <h3>UX Design Principles</h3>
           <p>Core reference sheet — 12 principles.</p>
         </div>
@@ -949,41 +981,41 @@
         <h2 class="rec-title">Sound familiar?</h2>
         <p class="rec-subtitle">Most designers hit these moments at some point. Recognising where you're stuck is the first step to moving forward.</p>
       </div>
-      <div class="rec-grid">
+      <ul class="pain-list">
 
-        <div class="rec-card animate d2">
-          <div class="rec-icon">
-            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/></svg>
+        <li class="animate d2">
+          <em>01</em>
+          <div>
+            <h3>Stuck at mid-level for longer than expected</h3>
+            <p>You're shipping good work and hitting your goals. But Senior keeps feeling out of reach, and no one is giving you clear, specific feedback on what's actually holding you back.</p>
           </div>
-          <h3>Stuck at mid-level for longer than expected</h3>
-          <p>You're shipping good work and hitting your goals. But Senior keeps feeling out of reach, and no one is giving you clear, specific feedback on what's actually holding you back.</p>
-        </div>
+        </li>
 
-        <div class="rec-card animate d3">
-          <div class="rec-icon">
-            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
+        <li class="animate d3">
+          <em>02</em>
+          <div>
+            <h3>No senior designer around you to learn from</h3>
+            <p>You're the most experienced designer on your team — or close to it. Feedback comes from PMs, not designers. You're growing, but you're mostly figuring it out alone.</p>
           </div>
-          <h3>No senior designer around you to learn from</h3>
-          <p>You're the most experienced designer on your team — or close to it. Feedback comes from PMs, not designers. You're growing, but you're mostly figuring it out alone.</p>
-        </div>
+        </li>
 
-        <div class="rec-card animate d4">
-          <div class="rec-icon">
-            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z"/></svg>
+        <li class="animate d4">
+          <em>03</em>
+          <div>
+            <h3>Your portfolio exists — but it's not converting</h3>
+            <p>You've done real, solid work. But interviews aren't coming, or they stall at the portfolio review. You can't tell if it's the work itself, the framing, or how the story is told.</p>
           </div>
-          <h3>Your portfolio exists — but it's not converting</h3>
-          <p>You've done real, solid work. But interviews aren't coming, or they stall at the portfolio review. You can't tell if it's the work itself, the framing, or how the story is told.</p>
-        </div>
+        </li>
 
-        <div class="rec-card animate d5">
-          <div class="rec-icon">
-            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
+        <li class="animate d5">
+          <em>04</em>
+          <div>
+            <h3>Unsure what AI actually means for your design career</h3>
+            <p>Everyone's saying AI is changing everything. You want to stay relevant and future-proof your skills — but you're not sure which direction to go, or where to start.</p>
           </div>
-          <h3>Unsure what AI actually means for your design career</h3>
-          <p>Everyone's saying AI is changing everything. You want to stay relevant and future-proof your skills — but you're not sure which direction to go, or where to start.</p>
-        </div>
+        </li>
 
-      </div>
+      </ul>
     </div>
   </div>
 
@@ -1023,28 +1055,53 @@
         <h2 class="section-title" style="margin-bottom:12px;">How it works</h2>
         <p style="font-size:1rem; color:var(--text-secondary); line-height:1.75;">Three steps, no commitment until you're ready.</p>
       </div>
-      <div class="hiw-steps">
-        <div class="hiw-step animate d2">
-          <div class="step-num">1</div>
-          <span class="step-tag">Free · 15 min</span>
-          <h3>Take the self-assessment</h3>
-          <p>Map your skills across 9 core design areas and 6 professional behaviours. See exactly where you stand — and where the gaps are — before we even talk.</p>
+      <div class="session-list">
+        <div class="session-row animate d2">
+          <div class="idx">01</div>
+          <div>
+            <span class="step-tag">Free · 15 min</span>
+            <h3>Take the self-assessment</h3>
+            <p>Map your skills across 9 core design areas and 6 professional behaviours. See exactly where you stand — and where the gaps are — before we even talk.</p>
+          </div>
         </div>
-        <div class="hiw-step animate d3">
-          <div class="step-num">2</div>
-          <span class="step-tag">Free · 20 min</span>
-          <h3>Book a discovery call</h3>
-          <p>We'll talk through your results, your goals, and what's been holding you back. No pitch, no commitment. Just a clear-eyed look at where you want to go.</p>
+        <div class="session-row animate d3">
+          <div class="idx">02</div>
+          <div>
+            <span class="step-tag">Free · 20 min</span>
+            <h3>Book a discovery call</h3>
+            <p>We'll talk through your results, your goals, and what's been holding you back. No pitch, no commitment. Just a clear-eyed look at where you want to go.</p>
+          </div>
         </div>
-        <div class="hiw-step animate d4">
-          <div class="step-num">3</div>
-          <span class="step-tag">Structured program</span>
-          <h3>Build your growth plan</h3>
-          <p>Get a tailored roadmap with regular sessions, real feedback on your actual work, and accountability built in — so growth stops being something you plan and starts being something you do.</p>
+        <div class="session-row animate d4">
+          <div class="idx">03</div>
+          <div>
+            <span class="step-tag">Structured program</span>
+            <h3>Build your growth plan</h3>
+            <p>Get a tailored roadmap with regular sessions, real feedback on your actual work, and accountability built in — so growth stops being something you plan and starts being something you do.</p>
+          </div>
         </div>
       </div>
       <div class="hiw-cta animate d5">
-        <a href="self-assessment.html" class="btn-primary">Start with the free assessment</a>
+        <a href="self-assessment.html" class="btn-primary">Start with the free assessment <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4V11"/></svg></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRAMS -->
+  <div class="programs">
+    <div class="programs-inner">
+      <div class="programs-head animate d1">
+        <p class="section-label">Programs</p>
+        <h2 class="section-title" style="margin-bottom:12px;">Structured programs to <em style="white-space:nowrap;">level up</em></h2>
+        <p style="font-size:1rem; color:var(--text-secondary); line-height:1.75;">Beyond 1:1 mentoring, these are structured programs built around your own real work.</p>
+      </div>
+      <div class="programs-grid">
+        <a href="programs/junior-to-mid-level.html" class="program-card animate d2">
+          <span class="program-card-tag">1:1 or Group (3–5) · 1–3 yrs experience</span>
+          <h3>Junior to Mid-Level Track</h3>
+          <p>Learn to run a full UX process yourself, not just execute a screen. 8 sessions, biweekly, over about 4 months.</p>
+          <span class="program-card-link">View program</span>
+        </a>
       </div>
     </div>
   </div>
@@ -1061,14 +1118,6 @@
         <p>
           With 10+ years as a UX product designer and experience mentoring 50+ designers through ADPList and private programs, I've developed a practical, human-centred approach to teaching design — one that bridges real-world product work with structured learning.
         </p>
-        <div class="expertise-pills animate d2">
-          <span class="pill">UX Research</span>
-          <span class="pill">Product Thinking</span>
-          <span class="pill">Mental Models</span>
-          <span class="pill">Prototyping</span>
-          <span class="pill">Design Systems</span>
-          <span class="pill">1:1 Coaching</span>
-        </div>
       </div>
 
       <div class="about-visual animate d3">
@@ -1172,8 +1221,8 @@
       <h2>See where you stand — it takes 15 minutes</h2>
       <p>The self-assessment is free, takes about 15 minutes, and gives you a personalised skills map with a learning pathway before you ever speak to me. It's the best first step.</p>
       <div class="final-cta-actions">
-        <a href="self-assessment.html" class="btn-primary">Run self-assessment — free</a>
-        <a href="https://adplist.org/mentors/winnie-nguyen" target="_blank" rel="noopener" class="btn-ghost">Or connect on ADPList</a>
+        <a href="self-assessment.html" class="btn-primary">Run self-assessment, free <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4V11"/></svg></a>
+        <a href="https://adplist.org/mentors/winnie-nguyen" target="_blank" rel="noopener" class="btn-ghost">Or connect on ADPList <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4V11"/></svg></a>
       </div>
       <p class="cta-note">No account needed · Results shown instantly · Takes ~15 min</p>
     </div>
