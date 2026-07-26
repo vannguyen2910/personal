@@ -185,3 +185,59 @@
 .mentor-link { display: inline-flex; align-items: center; gap: .4rem; margin-top: 1.6rem; font-size: .88rem; font-weight: 700; color: var(--mentor-heading-color, inherit); text-decoration: none; }
 .mentor-link svg { width: 13px; height: 13px; transition: transform .25s ease; }
 .mentor-link:hover svg { transform: translate(3px,-3px); }
+
+
+/* ── Class photo gallery — Instagram-style auto-scrolling slider ──
+   Usage:
+   <div class="gallery-track-wrap">
+     <div class="gallery-track">
+       <div class="ig-card">
+         <div class="ig-card-header"><img class="ig-card-avatar">...<span class="ig-card-handle">...</span></div>
+         <img class="ig-card-photo">
+         <div class="ig-card-actions"><svg>...</svg>...<svg class="ig-card-bookmark">...</svg></div>
+         <div class="ig-card-likes">N likes</div>
+         <p class="ig-card-caption"><strong>handle</strong>Caption text.</p>
+       </div>
+       … (repeat the full card set once more, aria-hidden="true", for a seamless loop)
+     </div>
+   </div>
+   Themeable via: --gallery-card-bg, --gallery-border-color,
+                  --gallery-heading-color, --gallery-text-color            */
+.gallery-track-wrap {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 48px, black calc(100% - 48px), transparent);
+  mask-image: linear-gradient(to right, transparent, black 48px, black calc(100% - 48px), transparent);
+}
+.gallery-track {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  animation: gallery-scroll 50s linear infinite;
+}
+.gallery-track-wrap:hover .gallery-track { animation-play-state: paused; }
+@keyframes gallery-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gallery-track { animation: none; }
+  .gallery-track-wrap { overflow-x: auto; }
+}
+.ig-card {
+  width: 300px;
+  flex-shrink: 0;
+  background: var(--gallery-card-bg, #fff);
+  border: 1px solid var(--gallery-border-color, rgba(0,0,0,.14));
+  border-radius: 12px;
+  overflow: hidden;
+}
+.ig-card-header { display: flex; align-items: center; gap: 10px; padding: 12px 14px; }
+.ig-card-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.ig-card-handle { font-size: .85rem; font-weight: 600; color: var(--gallery-heading-color, inherit); }
+.ig-card-photo { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; background: var(--gallery-border-color, rgba(0,0,0,.08)); }
+.ig-card-actions { display: flex; align-items: center; gap: 14px; padding: 12px 14px 4px; }
+.ig-card-actions svg { width: 22px; height: 22px; color: var(--gallery-heading-color, inherit); }
+.ig-card-bookmark { margin-left: auto; }
+.ig-card-likes { font-size: .85rem; font-weight: 600; color: var(--gallery-heading-color, inherit); padding: 6px 14px 0; }
+.ig-card-caption { font-size: .85rem; color: var(--gallery-text-color, inherit); line-height: 1.5; padding: 4px 14px 16px; }
+.ig-card-caption strong { color: var(--gallery-heading-color, inherit); font-weight: 600; margin-right: 5px; }

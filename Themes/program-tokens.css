@@ -75,4 +75,9 @@
   --mentor-heading-color:   var(--ink);
   --mentor-body-color:      var(--ink-70);
   --mentor-pill-border:     var(--line);
+
+  --gallery-card-bg:      var(--cream);
+  --gallery-border-color: var(--line);
+  --gallery-heading-color: var(--ink);
+  --gallery-text-color:    var(--ink-70);
 }

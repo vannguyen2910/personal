@@ -659,7 +659,10 @@
       gap: 24px;
     }
     .program-card {
-      display: block;
+      display: grid;
+      grid-template-columns: 108px 1fr;
+      gap: 28px;
+      align-items: center;
       background: var(--white);
       border-radius: 16px;
       padding: 32px;
@@ -667,10 +670,53 @@
       text-decoration: none;
       transition: box-shadow 0.25s, transform 0.25s;
     }
+    @media (max-width: 560px) {
+      .program-card { grid-template-columns: 1fr; }
+      .program-card-visual { display: none; }
+    }
     .program-card:hover {
       box-shadow: 0 16px 48px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.05);
       transform: translateY(-4px);
     }
+    .program-card-visual {
+      position: relative;
+      width: 108px;
+      height: 108px;
+      flex-shrink: 0;
+    }
+    .pc-ring {
+      position: absolute;
+      inset: 0;
+      border: 1px dashed var(--rule);
+      border-radius: 50%;
+    }
+    .pc-steps {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      height: 52px;
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+    }
+    .pc-step {
+      flex: 1;
+      border-radius: 3px 3px 0 0;
+    }
+    .pc-step:nth-child(1) { height: 42%; background: var(--rule); }
+    .pc-step:nth-child(2) { height: 68%; background: var(--yellow); opacity: 0.55; }
+    .pc-step:nth-child(3) { height: 100%; background: var(--accent); }
+    .pc-climber {
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      right: 26px;
+      bottom: 74px;
+      border-radius: 50%;
+      background: var(--text-primary);
+    }
+    .program-card:hover .pc-climber { animation-duration: 1.6s; }
     .program-card-tag {
       display: inline-block;
       font-size: 0.7rem;
@@ -801,101 +847,12 @@
       color: rgba(255,255,255,0.42);
     }
 
-    /* ── IN THE ROOM — Instagram-style class photo gallery ── */
-    .gallery {
-      padding: 96px 0;
-    }
-    .gallery-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 48px;
-    }
-    .gallery-head {
-      max-width: 560px;
-      margin-bottom: 44px;
-    }
-    .gallery-track-wrap {
-      overflow: hidden;
-      -webkit-mask-image: linear-gradient(to right, transparent, black 48px, black calc(100% - 48px), transparent);
-      mask-image: linear-gradient(to right, transparent, black 48px, black calc(100% - 48px), transparent);
-    }
-    .gallery-track {
-      display: flex;
-      gap: 24px;
-      width: max-content;
-      animation: gallery-scroll 50s linear infinite;
-    }
-    .gallery-track-wrap:hover .gallery-track { animation-play-state: paused; }
-    @keyframes gallery-scroll {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .gallery-track { animation: none; }
-      .gallery-track-wrap { overflow-x: auto; }
-    }
-    .ig-card {
-      width: 300px;
-      flex-shrink: 0;
-      background: var(--white);
-      border: 1px solid var(--rule);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    .ig-card-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 14px;
-    }
-    .ig-card-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-    .ig-card-handle {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-    .ig-card-photo {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      display: block;
-      background: var(--off-white);
-    }
-    .ig-card-actions {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 12px 14px 4px;
-    }
-    .ig-card-actions svg {
-      width: 22px;
-      height: 22px;
-      color: var(--text-primary);
-    }
-    .ig-card-bookmark { margin-left: auto; }
-    .ig-card-likes {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      padding: 6px 14px 0;
-    }
-    .ig-card-caption {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      line-height: 1.5;
-      padding: 4px 14px 16px;
-    }
-    .ig-card-caption strong {
-      color: var(--text-primary);
-      font-weight: 600;
-      margin-right: 5px;
-    }
+    /* ── IN THE ROOM — section wrapper (the .ig-card/.gallery-track
+       mechanics live in the shared Themes/editorial-patterns.css,
+       themed by the --gallery-* custom properties below) ── */
+    .gallery { padding: 96px 0; }
+    .gallery-inner { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+    .gallery-head { max-width: 560px; margin-bottom: 44px; }
 
     /* ── FINAL CTA ────────────────────────────────── */
     .final-cta {
@@ -944,7 +901,8 @@
     <div class="nav-inner">
       <a href="index.html" class="nav-logo"><img src="assets/Logo.svg" alt="Winnie Nguyen" /></a>
       <div class="nav-links">
-        <a href="../Portfolio/index.html">Portfolio</a>
+        <a href="#process">Process</a>
+        <a href="#programs">Programs</a>
         <a href="#about">About</a>
         <a href="self-assessment.html" class="btn-primary">Run Self-assessment <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4V11"/></svg></a>
       </div>
@@ -1070,7 +1028,7 @@
   </div>
 
   <!-- HOW IT WORKS -->
-  <div class="how-it-works">
+  <div class="how-it-works" id="process">
     <div class="hiw-inner">
       <div class="hiw-header animate d1">
         <p class="section-label">The process</p>
@@ -1110,7 +1068,7 @@
   </div>
 
   <!-- PROGRAMS -->
-  <div class="programs">
+  <div class="programs" id="programs">
     <div class="programs-inner">
       <div class="programs-head animate d1">
         <p class="section-label">Programs</p>
@@ -1119,10 +1077,21 @@
       </div>
       <div class="programs-grid">
         <a href="programs/mid-level.html" class="program-card animate d2">
-          <span class="program-card-tag">1:1 or Group (3–5) · 1–3 yrs experience</span>
-          <h3>Junior to Mid-Level Track</h3>
-          <p>Learn to run a full UX process yourself, not just execute a screen. 8 sessions, biweekly, over about 4 months.</p>
-          <span class="program-card-link">View program</span>
+          <div class="program-card-visual" aria-hidden="true">
+            <span class="pc-ring"></span>
+            <span class="pc-steps">
+              <span class="pc-step"></span>
+              <span class="pc-step"></span>
+              <span class="pc-step"></span>
+            </span>
+            <span class="pc-climber float-a"></span>
+          </div>
+          <div class="program-card-body">
+            <span class="program-card-tag">1:1 or Group (3–5) · 1–3 yrs experience</span>
+            <h3>Junior to Mid-Level Track</h3>
+            <p>Learn to run a full UX process yourself, not just execute a screen. 8 sessions, biweekly, over about 4 months.</p>
+            <span class="program-card-link">View program</span>
+          </div>
         </a>
       </div>
     </div>

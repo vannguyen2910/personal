@@ -72,6 +72,11 @@
   --mentor-heading-color:   var(--text-primary);
   --mentor-body-color:      var(--text-secondary);
   --mentor-pill-border:     var(--rule);
+
+  --gallery-card-bg:      var(--white);
+  --gallery-border-color: var(--rule);
+  --gallery-heading-color: var(--text-primary);
+  --gallery-text-color:    var(--text-secondary);
 }
 
 
