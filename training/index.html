@@ -68,9 +68,14 @@
       padding: 0 48px;
       box-sizing: border-box;
       height: 100%;
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      justify-content: space-between;
+    }
+    .nav-inner .nav-logo { grid-column: 1; justify-self: start; }
+    .nav-inner .nav-links { grid-column: 2; justify-self: center; }
+    @media (max-width: 760px) {
+      .nav-inner { display: flex; justify-content: space-between; }
     }
 
     /* ── HERO ─────────────────────────────────────── */
@@ -783,6 +788,10 @@
       align-items: start;
     }
     .testi-left { position: sticky; top: 96px; }
+    @media (max-width: 900px) {
+      .testi-inner { grid-template-columns: 1fr; gap: 40px; }
+      .testi-left { position: static; }
+    }
     .testi-left .section-label { color: rgba(255,255,255,0.38); }
     .testi-heading {
       font-family: var(--serif);
@@ -1128,18 +1137,22 @@
         <p>
           With 10+ years as a UX product designer and experience mentoring 50+ designers through ADPList and private programs, I've developed a practical, human-centred approach to teaching design, one that bridges real-world product work with structured learning.
         </p>
-        <div class="mentor-pills">
-          <span class="mentor-pill">UX Research</span>
-          <span class="mentor-pill">Product Thinking</span>
-          <span class="mentor-pill">Mental Models</span>
-          <span class="mentor-pill">AI Prototyping</span>
-          <span class="mentor-pill">Design Systems</span>
-          <span class="mentor-pill">1:1 Coaching</span>
+        <div class="mentor-social">
+          <a href="https://adplist.org/mentors/winnie-nguyen" target="_blank" rel="noopener" class="mentor-social-icon" title="ADPList" aria-label="ADPList">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M8.3 10.65 C6.35 8.7 7.4 7.35 8.3 8.55 C9.2 7.35 10.25 8.7 8.3 10.65 Z" fill="currentColor"/>
+              <path d="M15.7 10.65 C13.75 8.7 14.8 7.35 15.7 8.55 C16.6 7.35 17.65 8.7 15.7 10.65 Z" fill="currentColor"/>
+              <path d="M8.3 13.3 C9.3 15 10.6 15.8 12 15.8 C13.4 15.8 14.7 15 15.7 13.3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+            </svg>
+          </a>
+          <a href="#" target="_blank" rel="noopener" class="mentor-social-icon" title="LinkedIn" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect width="24" height="24" rx="4" fill="#0A66C2"/>
+              <path fill="#fff" d="M19 19h-3v-4.7c0-1.1 0-2.6-1.6-2.6-1.6 0-1.9 1.3-1.9 2.5V19h-3V9.5h2.9v1.3h.1c.4-.8 1.4-1.6 2.9-1.6 3.1 0 3.6 2 3.6 4.7V19zM6.7 8.1a1.7 1.7 0 1 1 0-3.5 1.7 1.7 0 0 1 0 3.5zM8.2 19H5.2V9.5h3V19z"/>
+            </svg>
+          </a>
         </div>
-        <a href="https://adplist.org/mentors/winnie-nguyen" target="_blank" rel="noopener" class="mentor-link">
-          See my profile on ADPList
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4V11"/></svg>
-        </a>
       </div>
     </div>
   </section>
