@@ -195,14 +195,23 @@
          <div class="ig-card-header"><img class="ig-card-avatar">...<span class="ig-card-handle">...</span></div>
          <img class="ig-card-photo">
          <div class="ig-card-actions"><svg>...</svg>...<svg class="ig-card-bookmark">...</svg></div>
-         <div class="ig-card-likes">N likes</div>
          <p class="ig-card-caption"><strong>handle</strong>Caption text.</p>
        </div>
        … (repeat the full card set once more, aria-hidden="true", for a seamless loop)
      </div>
    </div>
    Themeable via: --gallery-card-bg, --gallery-border-color,
-                  --gallery-heading-color, --gallery-text-color            */
+                  --gallery-heading-color, --gallery-text-color
+
+   Reusable containers for nesting this slider inside another dark
+   section (e.g. directly under a testimonials/quote block, no gap):
+     .gallery-inner        — standalone max-width wrapper, use on a
+                              page with no other outer container
+     .gallery-dark-spacer  — just the top spacing; combine with a
+                              page's own outer container (e.g. .wrap
+                              on program pages) instead of .gallery-inner */
+.gallery-inner { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+.gallery-dark-spacer { padding-top: 64px; }
 .gallery-track-wrap {
   overflow: hidden;
   -webkit-mask-image: linear-gradient(to right, transparent, black 48px, black calc(100% - 48px), transparent);
@@ -238,6 +247,5 @@
 .ig-card-actions { display: flex; align-items: center; gap: 14px; padding: 12px 14px 4px; }
 .ig-card-actions svg { width: 22px; height: 22px; color: var(--gallery-heading-color, inherit); }
 .ig-card-bookmark { margin-left: auto; }
-.ig-card-likes { font-size: .85rem; font-weight: 600; color: var(--gallery-heading-color, inherit); padding: 6px 14px 0; }
-.ig-card-caption { font-size: .85rem; color: var(--gallery-text-color, inherit); line-height: 1.5; padding: 4px 14px 16px; }
+.ig-card-caption { font-size: .85rem; color: var(--gallery-text-color, inherit); line-height: 1.5; padding: 8px 14px 16px; }
 .ig-card-caption strong { color: var(--gallery-heading-color, inherit); font-weight: 600; margin-right: 5px; }
