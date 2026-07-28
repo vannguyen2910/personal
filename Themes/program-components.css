@@ -196,7 +196,7 @@ body.is-vi .lang-vi { display: revert !important; }
 }
 /* .pain-list structure lives in the shared Themes/editorial-patterns.css,
    themed by the --pain-list-* custom properties in program-tokens.css. */
-.pain-list{ margin-top:3rem; }
+.pain .pain-list{ margin-top:clamp(3rem,6vw,4.5rem); }
 
 /* ============ WHO IT'S FOR — asymmetric light ============ */
 .who{ padding:clamp(4rem,9vw,7rem) 0; }
