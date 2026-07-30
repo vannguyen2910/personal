@@ -68,8 +68,6 @@
     .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
     .btn-secondary { background: #fff; color: var(--purple); border: 2px solid var(--purple); }
     .btn-secondary:hover { background: var(--purple-tint); }
-    .btn-utility   { background: var(--gray-100); color: var(--text-primary); border: 1.5px solid var(--border-default); }
-    .btn-utility:hover { background: var(--gray-200); }
     .btn-full { width: 100%; }
     .btn-ghost {
       background: none; border: none;
@@ -349,7 +347,6 @@
     .chart-card {
       background: #fff; border: 1.5px solid var(--border-default);
       border-radius: var(--radius-lg); padding: 24px; margin-bottom: 20px;
-      box-shadow: var(--shadow-z4);
     }
     .chart-card canvas { max-height: 380px; }
     .chart-legend { display: flex; gap: 20px; justify-content: center; margin-top: 16px; font-size: 12px; color: var(--text-secondary); }
@@ -362,21 +359,21 @@
     .priority-card {
       background: #fff; border: 1.5px solid var(--border-default);
       border-radius: var(--radius-lg); padding: 18px 20px; margin-bottom: 10px;
-      box-shadow: var(--shadow-z4); display: flex; gap: 14px; align-items: flex-start;
+      display: flex; gap: 14px; align-items: flex-start;
     }
     .p-rank { width: 32px; height: 32px; border-radius: 50%; background: var(--purple); color: #fff; font-family: var(--font-display); font-size: var(--text-sm); font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .p-name  { font-family: var(--font-display); font-size: var(--text-base); font-weight: 700; margin-bottom: 3px; }
     .p-gap   { font-size: 12px; color: var(--purple); font-weight: 600; margin-bottom: 4px; }
     .p-why   { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.5; }
 
-    .pathway-wrap { background: #fff; border: 1.5px solid var(--border-default); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 20px; box-shadow: var(--shadow-z4); }
+    .pathway-wrap { background: #fff; border: 1.5px solid var(--border-default); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 20px; }
     .pw-group  { border-bottom: 1px solid var(--gray-100); }
     .pw-group:last-child { border-bottom: none; }
     .pw-label  { padding: 10px 18px 6px; font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--purple); background: var(--surface-page); }
     .pw-item   { padding: 9px 18px; display: flex; align-items: center; gap: 10px; font-size: var(--text-sm); border-top: 1px solid var(--gray-100); }
     .pw-dot    { width: 6px; height: 6px; border-radius: 50%; background: var(--purple); flex-shrink: 0; }
 
-    .beh-summary { background: #fff; border: 1.5px solid var(--border-default); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 20px; box-shadow: var(--shadow-z4); }
+    .beh-summary { background: #fff; border: 1.5px solid var(--border-default); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 20px; }
     .beh-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; border-bottom: 1px solid var(--gray-100); font-size: var(--text-sm); }
     .beh-row:last-child { border-bottom: none; }
     .badge-pill { display: inline-block; font-size: var(--text-xs); font-weight: 600; padding: 3px 10px; border-radius: 100px; }
@@ -385,25 +382,71 @@
     .badge-consistent { background: var(--success-tint); color: var(--success-deep); }
 
     .cta-block {
-      background: #fff; border: 2px solid var(--purple);
-      border-radius: var(--radius-xl); padding: 32px 28px;
+      padding: 48px 32px;
       margin: 28px 0 20px;
-      box-shadow: 0 8px 40px rgba(0,0,0,.09);
       text-align: center;
     }
     .cta-eyebrow { font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple); margin-bottom: 8px; }
     .cta-title   { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 800; line-height: 1.15; margin-bottom: 10px; }
-    .cta-sub     { font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: 24px; line-height: 1.65; }
-    .cta-btns    { display: flex; flex-direction: column; gap: 10px; }
-    .cta-or      { font-size: var(--text-xs); color: var(--text-tertiary); }
-    .cta-note    { font-size: 12px; color: var(--text-tertiary); margin-top: 14px; line-height: 1.6; }
+    .cta-sub     { font-size: var(--text-sm); color: var(--text-secondary); margin: 0 auto 24px; max-width: 46ch; line-height: 1.65; }
+    .cta-btns    { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .btn-outline { background: #fff; color: var(--text-primary); border: 1.5px solid var(--text-primary); }
+    .btn-outline:hover { background: var(--gray-100); }
+    .cta-note    { font-size: 12px; color: var(--text-tertiary); margin-top: 16px; line-height: 1.6; }
 
-    .contact-footer { background: var(--surface-page); border: 1.5px solid var(--border-default); border-radius: var(--radius-lg); padding: 20px 24px; text-align: center; }
-    .cf-name  { font-family: var(--font-display); font-size: var(--text-md); font-weight: 700; margin-bottom: 2px; }
-    .cf-role  { font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: 12px; }
-    .cf-links { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-    .cf-link  { font-size: 12px; color: var(--purple); text-decoration: none; display: flex; align-items: center; gap: 4px; padding: 5px 10px; border: 1px solid var(--purple-tint); border-radius: 100px; }
-    .cf-link:hover { background: var(--purple-tint); }
+    /* ── Program card (reused as-is from training/index.html's Programs
+       section, so a recommended program looks identical wherever it
+       appears on the site) ──────────────────────────────────────── */
+    .program-card {
+      display: grid; grid-template-columns: 108px 1fr; gap: 28px; align-items: center;
+      background: var(--white); border-radius: 16px; padding: 32px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04);
+      text-decoration: none; margin: 28px 0 20px;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .program-card:hover { box-shadow: 0 16px 48px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.05); transform: translateY(-4px); }
+    @media (max-width: 560px) {
+      .program-card { grid-template-columns: 1fr; }
+      .program-card-visual { display: none; }
+    }
+    .program-card-visual { position: relative; width: 108px; height: 108px; flex-shrink: 0; }
+    .pc-ring  { position: absolute; inset: 0; border: 1px dashed var(--rule); border-radius: 50%; }
+    .pc-steps { position: absolute; left: 24px; right: 24px; bottom: 24px; height: 52px; display: flex; align-items: flex-end; gap: 6px; }
+    .pc-step  { flex: 1; border-radius: 3px 3px 0 0; }
+    .pc-step:nth-child(1) { height: 42%; background: var(--rule); }
+    .pc-step:nth-child(2) { height: 68%; background: var(--yellow); opacity: 0.55; }
+    .pc-step:nth-child(3) { height: 100%; background: var(--accent); }
+    .pc-climber { position: absolute; width: 13px; height: 13px; border-radius: 50%; background: var(--text-primary); animation: pcClimb 3.4s ease-in-out 1 forwards; }
+    @keyframes pcClimb {
+      0%   { left: 25px; bottom: 50px; }
+      22%  { left: 47px; bottom: 63px; }
+      42%  { left: 69px; bottom: 74px; }
+      50%  { left: 69px; bottom: 90px; }
+      58%  { left: 69px; bottom: 74px; }
+      66%  { left: 69px; bottom: 83px; }
+      74%  { left: 69px; bottom: 74px; }
+      80%  { left: 69px; bottom: 79px; }
+      86%, 100% { left: 69px; bottom: 74px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .pc-climber { animation: none; left: 69px; bottom: 74px; } }
+    .program-card-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--text-secondary); background: transparent; border: 1px solid var(--rule);
+      padding: 4px 12px; border-radius: 100px; margin-bottom: 16px;
+    }
+    .program-card h3 { font-family: var(--serif); font-size: 1.3rem; color: var(--text-primary); margin-bottom: 10px; line-height: 1.3; }
+    .program-card p  { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 20px; }
+    .program-card-link {
+      font-size: 0.875rem; font-weight: 600; color: var(--text-primary);
+      display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s;
+    }
+    .program-card-link::after { content: '→'; transition: transform 0.2s; }
+    .program-card:hover .program-card-link { color: var(--accent); }
+    .program-card:hover .program-card-link::after { transform: translateX(4px); }
+
+    @keyframes floatA { 0%, 100% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(6px,-14px) rotate(4deg); } }
+    .float-a { animation: floatA 7s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) { .float-a { animation: none; } }
 
     .olu-note {
       margin-top: 14px;
@@ -508,7 +551,6 @@
       margin-bottom: 14px;
       display: flex; gap: 18px; align-items: flex-start;
       border: 1.5px solid transparent;
-      box-shadow: var(--shadow-z4);
     }
     .archetype-emoji { font-size: 32px; line-height: 1; flex-shrink: 0; margin-top: 2px; }
     .archetype-label { font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.65; margin-bottom: 3px; }
@@ -522,7 +564,6 @@
     .insight-stat {
       background: #fff; border: 1.5px solid var(--border-default);
       border-radius: var(--radius-lg); padding: 18px 20px;
-      box-shadow: var(--shadow-z4);
     }
     .is-label { font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 6px; }
     .is-value { font-family: var(--font-display); font-size: var(--text-3xl); font-weight: 800; line-height: 1; margin-bottom: 4px; color: var(--purple); }
@@ -534,7 +575,8 @@
     .insight-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 24px; }
     .insight-card {
       background: #fff; border-radius: var(--radius-lg);
-      padding: 18px 18px 16px; box-shadow: var(--shadow-z4);
+      padding: 18px 18px 16px;
+      border: 1.5px solid var(--border-default);
       border-top: 3px solid transparent;
       display: flex; flex-direction: column; gap: 8px;
     }
@@ -559,7 +601,9 @@
     .olu-head  { font-family: var(--font-display); font-size: var(--text-base); font-weight: 700; color: var(--text-primary); margin-bottom: 14px; }
     .olu-items { display: flex; flex-direction: column; gap: 10px; }
     .olu-item  { display: flex; align-items: flex-start; gap: 12px; }
-    .olu-icon  { width: 32px; height: 32px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+    .olu-icon  { width: 32px; height: 32px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: var(--text-primary); flex-shrink: 0; }
+    .olu-icon svg { width: 18px; height: 18px; }
+    .olu-note svg { width: 15px; height: 15px; vertical-align: -3px; }
     .olu-body  { flex: 1; }
     .olu-type  { font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 1px; }
     .olu-text  { font-size: var(--text-sm); font-weight: 600; color: var(--text-primary); line-height: 1.4; }
@@ -629,6 +673,22 @@
           <div style="font-size:var(--text-sm);font-weight:500;">Book a free mentoring session</div>
         </div>
       </a>
+    </div>
+  </div>
+</div>
+
+<!-- ── Share results dialog ── -->
+<div id="shareDialog" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal" style="max-width:440px;">
+    <button class="modal-close" onclick="document.getElementById('shareDialog').classList.remove('open')">✕</button>
+    <div style="font-family:var(--font-display);font-size:var(--text-base);font-weight:700;color:var(--text-primary);margin-bottom:4px;">Share your results</div>
+    <div style="font-size:var(--text-sm);color:var(--text-secondary);line-height:1.5;margin-bottom:18px;">Anyone with this link can open your report — send it to someone, or save it to come back to later.</div>
+    <div style="display:flex;align-items:center;gap:8px;padding:6px 6px 6px 14px;border:1.5px solid var(--border-default);border-radius:var(--radius-md);background:var(--gray-100);">
+      <input id="shareLinkInput" type="text" readonly style="flex:1;min-width:0;border:none;background:none;font-size:var(--text-sm);color:var(--text-primary);outline:none;">
+      <button onclick="copyShareLink()" id="shareCopyBtn" style="flex-shrink:0;display:flex;align-items:center;gap:6px;padding:9px 14px;border:none;border-radius:var(--radius-sm);background:var(--text-primary);color:#fff;font-size:var(--text-sm);font-weight:600;cursor:pointer;transition:var(--transition);">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <span id="shareCopyLabel">Copy</span>
+      </button>
     </div>
   </div>
 </div>
@@ -830,25 +890,51 @@
     </div>
     <div id="coachingNotes"></div>
 
+    <div id="recommendedProgram"></div>
+
     <div class="cta-block">
       <div class="cta-eyebrow">Ready to level up?</div>
       <div class="cta-title">Turn your gaps into a growth plan</div>
       <div class="cta-sub">A 1-on-1 session with Winnie can help you build a structured, realistic roadmap — with accountability built in.</div>
       <div class="cta-btns">
-        <a href="https://adplist.org/mentors/winnie-nguyen" target="_blank" class="btn btn-primary">📞 Book a Free Discovery Call</a>
-        <div class="cta-or">or</div>
-        <button onclick="downloadPDF()" class="btn btn-utility btn-full" id="pdfBtn">⬇ Save My Results — Download PDF</button>
+        <a href="https://adplist.org/mentors/winnie-nguyen" target="_blank" class="btn btn-primary">Book a Free Discovery Call</a>
+        <button onclick="downloadPDF()" class="btn btn-outline" id="pdfBtn">Download PDF</button>
+        <button onclick="openShareModal()" class="btn btn-outline" id="shareBtn">Copy Link</button>
       </div>
       <div class="cta-note">The free discovery call is a 20-min conversation — no commitment, no pitch. Just clarity on where to go next.</div>
     </div>
 
-    <div class="contact-footer">
-      <div class="cf-name">Winnie Nguyen</div>
-      <div class="cf-role">UX Product Designer &amp; Mentor</div>
-      <div class="cf-links">
-        <a href="https://www.linkedin.com/in/winnienguyen2910" target="_blank" class="cf-link">🔗 LinkedIn</a>
-        <a href="https://adplist.org/mentors/winnie-nguyen" target="_blank" class="cf-link">🔗 ADPList</a>
-        <a href="mailto:nguyenphuctuongvan@gmail.com" class="cf-link">✉️ Email</a>
+    <div class="res-section-head">
+      <h3>About me</h3>
+    </div>
+    <div class="mentor-grid" style="margin-bottom: 20px;">
+      <div class="mentor-photo-wrap">
+        <div class="mentor-ring float-a"></div>
+        <img src="assets/GV5.jpg" alt="Winnie Nguyen" class="mentor-photo">
+        <div class="mentor-badge">
+          <strong>50+</strong>
+          <span>designers mentored</span>
+        </div>
+      </div>
+      <div class="mentor-text">
+        <p>I'm a <strong>Senior Product Designer &amp; Product Design Educator</strong> based in Vietnam, helping designers and teams build genuine design intuition, not just surface-level skills.</p>
+        <p>With 10+ years as a UX product designer and experience mentoring 50+ designers through ADPList, UX Boot Camp, and private programs, I've developed a practical, human-centred approach to teaching design, one that bridges real-world product work with structured learning.</p>
+        <div class="mentor-social">
+          <a href="https://adplist.org/mentors/winnie-nguyen" target="_blank" rel="noopener" class="mentor-social-icon" title="ADPList" aria-label="ADPList">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M8.3 10.65 C6.35 8.7 7.4 7.35 8.3 8.55 C9.2 7.35 10.25 8.7 8.3 10.65 Z" fill="currentColor"/>
+              <path d="M15.7 10.65 C13.75 8.7 14.8 7.35 15.7 8.55 C16.6 7.35 17.65 8.7 15.7 10.65 Z" fill="currentColor"/>
+              <path d="M8.3 13.3 C9.3 15 10.6 15.8 12 15.8 C13.4 15.8 14.7 15 15.7 13.3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/winnienguyen2910/" target="_blank" rel="noopener" class="mentor-social-icon" title="LinkedIn" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect width="24" height="24" rx="4" fill="#0A66C2"/>
+              <path fill="#fff" d="M19 19h-3v-4.7c0-1.1 0-2.6-1.6-2.6-1.6 0-1.9 1.3-1.9 2.5V19h-3V9.5h2.9v1.3h.1c.4-.8 1.4-1.6 2.9-1.6 3.1 0 3.6 2 3.6 4.7V19zM6.7 8.1a1.7 1.7 0 1 1 0-3.5 1.7 1.7 0 0 1 0 3.5zM8.2 19H5.2V9.5h3V19z"/>
+            </svg>
+          </a>
+        </div>
       </div>
     </div>
 
@@ -1114,6 +1200,19 @@ const TARGET_LEVELS = { Associate: 1.5, Mid: 2, Senior: 3, Lead: 3.5, Principal:
 const LEVEL_NAMES   = ['', 'Aware', 'Capable', 'Strong', 'Expert'];
 const TOTAL_Q = SKILLS.length + BEHAVIOURS.length; // 15
 
+// Programs to recommend on the results screen — matched to the student's
+// own target level, so we only ever suggest something built for them.
+// Add more entries here as new programs launch.
+const PROGRAMS = [
+  {
+    href: 'programs/junior-to-mid-level.html',
+    tag: '1:1 or Group Training',
+    title: 'Junior to Mid-Level Track',
+    desc: 'Learn to run a full UX process yourself, not just execute a screen. 12 sessions, weekly, over about 3 months.',
+    matches: s => s.target === 'Associate' || s.target === 'Mid'
+  }
+];
+
 // ── STATE ────────────────────────────────────────────────────────
 const STORAGE_KEY = 'winnie_assessment_v4';
 let state = { name:'', email:'', experience:'', target:'', skills:{}, behaviours:{}, directions:[], deprioritised:[], notes:{} };
@@ -1137,6 +1236,68 @@ function loadState() {
     if (p.questionIndex !== undefined) questionIndex = p.questionIndex;
     return true;
   } catch(e) { return false; }
+}
+
+// ── SHAREABLE RESULTS LINK ──────────────────────────────────────
+// Packs the finished results into a URL-safe code (no server, no database —
+// the link itself carries the data) so a report can be shared or revisited.
+// Email is left out on purpose: it's never shown in the report itself.
+function encodeReportState(s) {
+  const payload = {
+    name: s.name, experience: s.experience, target: s.target,
+    skills: s.skills, behaviours: s.behaviours,
+    directions: s.directions, deprioritised: s.deprioritised,
+    notes: s.notes, completedAt: s.completedAt
+  };
+  const json = JSON.stringify(payload);
+  const b64 = btoa(encodeURIComponent(json).replace(/%([0-9A-F]{2})/g,
+    (_, p) => String.fromCharCode('0x' + p)));
+  return b64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+function decodeReportState(code) {
+  try {
+    let b64 = code.replace(/-/g, '+').replace(/_/g, '/');
+    while (b64.length % 4) b64 += '=';
+    const json = decodeURIComponent(Array.prototype.map.call(atob(b64),
+      c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
+    return JSON.parse(json);
+  } catch (e) {
+    console.error('Could not read results from link', e);
+    return null;
+  }
+}
+
+// Updates the address bar (no reload) so copying the URL at this point
+// shares/saves this exact result.
+function updateResultsUrl() {
+  const code = encodeReportState(state);
+  const url = location.pathname + '?r=' + code;
+  history.replaceState(null, '', url);
+}
+
+function openShareModal() {
+  document.getElementById('shareLinkInput').value = location.href;
+  const label = document.getElementById('shareCopyLabel');
+  label.textContent = 'Copy';
+  document.getElementById('shareDialog').classList.add('open');
+}
+
+function copyShareLink() {
+  const input = document.getElementById('shareLinkInput');
+  const label = document.getElementById('shareCopyLabel');
+  const done = () => { label.textContent = 'Copied!'; setTimeout(() => { label.textContent = 'Copy'; }, 1800); };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(input.value).then(done).catch(() => {
+      input.select();
+      document.execCommand('copy');
+      done();
+    });
+  } else {
+    input.select();
+    document.execCommand('copy');
+    done();
+  }
 }
 
 function restoreForm() {
@@ -1415,7 +1576,8 @@ function getDirectionSkills() {
 let radarChart = null;
 
 function buildResults() {
-  const date = new Date().toLocaleDateString('en-AU', { day:'numeric', month:'long', year:'numeric' });
+  if (!state.completedAt) state.completedAt = Date.now();
+  const date = new Date(state.completedAt).toLocaleDateString('en-AU', { day:'numeric', month:'long', year:'numeric' });
   document.getElementById('heroName').textContent = state.name;
   document.getElementById('heroMeta').textContent = state.experience + ' experience · Targeting ' + state.target + ' level';
   document.getElementById('heroDate').textContent = 'Completed ' + date;
@@ -1436,6 +1598,8 @@ function buildResults() {
   buildPathway();
   buildBehaviourSummary();
   buildCoachingNotes();
+  buildRecommendedProgram();
+  updateResultsUrl();
 }
 
 function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
@@ -1510,6 +1674,35 @@ function getPlaybookMatches() {
   return matches;
 }
 
+// ── Recommended program (only shows if one actually fits this student) ──
+function buildRecommendedProgram() {
+  const el = document.getElementById('recommendedProgram');
+  const program = PROGRAMS.find(p => p.matches(state));
+  if (!program) { el.innerHTML = ''; return; }
+  el.innerHTML = `
+    <div class="res-section-head">
+      <h3>Recommended for you</h3>
+      <p>A structured way to close these gaps — not just a list of resources.</p>
+    </div>
+    <a href="${program.href}" class="program-card">
+      <div class="program-card-visual" aria-hidden="true">
+        <span class="pc-ring"></span>
+        <span class="pc-steps">
+          <span class="pc-step"></span>
+          <span class="pc-step"></span>
+          <span class="pc-step"></span>
+        </span>
+        <span class="pc-climber"></span>
+      </div>
+      <div class="program-card-body">
+        <span class="program-card-tag">${program.tag}</span>
+        <h3>${program.title}</h3>
+        <p>${program.desc}</p>
+        <span class="program-card-link">View program</span>
+      </div>
+    </a>`;
+}
+
 // ── Notes summary (only shows if any notes were captured) ──
 // Advice is attached directly under the note that triggered it — not shown as a separate section,
 // so a note's text and its match never appear twice on the page.
@@ -1549,15 +1742,15 @@ function buildCoachingNotes() {
 
 const ARCHETYPES = [
   { id:'craftsperson', name:'The Craftsperson', emoji:'🎨',
-    color:'#C9A400', bg:'#FFFDE8', border:'#F5D028',
+    color:'#8A6D00', bg:'#FFFDE8', border:'#F5D028',
     superpower:'Beautiful, considered execution that makes complex things feel simple.',
     blindspot:'Can over-polish before validating the right problem.' },
   { id:'researcher', name:'The Researcher', emoji:'🔍',
-    color:'#2563EB', bg:'#DBEAFE', border:'#93C5FD',
+    color:'#1D4ED8', bg:'#DBEAFE', border:'#93C5FD',
     superpower:'Deep user understanding that keeps the team grounded in real needs.',
     blindspot:'Work can lack the craft finish to land strongly with stakeholders.' },
   { id:'strategist', name:'The Strategist', emoji:'♟️',
-    color:'#16A34A', bg:'#DCFCE7', border:'#86EFAC',
+    color:'#166534', bg:'#DCFCE7', border:'#86EFAC',
     superpower:'Sees the big picture — connects features to outcomes to strategy.',
     blindspot:'Can get stuck in concepts without shipping tangible work.' },
   { id:'communicator', name:'The Communicator', emoji:'💬',
@@ -1565,7 +1758,7 @@ const ARCHETYPES = [
     superpower:'Turns complex work into clear, compelling narratives that earn trust.',
     blindspot:'May underestimate the need to level up core execution and craft skills.' },
   { id:'influencer', name:'The Influencer', emoji:'🎤',
-    color:'#0891B2', bg:'#ECFEFF', border:'#67E8F9',
+    color:'#0E7490', bg:'#ECFEFF', border:'#67E8F9',
     superpower:'Leads through story and relationships — gets alignment where others hit friction.',
     blindspot:'Can rely too much on communication and under-deliver on execution depth.' },
   { id:'allrounder', name:'The All-Rounder', emoji:'⚡',
@@ -1777,7 +1970,7 @@ function buildInsights() {
 
   const practiceItem = critGap ? `
     <div class="olu-item">
-      <div class="olu-icon" style="background:var(--purple-tint);">📚</div>
+      <div class="olu-icon" style="background:var(--purple-tint);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
       <div class="olu-body">
         <div class="olu-type">Practice this skill</div>
         <div class="olu-text">${critGap.skill.name}</div>
@@ -1787,7 +1980,7 @@ function buildInsights() {
 
   const behItem = lowestBeh ? `
     <div class="olu-item">
-      <div class="olu-icon" style="background:var(--yellow-tint);">🎯</div>
+      <div class="olu-icon" style="background:var(--yellow-tint);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
       <div class="olu-body">
         <div class="olu-type">Strengthen this behaviour</div>
         <div class="olu-text">${lowestBeh.name}</div>
@@ -1797,7 +1990,7 @@ function buildInsights() {
 
   const quickWinItem = quickWinSkill ? `
     <div class="olu-item">
-      <div class="olu-icon" style="background:var(--success-tint);">⚡</div>
+      <div class="olu-icon" style="background:var(--success-tint);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
       <div class="olu-body">
         <div class="olu-type">Quick win</div>
         <div class="olu-text">${quickWinSkill.s.name}</div>
@@ -1808,7 +2001,7 @@ function buildInsights() {
   const learningAgility = state.behaviours['learning-agility'];
   const agilityNote = learningAgility === 'consistent' ? `
     <div class="olu-note">
-      🚀 <strong>Your advantage:</strong> Your learning agility is strong — you tend to close skill gaps faster than average. Use that.
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> <strong>Your advantage:</strong> Your learning agility is strong — you tend to close skill gaps faster than average. Use that.
     </div>` : '';
 
   const items = [practiceItem, behItem, quickWinItem].filter(Boolean);
@@ -1886,7 +2079,7 @@ function buildPriorityGaps() {
     .filter(g => g.gap > 0).sort((a,b) => b.gap-a.gap);
 
   if (!allGaps.length) {
-    el.innerHTML = '<div style="background:#fff;border:1.5px solid var(--border-default);border-radius:var(--radius-lg);padding:24px;text-align:center;box-shadow:var(--shadow-z4)"><div style="font-size:32px;margin-bottom:8px">🎉</div><strong>You\'re at or above target in all skills!</strong></div>';
+    el.innerHTML = '<div style="background:#fff;border:1.5px solid var(--border-default);border-radius:var(--radius-lg);padding:24px;text-align:center"><div style="font-size:32px;margin-bottom:8px">🎉</div><strong>You\'re at or above target in all skills!</strong></div>';
     return;
   }
 
@@ -2359,6 +2552,20 @@ function footer(doc,p,W,H,m,g6,pu) {
 
 // ── INIT ─────────────────────────────────────────────────────────
 (function() {
+  // Opened via a shared/revisited results link (?r=...) — decode it and
+  // jump straight to the report, skipping the quiz entirely.
+  const sharedCode = new URLSearchParams(location.search).get('r');
+  if (sharedCode) {
+    const decoded = decodeReportState(sharedCode);
+    if (decoded) {
+      state = { name:'', email:'', experience:'', target:'', skills:{}, behaviours:{}, directions:[], deprioritised:[], notes:{}, ...decoded };
+      buildResults();
+      showScreen('screen-results');
+      setGlobalProgress(100);
+      return;
+    }
+  }
+
   const has = loadState();
   if (has && state.name) {
     restoreForm();
