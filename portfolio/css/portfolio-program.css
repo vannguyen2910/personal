@@ -1,0 +1,99 @@
+/* ================================================================
+   PORTFOLIO-PROGRAM.CSS — Portfolio homepage, program design system
+   Page-specific components built on top of ../../themes/program-tokens.css
+   + program-components.css + editorial-patterns.css. Those files stay
+   generic (program pages only); anything Portfolio-only lives here.
+================================================================ */
+
+/* ── Nav ──────────────────────────────────────────────────────── */
+.nav-logo img { height: 30px; width: auto; }
+.nav-actions { grid-column: 3; justify-self: end; }
+
+/* ── Kicker on dark sections (applied directly, not nested) ─────── */
+.kicker.on-dark, .kicker.on-dark .bracket { color: var(--coral); }
+
+/* ── Hero portrait — photo + soft decorative shapes ──────────── */
+.hero-portrait-wrap { position: relative; max-width: 400px; margin-left: auto; }
+.hero-portrait-wrap .decor { position: absolute; z-index: 0; }
+.hero-portrait-wrap .decor.lime {
+  width: 72%; height: 72%; top: -12%; right: -14%;
+  background: var(--lime);
+  border-radius: 62% 38% 55% 45% / 48% 45% 55% 52%;
+}
+.hero-portrait-wrap .decor.coral {
+  width: 96px; height: 96px; bottom: -22px; left: -22px;
+  background: var(--coral); border-radius: 20px; transform: rotate(12deg);
+}
+.hero-portrait {
+  position: relative; z-index: 1;
+  aspect-ratio: 4 / 5; border-radius: 28px; overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: 0 30px 60px rgba(22, 20, 15, .18);
+}
+.hero-portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (max-width: 900px) {
+  .hero-portrait-wrap { max-width: 320px; margin: 0 auto; }
+}
+
+/* ── Section heading (reused above work grid) ────────────────── */
+.section-head { margin-bottom: 2.6rem; }
+.section-head h2 {
+  font-family: var(--serif); font-weight: 800; letter-spacing: -.02em;
+  font-size: clamp(2rem, 4.4vw, 3.2rem); line-height: 1.05; margin-top: .6rem;
+}
+
+/* ── Case study cards ─────────────────────────────────────────── */
+/* .case-grid / .case-card family now lives in the shared
+   ../../themes/editorial-patterns.css (themed via --case-card-* in
+   ../../themes/program-tokens.css) so other pages can reuse it. */
+.work-section { padding: clamp(4rem, 9vw, 7rem) 0; }
+.work-more { text-align: center; margin-top: 2.6rem; }
+
+/* ── Footer ───────────────────────────────────────────────────── */
+.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; text-align: left; }
+.footer-links { display: flex; gap: 1.4rem; }
+.footer-links a { color: var(--ink-70); }
+.footer-links a:hover { color: var(--coral); }
+
+/* ── Contact modal ────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(22, 20, 15, .55);
+  display: flex; align-items: center; justify-content: center; padding: 1.5rem;
+  opacity: 0; pointer-events: none; transition: opacity .25s ease;
+}
+.modal-overlay.open { opacity: 1; pointer-events: auto; backdrop-filter: blur(4px); }
+.modal {
+  width: 100%; max-width: 440px; background: var(--cream); border-radius: 20px;
+  padding: 2rem; position: relative;
+  box-shadow: 0 30px 70px rgba(22, 20, 15, .28);
+  transform: translateY(12px); transition: transform .25s ease;
+}
+.modal-overlay.open .modal { transform: translateY(0); }
+.modal-close {
+  position: absolute; top: 1rem; right: 1rem; width: 32px; height: 32px;
+  border-radius: 50%; border: 1px solid var(--line); background: var(--cream);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .85rem; color: var(--ink-70); cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+}
+.modal-close:hover { background: var(--ink); color: var(--cream); }
+
+.contact-person { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.contact-person img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; object-position: center top; flex-shrink: 0; }
+.contact-person-name { font-family: var(--serif); font-size: 1rem; font-weight: 800; color: var(--ink); }
+.contact-person-role { font-size: .82rem; color: var(--ink-70); margin-top: 2px; }
+
+.contact-links { display: flex; flex-direction: column; gap: 12px; }
+.contact-row {
+  display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+  border: 1.5px solid var(--line); border-radius: 12px; color: var(--ink);
+  transition: border-color .2s ease, background .2s ease;
+}
+.contact-row:hover { border-color: var(--coral); background: var(--coral-tint); }
+.contact-row-icon {
+  width: 36px; height: 36px; border-radius: 10px; background: var(--coral-tint);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.contact-row-label { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-50); margin-bottom: 2px; }
+.contact-row-value { font-size: .88rem; font-weight: 600; color: var(--ink); }

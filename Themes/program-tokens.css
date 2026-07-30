@@ -80,4 +80,16 @@
   --gallery-border-color: var(--line);
   --gallery-heading-color: var(--ink);
   --gallery-text-color:    var(--ink-70);
+
+  --case-card-bg:            var(--cream);
+  --case-card-border:        var(--line);
+  --case-card-media-bg:      var(--cream);
+  --case-card-badge-bg:      rgba(22,20,15,.78);
+  --case-card-badge-text:    var(--cream);
+  --case-card-meta-color:    var(--coral);
+  --case-card-heading-color: var(--ink);
+  --case-card-text-color:    var(--ink-70);
+  --case-card-cta-color:     var(--ink);
+  --case-card-hover-shadow:  rgba(22,20,15,.12);
+  --case-card-hover-border:  rgba(22,20,15,.24);
 }

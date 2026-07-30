@@ -6,154 +6,168 @@
 <title>Winnie Nguyen — Senior Product Designer</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <meta name="description" content="Senior Product Designer with 11+ years of experience — Go1 and more. Portfolio and case studies."/>
-<link rel="stylesheet" href="css/tokens.css"/>
-<link rel="stylesheet" href="css/components.css"/>
-<link rel="stylesheet" href="css/site.css"/>
+<link rel="stylesheet" href="../themes/program-tokens.css"/>
+<link rel="stylesheet" href="../themes/program-components.css"/>
+<link rel="stylesheet" href="../themes/editorial-patterns.css"/>
+<link rel="stylesheet" href="css/portfolio-program.css"/>
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="nav-logo"><img src="images/logo-nav.svg" alt="Winnie Nguyen"/></a>
-  <div class="nav-links">
-    <a href="work.html">Work</a>
-    <a href="about.html">About</a>
-    <a href="files/Winnie-Nguyen-Resume.pdf" download>Resume</a>
-    <a href="../training/index.html">Training</a>
-    <button onclick="document.getElementById('contactModal').classList.add('open')" class="btn btn--contained btn--primary btn--sm">Contact</button>
+<nav class="nav">
+  <div class="wrap">
+    <a href="index.html" class="nav-logo"><img src="images/logo-nav.svg" alt="Winnie Nguyen"/></a>
+    <div class="nav-actions">
+      <button onclick="document.getElementById('contactModal').classList.add('open')" class="btn btn-dark">Contact</button>
+    </div>
   </div>
 </nav>
 
 <!-- ── Contact modal ── -->
 <div id="contactModal" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('open')">
-  <div class="modal" style="max-width:440px;">
+  <div class="modal">
     <button class="modal-close" onclick="document.getElementById('contactModal').classList.remove('open')">✕</button>
-    <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
-      <img src="images/headshot-square.jpg" alt="Winnie Nguyen" style="width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;">
+    <div class="contact-person">
+      <img src="images/headshot-square.jpg" alt="Winnie Nguyen"/>
       <div>
-        <div style="font-family:var(--font-display);font-size:var(--text-base);font-weight:700;color:var(--text-primary);">Winnie Nguyen</div>
-        <div style="font-size:var(--text-sm);color:var(--text-secondary);margin-top:2px;">Senior Product Designer</div>
+        <div class="contact-person-name">Winnie Nguyen</div>
+        <div class="contact-person-role">Senior Product Designer</div>
       </div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:12px;">
-      <a href="mailto:nguyenphuctuongvan@gmail.com" style="display:flex;align-items:center;gap:12px;padding:14px 16px;border:1.5px solid var(--border-default);border-radius:var(--radius-md);text-decoration:none;color:var(--text-primary);transition:var(--transition);" onmouseover="this.style.borderColor='var(--purple)';this.style.background='var(--purple-subtle)'" onmouseout="this.style.borderColor='var(--border-default)';this.style.background=''">
-        <span style="width:36px;height:36px;border-radius:var(--radius-sm);background:var(--purple-tint);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="var(--purple)" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+    <div class="contact-links">
+      <a href="mailto:nguyenphuctuongvan@gmail.com" class="contact-row">
+        <span class="contact-row-icon">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="var(--coral)" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
         </span>
         <div>
-          <div style="font-size:var(--text-xs);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-tertiary);margin-bottom:2px;">Email</div>
-          <div style="font-size:var(--text-sm);font-weight:500;">nguyenphuctuongvan@gmail.com</div>
+          <div class="contact-row-label">Email</div>
+          <div class="contact-row-value">nguyenphuctuongvan@gmail.com</div>
         </div>
       </a>
-      <a href="https://www.linkedin.com/in/winnienguyen2910/" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:12px;padding:14px 16px;border:1.5px solid var(--border-default);border-radius:var(--radius-md);text-decoration:none;color:var(--text-primary);transition:var(--transition);" onmouseover="this.style.borderColor='var(--purple)';this.style.background='var(--purple-subtle)'" onmouseout="this.style.borderColor='var(--border-default)';this.style.background=''">
-        <span style="width:36px;height:36px;border-radius:var(--radius-sm);background:var(--purple-tint);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-          <svg width="16" height="16" fill="var(--purple)" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      <a href="https://www.linkedin.com/in/winnienguyen2910/" target="_blank" rel="noopener" class="contact-row">
+        <span class="contact-row-icon">
+          <svg width="16" height="16" fill="var(--coral)" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
         </span>
         <div>
-          <div style="font-size:var(--text-xs);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-tertiary);margin-bottom:2px;">LinkedIn</div>
-          <div style="font-size:var(--text-sm);font-weight:500;">linkedin.com/in/winnienguyen2910</div>
+          <div class="contact-row-label">LinkedIn</div>
+          <div class="contact-row-value">linkedin.com/in/winnienguyen2910</div>
         </div>
       </a>
-      <a href="https://www.behance.net/nguyenphuctuongvan" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:12px;padding:14px 16px;border:1.5px solid var(--border-default);border-radius:var(--radius-md);text-decoration:none;color:var(--text-primary);transition:var(--transition);" onmouseover="this.style.borderColor='var(--purple)';this.style.background='var(--purple-subtle)'" onmouseout="this.style.borderColor='var(--border-default)';this.style.background=''">
-        <span style="width:36px;height:36px;border-radius:var(--radius-sm);background:var(--purple-tint);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-          <svg width="16" height="16" fill="var(--purple)" viewBox="0 0 24 24"><path d="M22 7h-7V5h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988H0V5.021h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.201 8.061zM3 11h3.584c2.508 0 2.906-3-.312-3H3v3zm3.391 3H3v3.016h3.341c3.055 0 2.868-3.016.05-3.016z"/></svg>
+      <a href="https://www.behance.net/nguyenphuctuongvan" target="_blank" rel="noopener" class="contact-row">
+        <span class="contact-row-icon">
+          <svg width="16" height="16" fill="var(--coral)" viewBox="0 0 24 24"><path d="M22 7h-7V5h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988H0V5.021h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.201 8.061zM3 11h3.584c2.508 0 2.906-3-.312-3H3v3zm3.391 3H3v3.016h3.341c3.055 0 2.868-3.016.05-3.016z"/></svg>
         </span>
         <div>
-          <div style="font-size:var(--text-xs);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-tertiary);margin-bottom:2px;">Behance</div>
-          <div style="font-size:var(--text-sm);font-weight:500;">behance.net/nguyenphuctuongvan</div>
+          <div class="contact-row-label">Behance</div>
+          <div class="contact-row-value">behance.net/nguyenphuctuongvan</div>
         </div>
       </a>
     </div>
   </div>
 </div>
 
-<section class="hero">
-  <div class="animate d1">
-    <div class="hero__eyebrow">Senior Product Designer</div>
-    <h1 class="hero__title">Learn like a junior. Act like a senior.</h1>
-    <p class="hero__lead">11+ years in product design. I've spent the last few shifting from shipping screens to shipping outcomes, aligning squads, coaching designers, and building the research and governance systems that make good design the default, not the exception.</p>
-    <div class="hero__actions">
-      <a href="work.html" class="btn btn--contained btn--primary btn--lg">View my work</a>
-      <a href="files/Winnie-Nguyen-Resume.pdf" download class="btn btn--outlined btn--primary btn--lg">Resume</a>
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <h1><span class="it">Outcomes</span> over pixels.</h1>
+        <p class="hero-desc">11+ years in product design. I've spent the last few shifting from shipping screens to shipping outcomes, aligning squads, coaching designers, and building the research and governance systems that make good design the default, not the exception.</p>
+        <div class="hero-cta">
+          <a href="work.html" class="btn btn-dark">View my work</a>
+          <a href="files/Winnie-Nguyen-Resume.pdf" download class="btn btn-ghost">Resume</a>
+        </div>
+      </div>
+      <div class="hero-portrait-wrap">
+        <div class="decor lime float-a"></div>
+        <div class="decor coral float-b"></div>
+        <div class="hero-portrait">
+          <img src="images/headshot.jpg" alt="Winnie Nguyen"/>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="hero__portrait animate d2">
-    <img src="images/headshot.jpg" alt="Winnie Nguyen"/>
+</header>
+
+<section class="work-section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker"><span class="bracket">[</span>Selected work<span class="bracket">]</span></span>
+      <h2>Highlighted work</h2>
+    </div>
+    <div class="case-grid">
+
+      <a href="work/imp.html" target="_blank" rel="noopener" class="case-card">
+        <div class="case-card-media">
+          <img src="work/images/cover/Cover%20-%20NAB%20IMP.png" alt="Intelligent Mortgage Platform cover"/>
+          <span class="case-card-badge">🔒 Password protected</span>
+        </div>
+        <div class="case-card-body">
+          <span class="case-card-meta">Senior Product Designer · 2025–present</span>
+          <h3>Intelligent Mortgage Platform</h3>
+          <p>Owned E2E design for an AI-powered mortgage platform, unifying the journey across product squads into one coherent experience — application time down from 78 minutes to 10.</p>
+          <span class="case-card-cta">View case study</span>
+        </div>
+      </a>
+
+      <a href="https://www.behance.net/gallery/184908239/Content-Curation-Go1" target="_blank" rel="noopener" class="case-card">
+        <div class="case-card-media">
+          <img src="work/images/cover/Cover%20-%20Go1%20Content%20Curation.png" alt="Go1 Content Curation cover"/>
+          <span class="case-card-badge">View on Behance ↗</span>
+        </div>
+        <div class="case-card-body">
+          <span class="case-card-meta">Go1 · Senior Product Designer · 2019–2023</span>
+          <h3>Search &amp; Discovery, Content Curation</h3>
+          <p>Led research and a GenAI-powered discovery pattern that lifted search conversion by 23%.</p>
+          <span class="case-card-cta">View case study</span>
+        </div>
+      </a>
+
+      <a href="https://www.behance.net/gallery/167963281/Pinbus-Rechargeable-Battery-Rentals-App" target="_blank" rel="noopener" class="case-card">
+        <div class="case-card-media">
+          <img src="work/images/cover/Cover%20-%20Pinbus.png" alt="Pinbus — Rechargeable Battery Rentals App cover"/>
+          <span class="case-card-badge">View on Behance ↗</span>
+        </div>
+        <div class="case-card-body">
+          <span class="case-card-meta">Behance · Selected work</span>
+          <h3>Pinbus — Rechargeable Battery Rentals App</h3>
+          <p>App design for on-demand EV battery swaps — flows for finding a station, renting, and returning a battery.</p>
+          <span class="case-card-cta">View case study</span>
+        </div>
+      </a>
+
+      <a href="https://app.notion.com/p/winnienguyen/ReferPlus-Part-1-User-Research-a23f83980f924251b1bde6625a4be015" target="_blank" rel="noopener" class="case-card">
+        <div class="case-card-media">
+          <img src="work/images/cover/Cover%20-%20Refer%20Plus.png" alt="ReferPlus cover"/>
+          <span class="case-card-badge">View on Notion ↗</span>
+        </div>
+        <div class="case-card-body">
+          <span class="case-card-meta">Notion · UX Case Study</span>
+          <h3>ReferPlus — User Research &amp; Visual Design</h3>
+          <p>UX research and product strategy for a referral-based HR community platform — interviews, surveys, personas, and usability testing shaping the product from problem to prototype.</p>
+          <span class="case-card-cta">View case study</span>
+        </div>
+      </a>
+
+    </div>
+    <div class="work-more">
+      <a href="work.html" class="btn btn-ghost">See more work →</a>
+    </div>
   </div>
 </section>
 
-<div class="section">
-  <h2 class="section-heading">Highlighted work</h2>
-  <div class="case-grid">
-
-    <a href="work/imp.html" target="_blank" rel="noopener" class="card card--z4 card--interactive case-card case-card--interactive">
-      <div class="case-card__media">
-        <img src="work/images/cover/Cover%20-%20NAB%20IMP.png" alt="Intelligent Mortgage Platform cover"/>
-        <span class="case-card__lock">🔒 Password protected</span>
-      </div>
-      <div class="case-card__body">
-        <div class="case-card__meta">Senior Product Designer · 2025–present</div>
-        <h3 class="case-card__title">Intelligent Mortgage Platform</h3>
-        <p class="case-card__desc">Owned E2E design for an AI-powered mortgage platform, unifying the journey across product squads into one coherent experience — application time down from 78 minutes to 10.</p>
-        <span class="case-card__cta">View case study</span>
-      </div>
-    </a>
-
-    <a href="https://www.behance.net/gallery/184908239/Content-Curation-Go1" target="_blank" rel="noopener" class="card card--z4 card--interactive case-card case-card--interactive">
-      <div class="case-card__media">
-        <img src="work/images/cover/Cover%20-%20Go1%20Content%20Curation.png" alt="Go1 Content Curation cover"/>
-        <span class="case-card__lock">View on Behance ↗</span>
-      </div>
-      <div class="case-card__body">
-        <div class="case-card__meta">Go1 · Senior Product Designer · 2019–2023</div>
-        <h3 class="case-card__title">Search &amp; Discovery, Content Curation</h3>
-        <p class="case-card__desc">Led research and a GenAI-powered discovery pattern that lifted search conversion by 23%.</p>
-        <span class="case-card__cta">View case study</span>
-      </div>
-    </a>
-
-    <a href="https://www.behance.net/gallery/167963281/Pinbus-Rechargeable-Battery-Rentals-App" target="_blank" rel="noopener" class="card card--z4 card--interactive case-card case-card--interactive">
-      <div class="case-card__media">
-        <img src="work/images/cover/Cover%20-%20Pinbus.png" alt="Pinbus — Rechargeable Battery Rentals App cover"/>
-        <span class="case-card__lock">View on Behance ↗</span>
-      </div>
-      <div class="case-card__body">
-        <div class="case-card__meta">Behance · Selected work</div>
-        <h3 class="case-card__title">Pinbus — Rechargeable Battery Rentals App</h3>
-        <p class="case-card__desc">App design for on-demand EV battery swaps — flows for finding a station, renting, and returning a battery.</p>
-        <span class="case-card__cta">View case study</span>
-      </div>
-    </a>
-
-    <a href="https://app.notion.com/p/winnienguyen/ReferPlus-Part-1-User-Research-a23f83980f924251b1bde6625a4be015" target="_blank" rel="noopener" class="card card--z4 card--interactive case-card case-card--interactive">
-      <div class="case-card__media">
-        <img src="work/images/cover/Cover%20-%20Refer%20Plus.png" alt="ReferPlus cover"/>
-        <span class="case-card__lock">View on Notion ↗</span>
-      </div>
-      <div class="case-card__body">
-        <div class="case-card__meta">Notion · UX Case Study</div>
-        <h3 class="case-card__title">ReferPlus — User Research &amp; Visual Design</h3>
-        <p class="case-card__desc">UX research and product strategy for a referral-based HR community platform — interviews, surveys, personas, and usability testing shaping the product from problem to prototype.</p>
-        <span class="case-card__cta">View case study</span>
-      </div>
-    </a>
-
+<section class="closing">
+  <div class="wrap" style="text-align:center;">
+    <span class="kicker on-dark" style="justify-content:center;"><span class="bracket">[</span>Let's talk<span class="bracket">]</span></span>
+    <h2 style="margin-top:.8rem;">Always happy to compare notes</h2>
+    <p style="color:rgba(245,239,226,.72); max-width:520px; margin:1rem auto 0; font-size:.96rem; line-height:1.6;">Take a closer look at the work above, or explore more on Behance — I'm always up for talking shop or hearing about new opportunities.</p>
+    <div class="closing-cta" style="justify-content:center;">
+      <button onclick="document.getElementById('contactModal').classList.add('open')" class="btn btn-lime">Get in touch</button>
+      <a href="https://www.behance.net/nguyenphuctuongvan" target="_blank" rel="noopener" class="btn btn-ghost" style="border-color:rgba(245,239,226,.4); color:var(--cream);">Explore more on Behance ↗</a>
+    </div>
   </div>
-  <div style="text-align:center; margin-top: var(--space-10);">
-    <a href="work.html" class="btn btn--outlined btn--primary btn--md">See more work →</a>
-  </div>
-</div>
-
-<div class="section section--tight" style="text-align:center;">
-  <h2 class="section-heading" style="margin-bottom: var(--space-4);">Let's talk</h2>
-  <p style="color:var(--text-secondary); font-size:var(--text-lg); max-width:560px; margin:0 auto var(--space-8);">Always happy to talk shop, compare notes, or hear about new opportunities — take a closer look at the work above, or explore more on Behance.</p>
-  <div style="display:flex; gap: var(--space-4); justify-content:center; flex-wrap:wrap;">
-    <button onclick="document.getElementById('contactModal').classList.add('open')" class="btn btn--contained btn--primary btn--lg">Get in touch</button>
-    <a href="https://www.behance.net/nguyenphuctuongvan" target="_blank" rel="noopener" class="btn btn--outlined btn--primary btn--lg">Explore more on Behance ↗</a>
-  </div>
-</div>
+</section>
 
 <footer>
-  <div class="footer-inner">
+  <div class="wrap footer-inner">
     <p>© 2026 Winnie Nguyen · Senior Product Designer</p>
     <div class="footer-links">
       <a href="mailto:nguyenphuctuongvan@gmail.com">Email</a>
