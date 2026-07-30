@@ -19,7 +19,21 @@
       background: #fff;
       color: var(--text-primary);
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
+
+    /* Footer sits flush at the bottom even on short pages (welcome screen),
+       and reads light — not the dark footer used on marketing pages. */
+    footer {
+      background: #fff;
+      border-top: 1px solid var(--border-default);
+      margin-top: auto;
+    }
+    .footer-inner p    { color: var(--text-tertiary); }
+    .footer-inner span { color: var(--text-tertiary); }
+    .footer-links a { color: var(--text-secondary); }
+    .footer-links a:hover { color: var(--purple); }
 
     /* ── Header ─────────────────────────────────────────── */
     .site-header {
@@ -138,15 +152,15 @@
     }
     .welcome-title {
       font-family: var(--font-display);
-      font-size: clamp(2.8rem, 5vw, 4.2rem);
-      font-weight: 700;
+      font-size: clamp(2.6rem, 6.4vw, 5.4rem);
+      font-weight: 800;
       color: var(--text-primary);
-      line-height: 1.08;
-      letter-spacing: -0.02em;
+      line-height: 0.98;
+      letter-spacing: -0.03em;
       margin-bottom: 20px;
     }
     .welcome-desc {
-      font-size: var(--text-base);
+      font-size: 1.125rem;
       color: var(--text-secondary);
       line-height: 1.7;
       margin-bottom: 32px;
@@ -172,7 +186,6 @@
       border: 1.5px solid var(--border-default);
       border-radius: var(--radius-xl);
       padding: 32px 28px;
-      box-shadow: var(--shadow-z8);
     }
     .form-card-title {
       font-family: var(--font-display);
