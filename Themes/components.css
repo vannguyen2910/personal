@@ -1597,6 +1597,10 @@ footer { background: var(--gray-900); padding: var(--space-10) var(--gutter); }
 }
 .footer-inner p    { font-size: var(--text-sm); color: rgba(255, 255, 255, .3); }
 .footer-inner span { font-size: var(--text-sm); color: rgba(255, 255, 255, .2); }
+.footer-inner { flex-wrap: wrap; }
+.footer-links { display: flex; gap: var(--space-6); }
+.footer-links a { color: rgba(255, 255, 255, .55); font-size: var(--text-sm); text-decoration: none; }
+.footer-links a:hover { color: #fff; }
 
 
 /* ─────────────────────────────────────────────────────────── */
