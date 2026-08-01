@@ -362,7 +362,7 @@
       background: #fff; border: 1.5px solid var(--border-default);
       border-radius: var(--radius-lg); padding: 24px; margin-bottom: 20px;
     }
-    .chart-card canvas { max-height: 380px; }
+    .chart-card canvas { max-height: 380px; display: block; margin: 0 auto; }
     .chart-legend { display: flex; gap: 20px; justify-content: center; margin-top: 16px; font-size: 12px; color: var(--text-secondary); }
     .legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
 
@@ -1383,6 +1383,12 @@ function showScreen(id) {
   document.getElementById(id).classList.add('active');
   currentScreenId = id;
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  // The radar chart is built while its screen is still hidden (display:none),
+  // so Chart.js measures a 0-size container. Nudge it once the screen is
+  // actually visible so it picks up its real dimensions.
+  if (id === 'screen-results' && radarChart) {
+    requestAnimationFrame(() => radarChart.resize());
+  }
 }
 
 function setGlobalProgress(pct) {

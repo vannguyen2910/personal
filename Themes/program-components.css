@@ -195,6 +195,7 @@ body.is-vi .lang-vi { display: revert !important; }
   font-family:var(--serif); font-weight:800; letter-spacing:-.02em;
   font-size:clamp(1.8rem,4.4vw,3.1rem); line-height:1.15; max-width:18ch;
 }
+body.is-vi .pain-headline{ max-width:30ch; }
 /* .pain-list structure lives in the shared Themes/editorial-patterns.css,
    themed by the --pain-list-* custom properties in program-tokens.css. */
 .pain .pain-list{ margin-top:clamp(3rem,6vw,4.5rem); }
