@@ -168,6 +168,7 @@
    Themeable via: --mentor-badge-bg, --mentor-badge-text, --mentor-badge-text-soft,
                   --mentor-badge-accent, --mentor-ring-color, --mentor-heading-color,
                   --mentor-body-color, --mentor-pill-border                          */
+.mentor { padding: clamp(4rem,9vw,7rem) 0; }
 .mentor-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 3.5rem; align-items: center; }
 @media (max-width: 820px) { .mentor-grid { grid-template-columns: 1fr; } }
 
