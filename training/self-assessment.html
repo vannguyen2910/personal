@@ -411,6 +411,8 @@
     /* ── Program card (reused as-is from training/index.html's Programs
        section, so a recommended program looks identical wherever it
        appears on the site) ──────────────────────────────────────── */
+    .programs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin: 28px 0 20px; }
+    .programs-grid .program-card { margin: 0; }
     .program-card {
       display: grid; grid-template-columns: 108px 1fr; gap: 28px; align-items: center;
       background: var(--white); border-radius: 16px; padding: 32px;
@@ -1267,6 +1269,13 @@ const PROGRAMS = [
     title: 'UX & Product Design course for Mid-Level track',
     desc: 'Learn to run a full UX process yourself, not just execute a screen. 12 sessions, weekly, over about 3 months.',
     matches: s => s.target === 'Associate' || s.target === 'Mid'
+  },
+  {
+    href: 'programs/systematic-ai-prototyping.html',
+    tag: 'Video · 1:1 · Group',
+    title: 'Systematic AI Prototyping for UX Product Designer',
+    desc: 'Stop prompting screen by screen. Define your design system once, then let AI build consistently at any scale.',
+    matches: s => true
   }
 ];
 
@@ -1737,16 +1746,14 @@ function getPlaybookMatches() {
   return matches;
 }
 
-// ── Recommended program (only shows if one actually fits this student) ──
+// ── Recommended programs (only shows if at least one fits this student —
+// a student can match more than one program at once, e.g. a level-gated
+// coaching program plus a skill course open to every level) ──
 function buildRecommendedProgram() {
   const el = document.getElementById('recommendedProgram');
-  const program = PROGRAMS.find(p => p.matches(state));
-  if (!program) { el.innerHTML = ''; return; }
-  el.innerHTML = `
-    <div class="res-section-head">
-      <h3>Recommended for you</h3>
-      <p>A structured way to close these gaps — not just a list of resources.</p>
-    </div>
+  const programs = PROGRAMS.filter(p => p.matches(state));
+  if (!programs.length) { el.innerHTML = ''; return; }
+  const cards = programs.map(program => `
     <a href="${program.href}" class="program-card">
       <div class="program-card-visual" aria-hidden="true">
         <span class="pc-ring"></span>
@@ -1763,7 +1770,13 @@ function buildRecommendedProgram() {
         <p>${program.desc}</p>
         <span class="program-card-link">View program</span>
       </div>
-    </a>`;
+    </a>`).join('');
+  el.innerHTML = `
+    <div class="res-section-head">
+      <h3>Recommended for you</h3>
+      <p>A structured way to close these gaps — not just a list of resources.</p>
+    </div>
+    <div class="programs-grid">${cards}</div>`;
 }
 
 // ── Notes summary (only shows if any notes were captured) ──

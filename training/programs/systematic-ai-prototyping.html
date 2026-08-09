@@ -9,9 +9,94 @@
 <link rel="stylesheet" href="../../Themes/program-components.css?v=2">
 <link rel="stylesheet" href="../../Themes/editorial-patterns.css?v=2">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=wand_stars" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=stars_2" />
 <style>
   /* longer literal course-name headline needs a smaller size than the tagline this template was built for */
   .hero h1{ font-size:clamp(2.2rem,4.8vw,3.8rem); }
+
+  /* ===== hero illustration: phone frame + AI tool badges (page-scoped) ===== */
+  .pp-ring{ animation:ppRingSpin 50s linear infinite; }
+  @keyframes ppRingSpin{ to{ transform:rotate(360deg); } }
+
+  .hero-visual .pp-dot{ top:270px; right:222px; }
+
+  .pp-phone{
+    position:absolute; top:14px; right:54px; width:132px; height:232px; z-index:3;
+    background:var(--cream); border:2.5px solid var(--ink); border-radius:22px;
+    box-sizing:border-box; padding:16px 12px; display:flex; flex-direction:column; gap:8px;
+    animation:ppPhoneFloat 10s ease-in-out infinite;
+  }
+  @keyframes ppPhoneFloat{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-6px); } }
+  .pp-line-1{ width:78%; height:10px; border-radius:4px; background:var(--ink); }
+  .pp-line-2{ width:55%; height:6px; border-radius:3px; background:var(--ink); opacity:.3; }
+  .pp-block-lg{ height:58px; border-radius:8px; background:var(--ink); opacity:.08; margin-top:6px; }
+  .pp-block-row{ display:flex; gap:8px; }
+  .pp-block-row span{ flex:1; height:38px; border-radius:8px; background:var(--ink); opacity:.08; }
+  .pp-cta{ margin-top:auto; height:26px; border-radius:13px; background:var(--ink); }
+
+  .pp-badge{
+    position:absolute; z-index:4; white-space:nowrap;
+    font-size:.66rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+    padding:.42rem .85rem; border-radius:999px; border:1.5px solid var(--ink);
+    background:var(--cream); color:var(--ink);
+  }
+  .pp-badge-figma{ top:20px; right:183px; }
+  .pp-badge-claude{ top:-7px; right:-5px; }
+  .pp-badge-cursor{ top:246px; right:156px; }
+
+  .hero-visual{ align-self:center; }
+
+  .pp-spark{
+    position:absolute; z-index:5; pointer-events:none;
+    font-family:'Material Symbols Outlined';
+    font-variation-settings:'FILL' 1,'wght' 600,'GRAD' 0,'opsz' 20;
+    line-height:1; color:var(--coral);
+    animation:wand-twinkle 2.8s ease-in-out infinite;
+  }
+  .pp-spark-1{ top:-24px; right:110px; font-size:22px; animation-delay:0s; }
+  .pp-spark-2{ top:306px; right:130px; font-size:15px; color:var(--ink); animation-delay:.9s; }
+  .pp-spark-3{ top:92px; right:266px; font-size:17px; animation-delay:1.8s; }
+
+  @media (prefers-reduced-motion: reduce){
+    .pp-ring, .pp-phone, .pp-spark{ animation:none; }
+  }
+  @media (max-width:900px){
+    .pp-badge, .pp-spark{ display:none; }
+  }
+
+  /* ----- 1.6x enlargement: only on wide viewports, so it never fights the mobile stack above ----- */
+  @media (min-width:1300px){
+    .hero-grid{ grid-template-columns:1fr 1fr; }
+    .hero-visual{ width:448px; height:560px; justify-self:end; }
+
+    /* narrower text column at this tier needs a smaller headline so "UX Product Designer" never breaks across two lines */
+    .hero h1{ font-size:46px; }
+    .hero h1 > span{ white-space:nowrap; }
+
+    .pp-ring{ width:480px; height:480px; top:-32px; right:-48px; border-width:1.5px; }
+    .hero-visual .blob-1{ width:352px; height:352px; top:16px; right:16px; }
+    .hero-visual .pp-dot{ width:16px; height:16px; top:432px; right:355px; }
+
+    .pp-phone{
+      top:22px; right:86px; width:211px; height:371px;
+      border-width:4px; border-radius:35px; padding:26px 19px; gap:13px;
+    }
+    .pp-line-1{ height:16px; border-radius:6px; }
+    .pp-line-2{ height:10px; border-radius:5px; }
+    .pp-block-lg{ height:93px; border-radius:13px; margin-top:10px; }
+    .pp-block-row{ gap:13px; }
+    .pp-block-row span{ height:61px; border-radius:13px; }
+    .pp-cta{ height:42px; border-radius:21px; }
+
+    .pp-badge{ font-size:1.06rem; padding:.67rem 1.36rem; border-width:2.5px; }
+    .pp-badge-figma{ top:31px; right:293px; }
+    .pp-badge-claude{ top:-16px; right:56px; }
+    .pp-badge-cursor{ top:394px; right:250px; }
+
+    .pp-spark-1{ top:-38px; right:176px; font-size:35px; }
+    .pp-spark-2{ top:490px; right:208px; font-size:24px; }
+    .pp-spark-3{ top:147px; right:426px; font-size:27px; }
+  }
 </style>
 </head>
 <body>
@@ -90,7 +175,7 @@
             <span><span><em class="it">Prototyping</em></span></span>
             <span><span><span class="lang-en">for UX <span class="mark"><span>Product Designer</span></span>.</span><span class="lang-vi">dành cho <span class="mark"><span>UX Product Designer</span></span>.</span></span></span>
           </h1>
-          <p class="hero-desc"><span class="lang-en">Systematic AI Prototyping for UX Product Designer teaches you to define your token, component inventory, and template once, before letting AI build any screen. The result is a prototype pattern AI can build from consistently, whether you need 3 screens or 30.</span><span class="lang-vi">Systematic AI Prototyping for UX Product Designer dạy bạn định nghĩa token, component inventory và template một lần, trước khi để AI build bất kỳ màn hình nào. Kết quả là một prototype pattern AI dựa vào để build nhất quán, dù bạn cần 3 màn hình hay 30 màn hình.</span></p>
+          <p class="hero-desc"><span class="lang-en">Define your token, component inventory, and template once — then let AI build every screen from that same pattern, whether it's 3 screens or 30.</span><span class="lang-vi">Định nghĩa token, component inventory và template một lần — rồi để AI build mọi màn hình theo đúng pattern đó, dù bạn cần 3 màn hình hay 30.</span></p>
           <a href="#mentor" class="hero-mentor">
             <img src="../assets/avatar.png" alt="Winnie Nguyen" class="hero-mentor-avatar">
             <span class="hero-mentor-text">
@@ -110,11 +195,25 @@
         </div>
 
         <div class="hero-visual">
-          <div class="hero-ring"></div>
+          <div class="hero-ring pp-ring"></div>
           <div class="blob blob-1 float-a"></div>
-          <div class="blob-2 float-b"></div>
-          <div class="blob-3 float-c"></div>
-          <div class="blob-dot"></div>
+          <div class="blob-dot pp-dot"></div>
+
+          <div class="pp-phone">
+            <div class="pp-line-1"></div>
+            <div class="pp-line-2"></div>
+            <div class="pp-block-lg"></div>
+            <div class="pp-block-row"><span></span><span></span></div>
+            <div class="pp-cta"></div>
+          </div>
+
+          <span class="pp-badge pp-badge-figma float-b">Figma Make</span>
+          <span class="pp-badge pp-badge-claude float-c">Claude</span>
+          <span class="pp-badge pp-badge-cursor float-a">Cursor</span>
+
+          <span class="material-symbols-rounded pp-spark pp-spark-1" aria-hidden="true">stars_2</span>
+          <span class="material-symbols-rounded pp-spark pp-spark-2" aria-hidden="true">stars_2</span>
+          <span class="material-symbols-rounded pp-spark pp-spark-3" aria-hidden="true">stars_2</span>
         </div>
       </div>
     </div>
@@ -144,7 +243,7 @@
         </div>
         <div class="who-card reveal reveal-d2">
           <div class="num">✓</div>
-          <p><span class="lang-en">You're a product or UX designer with basic Figma skills: creating frames, using components, connecting screens. You want to use AI to prototype faster, without trading consistency for speed. You have a real design project, even an early-stage one, to practice on real data instead of made-up examples.</span><span class="lang-vi">Bạn là product hoặc UX designer, đã có nền tảng Figma cơ bản: tạo frame, dùng component, nối màn hình. Bạn muốn dùng AI để prototype nhanh hơn, nhưng không muốn đánh đổi sự nhất quán để lấy tốc độ. Bạn có 1 design project thật, dù mới ở giai đoạn sơ khai, để thực hành trên dữ liệu thật.</span></p>
+          <p><span class="lang-en">You don't need another Figma tutorial — you need AI that respects the system you already built. If frames, components, and connected screens are already second nature, and you've got a real project (even a messy, early one) to work on, you're ready.</span><span class="lang-vi">Bạn không cần thêm một tutorial Figma nữa — bạn cần AI tôn trọng hệ thống bạn đã xây. Nếu frame, component và nối màn hình đã là chuyện quen thuộc, và bạn có 1 project thật (dù mới ở giai đoạn sơ khai) để thực hành, vậy là đủ.</span></p>
         </div>
       </div>
 
@@ -442,6 +541,9 @@
               <p class="lead-form-note"><span class="lang-en">I'll reply by email within 1–2 business days.</span><span class="lang-vi">Mình sẽ phản hồi qua email trong 1–2 ngày làm việc.</span></p>
             </form>
             <p id="leadFormSuccess" class="lead-form-success"><span class="lang-en">Thanks! I've got your details and will email you within 1–2 business days.</span><span class="lang-vi">Cảm ơn bạn! Mình đã nhận được thông tin và sẽ email lại trong 1–2 ngày làm việc.</span></p>
+            <a href="../self-assessment.html" class="btn btn-ghost lead-form-secondary" style="border-color:rgba(245,239,226,.4); color:var(--cream);">
+              <span class="lang-en">Or start with the free self-assessment</span><span class="lang-vi">Hoặc bắt đầu với bài tự đánh giá miễn phí</span>
+            </a>
           </div>
         </div>
 

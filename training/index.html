@@ -178,7 +178,19 @@
     /* Hero Right — Visual Card Stack */
     .hero-right {
       position: relative;
-      height: 420px;
+      height: 500px;
+    }
+    .hero-illustration {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-illustration img {
+      width: 100%;
+      max-width: 480px;
+      height: auto;
     }
 
     /* Ambient decorative shapes — subtle motion behind the card stack */
@@ -649,6 +661,30 @@
     @media (prefers-reduced-motion: reduce) {
       .pc-climber { animation: none; left: 69px; bottom: 74px; }
     }
+
+    /* mini version of the AI-prototyping hero illustration, for the program card */
+    .ppc-blob {
+      position: absolute; width: 64px; height: 64px; top: 12px; right: 6px;
+      background: var(--yellow); border-radius: 50%;
+    }
+    .ppc-phone {
+      position: absolute; width: 34px; height: 58px; top: 25px; right: 37px;
+      background: var(--white); border: 1.5px solid var(--text-primary); border-radius: 8px;
+      box-sizing: border-box; padding: 6px 5px; display: flex; flex-direction: column; gap: 4px;
+    }
+    .ppc-line-1 { display: block; width: 70%; height: 3px; border-radius: 1.5px; background: var(--text-primary); }
+    .ppc-line-2 { display: block; width: 45%; height: 2px; border-radius: 1px; background: var(--text-primary); opacity: 0.35; }
+    .ppc-spark {
+      position: absolute; top: 2px; right: 0; fill: var(--accent);
+      animation: ppcTwinkle 2.6s ease-in-out infinite;
+    }
+    @keyframes ppcTwinkle {
+      0%, 100% { opacity: 0.35; transform: scale(0.75); }
+      50%      { opacity: 1; transform: scale(1.1); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .ppc-spark { animation: none; }
+    }
     .program-card-tag {
       display: inline-block;
       font-size: 0.7rem;
@@ -895,27 +931,8 @@
       </div>
 
       <div class="hero-right animate d3">
-        <div class="hero-shapes" aria-hidden="true">
-          <span class="shape-ring"></span>
-          <span class="shape-blob float-a"></span>
-        </div>
-        <!-- Card 1 — main -->
-        <div class="hero-card hero-card-main">
-          <span class="card-tag">Lesson · UX Research</span>
-          <h3>Mental Models in UX Design</h3>
-          <p>How users build expectations, and how we design for them.</p>
-        </div>
-        <!-- Card 2 — secondary -->
-        <div class="hero-card hero-card-secondary">
-          <span class="card-tag">Self-assessment</span>
-          <h3>Where are you right now?</h3>
-          <p>Map your current skills and identify your next growth area.</p>
-        </div>
-        <!-- Card 3 — tertiary -->
-        <div class="hero-card hero-card-tertiary">
-          <span class="card-tag">Framework</span>
-          <h3>UX Design Principles</h3>
-          <p>Core reference sheet — 12 principles.</p>
+        <div class="hero-illustration" aria-hidden="true">
+          <img src="assets/hero-uiux-illustration.svg" alt="" width="296" height="293">
         </div>
       </div>
     </div>
@@ -967,30 +984,49 @@
     </div>
   </div>
 
-  <!-- WHAT A MENTOR ADDS -->
-  <div>
-    <div class="mentor-value">
-      <div class="mv-header animate d1">
-        <p class="section-label" style="text-align:center; display:block;">What changes</p>
-        <h2 class="section-title" style="margin-bottom:14px; text-align:center;">What shifts when you have someone in your corner</h2>
-        <p style="font-size:1rem; color:var(--text-secondary); line-height:1.75; text-align:center;">There's no shortage of great design resources, courses, and communities. A mentor works differently — focused entirely on your situation, your work, and your next move.</p>
+  <!-- PROGRAMS -->
+  <div class="programs" id="programs">
+    <div class="programs-inner">
+      <div class="programs-head animate d1">
+        <p class="section-label">Programs</p>
+        <h2 class="section-title" style="margin-bottom:12px;">Structured programs to <em style="white-space:nowrap;">level up</em></h2>
+        <p style="font-size:1rem; color:var(--text-secondary); line-height:1.75;">Beyond 1:1 mentoring, these are structured programs built around your own real work.</p>
       </div>
-      <div class="mv-grid">
-        <div class="mv-item animate d2">
-          <div class="mv-num">01</div>
-          <h3>Guidance applied to your specific situation</h3>
-          <p>You don't need more frameworks. You need someone who can look at your actual work, your specific career challenge, and tell you what to do next — not what works in general.</p>
-        </div>
-        <div class="mv-item animate d3">
-          <div class="mv-num">02</div>
-          <h3>The honest feedback that's hard to get elsewhere</h3>
-          <p>A mentor gives you the kind of direct, specific feedback that's rare in most workplaces — grounded in real product design experience, with your growth as the only agenda.</p>
-        </div>
-        <div class="mv-item animate d4">
-          <div class="mv-num">03</div>
-          <h3>Accountability that keeps you moving forward</h3>
-          <p>Regular sessions with someone genuinely invested in your progress create momentum that self-study rarely does — even when the day-to-day gets in the way.</p>
-        </div>
+      <div class="programs-grid">
+        <a href="programs/junior-to-mid-level.html" class="program-card animate d2">
+          <div class="program-card-visual" aria-hidden="true">
+            <span class="pc-ring"></span>
+            <span class="pc-steps">
+              <span class="pc-step"></span>
+              <span class="pc-step"></span>
+              <span class="pc-step"></span>
+            </span>
+            <span class="pc-climber"></span>
+          </div>
+          <div class="program-card-body">
+            <span class="program-card-tag">1:1 or Group (3–5) · 1–3 yrs experience</span>
+            <h3>UX & Product Design course for Mid-Level track</h3>
+            <p>Learn to run a full UX process yourself, not just execute a screen. 12 sessions, weekly, over about 3 months.</p>
+            <span class="program-card-link">View program</span>
+          </div>
+        </a>
+        <a href="programs/systematic-ai-prototyping.html" class="program-card animate d3">
+          <div class="program-card-visual" aria-hidden="true">
+            <span class="pc-ring"></span>
+            <span class="ppc-blob"></span>
+            <span class="ppc-phone">
+              <span class="ppc-line-1"></span>
+              <span class="ppc-line-2"></span>
+            </span>
+            <svg class="ppc-spark" viewBox="0 0 24 24" width="12" height="12"><path d="M12 0 C12 6 14 10 20 12 C14 14 12 18 12 24 C12 18 10 14 4 12 C10 10 12 6 12 0 Z"/></svg>
+          </div>
+          <div class="program-card-body">
+            <span class="program-card-tag">Video · 1:1 · Group</span>
+            <h3>Systematic AI Prototyping for UX Product Designer</h3>
+            <p>Stop prompting screen by screen. Define your design system once, then let AI build consistently at any scale.</p>
+            <span class="program-card-link">View program</span>
+          </div>
+        </a>
       </div>
     </div>
   </div>
@@ -1035,53 +1071,6 @@
     </div>
   </div>
 
-  <!-- PROGRAMS -->
-  <div class="programs" id="programs">
-    <div class="programs-inner">
-      <div class="programs-head animate d1">
-        <p class="section-label">Programs</p>
-        <h2 class="section-title" style="margin-bottom:12px;">Structured programs to <em style="white-space:nowrap;">level up</em></h2>
-        <p style="font-size:1rem; color:var(--text-secondary); line-height:1.75;">Beyond 1:1 mentoring, these are structured programs built around your own real work.</p>
-      </div>
-      <div class="programs-grid">
-        <a href="programs/junior-to-mid-level.html" class="program-card animate d2">
-          <div class="program-card-visual" aria-hidden="true">
-            <span class="pc-ring"></span>
-            <span class="pc-steps">
-              <span class="pc-step"></span>
-              <span class="pc-step"></span>
-              <span class="pc-step"></span>
-            </span>
-            <span class="pc-climber"></span>
-          </div>
-          <div class="program-card-body">
-            <span class="program-card-tag">1:1 or Group (3–5) · 1–3 yrs experience</span>
-            <h3>UX & Product Design course for Mid-Level track</h3>
-            <p>Learn to run a full UX process yourself, not just execute a screen. 12 sessions, weekly, over about 3 months.</p>
-            <span class="program-card-link">View program</span>
-          </div>
-        </a>
-        <a href="programs/systematic-ai-prototyping.html" class="program-card animate d3">
-          <div class="program-card-visual" aria-hidden="true">
-            <span class="pc-ring"></span>
-            <span class="pc-steps">
-              <span class="pc-step"></span>
-              <span class="pc-step"></span>
-              <span class="pc-step"></span>
-            </span>
-            <span class="pc-climber"></span>
-          </div>
-          <div class="program-card-body">
-            <span class="program-card-tag">Video · 1:1 · Group</span>
-            <h3>Systematic AI Prototyping for UX Product Designer</h3>
-            <p>Stop prompting screen by screen. Define your design system once, then let AI build consistently at any scale.</p>
-            <span class="program-card-link">View program</span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-
   <!-- ABOUT -->
   <section class="mentor" id="about">
     <div class="mentor-grid">
@@ -1122,6 +1111,34 @@
       </div>
     </div>
   </section>
+
+  <!-- WHAT A MENTOR ADDS -->
+  <div>
+    <div class="mentor-value">
+      <div class="mv-header animate d1">
+        <p class="section-label" style="text-align:center; display:block;">What changes</p>
+        <h2 class="section-title" style="margin-bottom:14px; text-align:center;">What shifts when you have someone in your corner</h2>
+        <p style="font-size:1rem; color:var(--text-secondary); line-height:1.75; text-align:center;">There's no shortage of great design resources, courses, and communities. A mentor works differently — focused entirely on your situation, your work, and your next move.</p>
+      </div>
+      <div class="mv-grid">
+        <div class="mv-item animate d2">
+          <div class="mv-num">01</div>
+          <h3>Guidance applied to your specific situation</h3>
+          <p>You don't need more frameworks. You need someone who can look at your actual work, your specific career challenge, and tell you what to do next — not what works in general.</p>
+        </div>
+        <div class="mv-item animate d3">
+          <div class="mv-num">02</div>
+          <h3>The honest feedback that's hard to get elsewhere</h3>
+          <p>A mentor gives you the kind of direct, specific feedback that's rare in most workplaces — grounded in real product design experience, with your growth as the only agenda.</p>
+        </div>
+        <div class="mv-item animate d4">
+          <div class="mv-num">03</div>
+          <h3>Accountability that keeps you moving forward</h3>
+          <p>Regular sessions with someone genuinely invested in your progress create momentum that self-study rarely does — even when the day-to-day gets in the way.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- STATS -->
   <div class="stats-strip">
