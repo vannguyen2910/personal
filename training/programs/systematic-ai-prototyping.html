@@ -8,43 +8,65 @@
 <link rel="stylesheet" href="../../Themes/program-tokens.css?v=2">
 <link rel="stylesheet" href="../../Themes/program-components.css?v=2">
 <link rel="stylesheet" href="../../Themes/editorial-patterns.css?v=2">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=wand_stars" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=stars_2" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=wand_stars" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=stars_2" media="print" onload="this.media='all'">
 <style>
-  /* longer literal course-name headline needs a smaller size than the tagline this template was built for */
-  .hero h1{ font-size:clamp(2.2rem,4.8vw,3.8rem); }
+  /* ===== hero illustration: phone frame + AI tool badges (page-scoped) =====
+     Scales fluidly with viewport width instead of jumping at a single breakpoint.
+     --pp-t is a 0→1 progress value; every dimension below is base + t * delta,
+     where base/delta were reverse-engineered from the two sizes this illustration
+     was originally designed at (900px and 1728px viewports). */
+  .hero-visual{
+    align-self:center;
+    --pp-t:clamp(0, calc((100vw - 900px) / 828px), 1);
+  }
+  .hero-grid > div:first-child{ align-self:start; min-width:0; }
 
-  /* ===== hero illustration: phone frame + AI tool badges (page-scoped) ===== */
-  .pp-ring{ animation:ppRingSpin 50s linear infinite; }
+  .pp-ring{
+    animation:ppRingSpin 50s linear infinite;
+    width:calc(300px + var(--pp-t) * 180px); height:calc(300px + var(--pp-t) * 180px);
+    top:calc(-20px + var(--pp-t) * -12px); right:calc(-30px + var(--pp-t) * -18px);
+    border-width:calc(1px + var(--pp-t) * .5px);
+  }
   @keyframes ppRingSpin{ to{ transform:rotate(360deg); } }
 
-  .hero-visual .pp-dot{ top:270px; right:222px; }
+  .hero-visual .blob-1{
+    width:calc(220px + var(--pp-t) * 132px); height:calc(220px + var(--pp-t) * 132px);
+    top:calc(10px + var(--pp-t) * 6px); right:calc(10px + var(--pp-t) * 6px);
+  }
+  .hero-visual .pp-dot{
+    width:calc(10px + var(--pp-t) * 6px); height:calc(10px + var(--pp-t) * 6px);
+    top:calc(270px + var(--pp-t) * 162px); right:calc(222px + var(--pp-t) * 133px);
+  }
 
   .pp-phone{
-    position:absolute; top:14px; right:54px; width:132px; height:232px; z-index:3;
-    background:var(--cream); border:2.5px solid var(--ink); border-radius:22px;
-    box-sizing:border-box; padding:16px 12px; display:flex; flex-direction:column; gap:8px;
+    position:absolute; z-index:3;
+    top:calc(14px + var(--pp-t) * 8px); right:calc(54px + var(--pp-t) * 32px);
+    width:calc(132px + var(--pp-t) * 79px); height:calc(232px + var(--pp-t) * 139px);
+    background:var(--cream); border:calc(2.5px + var(--pp-t) * 1.5px) solid var(--ink);
+    border-radius:calc(22px + var(--pp-t) * 13px);
+    box-sizing:border-box; padding:calc(16px + var(--pp-t) * 10px) calc(12px + var(--pp-t) * 7px);
+    display:flex; flex-direction:column; gap:calc(8px + var(--pp-t) * 5px);
     animation:ppPhoneFloat 10s ease-in-out infinite;
   }
   @keyframes ppPhoneFloat{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-6px); } }
-  .pp-line-1{ width:78%; height:10px; border-radius:4px; background:var(--ink); }
-  .pp-line-2{ width:55%; height:6px; border-radius:3px; background:var(--ink); opacity:.3; }
-  .pp-block-lg{ height:58px; border-radius:8px; background:var(--ink); opacity:.08; margin-top:6px; }
-  .pp-block-row{ display:flex; gap:8px; }
-  .pp-block-row span{ flex:1; height:38px; border-radius:8px; background:var(--ink); opacity:.08; }
-  .pp-cta{ margin-top:auto; height:26px; border-radius:13px; background:var(--ink); }
+  .pp-line-1{ width:78%; height:calc(10px + var(--pp-t) * 6px); border-radius:calc(4px + var(--pp-t) * 2px); background:var(--ink); }
+  .pp-line-2{ width:55%; height:calc(6px + var(--pp-t) * 4px); border-radius:calc(3px + var(--pp-t) * 2px); background:var(--ink); opacity:.3; }
+  .pp-block-lg{ height:calc(58px + var(--pp-t) * 35px); border-radius:calc(8px + var(--pp-t) * 5px); background:var(--ink); opacity:.08; margin-top:calc(6px + var(--pp-t) * 4px); }
+  .pp-block-row{ display:flex; gap:calc(8px + var(--pp-t) * 5px); }
+  .pp-block-row span{ flex:1; height:calc(38px + var(--pp-t) * 23px); border-radius:calc(8px + var(--pp-t) * 5px); background:var(--ink); opacity:.08; }
+  .pp-cta{ margin-top:auto; height:calc(26px + var(--pp-t) * 16px); border-radius:calc(13px + var(--pp-t) * 8px); background:var(--ink); }
 
   .pp-badge{
     position:absolute; z-index:4; white-space:nowrap;
-    font-size:.66rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
-    padding:.42rem .85rem; border-radius:999px; border:1.5px solid var(--ink);
+    font-size:calc(.66rem + var(--pp-t) * .4rem); font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+    padding:calc(.42rem + var(--pp-t) * .25rem) calc(.85rem + var(--pp-t) * .51rem);
+    border-radius:999px; border:calc(1.5px + var(--pp-t) * 1px) solid var(--ink);
     background:var(--cream); color:var(--ink);
   }
-  .pp-badge-figma{ top:20px; right:183px; }
-  .pp-badge-claude{ top:-7px; right:-5px; }
-  .pp-badge-cursor{ top:246px; right:156px; }
-
-  .hero-visual{ align-self:center; }
+  .pp-badge-figma{ top:calc(20px + var(--pp-t) * 11px); right:calc(183px + var(--pp-t) * 110px); }
+  .pp-badge-claude{ top:calc(-7px + var(--pp-t) * -9px); right:calc(-5px + var(--pp-t) * 61px); }
+  .pp-badge-cursor{ top:calc(246px + var(--pp-t) * 148px); right:calc(156px + var(--pp-t) * 94px); }
 
   .pp-spark{
     position:absolute; z-index:5; pointer-events:none;
@@ -53,9 +75,9 @@
     line-height:1; color:var(--coral);
     animation:wand-twinkle 2.8s ease-in-out infinite;
   }
-  .pp-spark-1{ top:-24px; right:110px; font-size:22px; animation-delay:0s; }
-  .pp-spark-2{ top:306px; right:130px; font-size:15px; color:var(--ink); animation-delay:.9s; }
-  .pp-spark-3{ top:92px; right:266px; font-size:17px; animation-delay:1.8s; }
+  .pp-spark-1{ top:calc(-24px + var(--pp-t) * -14px); right:calc(110px + var(--pp-t) * 66px); font-size:calc(22px + var(--pp-t) * 13px); animation-delay:0s; }
+  .pp-spark-2{ top:calc(306px + var(--pp-t) * 184px); right:calc(130px + var(--pp-t) * 78px); font-size:calc(15px + var(--pp-t) * 9px); color:var(--ink); animation-delay:.9s; }
+  .pp-spark-3{ top:calc(92px + var(--pp-t) * 55px); right:calc(266px + var(--pp-t) * 160px); font-size:calc(17px + var(--pp-t) * 10px); animation-delay:1.8s; }
 
   @media (prefers-reduced-motion: reduce){
     .pp-ring, .pp-phone, .pp-spark{ animation:none; }
@@ -64,38 +86,11 @@
     .pp-badge, .pp-spark{ display:none; }
   }
 
-  /* ----- 1.6x enlargement: only on wide viewports, so it never fights the mobile stack above ----- */
+  /* structural column switch stays a hard breakpoint — going from stacked to
+     side-by-side is inherently binary, unlike the illustration's own scale above */
   @media (min-width:1300px){
     .hero-grid{ grid-template-columns:1fr 1fr; }
     .hero-visual{ width:448px; height:560px; justify-self:end; }
-
-    /* narrower text column at this tier needs a smaller headline so "UX Product Designer" never breaks across two lines */
-    .hero h1{ font-size:46px; }
-    .hero h1 > span{ white-space:nowrap; }
-
-    .pp-ring{ width:480px; height:480px; top:-32px; right:-48px; border-width:1.5px; }
-    .hero-visual .blob-1{ width:352px; height:352px; top:16px; right:16px; }
-    .hero-visual .pp-dot{ width:16px; height:16px; top:432px; right:355px; }
-
-    .pp-phone{
-      top:22px; right:86px; width:211px; height:371px;
-      border-width:4px; border-radius:35px; padding:26px 19px; gap:13px;
-    }
-    .pp-line-1{ height:16px; border-radius:6px; }
-    .pp-line-2{ height:10px; border-radius:5px; }
-    .pp-block-lg{ height:93px; border-radius:13px; margin-top:10px; }
-    .pp-block-row{ gap:13px; }
-    .pp-block-row span{ height:61px; border-radius:13px; }
-    .pp-cta{ height:42px; border-radius:21px; }
-
-    .pp-badge{ font-size:1.06rem; padding:.67rem 1.36rem; border-width:2.5px; }
-    .pp-badge-figma{ top:31px; right:293px; }
-    .pp-badge-claude{ top:-16px; right:56px; }
-    .pp-badge-cursor{ top:394px; right:250px; }
-
-    .pp-spark-1{ top:-38px; right:176px; font-size:35px; }
-    .pp-spark-2{ top:490px; right:208px; font-size:24px; }
-    .pp-spark-3{ top:147px; right:426px; font-size:27px; }
   }
 </style>
 </head>
@@ -163,19 +158,20 @@
     <div class="wrap">
       <div class="hero-top">
         <div class="hero-badges">
-          <span class="hero-badge"><span class="lang-en">6 SECTIONS</span><span class="lang-vi">6 SECTION</span></span>
-          <span class="hero-badge ai-badge"><span class="material-symbols-rounded icon-ai-inline" aria-hidden="true">wand_stars</span><span class="lang-en">AI-Powered Workflow</span><span class="lang-vi">Có AI Hỗ Trợ</span></span>
+          <span class="hero-badge"><span class="lang-en">Master Class</span><span class="lang-vi">Master Class</span></span>
+          <span class="hero-badge"><span class="lang-en">UI/UX Designer</span><span class="lang-vi">UI/UX Designer</span></span>
+          <span class="hero-badge"><span class="lang-en">Product Design</span><span class="lang-vi">Product Design</span></span>
         </div>
       </div>
 
       <div class="hero-grid">
         <div>
           <h1 class="hero-lines">
-            <span><span>Systematic AI</span></span>
-            <span><span><em class="it">Prototyping</em></span></span>
-            <span><span><span class="lang-en">for UX <span class="mark"><span>Product Designer</span></span>.</span><span class="lang-vi">dành cho <span class="mark"><span>UX Product Designer</span></span>.</span></span></span>
+            <span><span><em class="it">Systematic</em></span></span>
+            <span><span><span class="mark"><span>AI</span></span></span></span>
+            <span><span><span class="mark"><span>Prototyping</span></span>.</span></span>
           </h1>
-          <p class="hero-desc"><span class="lang-en">Define your token, component inventory, and template once — then let AI build every screen from that same pattern, whether it's 3 screens or 30.</span><span class="lang-vi">Định nghĩa token, component inventory và template một lần — rồi để AI build mọi màn hình theo đúng pattern đó, dù bạn cần 3 màn hình hay 30.</span></p>
+          <p class="hero-desc"><span class="lang-en">Define the system once, AI builds every screen from it.</span><span class="lang-vi">Định nghĩa hệ thống một lần, AI sẽ build mọi màn hình từ đó.</span></p>
           <a href="#mentor" class="hero-mentor">
             <img src="../assets/avatar.png" alt="Winnie Nguyen" class="hero-mentor-avatar">
             <span class="hero-mentor-text">
@@ -188,9 +184,9 @@
             <a href="#curriculum" class="btn btn-ghost"><span class="lang-en">View Curriculum</span><span class="lang-vi">Xem nội dung khoá học</span></a>
           </div>
           <div class="hero-stats">
-            <div class="hero-stat"><strong>6</strong><span><span class="lang-en">Sections in the course</span><span class="lang-vi">Section trong khoá học</span></span></div>
-            <div class="hero-stat"><strong>3</strong><span><span class="lang-en">Layers in 1 prototype pattern</span><span class="lang-vi">Layer trong 1 prototype pattern</span></span></div>
-            <div class="hero-stat"><strong>Video · 1:1 · Group</strong><span><span class="lang-en">Choose your format</span><span class="lang-vi">Chọn hình thức phù hợp</span></span></div>
+            <div class="hero-stat"><strong>4</strong><span><span class="lang-en">Sessions · 2 weeks</span><span class="lang-vi">Buổi học · 2 tuần</span></span></div>
+            <div class="hero-stat"><strong>3 Tools</strong><span><span class="lang-en">Figma Make · Claude · Cursor</span><span class="lang-vi">Figma Make · Claude · Cursor</span></span></div>
+            <div class="hero-stat"><strong>1:1 or Group</strong><span><span class="lang-en">Format</span><span class="lang-vi">Hình thức</span></span></div>
           </div>
         </div>
 
@@ -461,6 +457,7 @@
           </div>
           <div class="pricing-price">5.000.000₫</div>
           <p class="pricing-note"><span class="lang-en">Full 6-section program</span><span class="lang-vi">Trọn chương trình 6 section</span></p>
+          <p class="pricing-caption" style="text-align:left; margin-top:-1.2rem; margin-bottom:1.8rem;"><span class="lang-en">4 live sessions over 2 weeks · 1.250.000₫/session</span><span class="lang-vi">4 buổi trực tiếp trong 2 tuần · 1.250.000₫/buổi</span></p>
 
           <div class="pricing-features">
             <div class="pricing-feature">
@@ -491,6 +488,7 @@
           </div>
           <div class="pricing-price">2.300.000₫</div>
           <p class="pricing-note"><span class="lang-en">Full 6-section program, groups of 3–5</span><span class="lang-vi">Trọn chương trình 6 section, nhóm 3–5 người</span></p>
+          <p class="pricing-caption" style="text-align:left; margin-top:-1.2rem; margin-bottom:1.8rem;"><span class="lang-en">4 live sessions over 2 weeks · 575.000₫/session</span><span class="lang-vi">4 buổi trực tiếp trong 2 tuần · 575.000₫/buổi</span></p>
 
           <div class="pricing-features">
             <div class="pricing-feature">
