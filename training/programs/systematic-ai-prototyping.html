@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Systematic AI Prototyping for UX Product Designer — Winnie Nguyen</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="../../Themes/program-tokens.css?v=2">
+<link rel="stylesheet" href="../../Themes/program-components.css?v=2">
+<link rel="stylesheet" href="../../Themes/editorial-patterns.css?v=2">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=wand_stars" />
+<style>
+  /* longer literal course-name headline needs a smaller size than the tagline this template was built for */
+  .hero h1{ font-size:clamp(2.2rem,4.8vw,3.8rem); }
+</style>
+</head>
+<body>
+
+  <!-- ── Contact modal ── -->
+  <div id="contactModal" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="modal">
+      <button class="modal-close" onclick="document.getElementById('contactModal').classList.remove('open')">✕</button>
+      <div class="contact-person">
+        <img src="../../portfolio/images/headshot-square.jpg" alt="Winnie Nguyen">
+        <div>
+          <div class="contact-person-name">Winnie Nguyen</div>
+          <div class="contact-person-role">UX &amp; Product Educator</div>
+        </div>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:nguyenphuctuongvan@gmail.com" class="contact-row">
+          <span class="contact-row-icon">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="var(--coral)" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          </span>
+          <div>
+            <div class="contact-row-label">Email</div>
+            <div class="contact-row-value">nguyenphuctuongvan@gmail.com</div>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/winnienguyen2910/" target="_blank" rel="noopener" class="contact-row">
+          <span class="contact-row-icon">
+            <svg width="16" height="16" fill="var(--coral)" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </span>
+          <div>
+            <div class="contact-row-label">LinkedIn</div>
+            <div class="contact-row-value">linkedin.com/in/winnienguyen2910</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <div class="wrap">
+      <a href="../index.html" class="nav-logo">
+        <img src="../assets/Logo.svg" alt="Winnie Nguyen">
+      </a>
+      <div class="nav-links">
+        <a href="#curriculum"><span class="lang-en">Content</span><span class="lang-vi">Nội dung</span></a>
+        <a href="#pricing"><span class="lang-en">Pricing</span><span class="lang-vi">Học phí</span></a>
+        <a href="#mentor"><span class="lang-en">Mentor</span><span class="lang-vi">Giảng viên</span></a>
+        <a href="#testimonial"><span class="lang-en">Story</span><span class="lang-vi">Câu chuyện</span></a>
+        <a href="#closing"><span class="lang-en">Format</span><span class="lang-vi">Hình thức</span></a>
+      </div>
+      <div class="nav-actions">
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button type="button" class="lang-btn is-active" data-lang="en">EN</button>
+          <span class="lang-toggle-sep">|</span>
+          <button type="button" class="lang-btn" data-lang="vi">VN</button>
+        </div>
+        <a href="#closing" class="btn btn-dark nav-cta"><span class="lang-en">Enroll</span><span class="lang-vi">Đăng ký</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-top">
+        <div class="hero-badges">
+          <span class="hero-badge"><span class="lang-en">6 SECTIONS</span><span class="lang-vi">6 SECTION</span></span>
+          <span class="hero-badge ai-badge"><span class="material-symbols-rounded icon-ai-inline" aria-hidden="true">wand_stars</span><span class="lang-en">AI-Powered Workflow</span><span class="lang-vi">Có AI Hỗ Trợ</span></span>
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <h1 class="hero-lines">
+            <span><span>Systematic AI</span></span>
+            <span><span><em class="it">Prototyping</em></span></span>
+            <span><span><span class="lang-en">for UX <span class="mark"><span>Product Designer</span></span>.</span><span class="lang-vi">dành cho <span class="mark"><span>UX Product Designer</span></span>.</span></span></span>
+          </h1>
+          <p class="hero-desc"><span class="lang-en">Systematic AI Prototyping for UX Product Designer teaches you to define your token, component inventory, and template once, before letting AI build any screen. The result is a prototype pattern AI can build from consistently, whether you need 3 screens or 30.</span><span class="lang-vi">Systematic AI Prototyping for UX Product Designer dạy bạn định nghĩa token, component inventory và template một lần, trước khi để AI build bất kỳ màn hình nào. Kết quả là một prototype pattern AI dựa vào để build nhất quán, dù bạn cần 3 màn hình hay 30 màn hình.</span></p>
+          <a href="#mentor" class="hero-mentor">
+            <img src="../assets/avatar.png" alt="Winnie Nguyen" class="hero-mentor-avatar">
+            <span class="hero-mentor-text">
+              <strong>Winnie Nguyen</strong>
+              <span>UX &amp; Product Educator</span>
+            </span>
+          </a>
+          <div class="hero-cta">
+            <a href="#closing" class="btn btn-dark"><span class="lang-en">Enroll Now</span><span class="lang-vi">Đăng Ký Khoá Học</span></a>
+            <a href="#curriculum" class="btn btn-ghost"><span class="lang-en">View Curriculum</span><span class="lang-vi">Xem nội dung khoá học</span></a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat"><strong>6</strong><span><span class="lang-en">Sections in the course</span><span class="lang-vi">Section trong khoá học</span></span></div>
+            <div class="hero-stat"><strong>3</strong><span><span class="lang-en">Layers in 1 prototype pattern</span><span class="lang-vi">Layer trong 1 prototype pattern</span></span></div>
+            <div class="hero-stat"><strong>Video · 1:1 · Group</strong><span><span class="lang-en">Choose your format</span><span class="lang-vi">Chọn hình thức phù hợp</span></span></div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-ring"></div>
+          <div class="blob blob-1 float-a"></div>
+          <div class="blob-2 float-b"></div>
+          <div class="blob-3 float-c"></div>
+          <div class="blob-dot"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ PAIN ============ -->
+  <section class="pain on-dark">
+    <div class="wrap">
+      <span class="kicker"><span class="lang-en">Common problem</span><span class="lang-vi">Vấn đề thường gặp</span></span>
+      <p class="pain-headline reveal"><span class="lang-en">Where does your prototype <em>break?</em></span><span class="lang-vi">Prototype của bạn rạn nứt <em>ở đâu?</em></span></p>
+
+      <ul class="pain-list">
+        <li class="reveal reveal-d1"><em>01</em><span><span class="lang-en">Describe one screen, let AI generate it, then move to the next screen. This works fine for the first 1-2 screens.</span><span class="lang-vi">Mô tả 1 màn hình, để AI generate ra, rồi chuyển sang màn hình tiếp theo. Cách này chạy tốt cho 1-2 màn hình đầu.</span></span></li>
+        <li class="reveal reveal-d2"><em>02</em><span><span class="lang-en">Components stop matching. AI forgets decisions made on the previous screen.</span><span class="lang-vi">Component không khớp nhau. AI quên quyết định đã đưa ra ở màn hình trước.</span></span></li>
+        <li class="reveal reveal-d3"><em>03</em><span><span class="lang-en">You end up fixing things by hand more than if you'd designed it yourself, because nothing was defined upfront for AI to work from.</span><span class="lang-vi">Bạn sửa tay nhiều hơn cả tự thiết kế từ đầu, vì không có gì được định nghĩa trước để AI dựa vào.</span></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ WHO IT'S FOR ============ -->
+  <section class="who" id="audience">
+    <div class="wrap">
+      <div class="who-grid">
+        <div class="reveal">
+          <span class="kicker"><span class="lang-en">Who it's for</span><span class="lang-vi">Dành cho ai</span></span>
+          <p class="who-headline" style="margin-top:1.2rem;"><span class="lang-en">You already know Figma. Now learn to make AI build your <span class="mark"><span>system</span></span> correctly.</span><span class="lang-vi">Bạn đã biết Figma. Giờ học cách để AI build đúng <span class="mark"><span>hệ thống của bạn</span></span>.</span></p>
+        </div>
+        <div class="who-card reveal reveal-d2">
+          <div class="num">✓</div>
+          <p><span class="lang-en">You're a product or UX designer with basic Figma skills: creating frames, using components, connecting screens. You want to use AI to prototype faster, without trading consistency for speed. You have a real design project, even an early-stage one, to practice on real data instead of made-up examples.</span><span class="lang-vi">Bạn là product hoặc UX designer, đã có nền tảng Figma cơ bản: tạo frame, dùng component, nối màn hình. Bạn muốn dùng AI để prototype nhanh hơn, nhưng không muốn đánh đổi sự nhất quán để lấy tốc độ. Bạn có 1 design project thật, dù mới ở giai đoạn sơ khai, để thực hành trên dữ liệu thật.</span></p>
+        </div>
+      </div>
+
+      <p class="curriculum-note reveal" style="margin-top:2.6rem;"><span class="lang-en">You don't need to know how to code. You don't need a complete design system already. You don't need to have used an AI coding tool before.</span><span class="lang-vi">Không cần biết code. Không cần có sẵn 1 design system hoàn chỉnh. Không cần đã từng dùng AI coding tool trước đó.</span></p>
+    </div>
+  </section>
+
+  <!-- ============ WALK AWAY ============ -->
+  <section class="walkaway">
+    <div class="wrap">
+      <div class="walkaway-card reveal">
+        <span class="walkaway-badge">
+          <span class="material-symbols-rounded" aria-hidden="true">wand_stars</span>
+          <span class="lang-en">What you walk away with</span><span class="lang-vi">Học xong bạn làm được gì</span>
+        </span>
+        <p class="walkaway-headline"><span class="lang-en">A <span class="mark"><span>prototype pattern</span></span> AI can read. A prototype that runs in the browser, whether 3 screens or 30. Coherent enough to <span class="mark"><span>demo for stakeholders</span></span>.</span><span class="lang-vi">Một <span class="mark"><span>prototype pattern</span></span> AI đọc được. Một prototype chạy được trong trình duyệt, dù 3 hay 30 màn hình. Đủ mạch lạc để <span class="mark"><span>demo cho stakeholder</span></span>.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CURRICULUM — 6 sections ============ -->
+  <section class="curriculum" id="curriculum">
+    <div class="wrap">
+      <div class="curriculum-head reveal">
+        <span class="kicker"><span class="lang-en">Course content</span><span class="lang-vi">Nội dung khoá học</span></span>
+        <h2 style="margin-top:1rem;"><span class="lang-en">What you build,<br><em style="font-style:normal; color:var(--coral);">section by section.</em></span><span class="lang-vi">Mỗi section,<br><em style="font-style:normal; color:var(--coral);">bạn xây dựng được gì.</em></span></h2>
+      </div>
+
+      <div class="session-list">
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">01</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3><span class="lang-en">Introduction</span><span class="lang-vi">Giới Thiệu</span></h3>
+                <p><span class="lang-en">Start in the right direction before building your first screen.</span><span class="lang-vi">Bắt đầu đúng hướng trước khi build màn hình đầu tiên.</span></p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div style="grid-column:1/-1">
+                <span class="session-detail-label"><span class="lang-en">What you'll learn</span><span class="lang-vi">Bạn sẽ học</span></span>
+                <ul>
+                  <li><span class="lang-en">Know exactly who this course is for, and whether you're in the right group</span><span class="lang-vi">Biết chính xác khoá học dành cho ai, và bạn có đang ở đúng nhóm đó không</span></li>
+                  <li><span class="lang-en">Understand the path from mindset to build to polish, with no surprises along the way</span><span class="lang-vi">Nắm được lộ trình từ tư duy đến build đến hoàn thiện, không bị bất ngờ ở bất kỳ phần nào</span></li>
+                  <li><span class="lang-en">Have Figma, an AI chat tool, an AI coding tool, and a real design project ready before you start</span><span class="lang-vi">Chuẩn bị đủ Figma, AI chat tool, AI coding tool và 1 design project thật trước khi bắt đầu</span></li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">02</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3><span class="lang-en">Changing How You Build AI Prototypes</span><span class="lang-vi">Thay Đổi Tư Duy Phát Triển AI Prototype</span></h3>
+                <p><span class="lang-en">Why your prototype breaks down at screen 4.</span><span class="lang-vi">Vì sao prototype của bạn rạn nứt ở màn hình thứ 4.</span></p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div style="grid-column:1/-1">
+                <span class="session-detail-label"><span class="lang-en">What you'll learn</span><span class="lang-vi">Bạn sẽ học</span></span>
+                <ul>
+                  <li><span class="lang-en">Explain exactly when and why the screen-by-screen approach starts breaking down</span><span class="lang-vi">Giải thích được chính xác lúc nào và vì sao cách làm screen-by-screen bắt đầu rạn nứt</span></li>
+                  <li><span class="lang-en">Define the 3 layers of a prototype pattern: token, component inventory with full states, and template</span><span class="lang-vi">Định nghĩa 3 layer của 1 prototype pattern: token, component inventory đủ state, và template</span></li>
+                  <li><span class="lang-en">Create a complete prototype pattern for your own project, through 4 specific prompts with an AI chat tool</span><span class="lang-vi">Tạo prototype pattern hoàn chỉnh cho đúng dự án của bạn, qua 4 prompt cụ thể với AI chat tool</span></li>
+                  <li><span class="lang-en">Choose the right 2-3 screens to prototype, based on a real user goal</span><span class="lang-vi">Chọn đúng 2-3 màn hình để prototype, dựa trên user goal thật</span></li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">03</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3><span class="lang-en">Building the AI Prototype</span><span class="lang-vi">Xây Dựng AI Prototype</span></h3>
+                <p><span class="lang-en">From a cleaned-up Figma file to a prototype that runs in the browser.</span><span class="lang-vi">Từ file Figma đã dọn dẹp đến prototype chạy được trong trình duyệt.</span></p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div style="grid-column:1/-1">
+                <span class="session-detail-label"><span class="lang-en">What you'll learn</span><span class="lang-vi">Bạn sẽ học</span></span>
+                <ul>
+                  <li><span class="lang-en">Clean up your design file and connect Figma to your AI tool through MCP, so AI reads the real system, not a rough draft</span><span class="lang-vi">Dọn dẹp design file và kết nối Figma với AI tool qua MCP, để AI đọc đúng hệ thống, không đọc luôn bản nháp</span></li>
+                  <li><span class="lang-en">Rebuild the token, component inventory, and template directly from the real Figma file using AI</span><span class="lang-vi">Dựng lại token, component inventory và template trực tiếp từ file Figma thật bằng AI</span></li>
+                  <li><span class="lang-en">Write a complete 5-part build prompt, and build a main journey of 2-4 screens that runs in the browser</span><span class="lang-vi">Viết build prompt đầy đủ 5 thành phần, build main journey 2-4 màn hình chạy được trong trình duyệt</span></li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">04</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3><span class="lang-en">Scaling the Prototype</span><span class="lang-vi">Mở Rộng Quy Mô Prototype</span></h3>
+                <p><span class="lang-en">Fix it in one place, every screen updates correctly.</span><span class="lang-vi">Sửa 1 chỗ, mọi màn hình tự động đúng theo.</span></p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div style="grid-column:1/-1">
+                <span class="session-detail-label"><span class="lang-en">What you'll learn</span><span class="lang-vi">Bạn sẽ học</span></span>
+                <ul>
+                  <li><span class="lang-en">Build the remaining journeys beyond the main one, staying consistent with the same component inventory</span><span class="lang-vi">Build các journey còn lại ngoài main journey, vẫn giữ nhất quán với cùng 1 component inventory</span></li>
+                  <li><span class="lang-en">Fix a repeated issue in exactly one place, in the component inventory or token, not screen by screen</span><span class="lang-vi">Sửa lỗi lặp lại đúng 1 chỗ ở component inventory hoặc token, không sửa lại từng màn hình</span></li>
+                  <li><span class="lang-en">Know exactly when to add a new component or template, through 3 specific questions before you expand</span><span class="lang-vi">Biết chính xác lúc nào cần thêm component hay template mới, qua 3 câu hỏi cụ thể trước khi mở rộng</span></li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">05</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3><span class="lang-en">Packaging &amp; Sharing the Prototype</span><span class="lang-vi">Đóng Gói &amp; Chia Sẻ Prototype</span></h3>
+                <p><span class="lang-en">A prototype that runs on your machine isn't a prototype anyone else can see.</span><span class="lang-vi">Prototype chạy trên máy bạn chưa phải prototype ai cũng xem được.</span></p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div style="grid-column:1/-1">
+                <span class="session-detail-label"><span class="lang-en">What you'll learn</span><span class="lang-vi">Bạn sẽ học</span></span>
+                <ul>
+                  <li><span class="lang-en">Send a link anyone can open, whether you used an AI design tool or an AI coding tool</span><span class="lang-vi">Gửi được 1 đường link ai cũng mở ra xem, dù bạn dùng AI design tool hay AI coding tool</span></li>
+                  <li><span class="lang-en">Know exactly what AI did faster than you could by hand, and what it missed that you had to fix yourself, through 3 specific questions</span><span class="lang-vi">Biết chính xác AI làm đúng điều gì nhanh hơn tay bạn, và bỏ sót điều gì bạn phải tự sửa, qua 3 câu hỏi cụ thể</span></li>
+                  <li><span class="lang-en">Extend the prototype with 2 new screens, following the component inventory you already built, without starting over</span><span class="lang-vi">Mở rộng prototype thêm 2 màn hình mới, đúng component inventory đã build, không phải làm lại từ đầu</span></li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">06</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3><span class="lang-en">Stitching the Prototype</span><span class="lang-vi">Stitching Prototype</span></h3>
+                <p><span class="lang-en">Separate screens aren't a journey yet.</span><span class="lang-vi">Nhiều màn hình rời rạc chưa phải một hành trình.</span></p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div style="grid-column:1/-1">
+                <span class="session-detail-label"><span class="lang-en">What you'll learn</span><span class="lang-vi">Bạn sẽ học</span></span>
+                <ul>
+                  <li><span class="lang-en">Explain what a stitched prototype is, and how it differs from separate screens</span><span class="lang-vi">Giải thích được thế nào là 1 stitched prototype, khác gì với các màn hình rời rạc</span></li>
+                  <li><span class="lang-en">Connect multiple prototypes into one coherent journey through a 5-step process</span><span class="lang-vi">Nối nhiều prototype thành 1 hành trình liền mạch qua quy trình 5 bước</span></li>
+                  <li><span class="lang-en">Walk through a real case study from the instructor's own work (company not named)</span><span class="lang-vi">Xem qua 1 case study thực tế từ chính công việc của giảng viên (không nêu tên công ty)</span></li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRICING — 3 cards ============ -->
+  <section class="pricing" id="pricing">
+    <div class="wrap">
+      <div class="pricing-head reveal">
+        <span class="kicker"><span class="lang-en">Pricing</span><span class="lang-vi">Học phí</span></span>
+        <h2><span class="lang-en">Choose your format.</span><span class="lang-vi">Chọn hình thức phù hợp.</span></h2>
+      </div>
+
+      <div class="pricing-grid is-triple">
+
+        <div class="pricing-card is-soon reveal">
+          <div class="pricing-card-head">
+            <span class="pricing-card-name">Video Course</span>
+            <span class="pricing-badge"><span class="lang-en">Coming Soon</span><span class="lang-vi">Sắp ra mắt</span></span>
+          </div>
+          <div class="pricing-price">—</div>
+          <p class="pricing-note"><span class="lang-en">Learn at your own pace</span><span class="lang-vi">Học theo tiến độ riêng</span></p>
+
+          <div class="pricing-features">
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13l3-9 3 9M4.5 9.5h3M9 13l3-9 3 9"/></svg></span>
+              <div><div class="pricing-feature-title"><span class="lang-en">All 6 Sections</span><span class="lang-vi">Toàn bộ 6 section</span></div><div class="pricing-feature-desc"><span class="lang-en">Video lessons covering all 6 sections.</span><span class="lang-vi">Bài giảng video cho cả 6 section.</span></div></div>
+            </div>
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2.5" y="3" width="11" height="10.5" rx="1.5"/><path d="M2.5 6h11M5.5 1.5v3M10.5 1.5v3"/></svg></span>
+              <div><div class="pricing-feature-title"><span class="lang-en">Included Materials</span><span class="lang-vi">Tài liệu đi kèm</span></div><div class="pricing-feature-desc"><span class="lang-en">Practice materials for each section.</span><span class="lang-vi">Tài liệu thực hành theo từng section.</span></div></div>
+            </div>
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h9M8 4l4 4-4 4"/></svg></span>
+              <div><div class="pricing-feature-title"><span class="lang-en">Your Own Pace</span><span class="lang-vi">Tiến độ riêng</span></div><div class="pricing-feature-desc"><span class="lang-en">Watch anytime, no fixed schedule.</span><span class="lang-vi">Xem lại bất cứ lúc nào, không cần lịch cố định.</span></div></div>
+            </div>
+          </div>
+
+          <a href="#closing" class="btn btn-ghost"><span class="lang-en">Notify Me</span><span class="lang-vi">Đăng Ký Nhận Thông Báo</span></a>
+          <p class="pricing-caption"><span class="lang-en">No official launch date yet</span><span class="lang-vi">Chưa có ngày ra mắt chính thức</span></p>
+        </div>
+
+        <div class="pricing-card is-light reveal reveal-d1">
+          <div class="pricing-card-head">
+            <span class="pricing-card-name">1:1 Coaching</span>
+            <span class="pricing-badge"><span class="lang-en">Most Focused</span><span class="lang-vi">Tập trung nhất</span></span>
+          </div>
+          <div class="pricing-price">5.000.000₫</div>
+          <p class="pricing-note"><span class="lang-en">Full 6-section program</span><span class="lang-vi">Trọn chương trình 6 section</span></p>
+
+          <div class="pricing-features">
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 13c0-3 2.5-5 6-5s6 2 6 5M8 8a3 3 0 100-6 3 3 0 000 6z"/></svg></span>
+              <div><div class="pricing-feature-title"><span class="lang-en">1:1 Support</span><span class="lang-vi">Đồng hành 1:1</span></div><div class="pricing-feature-desc"><span class="lang-en">Throughout all 6 sections.</span><span class="lang-vi">Xuyên suốt cả 6 section.</span></div></div>
+            </div>
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13l3-9 3 9M4.5 9.5h3M9 13l3-9 3 9"/></svg></span>
+              <div><div class="pricing-feature-title"><span class="lang-en">Real Project</span><span class="lang-vi">Dự án thật</span></div><div class="pricing-feature-desc"><span class="lang-en">Apply directly to your own project.</span><span class="lang-vi">Áp dụng trực tiếp trên dự án của bạn.</span></div></div>
+            </div>
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 13c0-3 2.5-5 6-5s6 2 6 5M8 8a3 3 0 100-6 3 3 0 000 6z"/></svg></span>
+              <div><div class="pricing-feature-title"><span class="lang-en">Direct Feedback</span><span class="lang-vi">Phản hồi trực tiếp</span></div><div class="pricing-feature-desc"><span class="lang-en">On the exact prototype pattern you build.</span><span class="lang-vi">Trên đúng prototype pattern bạn build.</span></div></div>
+            </div>
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2.5" y="3" width="11" height="10.5" rx="1.5"/><path d="M2.5 6h11M5.5 1.5v3M10.5 1.5v3"/></svg></span>
+              <div><div class="pricing-feature-title"><span class="lang-en">Flexible Schedule</span><span class="lang-vi">Lịch linh hoạt</span></div><div class="pricing-feature-desc"><span class="lang-en">On your own timeline.</span><span class="lang-vi">Theo tiến độ của bạn.</span></div></div>
+            </div>
+          </div>
+
+          <a href="#closing" class="btn btn-dark"><span class="lang-en">Enroll</span><span class="lang-vi">Đăng Ký</span></a>
+        </div>
+
+        <div class="pricing-card is-dark reveal reveal-d2">
+          <div class="pricing-card-head">
+            <span class="pricing-card-name">Group Training</span>
+            <span class="pricing-badge"><span class="lang-en">Best Value</span><span class="lang-vi">Tiết kiệm nhất</span></span>
+          </div>
+          <div class="pricing-price">2.300.000₫</div>
+          <p class="pricing-note"><span class="lang-en">Full 6-section program, groups of 3–5</span><span class="lang-vi">Trọn chương trình 6 section, nhóm 3–5 người</span></p>
+
+          <div class="pricing-features">
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13l3-9 3 9M4.5 9.5h3M9 13l3-9 3 9"/></svg></span>
+              <div><div class="pricing-feature-title"><span class="lang-en">Same Content</span><span class="lang-vi">Cùng nội dung</span></div><div class="pricing-feature-desc"><span class="lang-en">6 sections, learned in a group of 3–5.</span><span class="lang-vi">6 section, học theo nhóm 3–5 người.</span></div></div>
+            </div>
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M1.5 13c0-2.5 2-4 4-4s4 1.5 4 4M5.5 6.5a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5zM9.7 5.2c.3-.1.6-.2 1-.2 2 0 4 1.5 4 4M10.8 2.3c.9.2 1.5 1 1.5 1.9"/></svg></span>
+              <div><div class="pricing-feature-title"><span class="lang-en">Peer Feedback</span><span class="lang-vi">Phản hồi chéo</span></div><div class="pricing-feature-desc"><span class="lang-en">From the group, not just the mentor.</span><span class="lang-vi">Từ nhóm học, không chỉ từ mentor.</span></div></div>
+            </div>
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v3M8 11v3M2 8h3M11 8h3M4.5 4.5l2 2M9.5 9.5l2 2M11.5 4.5l-2 2M6.5 9.5l-2 2"/></svg></span>
+              <div><div class="pricing-feature-title"><span class="lang-en">Steady Pace</span><span class="lang-vi">Nhịp học đều đặn</span></div><div class="pricing-feature-desc"><span class="lang-en">With people alongside you.</span><span class="lang-vi">Có bạn đồng hành.</span></div></div>
+            </div>
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 1.5v13M11 4.2c0-1.2-1.3-2.2-3-2.2s-3 1-3 2.3c0 3 6 1.4 6 4.4 0 1.3-1.3 2.3-3 2.3s-3-1-3-2.2"/></svg></span>
+              <div><div class="pricing-feature-title"><span class="lang-en">Lower Cost</span><span class="lang-vi">Chi phí thấp hơn</span></div><div class="pricing-feature-desc"><span class="lang-en">Same full content.</span><span class="lang-vi">Cùng nội dung đầy đủ.</span></div></div>
+            </div>
+          </div>
+
+          <a href="#closing" class="btn btn-lime"><span class="lang-en">Enroll</span><span class="lang-vi">Đăng Ký</span></a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div data-include="../../Themes/partials/mentor-section.html"></div>
+
+  <div data-include="../../Themes/partials/testimonial-section.html"></div>
+
+  <!-- ============ CLOSING / PREP / CTA ============ -->
+  <section class="closing" id="closing">
+    <div class="wrap">
+      <div class="closing-grid">
+        <div class="reveal">
+          <span class="kicker"><span class="lang-en">Ready to start?</span><span class="lang-vi">Sẵn sàng bắt đầu?</span></span>
+          <h2 style="margin-top:1rem;"><span class="lang-en">Stop guessing.<br><em style="font-style:normal; color:var(--lime);">Start prototyping with a system.</em></span><span class="lang-vi">Dừng đoán.<br><em style="font-style:normal; color:var(--lime);">Bắt đầu prototype có hệ thống.</em></span></h2>
+          <div class="closing-cta">
+            <form id="leadForm" class="lead-form" action="https://formspree.io/f/mpqvoqyy" method="POST">
+              <input type="hidden" name="_subject" value="New inquiry: Systematic AI Prototyping course">
+              <input type="hidden" name="source" value="AI Prototyping Course — Contact Form">
+              <div class="lead-form-row">
+                <input type="text" name="name" placeholder="Your name" required>
+                <input type="email" name="email" placeholder="Your email" required>
+              </div>
+              <button type="submit" class="btn btn-lime lead-form-submit"><span class="lang-en">Enroll</span><span class="lang-vi">Đăng Ký</span></button>
+              <p class="lead-form-note"><span class="lang-en">I'll reply by email within 1–2 business days.</span><span class="lang-vi">Mình sẽ phản hồi qua email trong 1–2 ngày làm việc.</span></p>
+            </form>
+            <p id="leadFormSuccess" class="lead-form-success"><span class="lang-en">Thanks! I've got your details and will email you within 1–2 business days.</span><span class="lang-vi">Cảm ơn bạn! Mình đã nhận được thông tin và sẽ email lại trong 1–2 ngày làm việc.</span></p>
+          </div>
+        </div>
+
+        <div class="format-list reveal reveal-d2">
+          <div class="format-row"><span><span class="lang-en">Format</span><span class="lang-vi">Hình thức</span></span><span>Video · 1:1 · Group</span></div>
+          <div class="format-row"><span><span class="lang-en">Delivery</span><span class="lang-vi">Triển khai</span></span><span><span class="lang-en">Online video, in person, or remote</span><span class="lang-vi">Video online, trực tiếp, hoặc từ xa</span></span></div>
+          <div class="format-row"><span><span class="lang-en">Language</span><span class="lang-vi">Ngôn ngữ</span></span><span><span class="lang-en">Vietnamese</span><span class="lang-vi">Tiếng Việt</span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <p>© 2026 Winnie Nguyen · UX &amp; Product Educator</p>
+      <div class="footer-links">
+        <a href="#" onclick="document.getElementById('contactModal').classList.add('open'); return false;">Contact</a>
+        <a href="https://www.linkedin.com/in/winnienguyen2910" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+   (async function(){
+    // load shared partials (e.g. the testimonial section) before wiring up interactions below
+    await Promise.all([...document.querySelectorAll('[data-include]')].map(async node => {
+      const res = await fetch(node.dataset.include);
+      node.outerHTML = await res.text();
+    }));
+
+    // language toggle — EN/VN, remembered via localStorage
+    const storedLang = localStorage.getItem('lang') || 'en';
+    if (storedLang === 'vi') document.body.classList.add('is-vi');
+    document.querySelectorAll('.lang-btn').forEach(btn=>{
+      btn.classList.toggle('is-active', btn.dataset.lang === storedLang);
+      btn.addEventListener('click', ()=>{
+        document.body.classList.toggle('is-vi', btn.dataset.lang === 'vi');
+        document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('is-active', b === btn));
+        localStorage.setItem('lang', btn.dataset.lang);
+      });
+    });
+
+    // scroll-reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      });
+    }, { threshold:.15, rootMargin:'0px 0px -60px 0px' });
+    revealEls.forEach(el=>io.observe(el));
+
+    // curriculum accordion — click or press Enter/Space on a session to expand its detail
+    // only one session stays open at a time
+    function toggleSession(row){
+      const wasOpen = row.classList.contains('is-open');
+      document.querySelectorAll('.session-row.is-open').forEach(r=>{
+        r.classList.remove('is-open');
+        r.setAttribute('aria-expanded', 'false');
+      });
+      if (!wasOpen){
+        row.classList.add('is-open');
+        row.setAttribute('aria-expanded', 'true');
+      }
+    }
+    document.querySelectorAll('.session-row').forEach(row=>{
+      row.addEventListener('click', ()=>toggleSession(row));
+      row.addEventListener('keydown', (e)=>{
+        if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleSession(row); }
+      });
+    });
+
+    // lead form — submit via fetch so visitors never leave the page
+    const leadForm = document.getElementById('leadForm');
+    const leadFormSuccess = document.getElementById('leadFormSuccess');
+    if (leadForm) {
+      leadForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = leadForm.querySelector('.lead-form-submit');
+        const originalLabel = btn.innerHTML;
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+        try {
+          const res = await fetch(leadForm.action, {
+            method: 'POST',
+            body: new FormData(leadForm),
+            headers: { 'Accept': 'application/json' }
+          });
+          if (!res.ok) throw new Error('Submission failed');
+          leadForm.style.display = 'none';
+          leadFormSuccess.style.display = 'block';
+        } catch (err) {
+          btn.disabled = false;
+          btn.innerHTML = originalLabel;
+          alert("Something went wrong sending that. Please email me directly at nguyenphuctuongvan@gmail.com");
+        }
+      });
+    }
+   })();
+  </script>
+
+</body>
+</html>
