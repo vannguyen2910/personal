@@ -55,7 +55,7 @@ section{ position:relative; }
    themed by the --mark-* custom properties in program-tokens.css. */
 /* .hero-lines forces child spans to display:block for its line-reveal animation —
    override back to inline for .mark so it hugs the word instead of the whole line */
-.hero-lines .mark{ display:inline-block; }
+.hero-lines .mark{ display:inline-block; vertical-align:top; }
 .hero-lines .mark span{ display:inline; transform:none; opacity:1; animation:none; }
 
 /* reveal-on-scroll utility */
@@ -152,7 +152,7 @@ body.is-vi .lang-vi { display: revert !important; }
 .hero h1{
   font-family:var(--serif); font-weight:800;
   font-size:clamp(2.6rem,6.4vw,5.4rem);
-  line-height:.98; letter-spacing:-.03em;
+  line-height:1.37; letter-spacing:-.03em;
 }
 .hero h1 .sans-word{ font-family:var(--sans); font-weight:800; font-style:normal; }
 .hero h1 .it{ font-style:normal; color:var(--coral); }
