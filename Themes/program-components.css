@@ -187,6 +187,7 @@ body.is-vi .lang-vi { display: revert !important; }
 .hero-stats{ display:flex; gap:2.2rem; margin-top:1.4rem; flex-wrap:wrap; padding-top:1.4rem; border-top:1px solid var(--line); }
 .hero-stat strong{ display:block; font-family:var(--serif); font-size:1.5rem; font-weight:800; }
 .hero-stat > span{ font-size:.76rem; color:var(--ink-70); }
+.hero-stat-sub{ display:block; margin-top:.2rem; font-size:.68rem; opacity:.7; }
 
 /* ============ PRICING ============ */
 .pricing{ padding:clamp(4rem,9vw,7rem) 0; }
@@ -214,7 +215,7 @@ body.is-vi .lang-vi { display: revert !important; }
 .pricing-card.is-soon .pricing-badge{ background:var(--coral-tint); color:var(--coral); }
 
 .pricing-price{ font-family:var(--serif); font-weight:800; font-size:clamp(2rem,3.4vw,2.5rem); line-height:1; }
-.pricing-price span{ font-size:1rem; font-weight:600; opacity:.55; }
+.pricing-price span{ font-size:1.05rem; font-weight:700; opacity:.85; }
 .pricing-card.is-soon .pricing-price{ color:var(--ink-50); }
 .pricing-note{ font-size:.85rem; margin-top:.6rem; margin-bottom:1.8rem; }
 .pricing-card.is-light .pricing-note{ color:var(--ink-70); }
