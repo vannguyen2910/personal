@@ -477,7 +477,7 @@
             </div>
           </div>
 
-          <a href="#closing" class="btn btn-dark">
+          <a href="#closing" class="btn btn-dark" data-format="1:1 Coaching">
             <span class="lang-en">Enroll</span><span class="lang-vi">Đăng Ký</span>
           </a>
         </div>
@@ -510,7 +510,7 @@
             </div>
           </div>
 
-          <a href="#closing" class="btn btn-lime">
+          <a href="#closing" class="btn btn-lime" data-format="Group Training">
             <span class="lang-en">Enroll</span><span class="lang-vi">Đăng Ký</span>
           </a>
         </div>
@@ -533,6 +533,13 @@
             <form id="leadForm" class="lead-form" action="https://formspree.io/f/mpqvoqyy" method="POST">
               <input type="hidden" name="_subject" value="New coaching inquiry: Roadmap to Mid-Level Design Leadership">
               <input type="hidden" name="source" value="Mid-Level Program — Contact Form">
+              <div class="format-choices">
+                <span class="format-choices-label"><span class="lang-en">Which format interests you?</span><span class="lang-vi">Bạn quan tâm hình thức nào?</span></span>
+                <div class="format-choices-row">
+                  <label class="format-choice"><input type="radio" name="format" value="1:1 Coaching"><span class="lang-en">1:1 Coaching</span><span class="lang-vi">Kèm 1:1</span></label>
+                  <label class="format-choice"><input type="radio" name="format" value="Group Training"><span class="lang-en">Group Training</span><span class="lang-vi">Học nhóm</span></label>
+                </div>
+              </div>
               <div class="lead-form-row">
                 <input type="text" name="name" placeholder="Your name" required>
                 <input type="email" name="email" placeholder="Your email" required>
@@ -617,6 +624,14 @@
       row.addEventListener('click', ()=>toggleSession(row));
       row.addEventListener('keydown', (e)=>{
         if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleSession(row); }
+      });
+    });
+
+    // pre-select the format radio when arriving via a specific pricing card's button
+    document.querySelectorAll('a[data-format]').forEach(link => {
+      link.addEventListener('click', () => {
+        const radio = document.querySelector(`input[name="format"][value="${link.dataset.format}"]`);
+        if (radio) radio.checked = true;
       });
     });
 

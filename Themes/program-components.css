@@ -433,6 +433,18 @@ body.is-vi .pain-headline{ max-width:30ch; }
 }
 .lead-form-secondary{ margin-top:1.2rem; }
 
+/* ===== lead form: which-format choice pills ===== */
+.format-choices{ margin-bottom:1rem; }
+.format-choices-label{ display:block; font-size:.82rem; color:rgba(245,239,226,.6); margin-bottom:.6rem; }
+.format-choices-row{ display:flex; gap:.6rem; flex-wrap:wrap; }
+.format-choice{
+  display:inline-flex; align-items:center; gap:.4rem; cursor:pointer;
+  padding:.5rem 1rem; border:1.5px solid rgba(245,239,226,.25); border-radius:999px;
+  font-size:.85rem; color:rgba(245,239,226,.8); transition:border-color .2s, background .2s;
+}
+.format-choice input{ accent-color:var(--lime); margin:0; }
+.format-choice:has(input:checked){ border-color:var(--lime); background:rgba(63,207,110,.12); color:var(--cream); }
+
 /* ============ FOOTER ============ */
 footer{ padding:2.2rem 0; text-align:center; font-size:.8rem; color:var(--ink-70); }
 footer a{ color:var(--ink); font-weight:600; }
