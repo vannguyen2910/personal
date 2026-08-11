@@ -86,6 +86,14 @@
     .pp-badge, .pp-spark{ display:none; }
   }
 
+  /* curriculum session snapshot line — tools used, visible without opening the accordion */
+  .session-meta{
+    display:flex; gap:.5rem; align-items:center; flex-wrap:wrap;
+    margin-top:.6rem; font-size:.7rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--coral);
+  }
+  .session-meta > span:not(:last-child)::after{ content:'·'; margin-left:.5rem; color:var(--ink-50); font-weight:400; }
+
   /* structural column switch stays a hard breakpoint — going from stacked to
      side-by-side is inherently binary, unlike the illustration's own scale above */
   @media (min-width:1300px){
@@ -239,11 +247,11 @@
         </div>
         <div class="who-card reveal reveal-d2">
           <div class="num">✓</div>
-          <p><span class="lang-en">You don't need another Figma tutorial — you need AI that respects the system you already built. If frames, components, and connected screens are already second nature, and you've got a real project (even a messy, early one) to work on, you're ready.</span><span class="lang-vi">Bạn không cần thêm một tutorial Figma nữa — bạn cần AI tôn trọng hệ thống bạn đã xây. Nếu frame, component và nối màn hình đã là chuyện quen thuộc, và bạn có 1 project thật (dù mới ở giai đoạn sơ khai) để thực hành, vậy là đủ.</span></p>
+          <p><span class="lang-en">Frames, components, connected screens — already second nature. Bring one real project, even a messy one.</span><span class="lang-vi">Frame, component, nối màn hình — đã là chuyện quen thuộc. Mang theo 1 project thật, dù mới sơ khai.</span></p>
         </div>
       </div>
 
-      <p class="curriculum-note reveal" style="margin-top:2.6rem;"><span class="lang-en">You don't need to know how to code. You don't need a complete design system already. You don't need to have used an AI coding tool before.</span><span class="lang-vi">Không cần biết code. Không cần có sẵn 1 design system hoàn chỉnh. Không cần đã từng dùng AI coding tool trước đó.</span></p>
+      <p class="curriculum-note reveal" style="margin-top:2.6rem;"><span class="lang-en">No coding. No complete design system. No prior AI coding tool experience.</span><span class="lang-vi">Không cần biết code. Không cần có sẵn design system. Không cần đã từng dùng AI coding tool.</span></p>
     </div>
   </section>
 
@@ -260,12 +268,12 @@
     </div>
   </section>
 
-  <!-- ============ CURRICULUM — 6 sections ============ -->
+  <!-- ============ CURRICULUM — 4 sessions ============ -->
   <section class="curriculum" id="curriculum">
     <div class="wrap">
       <div class="curriculum-head reveal">
         <span class="kicker"><span class="lang-en">The curriculum</span><span class="lang-vi">Nội dung khoá học</span></span>
-        <h2 style="margin-top:1rem;"><span class="lang-en">What you build,<br><em style="font-style:normal; color:var(--coral);">section by section.</em></span><span class="lang-vi">Mỗi section,<br><em style="font-style:normal; color:var(--coral);">bạn xây dựng được gì.</em></span></h2>
+        <h2 style="margin-top:1rem;"><span class="lang-en">What you build,<br><em style="font-style:normal; color:var(--coral);">session by session.</em></span><span class="lang-vi">Mỗi buổi,<br><em style="font-style:normal; color:var(--coral);">bạn xây dựng được gì.</em></span></h2>
       </div>
 
       <div class="session-list">
@@ -275,18 +283,26 @@
           <div>
             <div class="session-row-top">
               <div>
-                <h3><span class="lang-en">Introduction</span><span class="lang-vi">Giới Thiệu</span></h3>
-                <p><span class="lang-en">Start in the right direction before building your first screen.</span><span class="lang-vi">Bắt đầu đúng hướng trước khi build màn hình đầu tiên.</span></p>
+                <h3><span class="lang-en">Changing How You Build AI Prototypes</span><span class="lang-vi">Thay Đổi Tư Duy Phát Triển AI Prototype</span></h3>
+                <p><span class="lang-en">Why your prototype breaks down at screen 4.</span><span class="lang-vi">Vì sao prototype của bạn rạn nứt ở màn hình thứ 4.</span></p>
+                <div class="session-meta"><span>AI chat tool</span></div>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
             </div>
             <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
-              <div style="grid-column:1/-1">
+              <div>
                 <span class="session-detail-label"><span class="lang-en">What you'll learn</span><span class="lang-vi">Bạn sẽ học</span></span>
                 <ul>
-                  <li><span class="lang-en">Know if this course is right for you</span><span class="lang-vi">Biết khoá học có phù hợp với bạn không</span></li>
-                  <li><span class="lang-en">See the full path ahead</span><span class="lang-vi">Nắm rõ lộ trình phía trước</span></li>
-                  <li><span class="lang-en">Get your tools and project ready</span><span class="lang-vi">Chuẩn bị sẵn công cụ và dự án</span></li>
+                  <li><span class="lang-en">See where your prototype breaks</span><span class="lang-vi">Nhìn ra prototype rạn nứt ở đâu</span></li>
+                  <li><span class="lang-en">Pick the right AI tool for the job</span><span class="lang-vi">Chọn đúng AI tool cho việc cần làm</span></li>
+                  <li><span class="lang-en">Define your prototype pattern</span><span class="lang-vi">Định nghĩa prototype pattern của bạn</span></li>
+                  <li><span class="lang-en">Choose the right journey to prototype</span><span class="lang-vi">Chọn đúng journey cần prototype</span></li>
+                </ul>
+              </div>
+              <div>
+                <span class="session-detail-label"><span class="lang-en">You'll leave with</span><span class="lang-vi">Bạn nhận được</span></span>
+                <ul>
+                  <li><span class="lang-en">Your Prototype Pattern Document — the token, component inventory, and template AI will build every screen from</span><span class="lang-vi">Prototype Pattern Document của bạn — token, component inventory và template để AI build mọi màn hình từ đó</span></li>
                 </ul>
               </div>
             </div></div></div>
@@ -298,19 +314,24 @@
           <div>
             <div class="session-row-top">
               <div>
-                <h3><span class="lang-en">Changing How You Build AI Prototypes</span><span class="lang-vi">Thay Đổi Tư Duy Phát Triển AI Prototype</span></h3>
-                <p><span class="lang-en">Why your prototype breaks down at screen 4.</span><span class="lang-vi">Vì sao prototype của bạn rạn nứt ở màn hình thứ 4.</span></p>
+                <h3><span class="lang-en">Building the AI Prototype</span><span class="lang-vi">Xây Dựng AI Prototype</span></h3>
+                <p><span class="lang-en">From a cleaned-up Figma file to a prototype that runs in the browser.</span><span class="lang-vi">Từ file Figma đã dọn dẹp đến prototype chạy được trong trình duyệt.</span></p>
+                <div class="session-meta"><span>Figma</span><span>AI coding tool</span></div>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
             </div>
             <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
-              <div style="grid-column:1/-1">
+              <div>
                 <span class="session-detail-label"><span class="lang-en">What you'll learn</span><span class="lang-vi">Bạn sẽ học</span></span>
                 <ul>
-                  <li><span class="lang-en">See why screen-by-screen breaks down</span><span class="lang-vi">Hiểu vì sao cách làm screen-by-screen dễ rạn nứt</span></li>
-                  <li><span class="lang-en">Define your prototype pattern: token, components, template</span><span class="lang-vi">Định nghĩa prototype pattern: token, component, template</span></li>
-                  <li><span class="lang-en">Build your pattern with an AI chat tool</span><span class="lang-vi">Tạo pattern bằng AI chat tool</span></li>
-                  <li><span class="lang-en">Choose the right screens to prototype</span><span class="lang-vi">Chọn đúng màn hình cần prototype</span></li>
+                  <li><span class="lang-en">Rebuild your design system for AI</span><span class="lang-vi">Dựng lại design system để AI dùng được</span></li>
+                  <li><span class="lang-en">Build your first prototype from that system</span><span class="lang-vi">Build prototype đầu tiên, từ đúng hệ thống đó</span></li>
+                </ul>
+              </div>
+              <div>
+                <span class="session-detail-label"><span class="lang-en">You'll leave with</span><span class="lang-vi">Bạn nhận được</span></span>
+                <ul>
+                  <li><span class="lang-en">Your first working prototype journey, built straight from your own Figma file</span><span class="lang-vi">Hành trình prototype đầu tiên chạy được, build thẳng từ file Figma của bạn</span></li>
                 </ul>
               </div>
             </div></div></div>
@@ -322,18 +343,25 @@
           <div>
             <div class="session-row-top">
               <div>
-                <h3><span class="lang-en">Building the AI Prototype</span><span class="lang-vi">Xây Dựng AI Prototype</span></h3>
-                <p><span class="lang-en">From a cleaned-up Figma file to a prototype that runs in the browser.</span><span class="lang-vi">Từ file Figma đã dọn dẹp đến prototype chạy được trong trình duyệt.</span></p>
+                <h3><span class="lang-en">Scaling the Prototype</span><span class="lang-vi">Mở Rộng Quy Mô Prototype</span></h3>
+                <p><span class="lang-en">Fix it in one place, every screen updates correctly.</span><span class="lang-vi">Sửa 1 chỗ, mọi màn hình tự động đúng theo.</span></p>
+                <div class="session-meta"><span>AI coding tool</span></div>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
             </div>
             <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
-              <div style="grid-column:1/-1">
+              <div>
                 <span class="session-detail-label"><span class="lang-en">What you'll learn</span><span class="lang-vi">Bạn sẽ học</span></span>
                 <ul>
-                  <li><span class="lang-en">Clean up and connect Figma via MCP</span><span class="lang-vi">Dọn dẹp và kết nối Figma qua MCP</span></li>
-                  <li><span class="lang-en">Rebuild your system from the real file</span><span class="lang-vi">Dựng lại hệ thống từ file thật</span></li>
-                  <li><span class="lang-en">Build your prototype in an AI coding tool, based on that system</span><span class="lang-vi">Build prototype bằng AI coding tool, dựa trên hệ thống đó</span></li>
+                  <li><span class="lang-en">Build the remaining journeys, staying consistent</span><span class="lang-vi">Build các journey còn lại, vẫn nhất quán</span></li>
+                  <li><span class="lang-en">Fix issues once, not screen by screen</span><span class="lang-vi">Sửa lỗi 1 chỗ, không sửa từng màn hình</span></li>
+                  <li><span class="lang-en">Know when to add a new component</span><span class="lang-vi">Biết khi nào cần thêm component mới</span></li>
+                </ul>
+              </div>
+              <div>
+                <span class="session-detail-label"><span class="lang-en">You'll leave with</span><span class="lang-vi">Bạn nhận được</span></span>
+                <ul>
+                  <li><span class="lang-en">A full prototype set, every screen built from the same system</span><span class="lang-vi">Bộ prototype hoàn chỉnh, mọi màn hình build từ cùng 1 hệ thống</span></li>
                 </ul>
               </div>
             </div></div></div>
@@ -345,64 +373,25 @@
           <div>
             <div class="session-row-top">
               <div>
-                <h3><span class="lang-en">Scaling the Prototype</span><span class="lang-vi">Mở Rộng Quy Mô Prototype</span></h3>
-                <p><span class="lang-en">Fix it in one place, every screen updates correctly.</span><span class="lang-vi">Sửa 1 chỗ, mọi màn hình tự động đúng theo.</span></p>
-              </div>
-              <span class="session-chevron" aria-hidden="true"></span>
-            </div>
-            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
-              <div style="grid-column:1/-1">
-                <span class="session-detail-label"><span class="lang-en">What you'll learn</span><span class="lang-vi">Bạn sẽ học</span></span>
-                <ul>
-                  <li><span class="lang-en">Build the remaining journeys, staying consistent</span><span class="lang-vi">Build các journey còn lại, vẫn nhất quán</span></li>
-                  <li><span class="lang-en">Fix issues in one place, not screen by screen</span><span class="lang-vi">Sửa lỗi ở một chỗ, không sửa từng màn hình</span></li>
-                  <li><span class="lang-en">Know when to add a new component</span><span class="lang-vi">Biết khi nào cần thêm component mới</span></li>
-                </ul>
-              </div>
-            </div></div></div>
-          </div>
-        </div>
-
-        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
-          <div class="idx">05</div>
-          <div>
-            <div class="session-row-top">
-              <div>
                 <h3><span class="lang-en">Packaging &amp; Sharing the Prototype</span><span class="lang-vi">Đóng Gói &amp; Chia Sẻ Prototype</span></h3>
                 <p><span class="lang-en">A prototype that runs on your machine isn't a prototype anyone else can see.</span><span class="lang-vi">Prototype chạy trên máy bạn chưa phải prototype ai cũng xem được.</span></p>
+                <div class="session-meta"><span>AI design tool</span><span>AI coding tool</span></div>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
             </div>
             <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
-              <div style="grid-column:1/-1">
+              <div>
                 <span class="session-detail-label"><span class="lang-en">What you'll learn</span><span class="lang-vi">Bạn sẽ học</span></span>
                 <ul>
-                  <li><span class="lang-en">Share a link anyone can open</span><span class="lang-vi">Chia sẻ 1 link ai cũng mở được</span></li>
-                  <li><span class="lang-en">Reflect on what AI got right and missed</span><span class="lang-vi">Nhìn lại AI làm tốt gì, bỏ sót gì</span></li>
-                  <li><span class="lang-en">Extend the prototype with 2 new screens</span><span class="lang-vi">Mở rộng thêm 2 màn hình mới</span></li>
+                  <li><span class="lang-en">Share it for stakeholder review or user testing</span><span class="lang-vi">Chia sẻ để stakeholder review hoặc user testing</span></li>
+                  <li><span class="lang-en">Connect screens into one journey</span><span class="lang-vi">Nối các màn hình thành 1 journey</span></li>
+                  <li><span class="lang-en">Reflect on what AI got right</span><span class="lang-vi">Nhìn lại AI đã làm tốt điều gì</span></li>
                 </ul>
               </div>
-            </div></div></div>
-          </div>
-        </div>
-
-        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
-          <div class="idx">06</div>
-          <div>
-            <div class="session-row-top">
               <div>
-                <h3><span class="lang-en">Stitching the Prototype</span><span class="lang-vi">Stitching Prototype</span></h3>
-                <p><span class="lang-en">Separate screens aren't a journey yet.</span><span class="lang-vi">Nhiều màn hình rời rạc chưa phải một hành trình.</span></p>
-              </div>
-              <span class="session-chevron" aria-hidden="true"></span>
-            </div>
-            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
-              <div style="grid-column:1/-1">
-                <span class="session-detail-label"><span class="lang-en">What you'll learn</span><span class="lang-vi">Bạn sẽ học</span></span>
+                <span class="session-detail-label"><span class="lang-en">You'll leave with</span><span class="lang-vi">Bạn nhận được</span></span>
                 <ul>
-                  <li><span class="lang-en">Understand what a stitched prototype is</span><span class="lang-vi">Hiểu thế nào là 1 stitched prototype</span></li>
-                  <li><span class="lang-en">Connect screens into one coherent journey</span><span class="lang-vi">Nối các màn hình thành 1 journey liền mạch</span></li>
-                  <li><span class="lang-en">See a real case study</span><span class="lang-vi">Xem qua 1 case study thực tế</span></li>
+                  <li><span class="lang-en">A shareable prototype link, plus a reflection on your AI collaboration process</span><span class="lang-vi">1 link prototype chia sẻ được, kèm bản phản tư về quá trình cộng tác với AI</span></li>
                 </ul>
               </div>
             </div></div></div>
