@@ -94,6 +94,12 @@
   }
   .session-meta > span:not(:last-child)::after{ content:'·'; margin-left:.5rem; color:var(--ink-50); font-weight:400; }
 
+  /* curriculum "you'll leave with" outcome — a named deliverable plus what it's for.
+     Same size as the "what you'll learn" bullets so the two columns share one body
+     scale; weight alone marks the title as the deliverable name. */
+  .session-outcome-title{ font-weight:700; font-size:.88rem; line-height:1.55; margin:0 0 .35rem; }
+  .session-outcome-desc{ font-size:.88rem; line-height:1.55; color:var(--ink-70); margin:0; }
+
   /* structural column switch stays a hard breakpoint — going from stacked to
      side-by-side is inherently binary, unlike the illustration's own scale above */
   @media (min-width:1300px){
@@ -284,7 +290,7 @@
             <div class="session-row-top">
               <div>
                 <h3><span class="lang-en">Changing How You Build AI Prototypes</span><span class="lang-vi">Thay Đổi Tư Duy Phát Triển AI Prototype</span></h3>
-                <p><span class="lang-en">Why your prototype breaks down at screen 4.</span><span class="lang-vi">Vì sao prototype của bạn rạn nứt ở màn hình thứ 4.</span></p>
+                <p><span class="lang-en">Ever had a prototype that looks great at first, then starts falling apart after a few screens?</span><span class="lang-vi">Bạn đã bao giờ có 1 prototype nhìn rất ổn lúc đầu, rồi bắt đầu rối tung sau vài màn hình chưa?</span></p>
                 <div class="session-meta"><span>AI chat tool</span></div>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
@@ -293,17 +299,17 @@
               <div>
                 <span class="session-detail-label"><span class="lang-en">What you'll learn</span><span class="lang-vi">Bạn sẽ học</span></span>
                 <ul>
-                  <li><span class="lang-en">See where your prototype breaks</span><span class="lang-vi">Nhìn ra prototype rạn nứt ở đâu</span></li>
-                  <li><span class="lang-en">Pick the right AI tool for the job</span><span class="lang-vi">Chọn đúng AI tool cho việc cần làm</span></li>
-                  <li><span class="lang-en">Define your prototype pattern</span><span class="lang-vi">Định nghĩa prototype pattern của bạn</span></li>
-                  <li><span class="lang-en">Choose the right journey to prototype</span><span class="lang-vi">Chọn đúng journey cần prototype</span></li>
+                  <li><span class="lang-en">See why AI starts making different decisions as your prototype gets bigger</span><span class="lang-vi">Hiểu vì sao AI bắt đầu quyết định khác đi khi prototype lớn dần</span></li>
+                  <li><span class="lang-en">Know which AI tool to use and when</span><span class="lang-vi">Biết dùng AI tool nào, vào lúc nào</span></li>
+                  <li><span class="lang-en">Decide what AI needs to know before you start building</span><span class="lang-vi">Xác định AI cần biết gì trước khi bắt đầu build</span></li>
+                  <li><span class="lang-en">Set up your Prototype Pattern for AI to reuse across screens</span><span class="lang-vi">Thiết lập Prototype Pattern để AI tái sử dụng qua các màn hình</span></li>
+                  <li><span class="lang-en">Pick the right journey to start with</span><span class="lang-vi">Chọn đúng journey để bắt đầu</span></li>
                 </ul>
               </div>
               <div>
                 <span class="session-detail-label"><span class="lang-en">You'll leave with</span><span class="lang-vi">Bạn nhận được</span></span>
-                <ul>
-                  <li><span class="lang-en">Your Prototype Pattern Document — the token, component inventory, and template AI will build every screen from</span><span class="lang-vi">Prototype Pattern Document của bạn — token, component inventory và template để AI build mọi màn hình từ đó</span></li>
-                </ul>
+                <p class="session-outcome-title"><span class="lang-en">Your Prototype Pattern Document</span><span class="lang-vi">Prototype Pattern Document của bạn</span></p>
+                <p class="session-outcome-desc"><span class="lang-en">Your tokens, components, and templates in one place, ready for AI to use as you build.</span><span class="lang-vi">Token, component và template của bạn ở cùng 1 chỗ, sẵn sàng để AI dùng khi bạn build.</span></p>
               </div>
             </div></div></div>
           </div>
@@ -315,7 +321,7 @@
             <div class="session-row-top">
               <div>
                 <h3><span class="lang-en">Building the AI Prototype</span><span class="lang-vi">Xây Dựng AI Prototype</span></h3>
-                <p><span class="lang-en">From a cleaned-up Figma file to a prototype that runs in the browser.</span><span class="lang-vi">Từ file Figma đã dọn dẹp đến prototype chạy được trong trình duyệt.</span></p>
+                <p><span class="lang-en">Take a real Figma file and turn it into something you can actually click through.</span><span class="lang-vi">Biến 1 file Figma thật thành thứ bạn thật sự click qua được.</span></p>
                 <div class="session-meta"><span>Figma</span><span>AI coding tool</span></div>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
@@ -324,15 +330,18 @@
               <div>
                 <span class="session-detail-label"><span class="lang-en">What you'll learn</span><span class="lang-vi">Bạn sẽ học</span></span>
                 <ul>
-                  <li><span class="lang-en">Rebuild your design system for AI</span><span class="lang-vi">Dựng lại design system để AI dùng được</span></li>
-                  <li><span class="lang-en">Build your first prototype from that system</span><span class="lang-vi">Build prototype đầu tiên, từ đúng hệ thống đó</span></li>
+                  <li><span class="lang-en">Clean up your Figma file before handing it to AI</span><span class="lang-vi">Dọn dẹp file Figma trước khi đưa cho AI</span></li>
+                  <li><span class="lang-en">Connect your Figma file to your AI coding tool</span><span class="lang-vi">Kết nối file Figma với AI coding tool</span></li>
+                  <li><span class="lang-en">Turn the things you've already designed into something AI can reuse</span><span class="lang-vi">Biến những gì bạn đã thiết kế thành thứ AI tái sử dụng được</span></li>
+                  <li><span class="lang-en">Build your first screen from your existing design system</span><span class="lang-vi">Build màn hình đầu tiên từ design system có sẵn</span></li>
+                  <li><span class="lang-en">Compare what AI built with your original Figma design</span><span class="lang-vi">So sánh những gì AI build với thiết kế Figma gốc</span></li>
+                  <li><span class="lang-en">Make the first round of fixes</span><span class="lang-vi">Sửa vòng đầu tiên</span></li>
                 </ul>
               </div>
               <div>
                 <span class="session-detail-label"><span class="lang-en">You'll leave with</span><span class="lang-vi">Bạn nhận được</span></span>
-                <ul>
-                  <li><span class="lang-en">Your first working prototype journey, built straight from your own Figma file</span><span class="lang-vi">Hành trình prototype đầu tiên chạy được, build thẳng từ file Figma của bạn</span></li>
-                </ul>
+                <p class="session-outcome-title"><span class="lang-en">Your first working prototype journey</span><span class="lang-vi">Hành trình prototype đầu tiên chạy được</span></p>
+                <p class="session-outcome-desc"><span class="lang-en">Built from your own Figma file, not from a random prompt and a blank canvas.</span><span class="lang-vi">Build từ chính file Figma của bạn, không phải từ 1 prompt ngẫu nhiên và màn hình trắng.</span></p>
               </div>
             </div></div></div>
           </div>
@@ -344,7 +353,7 @@
             <div class="session-row-top">
               <div>
                 <h3><span class="lang-en">Scaling the Prototype</span><span class="lang-vi">Mở Rộng Quy Mô Prototype</span></h3>
-                <p><span class="lang-en">Fix it in one place, every screen updates correctly.</span><span class="lang-vi">Sửa 1 chỗ, mọi màn hình tự động đúng theo.</span></p>
+                <p><span class="lang-en">Don't fix the same thing on every screen.</span><span class="lang-vi">Đừng sửa cùng 1 lỗi trên từng màn hình.</span></p>
                 <div class="session-meta"><span>AI coding tool</span></div>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
@@ -353,16 +362,17 @@
               <div>
                 <span class="session-detail-label"><span class="lang-en">What you'll learn</span><span class="lang-vi">Bạn sẽ học</span></span>
                 <ul>
-                  <li><span class="lang-en">Build the remaining journeys, staying consistent</span><span class="lang-vi">Build các journey còn lại, vẫn nhất quán</span></li>
-                  <li><span class="lang-en">Fix issues once, not screen by screen</span><span class="lang-vi">Sửa lỗi 1 chỗ, không sửa từng màn hình</span></li>
-                  <li><span class="lang-en">Know when to add a new component</span><span class="lang-vi">Biết khi nào cần thêm component mới</span></li>
+                  <li><span class="lang-en">Build the rest of your journeys without starting over</span><span class="lang-vi">Build các journey còn lại mà không cần làm lại từ đầu</span></li>
+                  <li><span class="lang-en">Keep things consistent as you add more screens</span><span class="lang-vi">Giữ mọi thứ nhất quán khi thêm màn hình mới</span></li>
+                  <li><span class="lang-en">Fix something once and see it carry through the prototype</span><span class="lang-vi">Sửa 1 lần, thấy thay đổi lan ra cả prototype</span></li>
+                  <li><span class="lang-en">Know when to reuse a component and when you actually need a new one</span><span class="lang-vi">Biết khi nào nên tái sử dụng component, khi nào thật sự cần cái mới</span></li>
+                  <li><span class="lang-en">Catch the little ways AI starts drifting from your original design</span><span class="lang-vi">Nhận ra những chỗ AI bắt đầu lệch khỏi thiết kế gốc</span></li>
                 </ul>
               </div>
               <div>
                 <span class="session-detail-label"><span class="lang-en">You'll leave with</span><span class="lang-vi">Bạn nhận được</span></span>
-                <ul>
-                  <li><span class="lang-en">A full prototype set, every screen built from the same system</span><span class="lang-vi">Bộ prototype hoàn chỉnh, mọi màn hình build từ cùng 1 hệ thống</span></li>
-                </ul>
+                <p class="session-outcome-title"><span class="lang-en">A full prototype set</span><span class="lang-vi">Bộ prototype hoàn chỉnh</span></p>
+                <p class="session-outcome-desc"><span class="lang-en">More screens and more journeys, all built from the same foundation.</span><span class="lang-vi">Nhiều màn hình hơn, nhiều journey hơn, tất cả build từ cùng 1 nền tảng.</span></p>
               </div>
             </div></div></div>
           </div>
@@ -374,7 +384,7 @@
             <div class="session-row-top">
               <div>
                 <h3><span class="lang-en">Packaging &amp; Sharing the Prototype</span><span class="lang-vi">Đóng Gói &amp; Chia Sẻ Prototype</span></h3>
-                <p><span class="lang-en">A prototype that runs on your machine isn't a prototype anyone else can see.</span><span class="lang-vi">Prototype chạy trên máy bạn chưa phải prototype ai cũng xem được.</span></p>
+                <p><span class="lang-en">You've built it. Now let's get it out of your laptop.</span><span class="lang-vi">Bạn đã build xong. Giờ đưa nó ra khỏi laptop của bạn.</span></p>
                 <div class="session-meta"><span>AI design tool</span><span>AI coding tool</span></div>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
@@ -383,16 +393,17 @@
               <div>
                 <span class="session-detail-label"><span class="lang-en">What you'll learn</span><span class="lang-vi">Bạn sẽ học</span></span>
                 <ul>
-                  <li><span class="lang-en">Share it for stakeholder review or user testing</span><span class="lang-vi">Chia sẻ để stakeholder review hoặc user testing</span></li>
-                  <li><span class="lang-en">Connect screens into one journey</span><span class="lang-vi">Nối các màn hình thành 1 journey</span></li>
-                  <li><span class="lang-en">Reflect on what AI got right</span><span class="lang-vi">Nhìn lại AI đã làm tốt điều gì</span></li>
+                  <li><span class="lang-en">Connect your screens into a proper journey</span><span class="lang-vi">Nối các màn hình thành 1 journey hoàn chỉnh</span></li>
+                  <li><span class="lang-en">Get the prototype ready for stakeholder review or user testing</span><span class="lang-vi">Chuẩn bị prototype sẵn sàng cho stakeholder review hoặc user testing</span></li>
+                  <li><span class="lang-en">Share it with a link</span><span class="lang-vi">Chia sẻ bằng 1 link</span></li>
+                  <li><span class="lang-en">Make the last few fixes before handing it over</span><span class="lang-vi">Sửa những lỗi cuối cùng trước khi bàn giao</span></li>
+                  <li><span class="lang-en">Look back at what worked and what didn't when working with AI</span><span class="lang-vi">Nhìn lại điều gì hiệu quả, điều gì chưa khi làm việc với AI</span></li>
                 </ul>
               </div>
               <div>
                 <span class="session-detail-label"><span class="lang-en">You'll leave with</span><span class="lang-vi">Bạn nhận được</span></span>
-                <ul>
-                  <li><span class="lang-en">A shareable prototype link, plus a reflection on your AI collaboration process</span><span class="lang-vi">1 link prototype chia sẻ được, kèm bản phản tư về quá trình cộng tác với AI</span></li>
-                </ul>
+                <p class="session-outcome-title"><span class="lang-en">A prototype you can actually share</span><span class="lang-vi">1 prototype bạn thật sự chia sẻ được</span></p>
+                <p class="session-outcome-desc"><span class="lang-en">A working prototype link and a better sense of where AI helps, where it gets things wrong, and how to work with it next time.</span><span class="lang-vi">1 link prototype chạy được, cùng cái nhìn rõ hơn về việc AI giúp được gì, sai ở đâu, và làm sao để làm việc với AI tốt hơn lần sau.</span></p>
               </div>
             </div></div></div>
           </div>
