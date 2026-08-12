@@ -100,6 +100,21 @@
   .session-outcome-title{ font-weight:700; font-size:.88rem; line-height:1.55; margin:0 0 .35rem; }
   .session-outcome-desc{ font-size:.88rem; line-height:1.55; color:var(--ink-70); margin:0; }
 
+  /* pain section — reframe line that closes the breakage story */
+  .pain-insight{
+    font-family:var(--serif); font-weight:700; font-size:clamp(1.15rem,2.2vw,1.5rem); line-height:1.4;
+    color:var(--cream); max-width:34ch; margin-top:clamp(2.5rem,5vw,3.5rem);
+  }
+  .pain-insight em{ font-style:normal; color:var(--lime); }
+
+  /* who-it's-for checklist — replaces the single proof card with 5 qualifiers */
+  .for-you-list{ list-style:none; margin:1.5rem 0 0; padding:0; display:grid; gap:.75rem; }
+  .for-you-list li{ position:relative; padding-left:1.3rem; font-size:1.05rem; color:var(--ink-70); line-height:1.55; }
+  .for-you-list li::before{
+    content:''; position:absolute; left:0; top:.6em; width:6px; height:6px; border-radius:50%; background:var(--coral);
+  }
+
+
   /* structural column switch stays a hard breakpoint — going from stacked to
      side-by-side is inherently binary, unlike the illustration's own scale above */
   @media (min-width:1300px){
@@ -185,7 +200,7 @@
             <span><span><em class="it">Systematic</em></span></span>
             <span><span><span class="mark"><span>AI Prototyping</span></span></span></span>
           </h1>
-          <p class="hero-desc"><span class="lang-en">Define the system once, AI builds every screen from it.</span><span class="lang-vi">Định nghĩa hệ thống một lần, AI sẽ build mọi màn hình từ đó.</span></p>
+          <p class="hero-desc"><span class="lang-en">Build AI prototypes from your real Figma files — without re-explaining your product every screen.</span><span class="lang-vi">Build AI prototype từ chính file Figma của bạn — không cần giải thích lại sản phẩm ở mỗi màn hình.</span></p>
           <a href="#mentor" class="hero-mentor">
             <img src="../assets/avatar.png" alt="Winnie Nguyen" class="hero-mentor-avatar">
             <span class="hero-mentor-text">
@@ -233,13 +248,15 @@
   <section class="pain on-dark">
     <div class="wrap">
       <span class="kicker"><span class="lang-en">Common problem</span><span class="lang-vi">Vấn đề thường gặp</span></span>
-      <p class="pain-headline reveal"><span class="lang-en">Where does your prototype <em>break?</em></span><span class="lang-vi">Prototype của bạn rạn nứt <em>ở đâu?</em></span></p>
+      <p class="pain-headline reveal"><span class="lang-en">AI can build a screen. The problem starts with <em>the next one.</em></span><span class="lang-vi">AI build được 1 màn hình. Vấn đề bắt đầu từ <em>màn hình tiếp theo.</em></span></p>
 
       <ul class="pain-list">
-        <li class="reveal reveal-d1"><em>01</em><span><span class="lang-en">Describe one screen, let AI generate it, then move to the next screen. This works fine for the first 1-2 screens.</span><span class="lang-vi">Mô tả 1 màn hình, để AI generate ra, rồi chuyển sang màn hình tiếp theo. Cách này chạy tốt cho 1-2 màn hình đầu.</span></span></li>
-        <li class="reveal reveal-d2"><em>02</em><span><span class="lang-en">Components stop matching. AI forgets decisions made on the previous screen.</span><span class="lang-vi">Component không khớp nhau. AI quên quyết định đã đưa ra ở màn hình trước.</span></span></li>
-        <li class="reveal reveal-d3"><em>03</em><span><span class="lang-en">You end up fixing things by hand more than if you'd designed it yourself, because nothing was defined upfront for AI to work from.</span><span class="lang-vi">Bạn sửa tay nhiều hơn cả tự thiết kế từ đầu, vì không có gì được định nghĩa trước để AI dựa vào.</span></span></li>
+        <li class="reveal reveal-d1"><em>01</em><span><span class="lang-en">You give AI a screenshot. It builds something close.</span><span class="lang-vi">Bạn đưa AI 1 screenshot. Nó build ra thứ gì đó gần đúng.</span></span></li>
+        <li class="reveal reveal-d2"><em>02</em><span><span class="lang-en">Ask for the next screen — the spacing shifts, the button looks different, the component gets rebuilt from scratch.</span><span class="lang-vi">Yêu cầu màn hình tiếp theo — spacing lệch đi, button trông khác, component bị build lại từ đầu.</span></span></li>
+        <li class="reveal reveal-d3"><em>03</em><span><span class="lang-en">By screen 4, you're spending more time fixing AI than building with it.</span><span class="lang-vi">Đến màn hình thứ 4, bạn dành nhiều thời gian sửa AI hơn là build cùng AI.</span></span></li>
       </ul>
+
+      <p class="pain-insight reveal"><span class="lang-en">The problem isn't that AI can't build. <em>It's that AI doesn't know your product the way you do.</em></span><span class="lang-vi">Vấn đề không phải AI không build được. <em>Mà là AI không hiểu sản phẩm của bạn như bạn hiểu.</em></span></p>
     </div>
   </section>
 
@@ -249,15 +266,18 @@
       <div class="who-grid">
         <div class="reveal">
           <span class="kicker"><span class="lang-en">Who it's for</span><span class="lang-vi">Dành cho ai</span></span>
-          <p class="who-headline" style="margin-top:1.2rem;"><span class="lang-en">You already know Figma. Now learn to make AI build your <span class="mark"><span>system</span></span> correctly.</span><span class="lang-vi">Bạn đã biết Figma. Giờ học cách để AI build đúng <span class="mark"><span>hệ thống của bạn</span></span>.</span></p>
+          <p class="who-headline" style="margin-top:1.2rem;"><span class="lang-en">This is for you <span class="mark"><span>if...</span></span></span><span class="lang-vi">Đây là khoá học dành cho bạn <span class="mark"><span>nếu...</span></span></span></p>
         </div>
-        <div class="who-card reveal reveal-d2">
-          <div class="num">✓</div>
-          <p><span class="lang-en">Frames, components, connected screens — already second nature. Bring one real project, even a messy one.</span><span class="lang-vi">Frame, component, nối màn hình — đã là chuyện quen thuộc. Mang theo 1 project thật, dù mới sơ khai.</span></p>
+        <div class="reveal reveal-d2">
+          <ul class="for-you-list">
+            <li><span class="lang-en">You're a Product Designer who already knows Figma</span><span class="lang-vi">Bạn là Product Designer đã biết dùng Figma</span></li>
+            <li><span class="lang-en">You have real designs or a design system to work with</span><span class="lang-vi">Bạn có sẵn thiết kế thật hoặc 1 design system để làm việc</span></li>
+            <li><span class="lang-en">You've tried prototyping with AI, but the results don't stay consistent</span><span class="lang-vi">Bạn đã thử prototype bằng AI, nhưng kết quả không nhất quán</span></li>
+            <li><span class="lang-en">You want to move faster without giving up control over the design</span><span class="lang-vi">Bạn muốn nhanh hơn mà không mất quyền kiểm soát thiết kế</span></li>
+            <li><span class="lang-en">You want to build something people can actually click through and test</span><span class="lang-vi">Bạn muốn build ra thứ mọi người thật sự click qua và test được</span></li>
+          </ul>
         </div>
       </div>
-
-      <p class="curriculum-note reveal" style="margin-top:2.6rem;"><span class="lang-en">No coding. No complete design system. No prior AI coding tool experience.</span><span class="lang-vi">Không cần biết code. Không cần có sẵn design system. Không cần đã từng dùng AI coding tool.</span></p>
     </div>
   </section>
 
@@ -526,7 +546,8 @@
       <div class="closing-grid">
         <div class="reveal">
           <span class="kicker"><span class="lang-en">Ready to start?</span><span class="lang-vi">Sẵn sàng bắt đầu?</span></span>
-          <h2 style="margin-top:1rem;"><span class="lang-en">Stop guessing.<br><em style="font-style:normal; color:var(--lime);">Start prototyping with a system.</em></span><span class="lang-vi">Dừng đoán.<br><em style="font-style:normal; color:var(--lime);">Bắt đầu prototype có hệ thống.</em></span></h2>
+          <h2 style="margin-top:1rem;"><span class="lang-en">Ready to stop rebuilding the same context?<br><em style="font-style:normal; color:var(--lime);">Bring a real Figma file.</em></span><span class="lang-vi">Sẵn sàng thôi dựng lại context mỗi lần chưa?<br><em style="font-style:normal; color:var(--lime);">Mang theo 1 file Figma thật.</em></span></h2>
+          <p style="margin-top:1rem; font-size:1.05rem; color:rgba(245,239,226,.75); max-width:38ch;"><span class="lang-en">We'll turn it into a working prototype together.</span><span class="lang-vi">Cùng nhau biến nó thành 1 prototype chạy được.</span></p>
           <div class="closing-cta">
             <form id="leadForm" class="lead-form" action="https://formspree.io/f/mpqvoqyy" method="POST">
               <input type="hidden" name="_subject" value="New inquiry: Systematic AI Prototyping course">
