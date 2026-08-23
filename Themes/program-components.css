@@ -468,6 +468,7 @@ footer a{ color:var(--ink); font-weight:600; }
      </div>
    </div>
    Open with: document.getElementById('contactModal').classList.add('open') */
+html.modal-open, html.modal-open body{ overflow:hidden; }
 .modal-overlay{
   position:fixed; inset:0; z-index:1000;
   background:rgba(22,20,15,.55);
@@ -509,3 +510,29 @@ footer a{ color:var(--ink); font-weight:600; }
 }
 .contact-row-label{ font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-50); margin-bottom:2px; }
 .contact-row-value{ font-size:.88rem; font-weight:600; color:var(--ink); }
+
+/* ============ ENROLL SUCCESS MODAL ============
+   Same .modal-overlay/.modal shell as #contactModal above.
+   Open with: document.getElementById('enrollSuccessModal').classList.add('open') */
+.enroll-success-modal{ text-align:center; }
+.enroll-success-icon{
+  width:64px; height:64px; margin:0 auto 1.3rem; border-radius:50%;
+  background:rgba(63,207,110,.14); display:flex; align-items:center; justify-content:center;
+  animation:enrollPop .45s cubic-bezier(.34,1.56,.64,1);
+}
+.enroll-success-icon svg{ width:30px; height:30px; }
+@keyframes enrollPop{ 0%{ transform:scale(0); opacity:0; } 100%{ transform:scale(1); opacity:1; } }
+@media (prefers-reduced-motion: reduce){ .enroll-success-icon{ animation:none; } }
+.enroll-success-title{ font-family:var(--serif); font-weight:800; font-size:1.4rem; color:var(--ink); margin-bottom:.6rem; }
+.enroll-success-body{ font-size:.92rem; color:var(--ink-70); line-height:1.55; max-width:32ch; margin:0 auto 1.5rem; }
+.enroll-success-steps{ display:flex; flex-direction:column; gap:.6rem; text-align:left; margin-bottom:1.6rem; }
+.enroll-success-step{
+  display:flex; align-items:center; gap:.7rem; padding:.7rem .85rem;
+  border:1.5px solid var(--line); border-radius:12px; font-size:.85rem; font-weight:600; color:var(--ink);
+}
+.enroll-success-step-icon{
+  width:30px; height:30px; border-radius:9px; background:rgba(63,207,110,.14); color:var(--lime-dim);
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.enroll-success-step-icon svg{ width:14px; height:14px; }
+.enroll-success-close{ width:100%; justify-content:center; }

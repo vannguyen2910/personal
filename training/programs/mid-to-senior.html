@@ -87,6 +87,29 @@
     </div>
   </div>
 
+  <!-- ── Enroll success modal ── -->
+  <div id="enrollSuccessModal" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="modal enroll-success-modal">
+      <button class="modal-close" onclick="document.getElementById('enrollSuccessModal').classList.remove('open')">✕</button>
+      <div class="enroll-success-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--lime-dim)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <h3 class="enroll-success-title"><span class="lang-en">You're enrolled! 🎉</span><span class="lang-vi">Bạn đã đăng ký thành công! 🎉</span></h3>
+      <p class="enroll-success-body"><span class="lang-en">Thanks for signing up. I'll personally reach out by email within 1–2 business days to get you started.</span><span class="lang-vi">Cảm ơn bạn đã đăng ký. Mình sẽ đích thân email lại trong 1–2 ngày làm việc để cùng bạn bắt đầu.</span></p>
+      <div class="enroll-success-steps">
+        <div class="enroll-success-step">
+          <span class="enroll-success-step-icon"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+          <span><span class="lang-en">Check your inbox for my email</span><span class="lang-vi">Kiểm tra email của bạn</span></span>
+        </div>
+        <div class="enroll-success-step">
+          <span class="enroll-success-step-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2.5" y="3" width="11" height="10.5" rx="1.5"/><path d="M2.5 6h11M5.5 1.5v3M10.5 1.5v3"/></svg></span>
+          <span><span class="lang-en">Find a time to kick off the conversation</span><span class="lang-vi">Tìm thời gian cho buổi trò chuyện đầu tiên</span></span>
+        </div>
+      </div>
+      <button type="button" class="btn btn-dark enroll-success-close" onclick="document.getElementById('enrollSuccessModal').classList.remove('open')"><span class="lang-en">Got it</span><span class="lang-vi">Đã hiểu</span></button>
+    </div>
+  </div>
+
   <nav class="nav">
     <div class="wrap">
       <a href="../index.html" class="nav-logo">
@@ -632,7 +655,6 @@
               </button>
               <p class="lead-form-note"><span class="lang-en">I'll reply by email within 1–2 business days.</span><span class="lang-vi">Mình sẽ phản hồi qua email trong 1–2 ngày làm việc.</span></p>
             </form>
-            <p id="leadFormSuccess" class="lead-form-success"><span class="lang-en">Thanks! I've got your details and will email you within 1–2 business days.</span><span class="lang-vi">Cảm ơn bạn! Mình đã nhận được thông tin và sẽ email lại trong 1–2 ngày làm việc.</span></p>
             <a href="../self-assessment.html" class="btn btn-ghost lead-form-secondary" style="border-color:rgba(245,239,226,.4); color:var(--cream);">
               <span class="lang-en">Or start with the free self-assessment</span><span class="lang-vi">Hoặc bắt đầu với bài tự đánh giá miễn phí</span>
             </a>
@@ -668,6 +690,14 @@
       const res = await fetch(node.dataset.include);
       node.outerHTML = await res.text();
     }));
+
+    // lock background scroll while any modal is open
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      new MutationObserver(() => {
+        const anyOpen = document.querySelector('.modal-overlay.open');
+        document.documentElement.classList.toggle('modal-open', !!anyOpen);
+      }).observe(overlay, { attributes: true, attributeFilter: ['class'] });
+    });
 
     // language toggle — EN/VN, remembered via localStorage
     const storedLang = localStorage.getItem('lang') || 'en';
@@ -720,7 +750,6 @@
 
     // lead form — submit via fetch so visitors never leave the page
     const leadForm = document.getElementById('leadForm');
-    const leadFormSuccess = document.getElementById('leadFormSuccess');
     if (leadForm) {
       leadForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -735,8 +764,10 @@
             headers: { 'Accept': 'application/json' }
           });
           if (!res.ok) throw new Error('Submission failed');
-          leadForm.style.display = 'none';
-          leadFormSuccess.style.display = 'block';
+          leadForm.reset();
+          btn.disabled = false;
+          btn.innerHTML = originalLabel;
+          document.getElementById('enrollSuccessModal').classList.add('open');
         } catch (err) {
           btn.disabled = false;
           btn.innerHTML = originalLabel;
