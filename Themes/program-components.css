@@ -187,7 +187,7 @@ body.is-vi .lang-vi { display: revert !important; }
 .hero-stats{ display:flex; gap:2.2rem; margin-top:1.4rem; flex-wrap:wrap; padding-top:1.4rem; border-top:1px solid var(--line); }
 .hero-stat strong{ display:block; font-family:var(--serif); font-size:1.5rem; font-weight:800; }
 .hero-stat > span{ font-size:.76rem; color:var(--ink-70); }
-.hero-stat-sub{ display:block; margin-top:.2rem; font-size:.68rem; opacity:.7; }
+.hero-stat-sub{ display:block; margin-top:.2rem; font-size:.68rem; }
 
 /* ============ PRICING ============ */
 .pricing{ padding:clamp(4rem,9vw,7rem) 0; }

@@ -587,8 +587,11 @@
     }
     .programs-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 24px;
+    }
+    @media (max-width: 760px) {
+      .programs-grid { grid-template-columns: 1fr; }
     }
     .program-card {
       display: grid;
@@ -684,6 +687,32 @@
     }
     @media (prefers-reduced-motion: reduce) {
       .ppc-spark { animation: none; }
+    }
+
+    /* mini "radius of influence" illustration, for the senior program card */
+    .spc-ring2 {
+      position: absolute; inset: 16px;
+      border: 1px dashed var(--rule); border-radius: 50%;
+    }
+    .spc-ring3 {
+      position: absolute; inset: 32px;
+      border: 1px solid var(--accent); border-radius: 50%;
+    }
+    .spc-core {
+      position: absolute; width: 10px; height: 10px; border-radius: 50%;
+      background: var(--text-primary); top: 50%; left: 50%; transform: translate(-50%,-50%);
+    }
+    .spc-pulse {
+      position: absolute; width: 10px; height: 10px; border-radius: 50%;
+      border: 1.5px solid var(--accent); top: 50%; left: 50%; transform: translate(-50%,-50%);
+      animation: spcPulse 2.6s ease-out infinite;
+    }
+    @keyframes spcPulse {
+      0%   { width: 10px; height: 10px; opacity: .9; }
+      100% { width: 96px; height: 96px; opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .spc-pulse { animation: none; opacity: 0; }
     }
     .program-card-tag {
       display: inline-block;
@@ -1024,6 +1053,21 @@
             <span class="program-card-tag">Video · 1:1 · Group</span>
             <h3>Systematic AI Prototyping for UX Product Designer</h3>
             <p>Stop prompting screen by screen. Define your design system once, then let AI build consistently at any scale.</p>
+            <span class="program-card-link">View program</span>
+          </div>
+        </a>
+        <a href="programs/mid-to-senior.html" class="program-card animate d4">
+          <div class="program-card-visual" aria-hidden="true">
+            <span class="pc-ring"></span>
+            <span class="spc-ring2"></span>
+            <span class="spc-ring3"></span>
+            <span class="spc-core"></span>
+            <span class="spc-pulse"></span>
+          </div>
+          <div class="program-card-body">
+            <span class="program-card-tag">1:1 or Group (3–5) · 3–6+ yrs experience</span>
+            <h3>UX Product Design Roadmap to Senior</h3>
+            <p>Defend decisions with evidence, not gut feel, and own projects end-to-end. 12 sessions, weekly, over 3 months.</p>
             <span class="program-card-link">View program</span>
           </div>
         </a>

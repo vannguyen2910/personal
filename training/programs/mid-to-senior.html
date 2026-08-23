@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UX Product Design Roadmap to Senior — Winnie Nguyen</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="../../Themes/program-tokens.css?v=2">
+<link rel="stylesheet" href="../../Themes/program-components.css?v=2">
+<link rel="stylesheet" href="../../Themes/editorial-patterns.css?v=2">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=wand_stars" />
+<style>
+  /* group-training card — empathetic note inviting visitors to bring their own cohort */
+  .group-cohort-note{
+    display:flex; gap:.7rem; align-items:flex-start;
+    margin:0 0 1.6rem; padding:.9rem 1rem;
+    background:rgba(63,207,110,.10); border:1px solid rgba(63,207,110,.3); border-radius:10px;
+  }
+  .group-cohort-note-icon{
+    flex-shrink:0; width:28px; height:28px; border-radius:8px; margin-top:.05rem;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(63,207,110,.15); color:var(--lime);
+  }
+  .group-cohort-note-icon svg{ width:14px; height:14px; }
+  .group-cohort-note-title{ font-weight:700; font-size:.85rem; color:var(--lime); margin-bottom:.2rem; }
+  .group-cohort-note-body{ font-size:.8rem; line-height:1.5; color:rgba(245,239,226,.75); }
+
+  /* hero illustration — "radius of influence": concentric rings pulsing outward,
+     matching the icon used for this track on the training hub's program card */
+  .roi-visual{ position:absolute; width:460px; height:460px; top:50%; left:50%; transform:translate(-50%,-50%); }
+  .roi-ring1{ position:absolute; inset:0; border:1px dashed var(--ink-50); border-radius:50%; }
+  .roi-ring2{ position:absolute; inset:69px; border:1px dashed var(--ink-50); border-radius:50%; }
+  .roi-ring3{ position:absolute; inset:146px; border:1.5px solid var(--coral); border-radius:50%; }
+  .roi-core{
+    position:absolute; width:40px; height:40px; border-radius:50%; background:var(--ink);
+    top:50%; left:50%; transform:translate(-50%,-50%);
+  }
+  .roi-pulse{
+    position:absolute; width:40px; height:40px; border-radius:50%;
+    border:2px solid var(--coral); top:50%; left:50%; transform:translate(-50%,-50%);
+    animation:roiPulse 2.8s ease-out infinite;
+  }
+  @keyframes roiPulse{
+    0%   { width:40px; height:40px; opacity:.9; }
+    100% { width:429px; height:429px; opacity:0; }
+  }
+  @media (prefers-reduced-motion: reduce){ .roi-pulse{ animation:none; opacity:0; } }
+
+  /* this page's hero text runs long, so center the illustration against the
+     full hero height instead of the shared bottom-aligned default */
+  .hero-grid{ align-items:center; }
+</style>
+</head>
+<body>
+
+  <!-- ── Contact modal ── -->
+  <div id="contactModal" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="modal">
+      <button class="modal-close" onclick="document.getElementById('contactModal').classList.remove('open')">✕</button>
+      <div class="contact-person">
+        <img src="../../portfolio/images/headshot-square.jpg" alt="Winnie Nguyen">
+        <div>
+          <div class="contact-person-name">Winnie Nguyen</div>
+          <div class="contact-person-role">UX &amp; Product Educator</div>
+        </div>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:nguyenphuctuongvan@gmail.com" class="contact-row">
+          <span class="contact-row-icon">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="var(--coral)" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          </span>
+          <div>
+            <div class="contact-row-label">Email</div>
+            <div class="contact-row-value">nguyenphuctuongvan@gmail.com</div>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/winnienguyen2910/" target="_blank" rel="noopener" class="contact-row">
+          <span class="contact-row-icon">
+            <svg width="16" height="16" fill="var(--coral)" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </span>
+          <div>
+            <div class="contact-row-label">LinkedIn</div>
+            <div class="contact-row-value">linkedin.com/in/winnienguyen2910</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <div class="wrap">
+      <a href="../index.html" class="nav-logo">
+        <img src="../assets/Logo.svg" alt="Winnie Nguyen">
+      </a>
+      <div class="nav-links">
+        <a href="#mentor"><span class="lang-en">Mentor</span><span class="lang-vi">Mentor</span></a>
+        <a href="#curriculum"><span class="lang-en">Curriculum</span><span class="lang-vi">Giáo trình</span></a>
+        <a href="#pricing"><span class="lang-en">Pricing</span><span class="lang-vi">Học phí</span></a>
+        <a href="#testimonial"><span class="lang-en">Story</span><span class="lang-vi">Câu chuyện</span></a>
+        <a href="#closing"><span class="lang-en">Format</span><span class="lang-vi">Hình thức</span></a>
+      </div>
+      <div class="nav-actions">
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button type="button" class="lang-btn is-active" data-lang="en">EN</button>
+          <span class="lang-toggle-sep">|</span>
+          <button type="button" class="lang-btn" data-lang="vi">VN</button>
+        </div>
+        <a href="#closing" class="btn btn-dark nav-cta"><span class="lang-en">Enroll</span><span class="lang-vi">Đăng ký</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-top">
+        <div class="hero-badges">
+          <span class="hero-badge"><span class="lang-en">Course</span><span class="lang-vi">Khóa học</span></span>
+          <span class="hero-badge ai-badge"><span class="material-symbols-rounded icon-ai-inline" aria-hidden="true">wand_stars</span><span class="lang-en">AI-Powered Workflow</span><span class="lang-vi">AI-Assisted Workflow</span></span>
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <h1 class="hero-lines">
+            <span><span><span class="lang-en">UX Product</span><span class="lang-vi">UX Product</span></span></span>
+            <span><span><em class="it">Design Roadmap</em></span></span>
+            <span><span><span class="lang-en">to <span class="mark"><span>Senior</span></span>.</span><span class="lang-vi">dành cho <span class="mark"><span>Senior</span></span>.</span></span></span>
+          </h1>
+          <p class="hero-desc"><span class="lang-en">Defend a decision with evidence, not "it feels right" — and start owning projects, not just executing them.</span><span class="lang-vi"><strong>Bảo vệ quyết định bằng bằng chứng, không chỉ bằng "nhìn hợp lý".</strong> Và bắt đầu làm chủ dự án, không chỉ thực thi.</span></p>
+          <a href="#mentor" class="hero-mentor">
+            <img src="../assets/avatar.png" alt="Winnie Nguyen" class="hero-mentor-avatar">
+            <span class="hero-mentor-text">
+              <strong>Winnie Nguyen</strong>
+              <span><span class="lang-en">UX &amp; Product Educator</span><span class="lang-vi">UX &amp; Product Design Educator</span></span>
+            </span>
+          </a>
+          <div class="hero-cta">
+            <a href="#closing" class="btn btn-dark">
+              <span class="lang-en">Enroll Now</span><span class="lang-vi">Đăng Ký Khoá Học</span>
+            </a>
+            <a href="../self-assessment.html" class="btn btn-ghost">
+              <span class="lang-en">Free self-assessment</span><span class="lang-vi">Tự đánh giá năng lực</span>
+            </a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat"><strong>12</strong><span><span class="lang-en">Sessions · 90 min weekly</span><span class="lang-vi">Buổi học · 90 phút/tuần</span><span class="hero-stat-sub"><span class="lang-en">~3 months</span><span class="lang-vi">~3 tháng</span></span></span></div>
+            <div class="hero-stat"><strong><span class="lang-en">1:1 or Group</span><span class="lang-vi">1:1 hoặc nhóm</span></strong><span><span class="lang-en">Online via Google Meet or Zoom</span><span class="lang-vi">Online qua Google Meet hoặc Zoom</span></span></div>
+            <div class="hero-stat">
+              <strong>3.500.000₫</strong>
+              <span>
+                <span class="lang-en">Per month · Group Training</span><span class="lang-vi">/tháng · Học nhóm</span>
+                <span class="hero-stat-sub"><span class="lang-en">1:1 from 5.500.000₫ per month</span><span class="lang-vi">1:1 từ 5.500.000₫/tháng</span></span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="roi-visual" aria-hidden="true">
+            <span class="roi-ring1"></span>
+            <span class="roi-ring2"></span>
+            <span class="roi-ring3"></span>
+            <span class="roi-core"></span>
+            <span class="roi-pulse"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ PAIN ============ -->
+  <section class="pain on-dark">
+    <div class="wrap">
+      <span class="kicker"><span class="lang-en">Sound familiar?</span><span class="lang-vi">Đã từng như thế này chưa?</span></span>
+      <p class="pain-headline reveal"><span class="lang-en">You're shipping good work. <em>Promotion still feels stuck.</em></span><span class="lang-vi">Kỹ năng đã đủ. <em>Nhưng promotion vẫn chưa tới.</em></span></p>
+
+      <ul class="pain-list">
+        <li class="reveal reveal-d1"><em>01</em><span><span class="lang-en">Every project ships clean. Stakeholders trust your taste.</span><span class="lang-vi">Dự án nào cũng ra mắt suôn sẻ. Stakeholder tin gu thẩm mỹ của bạn.</span></span></li>
+        <li class="reveal reveal-d2"><em>02</em><span><span class="lang-en">But in the room, you defend a call with "it feels right" — while the senior next to you opens with what they found in research.</span><span class="lang-vi">Nhưng trong phòng họp, bạn bảo vệ quyết định bằng "nhìn hợp lý" — trong khi senior bên cạnh mở đầu bằng điều họ tìm ra qua nghiên cứu.</span></span></li>
+        <li class="reveal reveal-d3"><em>03</em><span><span class="lang-en">And when there's more work than you can carry, it all still comes back to you. Nobody's taught you how to hand it off.</span><span class="lang-vi">Và khi khối lượng việc vượt quá sức một người, mọi thứ vẫn dồn về bạn. Chưa ai chỉ bạn cách giao việc lại.</span></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ WHO IT'S FOR ============ -->
+  <section class="who">
+    <div class="wrap">
+      <div class="who-grid">
+        <div class="reveal">
+          <span class="kicker"><span class="lang-en">Who it's for</span><span class="lang-vi">Dành cho ai</span></span>
+          <p class="who-headline" style="margin-top:1.2rem;"><span class="lang-en">You've proven the craft. Now it's time to <span class="mark"><span>own the room</span></span>.</span><span class="lang-vi">Bạn đã chứng minh được craft. Giờ là lúc <span class="mark"><span>làm chủ cả phòng họp</span></span>.</span></p>
+        </div>
+        <div class="who-card reveal reveal-d2">
+          <div class="num">3–6+</div>
+          <p><span class="lang-en">Years of experience, and craft that holds up under scrutiny. What's missing isn't skill — it's defending a decision with evidence, sizing work for someone else, and getting a room to actually trust your call.</span><span class="lang-vi">Nhiều năm kinh nghiệm, craft đủ vững để chịu được soi xét. Điều còn thiếu không phải kỹ năng — mà là bảo vệ quyết định bằng bằng chứng, định lượng công việc cho người khác, và khiến cả phòng thật sự tin vào lời bạn nói.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WALK AWAY ============ -->
+  <section class="walkaway">
+    <div class="wrap">
+      <div class="walkaway-card reveal">
+        <span class="walkaway-badge">
+          <span class="material-symbols-rounded" aria-hidden="true">wand_stars</span>
+          <span class="lang-en">What you walk away with</span><span class="lang-vi">Bạn sẽ mang về được gì</span>
+        </span>
+        <p class="walkaway-headline"><span class="lang-en">One project of yours, finished end-to-end the way a senior would — with <span class="mark"><span>AI woven in throughout</span></span>, not bolted on for a single session. Plus proof that you can <span class="mark"><span>own it end-to-end</span></span>, not just execute the brief.</span><span class="lang-vi">Một dự án của chính bạn, hoàn thành từ đầu đến cuối theo cách một Senior thực thụ sẽ làm — với <span class="mark"><span>AI đồng hành xuyên suốt</span></span>, không chỉ xuất hiện ở một buổi học. Cùng bằng chứng cho thấy bạn có thể <span class="mark"><span>làm chủ dự án từ đầu đến cuối</span></span>, không chỉ thực thi theo brief.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CURRICULUM — 9 lessons across 12 sessions, headline objective only ============ -->
+  <section class="curriculum" id="curriculum">
+    <div class="wrap">
+      <div class="curriculum-head reveal">
+        <span class="kicker"><span class="lang-en">The curriculum</span><span class="lang-vi">Giáo trình</span></span>
+        <h2 style="margin-top:1rem;"><span class="lang-en">What each<br><em style="font-style:normal; color:var(--coral);">session builds.</em></span><span class="lang-vi">Mỗi buổi học,<br><em style="font-style:normal; color:var(--coral);">bạn xây dựng được gì.</em></span></h2>
+        <p style="margin-top:1rem; font-size:1.05rem; color:var(--ink-70); max-width:56ch;"><span class="lang-en">Every session runs in two blocks: 30 minutes on the method, 60 minutes applying it live to your own real project — coached in the room, not reviewed later as homework.</span><span class="lang-vi">Mỗi buổi học chia làm hai phần: 30 phút học phương pháp, 60 phút áp dụng trực tiếp lên dự án thật của bạn — được coach ngay tại chỗ, không phải review bài tập sau đó.</span></p>
+      </div>
+
+      <div class="session-list">
+
+        <div class="phase-label"><span class="phase-dot"></span><span><span class="lang-en">Ground in evidence</span><span class="lang-vi">Xây nền bằng chứng</span></span></div>
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">01</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3><span class="lang-en">Mastery Design Process</span><span class="lang-vi">Làm chủ Quy trình Thiết kế</span></h3>
+                <p><span class="lang-en">Run the process as a loop you can defend under questioning, not a checklist to complete.</span><span class="lang-vi">Vận hành quy trình như một vòng lặp bạn có thể bảo vệ trước mọi câu hỏi, không phải một checklist để hoàn thành.</span></p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div>
+                <span class="session-detail-label"><span class="lang-en">Learning objective</span><span class="lang-vi">Mục tiêu học</span></span>
+                <ul>
+                  <li><span class="lang-en">Build a process charter for your real project: stages, activities, and success criteria</span><span class="lang-vi">Xây dựng process charter cho chính dự án của bạn: giai đoạn, hoạt động, tiêu chí thành công</span></li>
+                  <li><span class="lang-en">Surface and prioritise your assumptions before any evidence-gathering begins</span><span class="lang-vi">Nêu rõ và ưu tiên các giả định trước khi bắt đầu thu thập bằng chứng</span></li>
+                  <li><span class="lang-en">Learn to defend your process choices under stakeholder questioning, not just follow steps</span><span class="lang-vi">Học cách bảo vệ lựa chọn quy trình trước câu hỏi của stakeholder, không chỉ làm theo bước có sẵn</span></li>
+                  <li class="ai-line"><span class="lang-en">Use AI to brainstorm and stress-test your process charter and assumption list before you commit to them</span><span class="lang-vi">Dùng AI để brainstorm và phản biện process charter cùng danh sách giả định trước khi chốt</span></li>
+                </ul>
+              </div>
+              <div>
+                <span class="session-detail-label"><span class="lang-en">What you'll achieve</span><span class="lang-vi">Bạn sẽ đạt được</span></span>
+                <ul>
+                  <li><span class="lang-en">A sponsor-aligned process charter for your real project</span><span class="lang-vi">Một process charter được sponsor đồng thuận cho dự án của bạn</span></li>
+                  <li><span class="lang-en">An explicit, trackable assumption map instead of a mental list</span><span class="lang-vi">Một assumption map rõ ràng, theo dõi được thay vì chỉ nhớ trong đầu</span></li>
+                  <li><span class="lang-en">The first concrete artifact of a program built entirely on your own work</span><span class="lang-vi">Artifact đầu tiên của cả chương trình, xây hoàn toàn trên công việc thật của bạn</span></li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">02</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3><span class="lang-en">Audit &amp; Desk Research</span><span class="lang-vi">Audit &amp; Desk Research</span></h3>
+                <p><span class="lang-en">Ground the redesign in what's actually broken, not a list of pet peeves.</span><span class="lang-vi">Đặt nền cho redesign bằng bằng chứng thực tế, không phải danh sách than phiền cảm tính.</span></p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div>
+                <span class="session-detail-label"><span class="lang-en">Learning objective</span><span class="lang-vi">Mục tiêu học</span></span>
+                <ul>
+                  <li><span class="lang-en">Run a heuristic evaluation of your current product to find recurring patterns, not isolated bugs</span><span class="lang-vi">Chạy heuristic evaluation trên sản phẩm hiện tại để tìm pattern lặp lại, không phải lỗi đơn lẻ</span></li>
+                  <li><span class="lang-en">Conduct targeted desk research against comparable products to test named assumptions</span><span class="lang-vi">Nghiên cứu bàn giấy có mục tiêu trên sản phẩm tương tự để kiểm chứng các giả định cụ thể</span></li>
+                  <li><span class="lang-en">Update your assumption map with real evidence — moving items to Confirmed or Unconfirmed</span><span class="lang-vi">Cập nhật assumption map bằng bằng chứng thật — chuyển mục sang Confirmed hoặc Unconfirmed</span></li>
+                  <li class="ai-line"><span class="lang-en">Build reusable AI assets — a checklist, a living log, two templates — that compound across every future audit</span><span class="lang-vi">Dựng các AI asset dùng lại được — checklist, living log, hai template — tích lũy qua mỗi lần audit sau này</span></li>
+                </ul>
+              </div>
+              <div>
+                <span class="session-detail-label"><span class="lang-en">What you'll achieve</span><span class="lang-vi">Bạn sẽ đạt được</span></span>
+                <ul>
+                  <li><span class="lang-en">A specific, evidence-grounded audit report your team can act on</span><span class="lang-vi">Một audit report cụ thể, có bằng chứng, team dùng được ngay</span></li>
+                  <li><span class="lang-en">Reusable audit assets you'll use again on every future project</span><span class="lang-vi">Bộ tài sản audit dùng lại được cho mọi dự án sau này</span></li>
+                  <li><span class="lang-en">A stakeholder-ready narrative, not a slide of screenshots</span><span class="lang-vi">Một câu chuyện sẵn sàng trình bày, không phải một slide đầy screenshot</span></li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">03</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3><span class="lang-en">Understand Customer — Jobs to Be Done</span><span class="lang-vi">Thấu hiểu khách hàng — Jobs to Be Done</span></h3>
+                <p><span class="lang-en">From the job stakeholders assume, to the job customers actually hire your product for.</span><span class="lang-vi">Từ công việc stakeholder giả định, đến công việc khách hàng thật sự "thuê" sản phẩm để làm.</span></p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div>
+                <span class="session-detail-label"><span class="lang-en">Learning objective</span><span class="lang-vi">Mục tiêu học</span></span>
+                <ul>
+                  <li><span class="lang-en">Apply the JTBD framework — functional, emotional, and social jobs — most design misses the last two</span><span class="lang-vi">Áp dụng JTBD — job chức năng, cảm xúc, xã hội — phần lớn thiết kế bỏ sót hai loại sau</span></li>
+                  <li><span class="lang-en">Run a stakeholder check-in to surface what the business assumes the customer's job actually is</span><span class="lang-vi">Trao đổi với stakeholder để lộ ra giả định của business về "job" thật sự của khách hàng</span></li>
+                  <li><span class="lang-en">Conduct JTBD-informed interviews across enough conversations to see a pattern, not one data point</span><span class="lang-vi">Phỏng vấn theo JTBD, đủ số lượng để thấy pattern, không phải một điểm dữ liệu đơn lẻ</span></li>
+                  <li class="ai-line"><span class="lang-en">Use AI to enrich context — cross-checking interview notes against your saved project files, not a blank prompt</span><span class="lang-vi">Dùng AI để làm giàu context — đối chiếu ghi chú phỏng vấn với file dự án đã lưu, không phải prompt trắng</span></li>
+                </ul>
+              </div>
+              <div>
+                <span class="session-detail-label"><span class="lang-en">What you'll achieve</span><span class="lang-vi">Bạn sẽ đạt được</span></span>
+                <ul>
+                  <li><span class="lang-en">A named gap between what stakeholders assumed and what customers actually said</span><span class="lang-vi">Một khoảng cách cụ thể giữa giả định của stakeholder và điều khách hàng thật sự nói</span></li>
+                  <li><span class="lang-en">An actionable insight with a decision attached, not just an observation</span><span class="lang-vi">Một insight hành động được, gắn với một quyết định cụ thể, không chỉ là quan sát</span></li>
+                  <li><span class="lang-en">A pitch you can defend, framed as implication, not raw data</span><span class="lang-vi">Một bài pitch bảo vệ được, trình bày theo hướng ý nghĩa, không phải dữ liệu thô</span></li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+        <div class="phase-label"><span class="phase-dot"></span><span><span class="lang-en">Define &amp; architect</span><span class="lang-vi">Định hình &amp; kiến trúc</span></span></div>
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">04</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3><span class="lang-en">Problem Definition &amp; Strategy</span><span class="lang-vi">Định nghĩa vấn đề &amp; Chiến lược</span></h3>
+                <p><span class="lang-en">A problem statement a stakeholder can actually push back on.</span><span class="lang-vi">Một problem statement mà stakeholder có thể thật sự phản biện.</span></p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div>
+                <span class="session-detail-label"><span class="lang-en">Learning objective</span><span class="lang-vi">Mục tiêu học</span></span>
+                <ul>
+                  <li><span class="lang-en">Run affinity mapping to cluster research into 3–5 clear themes</span><span class="lang-vi">Chạy affinity mapping để gom nghiên cứu thành 3–5 theme rõ ràng</span></li>
+                  <li><span class="lang-en">Draft a Lean UX Canvas connecting your problem statement to a target-state vision</span><span class="lang-vi">Soạn Lean UX Canvas nối problem statement với tầm nhìn target-state</span></li>
+                  <li><span class="lang-en">Pressure-test your problem statement with a real stakeholder before moving to design</span><span class="lang-vi">Kiểm chứng problem statement với stakeholder thật trước khi bước sang thiết kế</span></li>
+                  <li class="ai-line"><span class="lang-en">Brainstorm with AI to stress-test your problem statement and canvas from angles you hadn't considered</span><span class="lang-vi">Brainstorm cùng AI để phản biện problem statement và canvas từ những góc bạn chưa nghĩ tới</span></li>
+                </ul>
+              </div>
+              <div>
+                <span class="session-detail-label"><span class="lang-en">What you'll achieve</span><span class="lang-vi">Bạn sẽ đạt được</span></span>
+                <ul>
+                  <li><span class="lang-en">A sharp, testable problem statement leadership is aligned on</span><span class="lang-vi">Một problem statement rõ ràng, kiểm chứng được, được leadership đồng thuận</span></li>
+                  <li><span class="lang-en">A target-state vision tied to business goals, not just the current screen</span><span class="lang-vi">Một target-state gắn với mục tiêu kinh doanh, không chỉ dừng ở màn hình hiện tại</span></li>
+                  <li><span class="lang-en">Practice defending a strategic call, not just a design one</span><span class="lang-vi">Kinh nghiệm bảo vệ một quyết định chiến lược, không chỉ một quyết định thiết kế</span></li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">05</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3><span class="lang-en">System Architecture &amp; IA</span><span class="lang-vi">Kiến trúc hệ thống &amp; IA</span></h3>
+                <p><span class="lang-en">Structure validated through card sorting, not assumed from an org chart.</span><span class="lang-vi">Cấu trúc được kiểm chứng qua card sorting, không suy đoán từ sơ đồ tổ chức.</span></p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div>
+                <span class="session-detail-label"><span class="lang-en">Learning objective</span><span class="lang-vi">Mục tiêu học</span></span>
+                <ul>
+                  <li><span class="lang-en">Run a card sort and compare it against your current information architecture</span><span class="lang-vi">Chạy card sort và so sánh với kiến trúc thông tin hiện tại</span></li>
+                  <li><span class="lang-en">Draft an evidence-based sitemap or service blueprint</span><span class="lang-vi">Soạn sitemap hoặc service blueprint dựa trên bằng chứng</span></li>
+                  <li><span class="lang-en">Learn to defend a structural decision using research, not preference</span><span class="lang-vi">Học cách bảo vệ quyết định cấu trúc bằng nghiên cứu, không phải cảm tính</span></li>
+                  <li class="ai-line"><span class="lang-en">Use AI to build your sitemap or blueprint as a working artifact, then stress-test it against alternative user mental models</span><span class="lang-vi">Dùng AI để dựng sitemap hoặc blueprint thành artifact thật, rồi phản biện với các mental model khác của người dùng</span></li>
+                </ul>
+              </div>
+              <div>
+                <span class="session-detail-label"><span class="lang-en">What you'll achieve</span><span class="lang-vi">Bạn sẽ đạt được</span></span>
+                <ul>
+                  <li><span class="lang-en">A system-wide IA grounded in real user research</span><span class="lang-vi">Một IA toàn hệ thống, dựa trên nghiên cứu người dùng thật</span></li>
+                  <li><span class="lang-en">A structure your team trusts because it traces back to evidence</span><span class="lang-vi">Một cấu trúc được team tin tưởng vì truy ngược được về bằng chứng</span></li>
+                  <li><span class="lang-en">The vocabulary to defend structural calls under scrutiny</span><span class="lang-vi">Ngôn ngữ để bảo vệ quyết định cấu trúc khi bị chất vấn</span></li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">06</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3><span class="lang-en">Design</span><span class="lang-vi">Thiết kế</span></h3>
+                <p><span class="lang-en">Every screen decision traces back to a finding or a validated assumption.</span><span class="lang-vi">Mỗi quyết định trên màn hình đều truy ngược được về một phát hiện hoặc giả định đã kiểm chứng.</span></p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div>
+                <span class="session-detail-label"><span class="lang-en">Learning objective</span><span class="lang-vi">Mục tiêu học</span></span>
+                <ul>
+                  <li><span class="lang-en">Design priority workflows with a documented rationale for each key decision</span><span class="lang-vi">Thiết kế các workflow ưu tiên với lý do được ghi rõ cho từng quyết định</span></li>
+                  <li><span class="lang-en">Build or extend a component inventory with full states — default, loading, empty, error, success</span><span class="lang-vi">Xây hoặc mở rộng component inventory với đủ trạng thái — default, loading, empty, error, success</span></li>
+                  <li><span class="lang-en">Run a design QA pass against your own tokens and components</span><span class="lang-vi">Chạy design QA đối chiếu với chính token và component của bạn</span></li>
+                  <li class="ai-line"><span class="lang-en">Use AI to build your component inventory and design system foundations as reusable artifacts your team can extend</span><span class="lang-vi">Dùng AI để dựng component inventory và nền tảng design system thành artifact team có thể mở rộng</span></li>
+                </ul>
+              </div>
+              <div>
+                <span class="session-detail-label"><span class="lang-en">What you'll achieve</span><span class="lang-vi">Bạn sẽ đạt được</span></span>
+                <ul>
+                  <li><span class="lang-en">Priority screens designed with evidence-backed rationale, not taste</span><span class="lang-vi">Các màn hình ưu tiên có lý do dựa trên bằng chứng, không phải cảm tính</span></li>
+                  <li><span class="lang-en">Design system foundations named and ready to scale</span><span class="lang-vi">Nền tảng design system được đặt tên rõ ràng, sẵn sàng mở rộng</span></li>
+                  <li><span class="lang-en">A design QA habit you can run on every future project</span><span class="lang-vi">Thói quen design QA áp dụng được cho mọi dự án sau này</span></li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+        <div class="phase-label"><span class="phase-dot"></span><span><span class="lang-en">Deliver &amp; own</span><span class="lang-vi">Bàn giao &amp; làm chủ</span></span></div>
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">07</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3><span class="lang-en">AI Prototyping</span><span class="lang-vi">AI Prototyping</span></h3>
+                <p><span class="lang-en">A working, browser-viewable prototype, not a folder of static screens.</span><span class="lang-vi">Một prototype hoạt động, xem được trên trình duyệt — không phải một thư mục ảnh tĩnh.</span></p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div>
+                <span class="session-detail-label"><span class="lang-en">Learning objective</span><span class="lang-vi">Mục tiêu học</span></span>
+                <ul>
+                  <li><span class="lang-en">Sync your design tokens and generate a component inventory with AI as your working brief</span><span class="lang-vi">Đồng bộ design token và tạo component inventory, dùng AI như bản brief làm việc</span></li>
+                  <li><span class="lang-en">Build priority screens through a review loop — chat for structure, targeted feedback for components, direct manipulation for spacing</span><span class="lang-vi">Dựng màn hình ưu tiên qua vòng review — chat cho cấu trúc, feedback trực tiếp cho component, chỉnh tay cho spacing</span></li>
+                  <li><span class="lang-en">Learn where AI accelerates you, and where your judgment still has to lead</span><span class="lang-vi">Biết khi nào AI giúp tăng tốc, và khi nào bạn cần tự đưa ra quyết định</span></li>
+                  <li class="ai-line"><span class="lang-en">Use AI to build the actual artifact end to end — not just generate ideas, ship a working prototype across at least 2 states</span><span class="lang-vi">Dùng AI để dựng artifact thật từ đầu đến cuối — không chỉ tạo ý tưởng, mà ra một prototype hoạt động với ít nhất 2 trạng thái</span></li>
+                </ul>
+              </div>
+              <div>
+                <span class="session-detail-label"><span class="lang-en">What you'll achieve</span><span class="lang-vi">Bạn sẽ đạt được</span></span>
+                <ul>
+                  <li><span class="lang-en">A working, testable prototype built at senior-rigor pace</span><span class="lang-vi">Một prototype hoạt động, kiểm thử được, ở tốc độ tiêu chuẩn Senior</span></li>
+                  <li><span class="lang-en">A repeatable AI-assisted prototyping workflow for every future project</span><span class="lang-vi">Một workflow prototype có AI hỗ trợ, dùng lại được cho mọi dự án sau này</span></li>
+                  <li><span class="lang-en">Confidence knowing exactly when to trust AI output and when to override it</span><span class="lang-vi">Sự tự tin biết chính xác khi nào tin vào kết quả AI và khi nào cần can thiệp</span></li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">08</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3><span class="lang-en">Validation &amp; Iteration</span><span class="lang-vi">Kiểm chứng &amp; Lặp lại</span></h3>
+                <p><span class="lang-en">The right test method for the question you're actually asking.</span><span class="lang-vi">Đúng phương pháp test cho đúng câu hỏi bạn cần trả lời.</span></p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div>
+                <span class="session-detail-label"><span class="lang-en">Learning objective</span><span class="lang-vi">Mục tiêu học</span></span>
+                <ul>
+                  <li><span class="lang-en">Choose the right test method — usability, desirability, or comprehension — for your actual question</span><span class="lang-vi">Chọn đúng phương pháp test — usability, desirability, hay comprehension — cho đúng câu hỏi</span></li>
+                  <li><span class="lang-en">Run a moderated usability test on your real prototype</span><span class="lang-vi">Chạy moderated usability test trên prototype thật của bạn</span></li>
+                  <li><span class="lang-en">Prioritise findings by severity — impact × frequency — not the loudest opinion in the room</span><span class="lang-vi">Ưu tiên phát hiện theo severity — impact × frequency — không phải ý kiến to tiếng nhất trong phòng</span></li>
+                  <li class="ai-line"><span class="lang-en">Use AI to draft test scripts, flag likely bias in your findings, and synthesise results into an evidence-backed narrative</span><span class="lang-vi">Dùng AI để soạn test script, phát hiện bias có thể có, và tổng hợp kết quả thành câu chuyện có bằng chứng</span></li>
+                </ul>
+              </div>
+              <div>
+                <span class="session-detail-label"><span class="lang-en">What you'll achieve</span><span class="lang-vi">Bạn sẽ đạt được</span></span>
+                <ul>
+                  <li><span class="lang-en">Real test results from your own prototype, not a hypothetical one</span><span class="lang-vi">Kết quả test thật từ prototype của bạn, không phải giả định</span></li>
+                  <li><span class="lang-en">A severity-ranked list of what to fix before shipping</span><span class="lang-vi">Danh sách ưu tiên sửa lỗi theo severity trước khi ra mắt</span></li>
+                  <li><span class="lang-en">A closed loop: findings synthesised, highest-severity issues fixed, retested</span><span class="lang-vi">Một vòng lặp khép kín: tổng hợp phát hiện, sửa lỗi nghiêm trọng nhất, test lại</span></li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">09</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3><span class="lang-en">Delegating &amp; Communicating Design Effort</span><span class="lang-vi">Phân bổ công việc &amp; Truyền đạt khối lượng thiết kế</span></h3>
+                <p><span class="lang-en">Sizing work for someone else, and making a stakeholder actually trust the number.</span><span class="lang-vi">Định lượng công việc cho người khác, và khiến stakeholder thật sự tin vào con số đó.</span></p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div>
+                <span class="session-detail-label"><span class="lang-en">Learning objective</span><span class="lang-vi">Mục tiêu học</span></span>
+                <ul>
+                  <li><span class="lang-en">Learn two estimation approaches — relative story-pointing and page/state-based sizing — and when each fits</span><span class="lang-vi">Học hai cách ước lượng — story-pointing tương đối và sizing theo page/state — và khi nào dùng cách nào</span></li>
+                  <li><span class="lang-en">Practice sizing your project's remaining work across a junior/mid split, not routing everything through yourself</span><span class="lang-vi">Thực hành phân bổ phần việc còn lại của dự án cho junior/mid, không dồn hết qua chính mình</span></li>
+                  <li><span class="lang-en">Learn to translate design effort into terms a PM or engineering lead will actually accept</span><span class="lang-vi">Học cách chuyển khối lượng thiết kế thành ngôn ngữ mà PM hoặc engineering lead thật sự chấp nhận</span></li>
+                  <li class="ai-line"><span class="lang-en">Use AI to enrich context on your project's full scope, then build a stakeholder-ready effort breakdown as a real artifact, not a guess</span><span class="lang-vi">Dùng AI để làm giàu context về toàn bộ scope dự án, rồi dựng bản breakdown khối lượng công việc sẵn sàng trình bày, không phải đoán</span></li>
+                </ul>
+              </div>
+              <div>
+                <span class="session-detail-label"><span class="lang-en">What you'll achieve</span><span class="lang-vi">Bạn sẽ đạt được</span></span>
+                <ul>
+                  <li><span class="lang-en">A real allocation plan for your project, sized by seniority, not funnelled through one person</span><span class="lang-vi">Một kế hoạch phân bổ thật cho dự án, chia theo cấp độ, không dồn qua một người</span></li>
+                  <li><span class="lang-en">A stakeholder pitch for design timelines you can actually defend</span><span class="lang-vi">Một bài pitch về timeline thiết kế bạn có thể thật sự bảo vệ</span></li>
+                  <li><span class="lang-en">A concrete step toward owning bigger scope, not just your own tasks</span><span class="lang-vi">Bước đi cụ thể hướng tới việc đảm nhận phạm vi công việc lớn hơn, không chỉ phần việc của riêng bạn</span></li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="curriculum-note reveal"><span class="lang-en">Anchored to your own real project throughout. AI runs through every block — brainstorming options, building the actual artifact, enriching context from your project files — not one-off prompts.</span><span class="lang-vi">Xuyên suốt chương trình đều gắn với dự án thật của bạn. AI xuất hiện trong mọi phần — brainstorm phương án, dựng artifact thật, làm giàu context từ file dự án — không phải những prompt rời rạc.</span></p>
+    </div>
+  </section>
+
+  <!-- ============ PRICING ============ -->
+  <section class="pricing" id="pricing">
+    <div class="wrap">
+      <div class="pricing-head reveal">
+        <span class="kicker"><span class="lang-en">Investment</span><span class="lang-vi">Đầu tư</span></span>
+        <h2><span class="lang-en">Choose your format.</span><span class="lang-vi">Chọn hình thức phù hợp.</span></h2>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="pricing-card is-light reveal">
+          <div class="pricing-card-head">
+            <span class="pricing-card-name"><span class="lang-en">1:1 Coaching</span><span class="lang-vi">Kèm 1:1</span></span>
+            <span class="pricing-badge"><span class="lang-en">Most focused</span><span class="lang-vi">Tập trung nhất</span></span>
+          </div>
+          <div class="pricing-price">5.500.000₫<span><span class="lang-en">/month</span><span class="lang-vi">/tháng</span></span></div>
+          <p class="pricing-note"><span class="lang-en">Starting at, per month</span><span class="lang-vi">Học phí từ, mỗi tháng</span></p>
+          <p class="pricing-caption" style="text-align:left; margin-top:-1.2rem; margin-bottom:1.8rem;"><span class="lang-en">Full program: 12 sessions over 12 weeks · 16.500.000₫ total</span><span class="lang-vi">Trọn khóa: 12 buổi trong 12 tuần · 16.500.000₫ trọn gói</span></p>
+
+          <div class="pricing-features">
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13l3-9 3 9M4.5 9.5h3M9 13l3-9 3 9"/></svg></span>
+              <div><div class="pricing-feature-title"><span class="lang-en">Personalized Curriculum</span><span class="lang-vi">Chương trình cá nhân hóa</span></div><div class="pricing-feature-desc"><span class="lang-en">Sessions shaped around your real project and your specific promotion gaps.</span><span class="lang-vi">Buổi học xây dựng theo đúng dự án và khoảng cách promotion cụ thể của bạn.</span></div></div>
+            </div>
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 13c0-3 2.5-5 6-5s6 2 6 5M8 8a3 3 0 100-6 3 3 0 000 6z"/></svg></span>
+              <div><div class="pricing-feature-title"><span class="lang-en">Live Coaching, Not Homework Review</span><span class="lang-vi">Coach trực tiếp, không phải review bài về nhà</span></div><div class="pricing-feature-desc"><span class="lang-en">The practice block happens with you, in real time, every session.</span><span class="lang-vi">Phần thực hành diễn ra cùng bạn, ngay lúc đó, mỗi buổi học.</span></div></div>
+            </div>
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2.5" y="3" width="11" height="10.5" rx="1.5"/><path d="M2.5 6h11M5.5 1.5v3M10.5 1.5v3"/></svg></span>
+              <div><div class="pricing-feature-title"><span class="lang-en">Flexible Scheduling</span><span class="lang-vi">Lịch học linh hoạt</span></div><div class="pricing-feature-desc"><span class="lang-en">Pick times that fit your calendar.</span><span class="lang-vi">Chọn giờ học phù hợp với bạn.</span></div></div>
+            </div>
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h9M8 4l4 4-4 4"/></svg></span>
+              <div><div class="pricing-feature-title"><span class="lang-en">Your Pace</span><span class="lang-vi">Tốc độ của riêng bạn</span></div><div class="pricing-feature-desc"><span class="lang-en">Move faster or slower depending on where you're stuck.</span><span class="lang-vi">Nhanh hay chậm tùy vào điều bạn đang vướng.</span></div></div>
+            </div>
+          </div>
+
+          <a href="#closing" class="btn btn-dark" data-format="1:1 Coaching">
+            <span class="lang-en">Enroll</span><span class="lang-vi">Đăng Ký</span>
+          </a>
+        </div>
+
+        <div class="pricing-card is-dark reveal reveal-d2">
+          <div class="pricing-card-head">
+            <span class="pricing-card-name"><span class="lang-en">Group Training</span><span class="lang-vi">Học nhóm</span></span>
+            <span class="pricing-badge"><span class="lang-en">Best value</span><span class="lang-vi">Tiết kiệm nhất</span></span>
+          </div>
+          <div class="pricing-price">3.500.000₫<span><span class="lang-en">/month</span><span class="lang-vi">/tháng</span></span></div>
+          <p class="pricing-note"><span class="lang-en">Starting at, per month · groups of 3–5</span><span class="lang-vi">Học phí từ, mỗi tháng · nhóm 3–5 người</span></p>
+          <p class="pricing-caption" style="text-align:left; margin-top:-1.2rem; margin-bottom:1.8rem;"><span class="lang-en">Full program: 12 sessions over 12 weeks · 10.500.000₫ total per person</span><span class="lang-vi">Trọn khóa: 12 buổi trong 12 tuần · 10.500.000₫ trọn gói mỗi người</span></p>
+
+          <div class="group-cohort-note">
+            <span class="group-cohort-note-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M1.5 13c0-2.5 2-4 4-4s4 1.5 4 4M5.5 6.5a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5zM9.7 5.2c.3-.1.6-.2 1-.2 2 0 4 1.5 4 4M10.8 2.3c.9.2 1.5 1 1.5 1.9"/></svg></span>
+            <div>
+              <div class="group-cohort-note-title"><span class="lang-en">Building your own cohort</span><span class="lang-vi">Tự rủ nhóm cùng học</span></div>
+              <div class="group-cohort-note-body"><span class="lang-en">Group training starts once there's a full cohort, so it may take a little longer to kick off than 1:1. If you know a few designers who'd want this too, bring them with you — I'll take it from there.</span><span class="lang-vi">Học nhóm chỉ bắt đầu khi đã đủ người, nên có thể mất thêm thời gian hơn so với học 1:1. Nếu bạn biết vài designer khác cũng đang cần điều này, hãy rủ họ cùng đăng ký — phần còn lại để mình lo.</span></div>
+            </div>
+          </div>
+
+          <div class="pricing-features">
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13l3-9 3 9M4.5 9.5h3M9 13l3-9 3 9"/></svg></span>
+              <div><div class="pricing-feature-title"><span class="lang-en">Same Core Curriculum</span><span class="lang-vi">Giáo trình như nhau</span></div><div class="pricing-feature-desc"><span class="lang-en">The same senior curriculum, AI-powered workflow included.</span><span class="lang-vi">Cùng một giáo trình senior, có AI hỗ trợ.</span></div></div>
+            </div>
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 1.5v13M11 4.2c0-1.2-1.3-2.2-3-2.2s-3 1-3 2.3c0 3 6 1.4 6 4.4 0 1.3-1.3 2.3-3 2.3s-3-1-3-2.2"/></svg></span>
+              <div><div class="pricing-feature-title"><span class="lang-en">Lower Cost, Same Depth</span><span class="lang-vi">Chi phí thấp hơn, cùng chiều sâu</span></div><div class="pricing-feature-desc"><span class="lang-en">About 45% less per person than 1:1 coaching, same full curriculum.</span><span class="lang-vi">Thấp hơn khoảng 45% mỗi người so với học 1:1, vẫn đầy đủ giáo trình.</span></div></div>
+            </div>
+          </div>
+
+          <a href="#closing" class="btn btn-lime" data-format="Group Training">
+            <span class="lang-en">Enroll</span><span class="lang-vi">Đăng Ký</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div data-include="../../Themes/partials/mentor-section.html"></div>
+
+  <div data-include="../../Themes/partials/testimonial-section.html"></div>
+
+  <!-- ============ CLOSING / FORMAT / CTA ============ -->
+  <section class="closing" id="closing">
+    <div class="wrap">
+      <div class="closing-grid">
+        <div class="reveal">
+          <span class="kicker"><span class="lang-en">Ready to start?</span><span class="lang-vi">Sẵn sàng bắt đầu?</span></span>
+          <h2 style="margin-top:1rem;"><span class="lang-en">Ready to stop just executing.<br><em style="font-style:normal; color:var(--lime);">Start owning it.</em></span><span class="lang-vi">Đã đến lúc không chỉ thực thi.<br><em style="font-style:normal; color:var(--lime);">Bắt đầu làm chủ.</em></span></h2>
+          <div class="closing-cta">
+            <form id="leadForm" class="lead-form" action="https://formspree.io/f/mpqvoqyy" method="POST">
+              <input type="hidden" name="_subject" value="New coaching inquiry: Roadmap to Senior">
+              <input type="hidden" name="source" value="Senior Program — Contact Form">
+              <div class="format-choices">
+                <span class="format-choices-label"><span class="lang-en">Which format interests you?</span><span class="lang-vi">Bạn quan tâm hình thức nào?</span></span>
+                <div class="format-choices-row">
+                  <label class="format-choice"><input type="radio" name="format" value="1:1 Coaching"><span class="lang-en">1:1 Coaching</span><span class="lang-vi">Kèm 1:1</span></label>
+                  <label class="format-choice"><input type="radio" name="format" value="Group Training"><span class="lang-en">Group Training</span><span class="lang-vi">Học nhóm</span></label>
+                </div>
+              </div>
+              <div class="lead-form-row">
+                <input type="text" name="name" placeholder="Your name" required>
+                <input type="email" name="email" placeholder="Your email" required>
+              </div>
+              <button type="submit" class="btn btn-lime lead-form-submit">
+                <span class="lang-en">Enroll</span><span class="lang-vi">Đăng Ký</span>
+              </button>
+              <p class="lead-form-note"><span class="lang-en">I'll reply by email within 1–2 business days.</span><span class="lang-vi">Mình sẽ phản hồi qua email trong 1–2 ngày làm việc.</span></p>
+            </form>
+            <p id="leadFormSuccess" class="lead-form-success"><span class="lang-en">Thanks! I've got your details and will email you within 1–2 business days.</span><span class="lang-vi">Cảm ơn bạn! Mình đã nhận được thông tin và sẽ email lại trong 1–2 ngày làm việc.</span></p>
+            <a href="../self-assessment.html" class="btn btn-ghost lead-form-secondary" style="border-color:rgba(245,239,226,.4); color:var(--cream);">
+              <span class="lang-en">Or start with the free self-assessment</span><span class="lang-vi">Hoặc bắt đầu với bài tự đánh giá miễn phí</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="format-list reveal reveal-d2">
+          <div class="format-row"><span><span class="lang-en">Format</span><span class="lang-vi">Hình thức</span></span><span><span class="lang-en">1:1 or Group (3–5)</span><span class="lang-vi">1:1 hoặc nhóm (3–5)</span></span></div>
+          <div class="format-row"><span><span class="lang-en">Sessions</span><span class="lang-vi">Số buổi</span></span><span><span class="lang-en">12 × 90 min</span><span class="lang-vi">12 × 90 phút</span></span></div>
+          <div class="format-row"><span><span class="lang-en">Cadence</span><span class="lang-vi">Tần suất</span></span><span><span class="lang-en">Weekly</span><span class="lang-vi">Hàng tuần</span></span></div>
+          <div class="format-row"><span><span class="lang-en">Delivery</span><span class="lang-vi">Triển khai</span></span><span><span class="lang-en">Online via Google Meet or Zoom</span><span class="lang-vi">Online qua Google Meet hoặc Zoom</span></span></div>
+          <div class="format-row"><span><span class="lang-en">Language</span><span class="lang-vi">Ngôn ngữ</span></span><span><span class="lang-en">Vietnamese or English</span><span class="lang-vi">Tiếng Việt hoặc tiếng Anh</span></span></div>
+          <div class="format-row tuition"><span><span class="lang-en">Tuition</span><span class="lang-vi">Học phí</span></span><span><span class="lang-en">Starting at 5.500.000₫/month</span><span class="lang-vi">Học phí từ 5.500.000₫/tháng</span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <p>© 2026 Winnie Nguyen · UX &amp; Product Educator</p>
+      <div class="footer-links">
+        <a href="#" onclick="document.getElementById('contactModal').classList.add('open'); return false;">Contact</a>
+        <a href="https://www.linkedin.com/in/winnienguyen2910" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+   (async function(){
+    // load shared partials (e.g. the testimonial section) before wiring up interactions below
+    await Promise.all([...document.querySelectorAll('[data-include]')].map(async node => {
+      const res = await fetch(node.dataset.include);
+      node.outerHTML = await res.text();
+    }));
+
+    // language toggle — EN/VN, remembered via localStorage
+    const storedLang = localStorage.getItem('lang') || 'en';
+    if (storedLang === 'vi') document.body.classList.add('is-vi');
+    document.querySelectorAll('.lang-btn').forEach(btn=>{
+      btn.classList.toggle('is-active', btn.dataset.lang === storedLang);
+      btn.addEventListener('click', ()=>{
+        document.body.classList.toggle('is-vi', btn.dataset.lang === 'vi');
+        document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('is-active', b === btn));
+        localStorage.setItem('lang', btn.dataset.lang);
+      });
+    });
+
+    // scroll-reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      });
+    }, { threshold:.15, rootMargin:'0px 0px -60px 0px' });
+    revealEls.forEach(el=>io.observe(el));
+
+    // curriculum accordion — click or press Enter/Space on a session to expand its detail
+    // only one session stays open at a time
+    function toggleSession(row){
+      const wasOpen = row.classList.contains('is-open');
+      document.querySelectorAll('.session-row.is-open').forEach(r=>{
+        r.classList.remove('is-open');
+        r.setAttribute('aria-expanded', 'false');
+      });
+      if (!wasOpen){
+        row.classList.add('is-open');
+        row.setAttribute('aria-expanded', 'true');
+      }
+    }
+    document.querySelectorAll('.session-row').forEach(row=>{
+      row.addEventListener('click', ()=>toggleSession(row));
+      row.addEventListener('keydown', (e)=>{
+        if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleSession(row); }
+      });
+    });
+
+    // pre-select the format radio when arriving via a specific pricing card's button
+    document.querySelectorAll('a[data-format]').forEach(link => {
+      link.addEventListener('click', () => {
+        const radio = document.querySelector(`input[name="format"][value="${link.dataset.format}"]`);
+        if (radio) radio.checked = true;
+      });
+    });
+
+    // lead form — submit via fetch so visitors never leave the page
+    const leadForm = document.getElementById('leadForm');
+    const leadFormSuccess = document.getElementById('leadFormSuccess');
+    if (leadForm) {
+      leadForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = leadForm.querySelector('.lead-form-submit');
+        const originalLabel = btn.innerHTML;
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+        try {
+          const res = await fetch(leadForm.action, {
+            method: 'POST',
+            body: new FormData(leadForm),
+            headers: { 'Accept': 'application/json' }
+          });
+          if (!res.ok) throw new Error('Submission failed');
+          leadForm.style.display = 'none';
+          leadFormSuccess.style.display = 'block';
+        } catch (err) {
+          btn.disabled = false;
+          btn.innerHTML = originalLabel;
+          alert("Something went wrong sending that. Please email me directly at nguyenphuctuongvan@gmail.com");
+        }
+      });
+    }
+   })();
+  </script>
+
+</body>
+</html>

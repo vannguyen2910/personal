@@ -9,6 +9,22 @@
 <link rel="stylesheet" href="../../Themes/program-components.css?v=2">
 <link rel="stylesheet" href="../../Themes/editorial-patterns.css?v=2">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=wand_stars" />
+<style>
+  /* group-training card — empathetic note inviting visitors to bring their own cohort */
+  .group-cohort-note{
+    display:flex; gap:.7rem; align-items:flex-start;
+    margin:0 0 1.6rem; padding:.9rem 1rem;
+    background:rgba(63,207,110,.10); border:1px solid rgba(63,207,110,.3); border-radius:10px;
+  }
+  .group-cohort-note-icon{
+    flex-shrink:0; width:28px; height:28px; border-radius:8px; margin-top:.05rem;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(63,207,110,.15); color:var(--lime);
+  }
+  .group-cohort-note-icon svg{ width:14px; height:14px; }
+  .group-cohort-note-title{ font-weight:700; font-size:.85rem; color:var(--lime); margin-bottom:.2rem; }
+  .group-cohort-note-body{ font-size:.8rem; line-height:1.5; color:rgba(245,239,226,.75); }
+</style>
 </head>
 <body>
 
@@ -497,6 +513,14 @@
           <div class="pricing-price">2.500.000₫<span><span class="lang-en">/month</span><span class="lang-vi">/tháng</span></span></div>
           <p class="pricing-note"><span class="lang-en">Starting at, per month · groups of 3–5</span><span class="lang-vi">Học phí từ, mỗi tháng · nhóm 3–5 người</span></p>
           <p class="pricing-caption" style="text-align:left; margin-top:-1.2rem; margin-bottom:1.8rem;"><span class="lang-en">Full program: 12 sessions over 3 months · 7.500.000₫ total per person</span><span class="lang-vi">Trọn khóa: 12 buổi trong 3 tháng · 7.500.000₫ trọn gói mỗi người</span></p>
+
+          <div class="group-cohort-note">
+            <span class="group-cohort-note-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M1.5 13c0-2.5 2-4 4-4s4 1.5 4 4M5.5 6.5a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5zM9.7 5.2c.3-.1.6-.2 1-.2 2 0 4 1.5 4 4M10.8 2.3c.9.2 1.5 1 1.5 1.9"/></svg></span>
+            <div>
+              <div class="group-cohort-note-title"><span class="lang-en">Building your own cohort</span><span class="lang-vi">Tự rủ nhóm cùng học</span></div>
+              <div class="group-cohort-note-body"><span class="lang-en">Group training starts once there's a full cohort, so it may take a little longer to kick off than 1:1. If you know a few designers who'd want this too, bring them with you — I'll take it from there.</span><span class="lang-vi">Học nhóm chỉ bắt đầu khi đã đủ người, nên có thể mất thêm thời gian hơn so với học 1:1. Nếu bạn biết vài designer khác cũng đang cần điều này, hãy rủ họ cùng đăng ký — phần còn lại để mình lo.</span></div>
+            </div>
+          </div>
 
           <div class="pricing-features">
             <div class="pricing-feature">
