@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UX Product Design Roadmap to Mid-Level — Winnie Nguyen</title>
+<title>Product Design Roadmap to Mid-Level — Winnie Nguyen</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="stylesheet" href="../../Themes/program-tokens.css?v=2">
 <link rel="stylesheet" href="../../Themes/program-components.css?v=2">
@@ -24,6 +24,15 @@
   .group-cohort-note-icon svg{ width:14px; height:14px; }
   .group-cohort-note-title{ font-weight:700; font-size:.85rem; color:var(--lime); margin-bottom:.2rem; }
   .group-cohort-note-body{ font-size:.8rem; line-height:1.5; color:rgba(245,239,226,.75); }
+
+  .curriculum-head-note{ font-size:1.05rem; line-height:1.65; color:var(--ink-70); max-width:52ch; margin-top:1.1rem; }
+  .curriculum-head-note .material-symbols-rounded{ font-size:.95rem; color:var(--coral); vertical-align:-2px; }
+
+  /* walkaway-sub carries the leadership-behaviours line separately from the
+     headline, so the headline can state the AI-as-evidence logic on its own */
+  .walkaway-sub{ font-size:1.05rem; line-height:1.6; color:rgba(21,24,28,.72); max-width:38ch; margin-top:1.4rem; }
+
+  .reveal-d4{ transition-delay:.32s; }
 </style>
 </head>
 <body>
@@ -36,7 +45,7 @@
         <img src="../../portfolio/images/headshot-square.jpg" alt="Winnie Nguyen">
         <div>
           <div class="contact-person-name">Winnie Nguyen</div>
-          <div class="contact-person-role">UX &amp; Product Educator</div>
+          <div class="contact-person-role">UX Product Design Educator</div>
         </div>
       </div>
       <div class="contact-links">
@@ -121,7 +130,7 @@
       <div class="hero-grid">
         <div>
           <h1 class="hero-lines">
-            <span><span><span class="lang-en">UX Product</span><span class="lang-vi">UX Product</span></span></span>
+            <span><span><span class="lang-en">Product</span><span class="lang-vi">Product</span></span></span>
             <span><span><em class="it">Design Roadmap</em></span></span>
             <span><span><span class="lang-en">to <span class="mark"><span>Mid-Level</span></span>.</span><span class="lang-vi">dành cho <span class="mark"><span>Mid-Level</span></span>.</span></span></span>
           </h1>
@@ -130,7 +139,7 @@
             <img src="../assets/avatar.png" alt="Winnie Nguyen" class="hero-mentor-avatar">
             <span class="hero-mentor-text">
               <strong>Winnie Nguyen</strong>
-              <span><span class="lang-en">UX &amp; Product Educator</span><span class="lang-vi">UX &amp; Product Design Educator</span></span>
+              <span><span class="lang-en">UX Product Design Educator</span><span class="lang-vi">UX Product Design Educator</span></span>
             </span>
           </a>
           <div class="hero-cta">
@@ -142,7 +151,7 @@
             </a>
           </div>
           <div class="hero-stats">
-            <div class="hero-stat"><strong>12</strong><span><span class="lang-en">Sessions · 90 min weekly</span><span class="lang-vi">Buổi học · 90 phút/tuần</span></span></div>
+            <div class="hero-stat"><strong>12</strong><span><span class="lang-en">Sessions · 90 min weekly</span><span class="lang-vi">Buổi học · 90 phút/tuần</span><span class="hero-stat-sub"><span class="lang-en">~3 months</span><span class="lang-vi">~3 tháng</span></span></span></div>
             <div class="hero-stat"><strong><span class="lang-en">1:1 or Group</span><span class="lang-vi">1:1 hoặc nhóm</span></strong><span><span class="lang-en">Online via Google Meet or Zoom</span><span class="lang-vi">Online qua Google Meet hoặc Zoom</span></span></div>
             <div class="hero-stat">
               <strong>2.500.000₫</strong>
@@ -175,6 +184,7 @@
         <li class="reveal reveal-d1"><em>01</em><span><span class="lang-en">You follow the brief well and deliver on time, but you're not the one framing what to build or making the trade-off calls.</span><span class="lang-vi">Bạn nhận task và hoàn thành đúng hạn. Nhưng chưa tham gia định hình hướng đi của sản phẩm.</span></span></li>
         <li class="reveal reveal-d2"><em>02</em><span><span class="lang-en">You're not sure when a design is "good enough" to ship, or how to defend that call.</span><span class="lang-vi">Bạn biết cách thiết kế. Nhưng chưa đủ tự tin để bảo vệ quyết định trước stakeholder.</span></span></li>
         <li class="reveal reveal-d3"><em>03</em><span><span class="lang-en">You want to be taken seriously in the room, not just heads-down in Figma.</span><span class="lang-vi">Bạn muốn đóng góp nhiều hơn là những màn hình đẹp.</span></span></li>
+        <li class="reveal reveal-d4"><em>04</em><span><span class="lang-en">Everyone's saying AI is changing what "executing well" even means, and you're not sure if you're keeping up or falling behind.</span><span class="lang-vi">Ai cũng nói AI đang thay đổi cả định nghĩa của việc "làm tốt", và bạn không chắc mình đang theo kịp hay đang tụt lại.</span></span></li>
       </ul>
     </div>
   </section>
@@ -203,7 +213,8 @@
           <span class="material-symbols-rounded" aria-hidden="true">wand_stars</span>
           <span class="lang-en">What you walk away with</span><span class="lang-vi">Bạn sẽ mang về được gì</span>
         </span>
-        <p class="walkaway-headline"><span class="lang-en">One end-to-end case study, built on <span class="mark"><span>your own real project</span></span> by <span class="mark"><span>leveraging AI</span></span>, plus the leadership behaviours that get you noticed.</span><span class="lang-vi">Một case study hoàn chỉnh từ chính <span class="mark"><span>dự án của bạn</span></span>. Biết cách dùng <span class="mark"><span>AI</span></span> để tăng tốc research và thiết kế, dành nhiều thời gian hơn cho việc giải quyết vấn đề.</span></p>
+        <p class="walkaway-headline"><span class="lang-en">Not a prompt trick per session. Every AI output becomes <span class="mark"><span>evidence for the next decision</span></span>, inside <span class="mark"><span>one real case study</span></span> from your own project.</span><span class="lang-vi">Không phải mẹo prompt cho từng buổi. Mỗi kết quả từ AI trở thành <span class="mark"><span>bằng chứng cho quyết định tiếp theo</span></span>, dựng thành <span class="mark"><span>một case study hoàn chỉnh</span></span> từ chính dự án của bạn.</span></p>
+        <p class="walkaway-sub"><span class="lang-en">Plus the leadership behaviours that get you noticed: defending a call, not just making one.</span><span class="lang-vi">Cộng thêm những hành vi lãnh đạo giúp bạn được chú ý: biết bảo vệ một quyết định, không chỉ đưa ra nó.</span></p>
       </div>
     </div>
   </section>
@@ -214,6 +225,7 @@
       <div class="curriculum-head reveal">
         <span class="kicker"><span class="lang-en">The curriculum</span><span class="lang-vi">Giáo trình</span></span>
         <h2 style="margin-top:1rem;"><span class="lang-en">What each<br><em style="font-style:normal; color:var(--coral);">session builds.</em></span><span class="lang-vi">Mỗi buổi học,<br><em style="font-style:normal; color:var(--coral);">bạn xây dựng được gì.</em></span></h2>
+        <p class="curriculum-head-note"><span class="material-symbols-rounded" aria-hidden="true">wand_stars</span> <span class="lang-en"><strong>AI shows up in 7 of the 8 sessions below</strong>, not as one bolted-on module, but as part of how the research, the strategy, and the design itself get done.</span><span class="lang-vi"><strong>AI xuất hiện trong 7/8 buổi học dưới đây</strong>, không phải một module gắn thêm, mà là một phần trong cách research, chiến lược và cả thiết kế được thực hiện.</span></p>
       </div>
 
       <div class="session-list">
@@ -226,7 +238,7 @@
             <div class="session-row-top">
               <div>
                 <h3><span class="lang-en">Design Thinking for UX</span><span class="lang-vi">Design Thinking cho Product Designer</span></h3>
-                <p><span class="lang-en">Learn to run the design process yourself, not just follow one.</span><span class="lang-vi">Hiểu toàn bộ quy trình trước khi bắt đầu thiết kế.</span></p>
+                <p><span class="lang-en">Learn to run the design process yourself, using AI to sketch a first map before you refine it.</span><span class="lang-vi">Hiểu toàn bộ quy trình, dùng AI để phác thảo trước khi tự tinh chỉnh.</span></p>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
             </div>
@@ -258,7 +270,7 @@
             <div class="session-row-top">
               <div>
                 <h3><span class="lang-en">Customer Understanding</span><span class="lang-vi">Thấu hiểu khách hàng</span></h3>
-                <p><span class="lang-en">Ground every decision in real user friction and evidence, not assumption.</span><span class="lang-vi">Mọi quyết định đều bắt đầu từ bằng chứng, không phải giả định.</span></p>
+                <p><span class="lang-en">Ground every decision in real evidence, with AI synthesizing interviews in minutes, not hours.</span><span class="lang-vi">Mọi quyết định bắt đầu từ bằng chứng, với AI tổng hợp phỏng vấn chỉ trong vài phút.</span></p>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
             </div>
@@ -292,7 +304,7 @@
             <div class="session-row-top">
               <div>
                 <h3><span class="lang-en">Synthesis &amp; Problem Definition</span><span class="lang-vi">Tổng hợp &amp; Định nghĩa vấn đề</span></h3>
-                <p><span class="lang-en">Turn raw research into a problem statement worth solving.</span><span class="lang-vi">Biến dữ liệu thành một bài toán đáng để giải quyết.</span></p>
+                <p><span class="lang-en">Turn raw research into a problem statement worth solving, AI-clustered before you refine it.</span><span class="lang-vi">Biến dữ liệu thành bài toán đáng giải quyết, với AI hỗ trợ phân nhóm trước khi bạn tinh chỉnh.</span></p>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
             </div>
@@ -324,7 +336,7 @@
             <div class="session-row-top">
               <div>
                 <h3><span class="lang-en">Develop Solutions &amp; Ideate</span><span class="lang-vi">Phát triển giải pháp &amp; Ideate</span></h3>
-                <p><span class="lang-en">Generate and validate real options before committing to one.</span><span class="lang-vi">Khám phá nhiều hướng đi trước khi chọn một hướng đúng.</span></p>
+                <p><span class="lang-en">Generate real options fast with AI, then validate before committing to one.</span><span class="lang-vi">Khám phá nhiều hướng đi cùng AI, trước khi chọn một hướng đúng.</span></p>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
             </div>
@@ -356,7 +368,7 @@
             <div class="session-row-top">
               <div>
                 <h3><span class="lang-en">Information Architecture</span><span class="lang-vi">Information Architecture (IA)</span></h3>
-                <p><span class="lang-en">Structure the product around how users actually think.</span><span class="lang-vi">Cấu trúc sản phẩm theo cách người dùng thật sự tìm kiếm và sử dụng.</span></p>
+                <p><span class="lang-en">Structure the product around how users think, stress-tested with AI before you build.</span><span class="lang-vi">Cấu trúc sản phẩm theo cách người dùng thật sự nghĩ, được AI phản biện trước khi dựng.</span></p>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
             </div>
@@ -388,7 +400,7 @@
             <div class="session-row-top">
               <div>
                 <h3><span class="lang-en">Interaction Design &amp; User Flows</span><span class="lang-vi">Interaction Design &amp; User Flow</span></h3>
-                <p><span class="lang-en">Design the full journey, not just the happy-path screen.</span><span class="lang-vi">Thiết kế trải nghiệm hoàn chỉnh, không chỉ từng màn hình riêng lẻ.</span></p>
+                <p><span class="lang-en">Design the full journey, AI included to catch edge cases you'd miss alone.</span><span class="lang-vi">Thiết kế trải nghiệm hoàn chỉnh, có AI giúp phát hiện những trường hợp dễ bị bỏ sót.</span></p>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
             </div>
@@ -454,7 +466,7 @@
             <div class="session-row-top">
               <div>
                 <h3><span class="lang-en">Solution Validation &amp; User Testing</span><span class="lang-vi">Kiểm chứng giải pháp &amp; User Testing</span></h3>
-                <p><span class="lang-en">Know your design works before it ships.</span><span class="lang-vi">Biết chắc thiết kế của bạn hiệu quả trước khi ra mắt.</span></p>
+                <p><span class="lang-en">Know your design works before it ships, with AI drafting scripts and flagging bias.</span><span class="lang-vi">Biết chắc thiết kế hiệu quả trước khi ra mắt, với AI hỗ trợ soạn script và phát hiện bias.</span></p>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
             </div>
@@ -623,7 +635,7 @@
 
   <footer>
     <div class="wrap footer-inner">
-      <p>© 2026 Winnie Nguyen · UX &amp; Product Educator</p>
+      <p>© 2026 Winnie Nguyen · UX Product Design Educator</p>
       <div class="footer-links">
         <a href="#" onclick="document.getElementById('contactModal').classList.add('open'); return false;">Contact</a>
         <a href="https://www.linkedin.com/in/winnienguyen2910" target="_blank" rel="noopener">LinkedIn</a>
