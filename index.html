@@ -35,12 +35,12 @@
     z-index: 10;
     display: flex;
     align-items: center;
-    gap: var(--space-3);
+    gap: var(--space-4);
     pointer-events: none;
     animation: introFadeDown .7s var(--ease-out) .8s both;
   }
   .brand-mark__photo {
-    width: 40px; height: 40px;
+    width: 52px; height: 52px;
     border-radius: 50%;
     object-fit: cover;
     box-shadow: var(--shadow-z4);
@@ -49,10 +49,10 @@
   .brand-mark__name {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: var(--text-sm);
+    font-size: var(--text-md);
     color: var(--text-primary);
   }
-  .brand-mark__title { font-size: var(--text-xs); color: var(--text-tertiary); }
+  .brand-mark__title { font-size: var(--text-sm); color: var(--text-tertiary); }
 
   .split-hero {
     display: flex;
@@ -66,15 +66,19 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
     text-align: center;
     padding: var(--space-10);
     background: var(--surface-base);
     transition: flex-basis .6s var(--ease-out);
   }
-  .split-panel--portfolio { animation: introSlideLeft 1.1s var(--ease-out) both; }
+  /* Anchored to the outer (non-moving) edge of each panel, not centered —
+     centering would re-position the hover zone as flex-basis changes,
+     which can shift it out from under the cursor and cause hover to
+     flicker on/off (a visible "shake") while the panel is expanding. */
+  .split-panel--portfolio { align-items: flex-start; animation: introSlideLeft 1.1s var(--ease-out) both; }
   .split-panel--training {
+    align-items: flex-end;
     border-left: 1px solid var(--border-default);
     animation: introSlideRight 1.1s var(--ease-out) .12s both;
   }
@@ -91,7 +95,8 @@
     padding: var(--space-4) var(--space-10);
     animation: introFadeUp .7s var(--ease-out) .65s both;
   }
-  .split-panel--training .split-panel__zone { animation-delay: .77s; }
+  .split-panel--portfolio .split-panel__zone { margin-left: max(var(--space-6), calc(25vw - 250px)); }
+  .split-panel--training .split-panel__zone { margin-right: max(var(--space-6), calc(25vw - 250px)); animation-delay: .77s; }
 
   .split-panel__link {
     display: flex;
@@ -183,14 +188,22 @@
 
   @media (max-width: 860px) {
     html, body { overflow: auto; height: auto; }
+    .brand-mark { gap: var(--space-3); }
+    .brand-mark__photo { width: 48px; height: 48px; }
+    .brand-mark__name { font-size: var(--text-md); }
+    .brand-mark__title { font-size: var(--text-xs); }
     .split-hero { flex-direction: column; height: auto; }
     .split-panel {
       flex: 0 0 auto !important;
+      align-items: center;
       height: auto;
       min-height: 60vh;
       padding: var(--space-12) var(--space-6) var(--space-8);
     }
+    .split-panel--portfolio { padding-top: 110px; }
     .split-panel--training { border-left: none; border-top: 1px solid var(--border-default); }
+    .split-panel--portfolio .split-panel__zone,
+    .split-panel--training .split-panel__zone { margin-left: 0; margin-right: 0; }
     .split-panel__reveal {
       max-height: none;
       opacity: 1;
@@ -205,7 +218,7 @@
   <img class="brand-mark__photo" src="portfolio/images/headshot-square.jpg" alt="Winnie Nguyen"/>
   <div class="brand-mark__text">
     <div class="brand-mark__name">Winnie Nguyen</div>
-    <div class="brand-mark__title">Senior Product Designer · UX Educator</div>
+    <div class="brand-mark__title">Senior Product Designer | UX Product Design Educator</div>
   </div>
 </div>
 
