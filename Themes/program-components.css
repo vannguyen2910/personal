@@ -232,7 +232,7 @@ body.is-vi .lang-vi { display: revert !important; }
 .pricing-card.is-dark .pricing-total-label{ color:rgba(245,239,226,.5); }
 
 /* sessions/duration/cadence/length — plain stats, no boxes */
-.pricing-facts{ display:flex; justify-content:space-between; gap:1rem; margin:1.6rem 0 0; }
+.pricing-facts{ display:flex; flex-wrap:wrap; row-gap:1.4rem; column-gap:clamp(1.5rem,5vw,2.75rem); margin:1.6rem 0 0; }
 .pricing-fact{ display:flex; flex-direction:column; gap:.3rem; }
 .pricing-fact-num{ font-weight:800; font-size:1.05rem; font-variant-numeric:tabular-nums; }
 .pricing-fact-label{ font-size:.66rem; text-transform:uppercase; letter-spacing:.05em; }
