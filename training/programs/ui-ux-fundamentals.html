@@ -767,6 +767,21 @@
     }, { threshold:.15, rootMargin:'0px 0px -60px 0px' });
     revealEls.forEach(el=>io.observe(el));
 
+    // testimonial "show more" — reveals 3 additional reviews per click
+    const testimonialMoreBtn = document.querySelector('.testimonial-more-btn');
+    if (testimonialMoreBtn) {
+      let testimonialBatch = 0;
+      const testimonialTotalBatches = parseInt(testimonialMoreBtn.dataset.batchTotal, 10);
+      testimonialMoreBtn.addEventListener('click', () => {
+        testimonialBatch++;
+        document.querySelectorAll(`.testimonial-card[data-batch="${testimonialBatch}"]`).forEach(card => {
+          card.classList.remove('is-hidden');
+          io.observe(card);
+        });
+        if (testimonialBatch >= testimonialTotalBatches) testimonialMoreBtn.closest('.testimonial-more-wrap').remove();
+      });
+    }
+
     // curriculum accordion — click or press Enter/Space on a session to expand its detail
     // only one session stays open at a time
     function toggleSession(row){

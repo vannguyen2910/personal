@@ -401,6 +401,15 @@ body.is-vi .pain-headline{ max-width:30ch; }
 }
 .testimonial .author{ margin-top:1.4rem; padding-top:.9rem; border-top:1px solid rgba(245,239,226,.1); font-size:.85rem; font-weight:700; }
 .testimonial .role{ font-size:.8rem; color:rgba(245,239,226,.6); margin-top:.2rem; }
+.testimonial-card.is-hidden{ display:none; }
+.testimonial-more-wrap{ grid-column:1 / -1; display:flex; justify-content:center; margin-top:.5rem; }
+.testimonial-more-btn{
+  display:inline-flex; align-items:center; gap:.4rem;
+  font-size:.85rem; font-weight:700; color:var(--lime);
+  background:none; border:none; cursor:pointer; padding:.5rem 1rem;
+}
+.testimonial-more-btn:hover{ text-decoration:underline; }
+.testimonial-more-btn svg{ width:13px; height:13px; transition:transform .2s ease; }
 
 /* ============ FORMAT + CTA ============ */
 .closing{ background:var(--forest); color:var(--cream); padding:clamp(4rem,9vw,6.5rem) 0; }
