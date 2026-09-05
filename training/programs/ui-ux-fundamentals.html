@@ -29,6 +29,11 @@
   .reveal-d4{ transition-delay:.32s; }
 
   /* hero mark — blueprint grid, specific to this page: fundamentals = grids and alignment */
+  .hero-grid{ align-items:center; }
+  @media (min-width:901px){
+    .hero-grid{ grid-template-columns:1fr 480px; }
+  }
+  .hero-visual{ width:100%; max-width:480px; height:auto; aspect-ratio:480/510; margin-left:auto; }
   .hero-blueprint{ position:absolute; inset:0; width:100%; height:100%; }
   .hero-blueprint g.float-a,
   .hero-blueprint g.float-b,
@@ -103,6 +108,7 @@
         <a href="#curriculum">Curriculum</a>
         <a href="#pricing">Pricing</a>
         <a href="#mentor">Mentor</a>
+        <a href="#testimonial">Story</a>
         <a href="#closing">Format</a>
       </div>
       <div class="nav-actions">
@@ -656,6 +662,8 @@
 
   <div data-include="../../Themes/partials/mentor-section.html"></div>
 
+  <div data-include="../../Themes/partials/testimonial-section.html"></div>
+
   <!-- ============ CLOSING / FORMAT / CTA ============ -->
   <section class="closing" id="closing">
     <div class="wrap">
@@ -691,7 +699,6 @@
           <div class="format-row"><span>Cadence</span><span>Weekly</span></div>
           <div class="format-row"><span>Delivery</span><span>Online via Google Meet or Zoom</span></div>
           <div class="format-row"><span>Language</span><span>Vietnamese or English</span></div>
-          <div class="format-row tuition"><span>Tuition</span><span>Starting at 4.000.000₫/month</span></div>
         </div>
       </div>
     </div>
