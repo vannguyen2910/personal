@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UI/UX Design Fundamentals — Winnie Nguyen</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="../../Themes/program-tokens.css?v=2">
+<link rel="stylesheet" href="../../Themes/program-components.css?v=2">
+<link rel="stylesheet" href="../../Themes/editorial-patterns.css?v=2">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=wand_stars" />
+<style>
+  .group-cohort-note{
+    display:flex; gap:.7rem; align-items:flex-start;
+    margin:0 0 1.6rem; padding:.9rem 1rem;
+    background:rgba(63,207,110,.10); border:1px solid rgba(63,207,110,.3); border-radius:10px;
+  }
+  .group-cohort-note-icon{
+    flex-shrink:0; width:28px; height:28px; border-radius:8px; margin-top:.05rem;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(63,207,110,.15); color:var(--lime);
+  }
+  .group-cohort-note-icon svg{ width:14px; height:14px; }
+  .group-cohort-note-title{ font-weight:700; font-size:.85rem; color:var(--lime); margin-bottom:.2rem; }
+  .group-cohort-note-body{ font-size:.8rem; line-height:1.5; color:rgba(245,239,226,.75); }
+
+  .walkaway-sub{ font-size:1.05rem; line-height:1.6; color:rgba(21,24,28,.72); max-width:38ch; margin-top:1.4rem; }
+
+  .reveal-d4{ transition-delay:.32s; }
+
+  /* hero mark — blueprint grid, specific to this page: fundamentals = grids and alignment */
+  .hero-blueprint{ position:absolute; inset:0; width:100%; height:100%; }
+  .hero-blueprint g.float-a,
+  .hero-blueprint g.float-b,
+  .hero-blueprint g.float-c{ transform-box:fill-box; transform-origin:50% 50%; }
+</style>
+</head>
+<body>
+
+  <!-- ── Contact modal ── -->
+  <div id="contactModal" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="modal">
+      <button class="modal-close" onclick="document.getElementById('contactModal').classList.remove('open')">✕</button>
+      <div class="contact-person">
+        <img src="../../portfolio/images/headshot-square.jpg" alt="Winnie Nguyen">
+        <div>
+          <div class="contact-person-name">Winnie Nguyen</div>
+          <div class="contact-person-role">UX Product Design Educator</div>
+        </div>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:nguyenphuctuongvan@gmail.com" class="contact-row">
+          <span class="contact-row-icon">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="var(--coral)" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          </span>
+          <div>
+            <div class="contact-row-label">Email</div>
+            <div class="contact-row-value">nguyenphuctuongvan@gmail.com</div>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/winnienguyen2910/" target="_blank" rel="noopener" class="contact-row">
+          <span class="contact-row-icon">
+            <svg width="16" height="16" fill="var(--coral)" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </span>
+          <div>
+            <div class="contact-row-label">LinkedIn</div>
+            <div class="contact-row-value">linkedin.com/in/winnienguyen2910</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Enroll success modal ── -->
+  <div id="enrollSuccessModal" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="modal enroll-success-modal">
+      <button class="modal-close" onclick="document.getElementById('enrollSuccessModal').classList.remove('open')">✕</button>
+      <div class="enroll-success-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--lime-dim)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <h3 class="enroll-success-title">You're enrolled! 🎉</h3>
+      <p class="enroll-success-body">Thanks for signing up. I'll personally reach out by email within 1–2 business days to get you started.</p>
+      <div class="enroll-success-steps">
+        <div class="enroll-success-step">
+          <span class="enroll-success-step-icon"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+          <span>Check your inbox for my email</span>
+        </div>
+        <div class="enroll-success-step">
+          <span class="enroll-success-step-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2.5" y="3" width="11" height="10.5" rx="1.5"/><path d="M2.5 6h11M5.5 1.5v3M10.5 1.5v3"/></svg></span>
+          <span>Find a time to kick off the conversation</span>
+        </div>
+      </div>
+      <button type="button" class="btn btn-dark enroll-success-close" onclick="document.getElementById('enrollSuccessModal').classList.remove('open')">Got it</button>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <div class="wrap">
+      <a href="../index.html" class="nav-logo">
+        <img src="../assets/Logo.svg" alt="Winnie Nguyen">
+      </a>
+      <div class="nav-links">
+        <a href="#curriculum">Curriculum</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#mentor">Mentor</a>
+        <a href="#closing">Format</a>
+      </div>
+      <div class="nav-actions">
+        <a href="#closing" class="btn btn-dark nav-cta">Enroll</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-top">
+        <div class="hero-badges">
+          <span class="hero-badge">Course</span>
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <h1 class="hero-lines">
+            <span><span>UI/UX</span></span>
+            <span><span><em class="it">Design</em></span></span>
+            <span><span><span class="mark"><span>Fundamentals</span></span>.</span></span>
+          </h1>
+          <p class="hero-desc">Your first real design process, built step by step, from problem to portfolio-ready case study.</p>
+          <a href="#mentor" class="hero-mentor">
+            <img src="../assets/avatar.png" alt="Winnie Nguyen" class="hero-mentor-avatar">
+            <span class="hero-mentor-text">
+              <strong>Winnie Nguyen</strong>
+              <span>UX Product Design Educator</span>
+            </span>
+          </a>
+          <div class="hero-cta">
+            <a href="#closing" class="btn btn-dark">Enroll Now</a>
+            <a href="../self-assessment.html" class="btn btn-ghost">Free self-assessment</a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat"><strong>12</strong><span>Sessions · 90 min weekly<span class="hero-stat-sub">~3 months</span></span></div>
+            <div class="hero-stat"><strong>1:1 or Group</strong><span>Online via Google Meet or Zoom</span></div>
+            <div class="hero-stat">
+              <strong>2.000.000₫</strong>
+              <span>
+                Per month · Group Training
+                <span class="hero-stat-sub">1:1 from 4.000.000₫ per month</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <svg class="hero-blueprint" viewBox="0 0 300 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g stroke="var(--ink-30)" stroke-width="1.5" stroke-dasharray="3 5">
+              <line x1="70" y1="20" x2="70" y2="300"/>
+              <line x1="160" y1="20" x2="160" y2="300"/>
+              <line x1="240" y1="20" x2="240" y2="300"/>
+              <line x1="20" y1="80" x2="280" y2="80"/>
+              <line x1="20" y1="170" x2="280" y2="170"/>
+              <line x1="20" y1="250" x2="280" y2="250"/>
+            </g>
+            <g stroke="var(--ink)" stroke-width="2" stroke-linecap="round">
+              <path d="M20 34V20h14"/>
+              <path d="M266 20h14v14"/>
+              <path d="M280 286v14h-14"/>
+              <path d="M34 300H20v-14"/>
+            </g>
+            <g class="float-a"><circle cx="70" cy="80" r="30" fill="none" stroke="var(--ink)" stroke-width="2.5"/></g>
+            <g class="float-b"><rect x="128" y="138" width="64" height="64" rx="14" fill="var(--coral)" transform="rotate(8 160 170)"/></g>
+            <g class="float-c"><circle cx="240" cy="250" r="46" fill="var(--lime)"/></g>
+            <circle cx="160" cy="250" r="5" fill="var(--ink)"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ PAIN ============ -->
+  <section class="pain on-dark">
+    <div class="wrap">
+      <span class="kicker">Sound familiar?</span>
+      <p class="pain-headline reveal">You know some of the pieces. <em>You haven't run the process yet.</em></p>
+
+      <ul class="pain-list">
+        <li class="reveal reveal-d1"><em>01</em><span>You've done some design learning on your own but never run a full process end to end.</span></li>
+        <li class="reveal reveal-d2"><em>02</em><span>You want a portfolio that can hold its own against design-school graduates.</span></li>
+        <li class="reveal reveal-d3"><em>03</em><span>You want honest feedback on your work, not cheerleading.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ WHO IT'S FOR ============ -->
+  <section class="who">
+    <div class="wrap">
+      <div class="who-grid">
+        <div class="reveal">
+          <span class="kicker">Who it's for</span>
+          <p class="who-headline" style="margin-top:1.2rem;">You know some of the pieces. You haven't <span class="mark"><span>run the whole process</span></span> yet.</p>
+        </div>
+        <div class="who-card reveal reveal-d2">
+          <div class="num">0</div>
+          <p>Professional design experience. You've explored UI/UX on your own, through tutorials or curiosity, but never worked as a designer or run a project start to finish.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WALK AWAY ============ -->
+  <section class="walkaway">
+    <div class="wrap">
+      <div class="walkaway-card reveal">
+        <span class="walkaway-badge">
+          <span class="material-symbols-rounded" aria-hidden="true">wand_stars</span>
+          What you walk away with
+        </span>
+        <p class="walkaway-headline">Not another tutorial project. <span class="mark"><span>One real case study</span></span>, run start to finish, that proves you can <span class="mark"><span>own the process</span></span>, not just follow one.</p>
+        <p class="walkaway-sub">Plus the fundamentals most bootcamps skip past: real user research, structure, and critique, not just screens.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CURRICULUM — 10 lessons, buffered to 12 program sessions ============ -->
+  <section class="curriculum" id="curriculum">
+    <div class="wrap">
+      <div class="curriculum-head reveal">
+        <span class="kicker">The curriculum</span>
+        <h2 style="margin-top:1rem;">What each<br><em style="font-style:normal; color:var(--coral);">session builds.</em></h2>
+      </div>
+
+      <div class="session-list">
+
+        <div class="phase-label"><span class="phase-dot"></span><span>Foundations</span></div>
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">01</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3>Design Thinking Foundations</h3>
+                <p>Learn what Design Thinking actually is, and how UI, UX, and Product Design differ, before you touch a single screen.</p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div>
+                <span class="session-detail-label">Learning objective</span>
+                <ul>
+                  <li>What is Design Thinking</li>
+                  <li>UI vs UX vs Product Design vs Service Design</li>
+                  <li>Practice-based design process methods</li>
+                </ul>
+              </div>
+              <div>
+                <span class="session-detail-label">What you'll achieve</span>
+                <ul>
+                  <li>A clear map of the 5-stage process applied to your own first project idea</li>
+                  <li>The vocabulary to tell UI, UX, Product, and Service Design apart</li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+        <div class="phase-label"><span class="phase-dot"></span><span>Empathise</span></div>
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">02</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3>Customer Understanding</h3>
+                <p>Learn why you are not your user, and how to run an interview that surfaces real needs.</p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div>
+                <span class="session-detail-label">Learning objective</span>
+                <ul>
+                  <li>Why you are not your user</li>
+                  <li>Making your assumptions visible</li>
+                  <li>Basics of a good user interview</li>
+                </ul>
+              </div>
+              <div>
+                <span class="session-detail-label">What you'll achieve</span>
+                <ul>
+                  <li>Your assumptions written down and separated from what you actually know</li>
+                  <li>Real interview notes from a person outside your own head</li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+        <div class="phase-label"><span class="phase-dot"></span><span>Define</span></div>
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">03</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3>Synthesis &amp; Problem Framing</h3>
+                <p>Turn scattered notes into a problem statement worth solving.</p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div>
+                <span class="session-detail-label">Learning objective</span>
+                <ul>
+                  <li>Turning raw notes into patterns (affinity mapping)</li>
+                  <li>Writing insight statements</li>
+                  <li>How Might We: turning insights into design questions</li>
+                  <li>Writing your problem statement</li>
+                </ul>
+              </div>
+              <div>
+                <span class="session-detail-label">What you'll achieve</span>
+                <ul>
+                  <li>A clustered set of themes from your own notes</li>
+                  <li>One sharp, testable problem statement</li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+        <div class="phase-label"><span class="phase-dot"></span><span>Ideate</span></div>
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">04</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3>Concept Sketching</h3>
+                <p>Generate real options fast, then pick the strongest one to move forward with.</p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div>
+                <span class="session-detail-label">Learning objective</span>
+                <ul>
+                  <li>Diverge before you converge</li>
+                  <li>Crazy 8s: generating ideas fast</li>
+                  <li>Turning rough ideas into concept sketches</li>
+                  <li>Picking your strongest concept</li>
+                </ul>
+              </div>
+              <div>
+                <span class="session-detail-label">What you'll achieve</span>
+                <ul>
+                  <li>A page full of rough directions, not just your first idea</li>
+                  <li>One concept chosen with a reason you can explain</li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">05</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3>Information Architecture Basics</h3>
+                <p>Structure your product around evidence, not guesses.</p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div>
+                <span class="session-detail-label">Learning objective</span>
+                <ul>
+                  <li>What is Information Architecture</li>
+                  <li>Organizing content around evidence, not guesses</li>
+                  <li>Card sorting basics</li>
+                  <li>Building a simple sitemap</li>
+                </ul>
+              </div>
+              <div>
+                <span class="session-detail-label">What you'll achieve</span>
+                <ul>
+                  <li>A sitemap for your own project, grounded in how people actually think</li>
+                  <li>A structure you can explain and defend</li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">06</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3>UI Fundamentals</h3>
+                <p>Learn the visual language, hierarchy, typography, color, layout, that makes an interface actually work.</p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div>
+                <span class="session-detail-label">Learning objective</span>
+                <ul>
+                  <li>Visual hierarchy: guiding the eye</li>
+                  <li>Typography and color basics</li>
+                  <li>Layout, grid, and spacing</li>
+                  <li>Common UI components (buttons, cards, inputs)</li>
+                </ul>
+              </div>
+              <div>
+                <span class="session-detail-label">What you'll achieve</span>
+                <ul>
+                  <li>A basic visual language you can apply consistently</li>
+                  <li>Enough tool fluency to start building screens</li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+        <div class="phase-label"><span class="phase-dot"></span><span>Prototype</span></div>
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">07</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3>Prototyping Mindset + Building Your First AI Prototype</h3>
+                <p>Build your first working prototype, using AI as a tool you direct, not one that decides for you.</p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div>
+                <span class="session-detail-label">Learning objective</span>
+                <ul>
+                  <li>Why prototyping pattern-first avoids inconsistent screens</li>
+                  <li>Design tokens and your component inventory</li>
+                  <li>The build loop: from tokens to your first working screen</li>
+                  <li class="ai-line">Correcting AI output: chat, feedback, and direct edits</li>
+                </ul>
+              </div>
+              <div>
+                <span class="session-detail-label">What you'll achieve</span>
+                <ul>
+                  <li>A working first screen built with AI, not just imagined</li>
+                  <li>A repeatable build loop you can reuse on the next screen</li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+        <div class="phase-label"><span class="phase-dot"></span><span>Deliver</span></div>
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">08</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3>Interaction Design Fundamentals &amp; Critique</h3>
+                <p>Design every state your users will hit, and learn to give and receive critique that actually helps.</p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div>
+                <span class="session-detail-label">Learning objective</span>
+                <ul>
+                  <li>Task flows vs. user flows</li>
+                  <li>Designing every state: default, loading, empty, error, success</li>
+                  <li>Mapping your critical user journey</li>
+                  <li>Giving and receiving critique: "I noticed / I wonder / What if"</li>
+                </ul>
+              </div>
+              <div>
+                <span class="session-detail-label">What you'll achieve</span>
+                <ul>
+                  <li>A complete flow for your feature, not just the happy path</li>
+                  <li>Practice giving and taking critique without it feeling personal</li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">09</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3>Packaging &amp; Presenting Your Case Study</h3>
+                <p>Turn your work into a case study you can defend in a room.</p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div>
+                <span class="session-detail-label">Learning objective</span>
+                <ul>
+                  <li>What makes a case study defensible</li>
+                  <li>Structuring your story: problem, process, decisions, outcome</li>
+                  <li>Presenting a journey, not just screens</li>
+                  <li>Whiteboard practice: talking through your process live</li>
+                </ul>
+              </div>
+              <div>
+                <span class="session-detail-label">What you'll achieve</span>
+                <ul>
+                  <li>A packaged case study, ready for a portfolio</li>
+                  <li>A live walkthrough you've actually rehearsed</li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+        <div class="phase-label"><span class="phase-dot"></span><span>Close</span></div>
+
+        <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="idx">10</div>
+          <div>
+            <div class="session-row-top">
+              <div>
+                <h3>Reflection &amp; Self-Assessment</h3>
+                <p>See how far you've come since session 1, and set your next goals.</p>
+              </div>
+              <span class="session-chevron" aria-hidden="true"></span>
+            </div>
+            <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
+              <div>
+                <span class="session-detail-label">Learning objective</span>
+                <ul>
+                  <li>Reassessing where you stand, compared to your Session 1 baseline</li>
+                  <li>What grew, what's still developing</li>
+                  <li>Turning your case study into a portfolio-ready story</li>
+                  <li>Setting your next 90-day goals</li>
+                </ul>
+              </div>
+              <div>
+                <span class="session-detail-label">What you'll achieve</span>
+                <ul>
+                  <li>A clear before/after picture of your growth</li>
+                  <li>A concrete next-90-days plan</li>
+                </ul>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="curriculum-note reveal">Anchored to your own real project throughout. The coaching output <em>is</em> the deliverable, not a separate exercise.</p>
+    </div>
+  </section>
+
+  <!-- ============ PRICING ============ -->
+  <section class="pricing" id="pricing">
+    <div class="wrap">
+      <div class="pricing-head reveal">
+        <span class="kicker">Investment</span>
+        <h2>Choose your format.</h2>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="pricing-card is-light reveal">
+          <div class="pricing-card-head">
+            <span class="pricing-card-name">1:1 Coaching</span>
+            <span class="pricing-badge">Most focused</span>
+          </div>
+          <div class="pricing-price">4.000.000₫<span>/month</span></div>
+          <p class="pricing-total">Full program: <b>12.000.000₫</b> <span class="pricing-total-label">total</span></p>
+
+          <div class="pricing-facts">
+            <div class="pricing-fact"><div class="pricing-fact-num">12</div><div class="pricing-fact-label">Sessions</div></div>
+            <div class="pricing-fact"><div class="pricing-fact-num">3 mo</div><div class="pricing-fact-label">Duration</div></div>
+            <div class="pricing-fact"><div class="pricing-fact-num">Weekly</div><div class="pricing-fact-label">Cadence</div></div>
+            <div class="pricing-fact"><div class="pricing-fact-num">90 min</div><div class="pricing-fact-label">Per session</div></div>
+          </div>
+
+          <div class="pricing-features">
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13l3-9 3 9M4.5 9.5h3M9 13l3-9 3 9"/></svg></span>
+              <div><div class="pricing-feature-title">Personalized Curriculum</div><div class="pricing-feature-desc">Sessions shaped around your real projects and goals.</div></div>
+            </div>
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 13c0-3 2.5-5 6-5s6 2 6 5M8 8a3 3 0 100-6 3 3 0 000 6z"/></svg></span>
+              <div><div class="pricing-feature-title">1:1 Feedback</div><div class="pricing-feature-desc">Direct critique every session, no sharing airtime.</div></div>
+            </div>
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2.5" y="3" width="11" height="10.5" rx="1.5"/><path d="M2.5 6h11M5.5 1.5v3M10.5 1.5v3"/></svg></span>
+              <div><div class="pricing-feature-title">Flexible Scheduling</div><div class="pricing-feature-desc">Pick times that fit your calendar.</div></div>
+            </div>
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h9M8 4l4 4-4 4"/></svg></span>
+              <div><div class="pricing-feature-title">Your Pace</div><div class="pricing-feature-desc">Move faster or slower depending on where you're stuck.</div></div>
+            </div>
+          </div>
+
+          <a href="#closing" class="btn btn-dark" data-format="1:1 Coaching">Enroll</a>
+        </div>
+
+        <div class="pricing-card is-dark reveal reveal-d2">
+          <div class="pricing-card-head">
+            <span class="pricing-card-name">Group Training</span>
+            <span class="pricing-badge">Best value</span>
+          </div>
+          <div class="pricing-price">2.000.000₫<span>/month</span></div>
+          <p class="pricing-total">Full program: <b>6.000.000₫</b> <span class="pricing-total-label">per person · groups of 3–5</span></p>
+
+          <div class="pricing-facts">
+            <div class="pricing-fact"><div class="pricing-fact-num">12</div><div class="pricing-fact-label">Sessions</div></div>
+            <div class="pricing-fact"><div class="pricing-fact-num">3 mo</div><div class="pricing-fact-label">Duration</div></div>
+            <div class="pricing-fact"><div class="pricing-fact-num">Weekly</div><div class="pricing-fact-label">Cadence</div></div>
+            <div class="pricing-fact"><div class="pricing-fact-num">90 min</div><div class="pricing-fact-label">Per session</div></div>
+          </div>
+
+          <div class="group-cohort-note">
+            <span class="group-cohort-note-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M1.5 13c0-2.5 2-4 4-4s4 1.5 4 4M5.5 6.5a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5zM9.7 5.2c.3-.1.6-.2 1-.2 2 0 4 1.5 4 4M10.8 2.3c.9.2 1.5 1 1.5 1.9"/></svg></span>
+            <div>
+              <div class="group-cohort-note-title">Building your own cohort</div>
+              <div class="group-cohort-note-body">Group training starts once there's a full cohort, so it may take a little longer to kick off than 1:1. If you know a few aspiring designers who'd want this too, bring them with you — I'll take it from there.</div>
+            </div>
+          </div>
+
+          <div class="pricing-features">
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13l3-9 3 9M4.5 9.5h3M9 13l3-9 3 9"/></svg></span>
+              <div><div class="pricing-feature-title">Same Core Curriculum</div><div class="pricing-feature-desc">Full 12-session foundations program.</div></div>
+            </div>
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M1.5 13c0-2.5 2-4 4-4s4 1.5 4 4M5.5 6.5a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5zM9.7 5.2c.3-.1.6-.2 1-.2 2 0 4 1.5 4 4M10.8 2.3c.9.2 1.5 1 1.5 1.9"/></svg></span>
+              <div><div class="pricing-feature-title">Peer Critique</div><div class="pricing-feature-desc">Feedback from 3–5 peers each session, not just the mentor.</div></div>
+            </div>
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v3M8 11v3M2 8h3M11 8h3M4.5 4.5l2 2M9.5 9.5l2 2M11.5 4.5l-2 2M6.5 9.5l-2 2"/></svg></span>
+              <div><div class="pricing-feature-title">Cohort Accountability</div><div class="pricing-feature-desc">Weekly momentum with people at your level.</div></div>
+            </div>
+            <div class="pricing-feature">
+              <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 1.5v13M11 4.2c0-1.2-1.3-2.2-3-2.2s-3 1-3 2.3c0 3 6 1.4 6 4.4 0 1.3-1.3 2.3-3 2.3s-3-1-3-2.2"/></svg></span>
+              <div><div class="pricing-feature-title">Lower Cost, Same Depth</div><div class="pricing-feature-desc">Half the cost per person of 1:1 coaching, same full curriculum.</div></div>
+            </div>
+          </div>
+
+          <a href="#closing" class="btn btn-lime" data-format="Group Training">Enroll</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div data-include="../../Themes/partials/mentor-section.html"></div>
+
+  <!-- ============ CLOSING / FORMAT / CTA ============ -->
+  <section class="closing" id="closing">
+    <div class="wrap">
+      <div class="closing-grid">
+        <div class="reveal">
+          <span class="kicker">Ready to start?</span>
+          <h2 style="margin-top:1rem;">Ready to stop guessing.<br><em style="font-style:normal; color:var(--lime);">Start building.</em></h2>
+          <div class="closing-cta">
+            <form id="leadForm" class="lead-form" action="https://formspree.io/f/mpqvoqyy" method="POST">
+              <input type="hidden" name="_subject" value="New coaching inquiry: UI/UX Design Fundamentals">
+              <input type="hidden" name="source" value="UI/UX Fundamentals Program — Contact Form">
+              <div class="format-choices">
+                <span class="format-choices-label">Which format interests you?</span>
+                <div class="format-choices-row">
+                  <label class="format-choice"><input type="radio" name="format" value="1:1 Coaching"><span>1:1 Coaching</span></label>
+                  <label class="format-choice"><input type="radio" name="format" value="Group Training"><span>Group Training</span></label>
+                </div>
+              </div>
+              <div class="lead-form-row">
+                <input type="text" name="name" placeholder="Your name" required>
+                <input type="email" name="email" placeholder="Your email" required>
+              </div>
+              <button type="submit" class="btn btn-lime lead-form-submit">Enroll</button>
+              <p class="lead-form-note">I'll reply by email within 1–2 business days.</p>
+            </form>
+            <a href="../self-assessment.html" class="btn btn-ghost lead-form-secondary" style="border-color:rgba(245,239,226,.4); color:var(--cream);">Or start with the free self-assessment</a>
+          </div>
+        </div>
+
+        <div class="format-list reveal reveal-d2">
+          <div class="format-row"><span>Format</span><span>1:1 or Group (3–5)</span></div>
+          <div class="format-row"><span>Sessions</span><span>12 × 90 min</span></div>
+          <div class="format-row"><span>Cadence</span><span>Weekly</span></div>
+          <div class="format-row"><span>Delivery</span><span>Online via Google Meet or Zoom</span></div>
+          <div class="format-row"><span>Language</span><span>Vietnamese or English</span></div>
+          <div class="format-row tuition"><span>Tuition</span><span>Starting at 4.000.000₫/month</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <p>© 2026 Winnie Nguyen · UX Product Design Educator</p>
+      <div class="footer-links">
+        <a href="#" onclick="document.getElementById('contactModal').classList.add('open'); return false;">Contact</a>
+        <a href="https://www.linkedin.com/in/winnienguyen2910" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+   (async function(){
+    await Promise.all([...document.querySelectorAll('[data-include]')].map(async node => {
+      const res = await fetch(node.dataset.include);
+      node.outerHTML = await res.text();
+    }));
+
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      new MutationObserver(() => {
+        const anyOpen = document.querySelector('.modal-overlay.open');
+        document.documentElement.classList.toggle('modal-open', !!anyOpen);
+      }).observe(overlay, { attributes: true, attributeFilter: ['class'] });
+    });
+
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      });
+    }, { threshold:.15, rootMargin:'0px 0px -60px 0px' });
+    revealEls.forEach(el=>io.observe(el));
+
+    function toggleSession(row){
+      const wasOpen = row.classList.contains('is-open');
+      document.querySelectorAll('.session-row.is-open').forEach(r=>{
+        r.classList.remove('is-open');
+        r.setAttribute('aria-expanded', 'false');
+      });
+      if (!wasOpen){
+        row.classList.add('is-open');
+        row.setAttribute('aria-expanded', 'true');
+      }
+    }
+    document.querySelectorAll('.session-row').forEach(row=>{
+      row.addEventListener('click', ()=>toggleSession(row));
+      row.addEventListener('keydown', (e)=>{
+        if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleSession(row); }
+      });
+    });
+
+    document.querySelectorAll('a[data-format]').forEach(link => {
+      link.addEventListener('click', () => {
+        const radio = document.querySelector(`input[name="format"][value="${link.dataset.format}"]`);
+        if (radio) radio.checked = true;
+      });
+    });
+
+    const leadForm = document.getElementById('leadForm');
+    if (leadForm) {
+      leadForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = leadForm.querySelector('.lead-form-submit');
+        const originalLabel = btn.innerHTML;
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+        try {
+          const res = await fetch(leadForm.action, {
+            method: 'POST',
+            body: new FormData(leadForm),
+            headers: { 'Accept': 'application/json' }
+          });
+          if (!res.ok) throw new Error('Submission failed');
+          leadForm.reset();
+          btn.disabled = false;
+          btn.innerHTML = originalLabel;
+          document.getElementById('enrollSuccessModal').classList.add('open');
+        } catch (err) {
+          btn.disabled = false;
+          btn.innerHTML = originalLabel;
+          alert("Something went wrong sending that. Please email me directly at nguyenphuctuongvan@gmail.com");
+        }
+      });
+    }
+   })();
+  </script>
+
+</body>
+</html>

@@ -24,6 +24,7 @@
   --ink:      #16140F;
   --ink-70:   rgba(22,20,15,.7);
   --ink-50:   rgba(22,20,15,.5);
+  --ink-30:   rgba(22,20,15,.3);
   --line:     rgba(22,20,15,.14);
 
   /* near-black navy — dark sections stay charcoal, not green */
