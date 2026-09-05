@@ -411,7 +411,7 @@
     /* ── Program card (reused as-is from training/index.html's Programs
        section, so a recommended program looks identical wherever it
        appears on the site) ──────────────────────────────────────── */
-    .programs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin: 28px 0 20px; }
+    .programs-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin: 28px 0 20px; }
     .programs-grid .program-card { margin: 0; }
     .program-card {
       display: grid; grid-template-columns: 108px 1fr; gap: 28px; align-items: center;
@@ -459,6 +459,56 @@
     .program-card-link::after { content: '→'; transition: transform 0.2s; }
     .program-card:hover .program-card-link { color: var(--accent); }
     .program-card:hover .program-card-link::after { transform: translateX(4px); }
+
+    /* mini version of the AI-prototyping hero illustration, for the program card */
+    .ppc-blob {
+      position: absolute; width: 64px; height: 64px; top: 12px; right: 6px;
+      background: var(--yellow); border-radius: 50%;
+    }
+    .ppc-phone {
+      position: absolute; width: 34px; height: 58px; top: 25px; right: 37px;
+      background: var(--white); border: 1.5px solid var(--text-primary); border-radius: 8px;
+      box-sizing: border-box; padding: 6px 5px; display: flex; flex-direction: column; gap: 4px;
+    }
+    .ppc-line-1 { display: block; width: 70%; height: 3px; border-radius: 1.5px; background: var(--text-primary); }
+    .ppc-line-2 { display: block; width: 45%; height: 2px; border-radius: 1px; background: var(--text-primary); opacity: 0.35; }
+    .ppc-spark {
+      position: absolute; top: 2px; right: 0; fill: var(--accent);
+      animation: ppcTwinkle 2.6s ease-in-out infinite;
+    }
+    @keyframes ppcTwinkle {
+      0%, 100% { opacity: 0.35; transform: scale(0.75); }
+      50%      { opacity: 1; transform: scale(1.1); }
+    }
+    @media (prefers-reduced-motion: reduce) { .ppc-spark { animation: none; } }
+
+    /* mini "radius of influence" illustration, for the senior program card */
+    .spc-ring2 { position: absolute; inset: 16px; border: 1px dashed var(--rule); border-radius: 50%; }
+    .spc-ring3 { position: absolute; inset: 32px; border: 1px solid var(--accent); border-radius: 50%; }
+    .spc-core {
+      position: absolute; width: 10px; height: 10px; border-radius: 50%;
+      background: var(--text-primary); top: 50%; left: 50%; transform: translate(-50%,-50%);
+    }
+    .spc-pulse {
+      position: absolute; width: 10px; height: 10px; border-radius: 50%;
+      border: 1.5px solid var(--accent); top: 50%; left: 50%; transform: translate(-50%,-50%);
+      animation: spcPulse 2.6s ease-out infinite;
+    }
+    @keyframes spcPulse {
+      0%   { width: 10px; height: 10px; opacity: .9; }
+      100% { width: 96px; height: 96px; opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) { .spc-pulse { animation: none; opacity: 0; } }
+
+    .program-card-tags { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .program-card-tags .program-card-tag { margin-bottom: 0; }
+    .program-card-level {
+      display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em;
+      text-transform: uppercase; padding: 4px 12px; border-radius: 100px;
+    }
+    .program-card-level.is-beginner { background: var(--info-tint); color: var(--info-deep); }
+    .program-card-level.is-intermediate { background: var(--yellow-subtle); color: var(--yellow-deep); }
+    .program-card-level.is-advanced { background: var(--purple-subtle); color: var(--purple-deep); }
 
     @keyframes floatA { 0%, 100% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(6px,-14px) rotate(4deg); } }
     .float-a { animation: floatA 7s ease-in-out infinite; }
@@ -967,7 +1017,7 @@
         </div>
       </div>
       <div class="mentor-text">
-        <p>I'm a <strong>Senior Product Designer &amp; UX Product Design Educator</strong> based in Vietnam, helping designers and teams build genuine design intuition, not just surface-level skills.</p>
+        <p>I'm a <strong>Senior Product Designer &amp; UX Product Design Educator</strong> based in Vietnam, with a Master of UX &amp; Service Design, helping designers and teams build genuine design intuition, not just surface-level skills.</p>
         <p>With 10+ years as a UX product designer and experience mentoring 50+ designers through ADPList, UX Boot Camp, and private programs, I've developed a practical, human-centred approach to teaching design, one that bridges real-world product work with structured learning.</p>
         <div class="mentor-social">
           <a href="https://adplist.org/mentors/winnie-nguyen" target="_blank" rel="noopener" class="mentor-social-icon" title="ADPList" aria-label="ADPList">
@@ -1264,17 +1314,43 @@ const TOTAL_Q = SKILLS.length + BEHAVIOURS.length; // 15
 // Add more entries here as new programs launch.
 const PROGRAMS = [
   {
+    href: 'programs/ui-ux-fundamentals.html',
+    tag: '1:1 or Group',
+    title: 'UI/UX Design Fundamentals',
+    desc: 'Your first real design process, built step by step, from problem to portfolio-ready case study. 12 sessions, weekly, over about 3 months.',
+    level: 'is-beginner',
+    levelLabel: 'Beginner',
+    visual: 'beginner',
+    matches: s => s.experience === '0–1 years'
+  },
+  {
     href: 'programs/junior-to-mid-level.html',
     tag: '1:1 or Group Training',
     title: 'UX Product Design Roadmap to Mid-Level',
     desc: 'Learn to run a full UX process yourself, not just execute a screen. 12 sessions, weekly, over about 3 months.',
+    level: 'is-intermediate',
+    levelLabel: 'Intermediate',
+    visual: 'steps',
     matches: s => s.target === 'Associate' || s.target === 'Mid'
+  },
+  {
+    href: 'programs/mid-to-senior.html',
+    tag: '1:1 or Group',
+    title: 'UX Product Design Roadmap to Senior',
+    desc: 'Defend decisions with evidence, not gut feel, and own projects end-to-end. 12 sessions, weekly, over 3 months.',
+    level: 'is-advanced',
+    levelLabel: 'Advanced',
+    visual: 'senior',
+    matches: s => s.target === 'Senior' || s.target === 'Lead' || s.target === 'Principal'
   },
   {
     href: 'programs/systematic-ai-prototyping.html',
     tag: 'Video · 1:1 · Group',
     title: 'Systematic AI Prototyping for UX Product Designer',
     desc: 'Stop prompting screen by screen. Define your design system once, then let AI build consistently at any scale.',
+    level: 'is-intermediate',
+    levelLabel: 'Intermediate',
+    visual: 'ai',
     matches: s => true
   }
 ];
@@ -1753,19 +1829,22 @@ function buildRecommendedProgram() {
   const el = document.getElementById('recommendedProgram');
   const programs = PROGRAMS.filter(p => p.matches(state));
   if (!programs.length) { el.innerHTML = ''; return; }
+  const visualHtml = {
+    beginner: `<span class="pc-ring"></span><span class="spc-core"></span>`,
+    steps: `<span class="pc-ring"></span><span class="pc-steps"><span class="pc-step"></span><span class="pc-step"></span><span class="pc-step"></span></span><span class="pc-climber"></span>`,
+    senior: `<span class="pc-ring"></span><span class="spc-ring2"></span><span class="spc-ring3"></span><span class="spc-core"></span><span class="spc-pulse"></span>`,
+    ai: `<span class="pc-ring"></span><span class="ppc-blob"></span><span class="ppc-phone"><span class="ppc-line-1"></span><span class="ppc-line-2"></span></span><svg class="ppc-spark" viewBox="0 0 24 24" width="12" height="12"><path d="M12 0 C12 6 14 10 20 12 C14 14 12 18 12 24 C12 18 10 14 4 12 C10 10 12 6 12 0 Z"/></svg>`
+  };
   const cards = programs.map(program => `
     <a href="${program.href}" class="program-card">
       <div class="program-card-visual" aria-hidden="true">
-        <span class="pc-ring"></span>
-        <span class="pc-steps">
-          <span class="pc-step"></span>
-          <span class="pc-step"></span>
-          <span class="pc-step"></span>
-        </span>
-        <span class="pc-climber"></span>
+        ${visualHtml[program.visual] || visualHtml.steps}
       </div>
       <div class="program-card-body">
-        <span class="program-card-tag">${program.tag}</span>
+        <div class="program-card-tags">
+          <span class="program-card-tag">${program.tag}</span>
+          <span class="program-card-level ${program.level}">${program.levelLabel}</span>
+        </div>
         <h3>${program.title}</h3>
         <p>${program.desc}</p>
         <span class="program-card-link">View program</span>

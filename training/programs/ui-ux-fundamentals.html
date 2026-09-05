@@ -83,19 +83,19 @@
       <div class="enroll-success-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="var(--lime-dim)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
       </div>
-      <h3 class="enroll-success-title">You're enrolled! 🎉</h3>
-      <p class="enroll-success-body">Thanks for signing up. I'll personally reach out by email within 1–2 business days to get you started.</p>
+      <h3 class="enroll-success-title"><span class="lang-en">You're enrolled! 🎉</span><span class="lang-vi">Bạn đã đăng ký thành công! 🎉</span></h3>
+      <p class="enroll-success-body"><span class="lang-en">Thanks for signing up. I'll personally reach out by email within 1–2 business days to get you started.</span><span class="lang-vi">Cảm ơn bạn đã đăng ký. Mình sẽ đích thân email lại trong 1–2 ngày làm việc để cùng bạn bắt đầu.</span></p>
       <div class="enroll-success-steps">
         <div class="enroll-success-step">
           <span class="enroll-success-step-icon"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
-          <span>Check your inbox for my email</span>
+          <span><span class="lang-en">Check your inbox for my email</span><span class="lang-vi">Kiểm tra email của bạn</span></span>
         </div>
         <div class="enroll-success-step">
           <span class="enroll-success-step-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2.5" y="3" width="11" height="10.5" rx="1.5"/><path d="M2.5 6h11M5.5 1.5v3M10.5 1.5v3"/></svg></span>
-          <span>Find a time to kick off the conversation</span>
+          <span><span class="lang-en">Find a time to kick off the conversation</span><span class="lang-vi">Tìm thời gian cho buổi trò chuyện đầu tiên</span></span>
         </div>
       </div>
-      <button type="button" class="btn btn-dark enroll-success-close" onclick="document.getElementById('enrollSuccessModal').classList.remove('open')">Got it</button>
+      <button type="button" class="btn btn-dark enroll-success-close" onclick="document.getElementById('enrollSuccessModal').classList.remove('open')"><span class="lang-en">Got it</span><span class="lang-vi">Đã hiểu</span></button>
     </div>
   </div>
 
@@ -105,14 +105,19 @@
         <img src="../assets/Logo.svg" alt="Winnie Nguyen">
       </a>
       <div class="nav-links">
-        <a href="#curriculum">Curriculum</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#mentor">Mentor</a>
-        <a href="#testimonial">Story</a>
-        <a href="#closing">Format</a>
+        <a href="#curriculum"><span class="lang-en">Curriculum</span><span class="lang-vi">Giáo trình</span></a>
+        <a href="#pricing"><span class="lang-en">Pricing</span><span class="lang-vi">Học phí</span></a>
+        <a href="#mentor"><span class="lang-en">Mentor</span><span class="lang-vi">Mentor</span></a>
+        <a href="#testimonial"><span class="lang-en">Story</span><span class="lang-vi">Câu chuyện</span></a>
+        <a href="#closing"><span class="lang-en">Format</span><span class="lang-vi">Hình thức</span></a>
       </div>
       <div class="nav-actions">
-        <a href="#closing" class="btn btn-dark nav-cta">Enroll</a>
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button type="button" class="lang-btn is-active" data-lang="en">EN</button>
+          <span class="lang-toggle-sep">|</span>
+          <button type="button" class="lang-btn" data-lang="vi">VN</button>
+        </div>
+        <a href="#closing" class="btn btn-dark nav-cta"><span class="lang-en">Enroll</span><span class="lang-vi">Đăng ký</span></a>
       </div>
     </div>
   </nav>
@@ -122,37 +127,41 @@
     <div class="wrap">
       <div class="hero-top">
         <div class="hero-badges">
-          <span class="hero-badge">Course</span>
+          <span class="hero-badge"><span class="lang-en">Course</span><span class="lang-vi">Khóa học</span></span>
         </div>
       </div>
 
       <div class="hero-grid">
         <div>
           <h1 class="hero-lines">
-            <span><span>UI/UX</span></span>
-            <span><span><em class="it">Design</em></span></span>
-            <span><span><span class="mark"><span>Fundamentals</span></span>.</span></span>
+            <span><span><span class="lang-en">UI/UX</span><span class="lang-vi">Nền Tảng</span></span></span>
+            <span><span><em class="it"><span class="lang-en">Design</span><span class="lang-vi">UI/UX</span></em></span></span>
+            <span><span><span class="lang-en"><span class="mark"><span>Fundamentals</span></span>.</span><span class="lang-vi"><span class="mark"><span>Design</span></span>.</span></span></span>
           </h1>
-          <p class="hero-desc">Your first real design process, built step by step, from problem to portfolio-ready case study.</p>
+          <p class="hero-desc"><span class="lang-en">Your first real design process, built step by step, from problem to portfolio-ready case study.</span><span class="lang-vi">Quy trình thiết kế thật đầu tiên của bạn, xây dựng từng bước, từ vấn đề đến một case study sẵn sàng cho portfolio.</span></p>
           <a href="#mentor" class="hero-mentor">
             <img src="../assets/avatar.png" alt="Winnie Nguyen" class="hero-mentor-avatar">
             <span class="hero-mentor-text">
               <strong>Winnie Nguyen</strong>
-              <span>UX Product Design Educator</span>
+              <span><span class="lang-en">UX Product Design Educator</span><span class="lang-vi">UX Product Design Educator</span></span>
             </span>
           </a>
           <div class="hero-cta">
-            <a href="#closing" class="btn btn-dark">Enroll Now</a>
-            <a href="../self-assessment.html" class="btn btn-ghost">Free self-assessment</a>
+            <a href="#closing" class="btn btn-dark">
+              <span class="lang-en">Enroll Now</span><span class="lang-vi">Đăng Ký Khoá Học</span>
+            </a>
+            <a href="../self-assessment.html" class="btn btn-ghost">
+              <span class="lang-en">Free self-assessment</span><span class="lang-vi">Tự đánh giá năng lực</span>
+            </a>
           </div>
           <div class="hero-stats">
-            <div class="hero-stat"><strong>12</strong><span>Sessions · 90 min weekly<span class="hero-stat-sub">~3 months</span></span></div>
-            <div class="hero-stat"><strong>1:1 or Group</strong><span>Online via Google Meet or Zoom</span></div>
+            <div class="hero-stat"><strong>12</strong><span><span class="lang-en">Sessions · 90 min weekly</span><span class="lang-vi">Buổi học · 90 phút/tuần</span><span class="hero-stat-sub"><span class="lang-en">~3 months</span><span class="lang-vi">~3 tháng</span></span></span></div>
+            <div class="hero-stat"><strong><span class="lang-en">1:1 or Group</span><span class="lang-vi">1:1 hoặc nhóm</span></strong><span><span class="lang-en">Online via Google Meet or Zoom</span><span class="lang-vi">Online qua Google Meet hoặc Zoom</span></span></div>
             <div class="hero-stat">
               <strong>2.000.000₫</strong>
               <span>
-                Per month · Group Training
-                <span class="hero-stat-sub">1:1 from 4.000.000₫ per month</span>
+                <span class="lang-en">Per month · Group Training</span><span class="lang-vi">/tháng · Học nhóm</span>
+                <span class="hero-stat-sub"><span class="lang-en">1:1 from 4.000.000₫ per month</span><span class="lang-vi">1:1 từ 4.000.000₫/tháng</span></span>
               </span>
             </div>
           </div>
@@ -187,13 +196,13 @@
   <!-- ============ PAIN ============ -->
   <section class="pain on-dark">
     <div class="wrap">
-      <span class="kicker">Sound familiar?</span>
-      <p class="pain-headline reveal">You know some of the pieces. <em>You haven't run the process yet.</em></p>
+      <span class="kicker"><span class="lang-en">Sound familiar?</span><span class="lang-vi">Đã từng như thế này chưa?</span></span>
+      <p class="pain-headline reveal"><span class="lang-en">You know some of the pieces. <em>You haven't run the process yet.</em></span><span class="lang-vi">Bạn đã biết vài mảnh ghép. <em>Nhưng chưa từng chạy qua cả quy trình.</em></span></p>
 
       <ul class="pain-list">
-        <li class="reveal reveal-d1"><em>01</em><span>You've done some design learning on your own but never run a full process end to end.</span></li>
-        <li class="reveal reveal-d2"><em>02</em><span>You want a portfolio that can hold its own against design-school graduates.</span></li>
-        <li class="reveal reveal-d3"><em>03</em><span>You want honest feedback on your work, not cheerleading.</span></li>
+        <li class="reveal reveal-d1"><em>01</em><span><span class="lang-en">You've done some design learning on your own but never run a full process end to end.</span><span class="lang-vi">Bạn đã tự học thiết kế một phần nào đó, nhưng chưa từng chạy toàn bộ quy trình end-to-end.</span></span></li>
+        <li class="reveal reveal-d2"><em>02</em><span><span class="lang-en">You want a portfolio that can hold its own against design-school graduates.</span><span class="lang-vi">Bạn muốn một portfolio đủ sức cạnh tranh với sinh viên tốt nghiệp trường thiết kế.</span></span></li>
+        <li class="reveal reveal-d3"><em>03</em><span><span class="lang-en">You want honest feedback on your work, not cheerleading.</span><span class="lang-vi">Bạn muốn phản hồi thật về công việc của mình, không phải những lời cổ vũ suông.</span></span></li>
       </ul>
     </div>
   </section>
@@ -203,12 +212,12 @@
     <div class="wrap">
       <div class="who-grid">
         <div class="reveal">
-          <span class="kicker">Who it's for</span>
-          <p class="who-headline" style="margin-top:1.2rem;">You know some of the pieces. You haven't <span class="mark"><span>run the whole process</span></span> yet.</p>
+          <span class="kicker"><span class="lang-en">Who it's for</span><span class="lang-vi">Dành cho ai</span></span>
+          <p class="who-headline" style="margin-top:1.2rem;"><span class="lang-en">You know some of the pieces. You haven't <span class="mark"><span>run the whole process</span></span> yet.</span><span class="lang-vi">Bạn đã biết vài mảnh ghép. Nhưng chưa từng <span class="mark"><span>chạy qua cả quy trình</span></span>.</span></p>
         </div>
         <div class="who-card reveal reveal-d2">
           <div class="num">0</div>
-          <p>Professional design experience. You've explored UI/UX on your own, through tutorials or curiosity, but never worked as a designer or run a project start to finish.</p>
+          <p><span class="lang-en">Professional design experience. You've explored UI/UX on your own, through tutorials or curiosity, but never worked as a designer or run a project start to finish.</span><span class="lang-vi">Kinh nghiệm thiết kế chuyên nghiệp. Bạn đã tự tìm hiểu UI/UX qua tutorial hoặc vì tò mò, nhưng chưa từng làm việc như một designer hay chạy một dự án end-to-end.</span></p>
         </div>
       </div>
     </div>
@@ -220,10 +229,9 @@
       <div class="walkaway-card reveal">
         <span class="walkaway-badge">
           <span class="material-symbols-rounded" aria-hidden="true">wand_stars</span>
-          What you walk away with
+          <span class="lang-en">What you walk away with</span><span class="lang-vi">Bạn sẽ mang về được gì</span>
         </span>
-        <p class="walkaway-headline">Not another tutorial project. <span class="mark"><span>One real case study</span></span>, run start to finish, that proves you can <span class="mark"><span>own the process</span></span>, not just follow one.</p>
-        <p class="walkaway-sub">Plus the fundamentals most bootcamps skip past: real user research, structure, and critique, not just screens.</p>
+        <p class="walkaway-headline"><span class="lang-en">Not another tutorial project. <span class="mark"><span>One real case study</span></span>, run start to finish, that proves you can <span class="mark"><span>own the process</span></span>, not just follow one.</span><span class="lang-vi">Bạn sẽ có một <span class="mark"><span>case study</span></span>, chạy end-to-end, để bạn không chỉ biết quy trình mà <span class="mark"><span>thực sự biết cách sử dụng nó</span></span>.</span></p>
       </div>
     </div>
   </section>
@@ -232,136 +240,136 @@
   <section class="curriculum" id="curriculum">
     <div class="wrap">
       <div class="curriculum-head reveal">
-        <span class="kicker">The curriculum</span>
-        <h2 style="margin-top:1rem;">What each<br><em style="font-style:normal; color:var(--coral);">session builds.</em></h2>
+        <span class="kicker"><span class="lang-en">The curriculum</span><span class="lang-vi">Giáo trình</span></span>
+        <h2 style="margin-top:1rem;"><span class="lang-en">What each<br><em style="font-style:normal; color:var(--coral);">session builds.</em></span><span class="lang-vi">Mỗi buổi học,<br><em style="font-style:normal; color:var(--coral);">bạn xây dựng được gì.</em></span></h2>
       </div>
 
       <div class="session-list">
 
-        <div class="phase-label"><span class="phase-dot"></span><span>Foundations</span></div>
+        <div class="phase-label"><span class="phase-dot"></span><span><span class="lang-en">Foundations</span><span class="lang-vi">Nền tảng</span></span></div>
 
         <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
           <div class="idx">01</div>
           <div>
             <div class="session-row-top">
               <div>
-                <h3>Design Thinking Foundations</h3>
-                <p>Learn what Design Thinking actually is, and how UI, UX, and Product Design differ, before you touch a single screen.</p>
+                <h3><span class="lang-en">Design Thinking Foundations</span><span class="lang-vi">Nền Tảng Design Thinking</span></h3>
+                <p><span class="lang-en">Learn what Design Thinking actually is, and how UI, UX, and Product Design differ, before you touch a single screen.</span><span class="lang-vi">Hiểu Design Thinking thực sự là gì, và phân biệt UI, UX, Product Design trước khi bạn chạm vào màn hình đầu tiên.</span></p>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
             </div>
             <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
               <div>
-                <span class="session-detail-label">Learning objective</span>
+                <span class="session-detail-label"><span class="lang-en">Learning objective</span><span class="lang-vi">Mục tiêu học</span></span>
                 <ul>
-                  <li>What is Design Thinking</li>
-                  <li>UI vs UX vs Product Design vs Service Design</li>
-                  <li>Practice-based design process methods</li>
+                  <li><span class="lang-en">What is Design Thinking</span><span class="lang-vi">Design Thinking là gì</span></li>
+                  <li><span class="lang-en">UI vs UX vs Product Design vs Service Design</span><span class="lang-vi">Phân biệt UI, UX, Product Design và Service Design</span></li>
+                  <li><span class="lang-en">Practice-based design process methods</span><span class="lang-vi">Các phương pháp quy trình thiết kế mang tính thực hành</span></li>
                 </ul>
               </div>
               <div>
-                <span class="session-detail-label">What you'll achieve</span>
+                <span class="session-detail-label"><span class="lang-en">What you'll achieve</span><span class="lang-vi">Bạn sẽ đạt được</span></span>
                 <ul>
-                  <li>A clear map of the 5-stage process applied to your own first project idea</li>
-                  <li>The vocabulary to tell UI, UX, Product, and Service Design apart</li>
+                  <li><span class="lang-en">A clear map of the 5-stage process applied to your own first project idea</span><span class="lang-vi">Một bản đồ rõ ràng về quy trình 5 giai đoạn, áp dụng cho ý tưởng dự án đầu tiên của bạn</span></li>
+                  <li><span class="lang-en">The vocabulary to tell UI, UX, Product, and Service Design apart</span><span class="lang-vi">Vốn từ vựng để phân biệt UI, UX, Product Design và Service Design</span></li>
                 </ul>
               </div>
             </div></div></div>
           </div>
         </div>
 
-        <div class="phase-label"><span class="phase-dot"></span><span>Empathise</span></div>
+        <div class="phase-label"><span class="phase-dot"></span><span><span class="lang-en">Empathise</span><span class="lang-vi">Thấu hiểu</span></span></div>
 
         <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
           <div class="idx">02</div>
           <div>
             <div class="session-row-top">
               <div>
-                <h3>Customer Understanding</h3>
-                <p>Learn why you are not your user, and how to run an interview that surfaces real needs.</p>
+                <h3><span class="lang-en">Customer Understanding</span><span class="lang-vi">Thấu Hiểu Khách Hàng</span></h3>
+                <p><span class="lang-en">Learn why you are not your user, and how to run an interview that surfaces real needs.</span><span class="lang-vi">Hiểu vì sao bạn không phải là người dùng của mình, và cách thực hiện một buổi phỏng vấn để tìm ra nhu cầu thật sự.</span></p>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
             </div>
             <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
               <div>
-                <span class="session-detail-label">Learning objective</span>
+                <span class="session-detail-label"><span class="lang-en">Learning objective</span><span class="lang-vi">Mục tiêu học</span></span>
                 <ul>
-                  <li>Why you are not your user</li>
-                  <li>Making your assumptions visible</li>
-                  <li>Basics of a good user interview</li>
+                  <li><span class="lang-en">Why you are not your user</span><span class="lang-vi">Vì sao bạn không phải là người dùng của mình</span></li>
+                  <li><span class="lang-en">Making your assumptions visible</span><span class="lang-vi">Nhìn rõ những giả định của bạn</span></li>
+                  <li><span class="lang-en">Basics of a good user interview</span><span class="lang-vi">Cơ bản về một buổi phỏng vấn người dùng tốt</span></li>
                 </ul>
               </div>
               <div>
-                <span class="session-detail-label">What you'll achieve</span>
+                <span class="session-detail-label"><span class="lang-en">What you'll achieve</span><span class="lang-vi">Bạn sẽ đạt được</span></span>
                 <ul>
-                  <li>Your assumptions written down and separated from what you actually know</li>
-                  <li>Real interview notes from a person outside your own head</li>
+                  <li><span class="lang-en">Your assumptions written down and separated from what you actually know</span><span class="lang-vi">Ghi lại rõ ràng giả định của bạn, tách biệt với những gì bạn thực sự biết</span></li>
+                  <li><span class="lang-en">Real interview notes from a person outside your own head</span><span class="lang-vi">Ghi chú phỏng vấn thật, từ một người ngoài chính suy nghĩ của bạn</span></li>
                 </ul>
               </div>
             </div></div></div>
           </div>
         </div>
 
-        <div class="phase-label"><span class="phase-dot"></span><span>Define</span></div>
+        <div class="phase-label"><span class="phase-dot"></span><span><span class="lang-en">Define</span><span class="lang-vi">Định hình</span></span></div>
 
         <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
           <div class="idx">03</div>
           <div>
             <div class="session-row-top">
               <div>
-                <h3>Synthesis &amp; Problem Framing</h3>
-                <p>Turn scattered notes into a problem statement worth solving.</p>
+                <h3><span class="lang-en">Synthesis &amp; Problem Framing</span><span class="lang-vi">Tổng Hợp &amp; Định Hình Vấn Đề</span></h3>
+                <p><span class="lang-en">Turn scattered notes into a problem statement worth solving.</span><span class="lang-vi">Biến những ghi chú rời rạc thành một problem statement đáng để giải quyết.</span></p>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
             </div>
             <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
               <div>
-                <span class="session-detail-label">Learning objective</span>
+                <span class="session-detail-label"><span class="lang-en">Learning objective</span><span class="lang-vi">Mục tiêu học</span></span>
                 <ul>
-                  <li>Turning raw notes into patterns (affinity mapping)</li>
-                  <li>Writing insight statements</li>
-                  <li>How Might We: turning insights into design questions</li>
-                  <li>Writing your problem statement</li>
+                  <li><span class="lang-en">Turning raw notes into patterns (affinity mapping)</span><span class="lang-vi">Biến ghi chú thô thành các nhóm ý (affinity mapping)</span></li>
+                  <li><span class="lang-en">Writing insight statements</span><span class="lang-vi">Viết insight statement</span></li>
+                  <li><span class="lang-en">How Might We: turning insights into design questions</span><span class="lang-vi">How Might We: biến insight thành câu hỏi thiết kế</span></li>
+                  <li><span class="lang-en">Writing your problem statement</span><span class="lang-vi">Viết problem statement của bạn</span></li>
                 </ul>
               </div>
               <div>
-                <span class="session-detail-label">What you'll achieve</span>
+                <span class="session-detail-label"><span class="lang-en">What you'll achieve</span><span class="lang-vi">Bạn sẽ đạt được</span></span>
                 <ul>
-                  <li>A clustered set of themes from your own notes</li>
-                  <li>One sharp, testable problem statement</li>
+                  <li><span class="lang-en">A clustered set of themes from your own notes</span><span class="lang-vi">Một bộ chủ đề đã được phân nhóm từ chính ghi chú của bạn</span></li>
+                  <li><span class="lang-en">One sharp, testable problem statement</span><span class="lang-vi">Một problem statement rõ ràng, có thể kiểm chứng</span></li>
                 </ul>
               </div>
             </div></div></div>
           </div>
         </div>
 
-        <div class="phase-label"><span class="phase-dot"></span><span>Ideate</span></div>
+        <div class="phase-label"><span class="phase-dot"></span><span><span class="lang-en">Ideate</span><span class="lang-vi">Lên ý tưởng</span></span></div>
 
         <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
           <div class="idx">04</div>
           <div>
             <div class="session-row-top">
               <div>
-                <h3>Concept Sketching</h3>
-                <p>Generate real options fast, then pick the strongest one to move forward with.</p>
+                <h3><span class="lang-en">Concept Sketching</span><span class="lang-vi">Phác Thảo Ý Tưởng</span></h3>
+                <p><span class="lang-en">Generate real options fast, then pick the strongest one to move forward with.</span><span class="lang-vi">Tạo ra nhiều phương án thật nhanh, sau đó chọn ra hướng đi mạnh nhất để tiếp tục.</span></p>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
             </div>
             <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
               <div>
-                <span class="session-detail-label">Learning objective</span>
+                <span class="session-detail-label"><span class="lang-en">Learning objective</span><span class="lang-vi">Mục tiêu học</span></span>
                 <ul>
-                  <li>Diverge before you converge</li>
-                  <li>Crazy 8s: generating ideas fast</li>
-                  <li>Turning rough ideas into concept sketches</li>
-                  <li>Picking your strongest concept</li>
+                  <li><span class="lang-en">Diverge before you converge</span><span class="lang-vi">Mở rộng trước khi thu hẹp</span></li>
+                  <li><span class="lang-en">Crazy 8s: generating ideas fast</span><span class="lang-vi">Crazy 8s: tạo ý tưởng thật nhanh</span></li>
+                  <li><span class="lang-en">Turning rough ideas into concept sketches</span><span class="lang-vi">Biến ý tưởng thô thành phác thảo concept</span></li>
+                  <li><span class="lang-en">Picking your strongest concept</span><span class="lang-vi">Chọn ra concept mạnh nhất</span></li>
                 </ul>
               </div>
               <div>
-                <span class="session-detail-label">What you'll achieve</span>
+                <span class="session-detail-label"><span class="lang-en">What you'll achieve</span><span class="lang-vi">Bạn sẽ đạt được</span></span>
                 <ul>
-                  <li>A page full of rough directions, not just your first idea</li>
-                  <li>One concept chosen with a reason you can explain</li>
+                  <li><span class="lang-en">A page full of rough directions, not just your first idea</span><span class="lang-vi">Một trang đầy các hướng đi thô, không chỉ dừng ở ý tưởng đầu tiên</span></li>
+                  <li><span class="lang-en">One concept chosen with a reason you can explain</span><span class="lang-vi">Một concept được chọn, với lý do bạn có thể giải thích rõ ràng</span></li>
                 </ul>
               </div>
             </div></div></div>
@@ -373,26 +381,26 @@
           <div>
             <div class="session-row-top">
               <div>
-                <h3>Information Architecture Basics</h3>
-                <p>Structure your product around evidence, not guesses.</p>
+                <h3><span class="lang-en">Information Architecture Basics</span><span class="lang-vi">Cơ Bản Về Information Architecture</span></h3>
+                <p><span class="lang-en">Structure your product around evidence, not guesses.</span><span class="lang-vi">Xây dựng cấu trúc sản phẩm dựa trên bằng chứng, không phải phỏng đoán.</span></p>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
             </div>
             <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
               <div>
-                <span class="session-detail-label">Learning objective</span>
+                <span class="session-detail-label"><span class="lang-en">Learning objective</span><span class="lang-vi">Mục tiêu học</span></span>
                 <ul>
-                  <li>What is Information Architecture</li>
-                  <li>Organizing content around evidence, not guesses</li>
-                  <li>Card sorting basics</li>
-                  <li>Building a simple sitemap</li>
+                  <li><span class="lang-en">What is Information Architecture</span><span class="lang-vi">Information Architecture là gì</span></li>
+                  <li><span class="lang-en">Organizing content around evidence, not guesses</span><span class="lang-vi">Tổ chức nội dung dựa trên bằng chứng, không phải phỏng đoán</span></li>
+                  <li><span class="lang-en">Card sorting basics</span><span class="lang-vi">Cơ bản về card sorting</span></li>
+                  <li><span class="lang-en">Building a simple sitemap</span><span class="lang-vi">Xây dựng một sitemap đơn giản</span></li>
                 </ul>
               </div>
               <div>
-                <span class="session-detail-label">What you'll achieve</span>
+                <span class="session-detail-label"><span class="lang-en">What you'll achieve</span><span class="lang-vi">Bạn sẽ đạt được</span></span>
                 <ul>
-                  <li>A sitemap for your own project, grounded in how people actually think</li>
-                  <li>A structure you can explain and defend</li>
+                  <li><span class="lang-en">A sitemap for your own project, grounded in how people actually think</span><span class="lang-vi">Một sitemap cho chính dự án của bạn, dựa trên cách người dùng thực sự suy nghĩ</span></li>
+                  <li><span class="lang-en">A structure you can explain and defend</span><span class="lang-vi">Một cấu trúc bạn có thể giải thích và bảo vệ</span></li>
                 </ul>
               </div>
             </div></div></div>
@@ -404,92 +412,92 @@
           <div>
             <div class="session-row-top">
               <div>
-                <h3>UI Fundamentals</h3>
-                <p>Learn the visual language, hierarchy, typography, color, layout, that makes an interface actually work.</p>
+                <h3><span class="lang-en">UI Fundamentals</span><span class="lang-vi">Nền Tảng UI</span></h3>
+                <p><span class="lang-en">Learn the visual language, hierarchy, typography, color, layout, that makes an interface actually work.</span><span class="lang-vi">Học ngôn ngữ hình ảnh, hierarchy, typography, màu sắc, layout, những yếu tố khiến một giao diện thực sự hoạt động.</span></p>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
             </div>
             <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
               <div>
-                <span class="session-detail-label">Learning objective</span>
+                <span class="session-detail-label"><span class="lang-en">Learning objective</span><span class="lang-vi">Mục tiêu học</span></span>
                 <ul>
-                  <li>Visual hierarchy: guiding the eye</li>
-                  <li>Typography and color basics</li>
-                  <li>Layout, grid, and spacing</li>
-                  <li>Common UI components (buttons, cards, inputs)</li>
+                  <li><span class="lang-en">Visual hierarchy: guiding the eye</span><span class="lang-vi">Visual hierarchy: dẫn dắt ánh nhìn</span></li>
+                  <li><span class="lang-en">Typography and color basics</span><span class="lang-vi">Cơ bản về typography và màu sắc</span></li>
+                  <li><span class="lang-en">Layout, grid, and spacing</span><span class="lang-vi">Layout, grid và spacing</span></li>
+                  <li><span class="lang-en">Common UI components (buttons, cards, inputs)</span><span class="lang-vi">Các UI component phổ biến (button, card, input)</span></li>
                 </ul>
               </div>
               <div>
-                <span class="session-detail-label">What you'll achieve</span>
+                <span class="session-detail-label"><span class="lang-en">What you'll achieve</span><span class="lang-vi">Bạn sẽ đạt được</span></span>
                 <ul>
-                  <li>A basic visual language you can apply consistently</li>
-                  <li>Enough tool fluency to start building screens</li>
+                  <li><span class="lang-en">A basic visual language you can apply consistently</span><span class="lang-vi">Một ngôn ngữ hình ảnh cơ bản bạn có thể áp dụng nhất quán</span></li>
+                  <li><span class="lang-en">Enough tool fluency to start building screens</span><span class="lang-vi">Đủ thành thạo công cụ để bắt đầu dựng màn hình</span></li>
                 </ul>
               </div>
             </div></div></div>
           </div>
         </div>
 
-        <div class="phase-label"><span class="phase-dot"></span><span>Prototype</span></div>
+        <div class="phase-label"><span class="phase-dot"></span><span><span class="lang-en">Prototype</span><span class="lang-vi">Dựng prototype</span></span></div>
 
         <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
           <div class="idx">07</div>
           <div>
             <div class="session-row-top">
               <div>
-                <h3>Prototyping Mindset + Building Your First AI Prototype</h3>
-                <p>Build your first working prototype, using AI as a tool you direct, not one that decides for you.</p>
+                <h3><span class="lang-en">Prototyping Mindset + Building Your First AI Prototype</span><span class="lang-vi">Tư Duy Prototype + Xây Dựng AI Prototype Đầu Tiên</span></h3>
+                <p><span class="lang-en">Build your first working prototype, using AI as a tool you direct, not one that decides for you.</span><span class="lang-vi">Xây dựng prototype hoạt động đầu tiên của bạn, dùng AI như một công cụ bạn điều khiển, không phải thứ quyết định thay bạn.</span></p>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
             </div>
             <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
               <div>
-                <span class="session-detail-label">Learning objective</span>
+                <span class="session-detail-label"><span class="lang-en">Learning objective</span><span class="lang-vi">Mục tiêu học</span></span>
                 <ul>
-                  <li>Why prototyping pattern-first avoids inconsistent screens</li>
-                  <li>Design tokens and your component inventory</li>
-                  <li>The build loop: from tokens to your first working screen</li>
-                  <li class="ai-line">Correcting AI output: chat, feedback, and direct edits</li>
+                  <li><span class="lang-en">Why prototyping pattern-first avoids inconsistent screens</span><span class="lang-vi">Vì sao prototype theo pattern trước giúp tránh các màn hình thiếu nhất quán</span></li>
+                  <li><span class="lang-en">Design tokens and your component inventory</span><span class="lang-vi">Design tokens và bộ component của bạn</span></li>
+                  <li><span class="lang-en">The build loop: from tokens to your first working screen</span><span class="lang-vi">Vòng lặp xây dựng: từ tokens đến màn hình hoạt động đầu tiên</span></li>
+                  <li class="ai-line"><span class="lang-en">Correcting AI output: chat, feedback, and direct edits</span><span class="lang-vi">Chỉnh sửa kết quả AI: qua chat, feedback, và chỉnh trực tiếp</span></li>
                 </ul>
               </div>
               <div>
-                <span class="session-detail-label">What you'll achieve</span>
+                <span class="session-detail-label"><span class="lang-en">What you'll achieve</span><span class="lang-vi">Bạn sẽ đạt được</span></span>
                 <ul>
-                  <li>A working first screen built with AI, not just imagined</li>
-                  <li>A repeatable build loop you can reuse on the next screen</li>
+                  <li><span class="lang-en">A working first screen built with AI, not just imagined</span><span class="lang-vi">Một màn hình đầu tiên hoạt động thật, được dựng cùng AI, không chỉ tưởng tượng</span></li>
+                  <li><span class="lang-en">A repeatable build loop you can reuse on the next screen</span><span class="lang-vi">Một quy trình xây dựng có thể lặp lại cho những màn hình tiếp theo</span></li>
                 </ul>
               </div>
             </div></div></div>
           </div>
         </div>
 
-        <div class="phase-label"><span class="phase-dot"></span><span>Deliver</span></div>
+        <div class="phase-label"><span class="phase-dot"></span><span><span class="lang-en">Deliver</span><span class="lang-vi">Hoàn thiện</span></span></div>
 
         <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
           <div class="idx">08</div>
           <div>
             <div class="session-row-top">
               <div>
-                <h3>Interaction Design Fundamentals &amp; Critique</h3>
-                <p>Design every state your users will hit, and learn to give and receive critique that actually helps.</p>
+                <h3><span class="lang-en">Interaction Design Fundamentals &amp; Critique</span><span class="lang-vi">Nền Tảng Interaction Design &amp; Critique</span></h3>
+                <p><span class="lang-en">Design every state your users will hit, and learn to give and receive critique that actually helps.</span><span class="lang-vi">Thiết kế mọi trạng thái người dùng sẽ gặp, và học cách đưa ra lẫn tiếp nhận critique thực sự hữu ích.</span></p>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
             </div>
             <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
               <div>
-                <span class="session-detail-label">Learning objective</span>
+                <span class="session-detail-label"><span class="lang-en">Learning objective</span><span class="lang-vi">Mục tiêu học</span></span>
                 <ul>
-                  <li>Task flows vs. user flows</li>
-                  <li>Designing every state: default, loading, empty, error, success</li>
-                  <li>Mapping your critical user journey</li>
-                  <li>Giving and receiving critique: "I noticed / I wonder / What if"</li>
+                  <li><span class="lang-en">Task flows vs. user flows</span><span class="lang-vi">Task flow và user flow</span></li>
+                  <li><span class="lang-en">Designing every state: default, loading, empty, error, success</span><span class="lang-vi">Thiết kế mọi trạng thái: default, loading, empty, error, success</span></li>
+                  <li><span class="lang-en">Mapping your critical user journey</span><span class="lang-vi">Xây dựng bản đồ hành trình quan trọng của người dùng</span></li>
+                  <li><span class="lang-en">Giving and receiving critique: "I noticed / I wonder / What if"</span><span class="lang-vi">Đưa ra và tiếp nhận critique: "I noticed / I wonder / What if"</span></li>
                 </ul>
               </div>
               <div>
-                <span class="session-detail-label">What you'll achieve</span>
+                <span class="session-detail-label"><span class="lang-en">What you'll achieve</span><span class="lang-vi">Bạn sẽ đạt được</span></span>
                 <ul>
-                  <li>A complete flow for your feature, not just the happy path</li>
-                  <li>Practice giving and taking critique without it feeling personal</li>
+                  <li><span class="lang-en">A complete flow for your feature, not just the happy path</span><span class="lang-vi">Một flow hoàn chỉnh cho tính năng của bạn, không chỉ happy path</span></li>
+                  <li><span class="lang-en">Practice giving and taking critique without it feeling personal</span><span class="lang-vi">Luyện tập đưa ra và tiếp nhận critique mà không cảm thấy đó là chuyện cá nhân</span></li>
                 </ul>
               </div>
             </div></div></div>
@@ -501,59 +509,59 @@
           <div>
             <div class="session-row-top">
               <div>
-                <h3>Packaging &amp; Presenting Your Case Study</h3>
-                <p>Turn your work into a case study you can defend in a room.</p>
+                <h3><span class="lang-en">Packaging &amp; Presenting Your Case Study</span><span class="lang-vi">Đóng Gói &amp; Trình Bày Case Study</span></h3>
+                <p><span class="lang-en">Turn your work into a case study you can defend in a room.</span><span class="lang-vi">Biến công việc của bạn thành một case study bạn có thể bảo vệ trước bất kỳ ai.</span></p>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
             </div>
             <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
               <div>
-                <span class="session-detail-label">Learning objective</span>
+                <span class="session-detail-label"><span class="lang-en">Learning objective</span><span class="lang-vi">Mục tiêu học</span></span>
                 <ul>
-                  <li>What makes a case study defensible</li>
-                  <li>Structuring your story: problem, process, decisions, outcome</li>
-                  <li>Presenting a journey, not just screens</li>
-                  <li>Whiteboard practice: talking through your process live</li>
+                  <li><span class="lang-en">What makes a case study defensible</span><span class="lang-vi">Điều gì khiến một case study đáng tin cậy</span></li>
+                  <li><span class="lang-en">Structuring your story: problem, process, decisions, outcome</span><span class="lang-vi">Xây dựng câu chuyện: vấn đề, quy trình, quyết định, kết quả</span></li>
+                  <li><span class="lang-en">Presenting a journey, not just screens</span><span class="lang-vi">Trình bày một hành trình, không chỉ những màn hình</span></li>
+                  <li><span class="lang-en">Whiteboard practice: talking through your process live</span><span class="lang-vi">Luyện tập whiteboard: trình bày trực tiếp quy trình của bạn</span></li>
                 </ul>
               </div>
               <div>
-                <span class="session-detail-label">What you'll achieve</span>
+                <span class="session-detail-label"><span class="lang-en">What you'll achieve</span><span class="lang-vi">Bạn sẽ đạt được</span></span>
                 <ul>
-                  <li>A packaged case study, ready for a portfolio</li>
-                  <li>A live walkthrough you've actually rehearsed</li>
+                  <li><span class="lang-en">A packaged case study, ready for a portfolio</span><span class="lang-vi">Một case study hoàn chỉnh, sẵn sàng đưa vào portfolio</span></li>
+                  <li><span class="lang-en">A live walkthrough you've actually rehearsed</span><span class="lang-vi">Một bài trình bày trực tiếp bạn đã thực sự luyện tập</span></li>
                 </ul>
               </div>
             </div></div></div>
           </div>
         </div>
 
-        <div class="phase-label"><span class="phase-dot"></span><span>Close</span></div>
+        <div class="phase-label"><span class="phase-dot"></span><span><span class="lang-en">Close</span><span class="lang-vi">Kết thúc</span></span></div>
 
         <div class="session-row reveal" tabindex="0" role="button" aria-expanded="false">
           <div class="idx">10</div>
           <div>
             <div class="session-row-top">
               <div>
-                <h3>Reflection &amp; Self-Assessment</h3>
-                <p>See how far you've come since session 1, and set your next goals.</p>
+                <h3><span class="lang-en">Reflection &amp; Self-Assessment</span><span class="lang-vi">Nhìn Lại &amp; Tự Đánh Giá</span></h3>
+                <p><span class="lang-en">See how far you've come since session 1, and set your next goals.</span><span class="lang-vi">Nhìn lại chặng đường từ buổi 1 đến giờ, và đặt ra mục tiêu tiếp theo.</span></p>
               </div>
               <span class="session-chevron" aria-hidden="true"></span>
             </div>
             <div class="session-detail-wrap"><div class="session-detail-inner"><div class="session-detail">
               <div>
-                <span class="session-detail-label">Learning objective</span>
+                <span class="session-detail-label"><span class="lang-en">Learning objective</span><span class="lang-vi">Mục tiêu học</span></span>
                 <ul>
-                  <li>Reassessing where you stand, compared to your Session 1 baseline</li>
-                  <li>What grew, what's still developing</li>
-                  <li>Turning your case study into a portfolio-ready story</li>
-                  <li>Setting your next 90-day goals</li>
+                  <li><span class="lang-en">Reassessing where you stand, compared to your Session 1 baseline</span><span class="lang-vi">Đánh giá lại vị trí hiện tại, so với baseline từ buổi 1</span></li>
+                  <li><span class="lang-en">What grew, what's still developing</span><span class="lang-vi">Điều gì đã phát triển, điều gì vẫn đang hình thành</span></li>
+                  <li><span class="lang-en">Turning your case study into a portfolio-ready story</span><span class="lang-vi">Biến case study thành câu chuyện sẵn sàng cho portfolio</span></li>
+                  <li><span class="lang-en">Setting your next 90-day goals</span><span class="lang-vi">Đặt ra mục tiêu cho 90 ngày tiếp theo</span></li>
                 </ul>
               </div>
               <div>
-                <span class="session-detail-label">What you'll achieve</span>
+                <span class="session-detail-label"><span class="lang-en">What you'll achieve</span><span class="lang-vi">Bạn sẽ đạt được</span></span>
                 <ul>
-                  <li>A clear before/after picture of your growth</li>
-                  <li>A concrete next-90-days plan</li>
+                  <li><span class="lang-en">A clear before/after picture of your growth</span><span class="lang-vi">Một bức tranh rõ ràng về sự phát triển, trước và sau</span></li>
+                  <li><span class="lang-en">A concrete next-90-days plan</span><span class="lang-vi">Một kế hoạch cụ thể cho 90 ngày tiếp theo</span></li>
                 </ul>
               </div>
             </div></div></div>
@@ -562,7 +570,7 @@
 
       </div>
 
-      <p class="curriculum-note reveal">Anchored to your own real project throughout. The coaching output <em>is</em> the deliverable, not a separate exercise.</p>
+      <p class="curriculum-note reveal"><span class="lang-en">Anchored to your own real project throughout. The coaching output <em>is</em> the deliverable, not a separate exercise.</span><span class="lang-vi">Luôn gắn liền với dự án thật của chính bạn. Kết quả từ mỗi buổi coaching <em>chính là</em> deliverable, không phải một bài tập riêng biệt.</span></p>
     </div>
   </section>
 
@@ -570,91 +578,95 @@
   <section class="pricing" id="pricing">
     <div class="wrap">
       <div class="pricing-head reveal">
-        <span class="kicker">Investment</span>
-        <h2>Choose your format.</h2>
+        <span class="kicker"><span class="lang-en">Investment</span><span class="lang-vi">Đầu tư</span></span>
+        <h2><span class="lang-en">Choose your format.</span><span class="lang-vi">Chọn hình thức phù hợp.</span></h2>
       </div>
 
       <div class="pricing-grid">
         <div class="pricing-card is-light reveal">
           <div class="pricing-card-head">
-            <span class="pricing-card-name">1:1 Coaching</span>
-            <span class="pricing-badge">Most focused</span>
+            <span class="pricing-card-name"><span class="lang-en">1:1 Coaching</span><span class="lang-vi">1 kèm 1</span></span>
+            <span class="pricing-badge"><span class="lang-en">Most focused</span><span class="lang-vi">Tập trung nhất</span></span>
           </div>
-          <div class="pricing-price">4.000.000₫<span>/month</span></div>
-          <p class="pricing-total">Full program: <b>12.000.000₫</b> <span class="pricing-total-label">total</span></p>
+          <div class="pricing-price">4.000.000₫<span><span class="lang-en">/month</span><span class="lang-vi">/tháng</span></span></div>
+          <p class="pricing-total"><span class="lang-en">Full program:</span><span class="lang-vi">Trọn khóa:</span> <b>12.000.000₫</b> <span class="pricing-total-label"><span class="lang-en">total</span><span class="lang-vi">trọn gói</span></span></p>
 
           <div class="pricing-facts">
-            <div class="pricing-fact"><div class="pricing-fact-num">12</div><div class="pricing-fact-label">Sessions</div></div>
-            <div class="pricing-fact"><div class="pricing-fact-num">3 mo</div><div class="pricing-fact-label">Duration</div></div>
-            <div class="pricing-fact"><div class="pricing-fact-num">Weekly</div><div class="pricing-fact-label">Cadence</div></div>
-            <div class="pricing-fact"><div class="pricing-fact-num">90 min</div><div class="pricing-fact-label">Per session</div></div>
+            <div class="pricing-fact"><div class="pricing-fact-num">12</div><div class="pricing-fact-label"><span class="lang-en">Sessions</span><span class="lang-vi">Buổi học</span></div></div>
+            <div class="pricing-fact"><div class="pricing-fact-num"><span class="lang-en">3 mo</span><span class="lang-vi">3 tháng</span></div><div class="pricing-fact-label"><span class="lang-en">Duration</span><span class="lang-vi">Thời lượng</span></div></div>
+            <div class="pricing-fact"><div class="pricing-fact-num"><span class="lang-en">Weekly</span><span class="lang-vi">Hàng tuần</span></div><div class="pricing-fact-label"><span class="lang-en">Cadence</span><span class="lang-vi">Tần suất</span></div></div>
+            <div class="pricing-fact"><div class="pricing-fact-num"><span class="lang-en">90 min</span><span class="lang-vi">90 phút</span></div><div class="pricing-fact-label"><span class="lang-en">Per session</span><span class="lang-vi">Mỗi buổi</span></div></div>
           </div>
 
           <div class="pricing-features">
             <div class="pricing-feature">
               <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13l3-9 3 9M4.5 9.5h3M9 13l3-9 3 9"/></svg></span>
-              <div><div class="pricing-feature-title">Personalized Curriculum</div><div class="pricing-feature-desc">Sessions shaped around your real projects and goals.</div></div>
+              <div><div class="pricing-feature-title"><span class="lang-en">Personalized Curriculum</span><span class="lang-vi">Chương trình cá nhân hóa</span></div><div class="pricing-feature-desc"><span class="lang-en">Sessions shaped around your real projects and goals.</span><span class="lang-vi">Buổi học xây dựng theo đúng dự án và mục tiêu của bạn.</span></div></div>
             </div>
             <div class="pricing-feature">
               <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 13c0-3 2.5-5 6-5s6 2 6 5M8 8a3 3 0 100-6 3 3 0 000 6z"/></svg></span>
-              <div><div class="pricing-feature-title">1:1 Feedback</div><div class="pricing-feature-desc">Direct critique every session, no sharing airtime.</div></div>
+              <div><div class="pricing-feature-title"><span class="lang-en">1:1 Feedback</span><span class="lang-vi">Phản hồi 1:1</span></div><div class="pricing-feature-desc"><span class="lang-en">Direct critique every session, no sharing airtime.</span><span class="lang-vi">Nhận xét trực tiếp mỗi buổi, không chia sẻ thời gian.</span></div></div>
             </div>
             <div class="pricing-feature">
               <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2.5" y="3" width="11" height="10.5" rx="1.5"/><path d="M2.5 6h11M5.5 1.5v3M10.5 1.5v3"/></svg></span>
-              <div><div class="pricing-feature-title">Flexible Scheduling</div><div class="pricing-feature-desc">Pick times that fit your calendar.</div></div>
+              <div><div class="pricing-feature-title"><span class="lang-en">Flexible Scheduling</span><span class="lang-vi">Lịch học linh hoạt</span></div><div class="pricing-feature-desc"><span class="lang-en">Pick times that fit your calendar.</span><span class="lang-vi">Chọn giờ học phù hợp với bạn.</span></div></div>
             </div>
             <div class="pricing-feature">
               <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h9M8 4l4 4-4 4"/></svg></span>
-              <div><div class="pricing-feature-title">Your Pace</div><div class="pricing-feature-desc">Move faster or slower depending on where you're stuck.</div></div>
+              <div><div class="pricing-feature-title"><span class="lang-en">Your Pace</span><span class="lang-vi">Tốc độ của riêng bạn</span></div><div class="pricing-feature-desc"><span class="lang-en">Move faster or slower depending on where you're stuck.</span><span class="lang-vi">Nhanh hay chậm tùy vào điều bạn đang vướng.</span></div></div>
             </div>
           </div>
 
-          <a href="#closing" class="btn btn-dark" data-format="1:1 Coaching">Enroll</a>
+          <a href="#closing" class="btn btn-dark" data-format="1:1 Coaching">
+            <span class="lang-en">Enroll</span><span class="lang-vi">Đăng Ký</span>
+          </a>
         </div>
 
         <div class="pricing-card is-dark reveal reveal-d2">
           <div class="pricing-card-head">
-            <span class="pricing-card-name">Group Training</span>
-            <span class="pricing-badge">Best value</span>
+            <span class="pricing-card-name"><span class="lang-en">Group Training</span><span class="lang-vi">Học nhóm</span></span>
+            <span class="pricing-badge"><span class="lang-en">Best value</span><span class="lang-vi">Tiết kiệm nhất</span></span>
           </div>
-          <div class="pricing-price">2.000.000₫<span>/month</span></div>
-          <p class="pricing-total">Full program: <b>6.000.000₫</b> <span class="pricing-total-label">per person · groups of 3–5</span></p>
+          <div class="pricing-price">2.000.000₫<span><span class="lang-en">/month</span><span class="lang-vi">/tháng</span></span></div>
+          <p class="pricing-total"><span class="lang-en">Full program:</span><span class="lang-vi">Trọn khóa:</span> <b>6.000.000₫</b> <span class="pricing-total-label"><span class="lang-en">per person · groups of 3–5</span><span class="lang-vi">mỗi người · nhóm 3–5 người</span></span></p>
 
           <div class="pricing-facts">
-            <div class="pricing-fact"><div class="pricing-fact-num">12</div><div class="pricing-fact-label">Sessions</div></div>
-            <div class="pricing-fact"><div class="pricing-fact-num">3 mo</div><div class="pricing-fact-label">Duration</div></div>
-            <div class="pricing-fact"><div class="pricing-fact-num">Weekly</div><div class="pricing-fact-label">Cadence</div></div>
-            <div class="pricing-fact"><div class="pricing-fact-num">90 min</div><div class="pricing-fact-label">Per session</div></div>
+            <div class="pricing-fact"><div class="pricing-fact-num">12</div><div class="pricing-fact-label"><span class="lang-en">Sessions</span><span class="lang-vi">Buổi học</span></div></div>
+            <div class="pricing-fact"><div class="pricing-fact-num"><span class="lang-en">3 mo</span><span class="lang-vi">3 tháng</span></div><div class="pricing-fact-label"><span class="lang-en">Duration</span><span class="lang-vi">Thời lượng</span></div></div>
+            <div class="pricing-fact"><div class="pricing-fact-num"><span class="lang-en">Weekly</span><span class="lang-vi">Hàng tuần</span></div><div class="pricing-fact-label"><span class="lang-en">Cadence</span><span class="lang-vi">Tần suất</span></div></div>
+            <div class="pricing-fact"><div class="pricing-fact-num"><span class="lang-en">90 min</span><span class="lang-vi">90 phút</span></div><div class="pricing-fact-label"><span class="lang-en">Per session</span><span class="lang-vi">Mỗi buổi</span></div></div>
           </div>
 
           <div class="group-cohort-note">
             <span class="group-cohort-note-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M1.5 13c0-2.5 2-4 4-4s4 1.5 4 4M5.5 6.5a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5zM9.7 5.2c.3-.1.6-.2 1-.2 2 0 4 1.5 4 4M10.8 2.3c.9.2 1.5 1 1.5 1.9"/></svg></span>
             <div>
-              <div class="group-cohort-note-title">Building your own cohort</div>
-              <div class="group-cohort-note-body">Group training starts once there's a full cohort, so it may take a little longer to kick off than 1:1. If you know a few aspiring designers who'd want this too, bring them with you — I'll take it from there.</div>
+              <div class="group-cohort-note-title"><span class="lang-en">Building your own cohort</span><span class="lang-vi">Tự rủ nhóm cùng học</span></div>
+              <div class="group-cohort-note-body"><span class="lang-en">Group training starts once there's a full cohort, so it may take a little longer to kick off than 1:1. If you know a few aspiring designers who'd want this too, bring them with you — I'll take it from there.</span><span class="lang-vi">Học nhóm chỉ bắt đầu khi đã đủ người, nên có thể mất thêm thời gian hơn so với học 1:1. Nếu bạn biết vài bạn cũng đang muốn bắt đầu con đường thiết kế, hãy rủ họ cùng đăng ký — phần còn lại để mình lo.</span></div>
             </div>
           </div>
 
           <div class="pricing-features">
             <div class="pricing-feature">
               <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13l3-9 3 9M4.5 9.5h3M9 13l3-9 3 9"/></svg></span>
-              <div><div class="pricing-feature-title">Same Core Curriculum</div><div class="pricing-feature-desc">Full 12-session foundations program.</div></div>
+              <div><div class="pricing-feature-title"><span class="lang-en">Same Core Curriculum</span><span class="lang-vi">Giáo trình như nhau</span></div><div class="pricing-feature-desc"><span class="lang-en">Full 12-session foundations program.</span><span class="lang-vi">Đầy đủ chương trình nền tảng 12 buổi.</span></div></div>
             </div>
             <div class="pricing-feature">
               <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M1.5 13c0-2.5 2-4 4-4s4 1.5 4 4M5.5 6.5a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5zM9.7 5.2c.3-.1.6-.2 1-.2 2 0 4 1.5 4 4M10.8 2.3c.9.2 1.5 1 1.5 1.9"/></svg></span>
-              <div><div class="pricing-feature-title">Peer Critique</div><div class="pricing-feature-desc">Feedback from 3–5 peers each session, not just the mentor.</div></div>
+              <div><div class="pricing-feature-title"><span class="lang-en">Peer Critique</span><span class="lang-vi">Phản hồi từ bạn học</span></div><div class="pricing-feature-desc"><span class="lang-en">Feedback from 3–5 peers each session, not just the mentor.</span><span class="lang-vi">Nhận góp ý từ 3–5 bạn học mỗi buổi, không chỉ từ mentor.</span></div></div>
             </div>
             <div class="pricing-feature">
               <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v3M8 11v3M2 8h3M11 8h3M4.5 4.5l2 2M9.5 9.5l2 2M11.5 4.5l-2 2M6.5 9.5l-2 2"/></svg></span>
-              <div><div class="pricing-feature-title">Cohort Accountability</div><div class="pricing-feature-desc">Weekly momentum with people at your level.</div></div>
+              <div><div class="pricing-feature-title"><span class="lang-en">Cohort Accountability</span><span class="lang-vi">Động lực từ nhóm</span></div><div class="pricing-feature-desc"><span class="lang-en">Weekly momentum with people at your level.</span><span class="lang-vi">Duy trì nhịp học hàng tuần cùng người cùng trình độ.</span></div></div>
             </div>
             <div class="pricing-feature">
               <span class="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 1.5v13M11 4.2c0-1.2-1.3-2.2-3-2.2s-3 1-3 2.3c0 3 6 1.4 6 4.4 0 1.3-1.3 2.3-3 2.3s-3-1-3-2.2"/></svg></span>
-              <div><div class="pricing-feature-title">Lower Cost, Same Depth</div><div class="pricing-feature-desc">Half the cost per person of 1:1 coaching, same full curriculum.</div></div>
+              <div><div class="pricing-feature-title"><span class="lang-en">Lower Cost, Same Depth</span><span class="lang-vi">Chi phí thấp hơn, cùng chiều sâu</span></div><div class="pricing-feature-desc"><span class="lang-en">Half the cost per person of 1:1 coaching, same full curriculum.</span><span class="lang-vi">Chi phí mỗi người chỉ bằng một nửa học 1:1, vẫn đầy đủ giáo trình.</span></div></div>
             </div>
           </div>
 
-          <a href="#closing" class="btn btn-lime" data-format="Group Training">Enroll</a>
+          <a href="#closing" class="btn btn-lime" data-format="Group Training">
+            <span class="lang-en">Enroll</span><span class="lang-vi">Đăng Ký</span>
+          </a>
         </div>
       </div>
     </div>
@@ -669,36 +681,40 @@
     <div class="wrap">
       <div class="closing-grid">
         <div class="reveal">
-          <span class="kicker">Ready to start?</span>
-          <h2 style="margin-top:1rem;">Ready to stop guessing.<br><em style="font-style:normal; color:var(--lime);">Start building.</em></h2>
+          <span class="kicker"><span class="lang-en">Ready to start?</span><span class="lang-vi">Sẵn sàng bắt đầu?</span></span>
+          <h2 style="margin-top:1rem;"><span class="lang-en">Ready to stop guessing.<br><em style="font-style:normal; color:var(--lime);">Start building.</em></span><span class="lang-vi">Đã đến lúc ngừng đoán mò.<br><em style="font-style:normal; color:var(--lime);">Bắt đầu xây dựng.</em></span></h2>
           <div class="closing-cta">
             <form id="leadForm" class="lead-form" action="https://formspree.io/f/mpqvoqyy" method="POST">
               <input type="hidden" name="_subject" value="New coaching inquiry: UI/UX Design Fundamentals">
               <input type="hidden" name="source" value="UI/UX Fundamentals Program — Contact Form">
               <div class="format-choices">
-                <span class="format-choices-label">Which format interests you?</span>
+                <span class="format-choices-label"><span class="lang-en">Which format interests you?</span><span class="lang-vi">Bạn quan tâm hình thức nào?</span></span>
                 <div class="format-choices-row">
-                  <label class="format-choice"><input type="radio" name="format" value="1:1 Coaching"><span>1:1 Coaching</span></label>
-                  <label class="format-choice"><input type="radio" name="format" value="Group Training"><span>Group Training</span></label>
+                  <label class="format-choice"><input type="radio" name="format" value="1:1 Coaching"><span class="lang-en">1:1 Coaching</span><span class="lang-vi">1 kèm 1</span></label>
+                  <label class="format-choice"><input type="radio" name="format" value="Group Training"><span class="lang-en">Group Training</span><span class="lang-vi">Học nhóm</span></label>
                 </div>
               </div>
               <div class="lead-form-row">
                 <input type="text" name="name" placeholder="Your name" required>
                 <input type="email" name="email" placeholder="Your email" required>
               </div>
-              <button type="submit" class="btn btn-lime lead-form-submit">Enroll</button>
-              <p class="lead-form-note">I'll reply by email within 1–2 business days.</p>
+              <button type="submit" class="btn btn-lime lead-form-submit">
+                <span class="lang-en">Enroll</span><span class="lang-vi">Đăng Ký</span>
+              </button>
+              <p class="lead-form-note"><span class="lang-en">I'll reply by email within 1–2 business days.</span><span class="lang-vi">Mình sẽ phản hồi qua email trong 1–2 ngày làm việc.</span></p>
             </form>
-            <a href="../self-assessment.html" class="btn btn-ghost lead-form-secondary" style="border-color:rgba(245,239,226,.4); color:var(--cream);">Or start with the free self-assessment</a>
+            <a href="../self-assessment.html" class="btn btn-ghost lead-form-secondary" style="border-color:rgba(245,239,226,.4); color:var(--cream);">
+              <span class="lang-en">Or start with the free self-assessment</span><span class="lang-vi">Hoặc bắt đầu với bài tự đánh giá miễn phí</span>
+            </a>
           </div>
         </div>
 
         <div class="format-list reveal reveal-d2">
-          <div class="format-row"><span>Format</span><span>1:1 or Group (3–5)</span></div>
-          <div class="format-row"><span>Sessions</span><span>12 × 90 min</span></div>
-          <div class="format-row"><span>Cadence</span><span>Weekly</span></div>
-          <div class="format-row"><span>Delivery</span><span>Online via Google Meet or Zoom</span></div>
-          <div class="format-row"><span>Language</span><span>Vietnamese or English</span></div>
+          <div class="format-row"><span><span class="lang-en">Format</span><span class="lang-vi">Hình thức</span></span><span><span class="lang-en">1:1 or Group (3–5)</span><span class="lang-vi">1:1 hoặc nhóm (3–5)</span></span></div>
+          <div class="format-row"><span><span class="lang-en">Sessions</span><span class="lang-vi">Số buổi</span></span><span><span class="lang-en">12 × 90 min</span><span class="lang-vi">12 × 90 phút</span></span></div>
+          <div class="format-row"><span><span class="lang-en">Cadence</span><span class="lang-vi">Tần suất</span></span><span><span class="lang-en">Weekly</span><span class="lang-vi">Hàng tuần</span></span></div>
+          <div class="format-row"><span><span class="lang-en">Delivery</span><span class="lang-vi">Triển khai</span></span><span><span class="lang-en">Online via Google Meet or Zoom</span><span class="lang-vi">Online qua Google Meet hoặc Zoom</span></span></div>
+          <div class="format-row"><span><span class="lang-en">Language</span><span class="lang-vi">Ngôn ngữ</span></span><span><span class="lang-en">Vietnamese or English</span><span class="lang-vi">Tiếng Việt hoặc tiếng Anh</span></span></div>
         </div>
       </div>
     </div>
@@ -716,11 +732,13 @@
 
   <script>
    (async function(){
+    // load shared partials (e.g. the testimonial section) before wiring up interactions below
     await Promise.all([...document.querySelectorAll('[data-include]')].map(async node => {
       const res = await fetch(node.dataset.include);
       node.outerHTML = await res.text();
     }));
 
+    // lock background scroll while any modal is open
     document.querySelectorAll('.modal-overlay').forEach(overlay => {
       new MutationObserver(() => {
         const anyOpen = document.querySelector('.modal-overlay.open');
@@ -728,6 +746,19 @@
       }).observe(overlay, { attributes: true, attributeFilter: ['class'] });
     });
 
+    // language toggle — EN/VN, remembered via localStorage
+    const storedLang = localStorage.getItem('lang') || 'en';
+    if (storedLang === 'vi') document.body.classList.add('is-vi');
+    document.querySelectorAll('.lang-btn').forEach(btn=>{
+      btn.classList.toggle('is-active', btn.dataset.lang === storedLang);
+      btn.addEventListener('click', ()=>{
+        document.body.classList.toggle('is-vi', btn.dataset.lang === 'vi');
+        document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('is-active', b === btn));
+        localStorage.setItem('lang', btn.dataset.lang);
+      });
+    });
+
+    // scroll-reveal
     const revealEls = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{
@@ -736,6 +767,8 @@
     }, { threshold:.15, rootMargin:'0px 0px -60px 0px' });
     revealEls.forEach(el=>io.observe(el));
 
+    // curriculum accordion — click or press Enter/Space on a session to expand its detail
+    // only one session stays open at a time
     function toggleSession(row){
       const wasOpen = row.classList.contains('is-open');
       document.querySelectorAll('.session-row.is-open').forEach(r=>{
@@ -754,6 +787,7 @@
       });
     });
 
+    // pre-select the format radio when arriving via a specific pricing card's button
     document.querySelectorAll('a[data-format]').forEach(link => {
       link.addEventListener('click', () => {
         const radio = document.querySelector(`input[name="format"][value="${link.dataset.format}"]`);
@@ -761,6 +795,7 @@
       });
     });
 
+    // lead form — submit via fetch so visitors never leave the page
     const leadForm = document.getElementById('leadForm');
     if (leadForm) {
       leadForm.addEventListener('submit', async (e) => {
