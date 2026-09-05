@@ -222,6 +222,23 @@ body.is-vi .lang-vi { display: revert !important; }
 .pricing-card.is-dark .pricing-note{ color:rgba(245,239,226,.6); }
 .pricing-card.is-soon .pricing-note{ color:var(--ink-70); }
 
+/* total/per-person line directly under the headline price */
+.pricing-total{ font-size:.92rem; font-weight:600; margin:.6rem 0 0; display:flex; align-items:baseline; gap:.35rem; flex-wrap:wrap; }
+.pricing-card.is-light .pricing-total{ color:var(--coral); }
+.pricing-card.is-dark .pricing-total{ color:var(--lime); }
+.pricing-total b{ font-size:1rem; font-variant-numeric:tabular-nums; }
+.pricing-total-label{ font-weight:500; }
+.pricing-card.is-light .pricing-total-label{ color:var(--ink-50); }
+.pricing-card.is-dark .pricing-total-label{ color:rgba(245,239,226,.5); }
+
+/* sessions/duration/cadence/length — plain stats, no boxes */
+.pricing-facts{ display:flex; justify-content:space-between; gap:1rem; margin:1.6rem 0 0; }
+.pricing-fact{ display:flex; flex-direction:column; gap:.3rem; }
+.pricing-fact-num{ font-weight:800; font-size:1.05rem; font-variant-numeric:tabular-nums; }
+.pricing-fact-label{ font-size:.66rem; text-transform:uppercase; letter-spacing:.05em; }
+.pricing-card.is-light .pricing-fact-label{ color:var(--ink-50); }
+.pricing-card.is-dark .pricing-fact-label{ color:rgba(245,239,226,.5); }
+
 .pricing-features{ display:flex; flex-direction:column; gap:1.1rem; margin-bottom:2rem; flex:1; border-top:1px solid; padding-top:1.6rem; }
 .pricing-card.is-light .pricing-features{ border-color:var(--line); }
 .pricing-card.is-dark .pricing-features{ border-color:rgba(245,239,226,.16); }
