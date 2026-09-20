@@ -17,6 +17,7 @@ export default defineConfig({
         portfolioContact: resolve(__dirname, 'portfolio/contact.html'),
         portfolioWork: resolve(__dirname, 'portfolio/work.html'),
         portfolioGo1: resolve(__dirname, 'portfolio/work/go1.html'),
+        selfAssessment: resolve(__dirname, 'training/self-assessment.html'),
         trainingHub: resolve(__dirname, 'training/index.html'),
         programJuniorToMid: resolve(__dirname, 'training/programs/junior-to-mid-level.html'),
         programMidToSenior: resolve(__dirname, 'training/programs/mid-to-senior.html'),
