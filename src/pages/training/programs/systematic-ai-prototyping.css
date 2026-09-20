@@ -1,0 +1,125 @@
+  /* ===== hero illustration: phone frame + AI tool badges (page-scoped) =====
+     Scales fluidly with viewport width instead of jumping at a single breakpoint.
+     --pp-t is a 0→1 progress value; every dimension below is base + t * delta,
+     where base/delta were reverse-engineered from the two sizes this illustration
+     was originally designed at (900px and 1728px viewports). */
+  .hero-visual{
+    align-self:center;
+    --pp-t:clamp(0, calc((100vw - 900px) / 828px), 1);
+  }
+  .hero-grid > div:first-child{ align-self:start; min-width:0; }
+
+  .pp-ring{
+    animation:ppRingSpin 50s linear infinite;
+    width:calc(300px + var(--pp-t) * 180px); height:calc(300px + var(--pp-t) * 180px);
+    top:calc(-20px + var(--pp-t) * -12px); right:calc(-30px + var(--pp-t) * -18px);
+    border-width:calc(1px + var(--pp-t) * .5px);
+  }
+  @keyframes ppRingSpin{ to{ transform:rotate(360deg); } }
+
+  .hero-visual .blob-1{
+    width:calc(220px + var(--pp-t) * 132px); height:calc(220px + var(--pp-t) * 132px);
+    top:calc(10px + var(--pp-t) * 6px); right:calc(10px + var(--pp-t) * 6px);
+  }
+  .hero-visual .pp-dot{
+    width:calc(10px + var(--pp-t) * 6px); height:calc(10px + var(--pp-t) * 6px);
+    top:calc(270px + var(--pp-t) * 162px); right:calc(222px + var(--pp-t) * 133px);
+  }
+
+  .pp-phone{
+    position:absolute; z-index:3;
+    top:calc(14px + var(--pp-t) * 8px); right:calc(54px + var(--pp-t) * 32px);
+    width:calc(132px + var(--pp-t) * 79px); height:calc(232px + var(--pp-t) * 139px);
+    background:var(--cream); border:calc(2.5px + var(--pp-t) * 1.5px) solid var(--ink);
+    border-radius:calc(22px + var(--pp-t) * 13px);
+    box-sizing:border-box; padding:calc(16px + var(--pp-t) * 10px) calc(12px + var(--pp-t) * 7px);
+    display:flex; flex-direction:column; gap:calc(8px + var(--pp-t) * 5px);
+    animation:ppPhoneFloat 10s ease-in-out infinite;
+  }
+  @keyframes ppPhoneFloat{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-6px); } }
+  .pp-line-1{ width:78%; height:calc(10px + var(--pp-t) * 6px); border-radius:calc(4px + var(--pp-t) * 2px); background:var(--ink); }
+  .pp-line-2{ width:55%; height:calc(6px + var(--pp-t) * 4px); border-radius:calc(3px + var(--pp-t) * 2px); background:var(--ink); opacity:.3; }
+  .pp-block-lg{ height:calc(58px + var(--pp-t) * 35px); border-radius:calc(8px + var(--pp-t) * 5px); background:var(--ink); opacity:.08; margin-top:calc(6px + var(--pp-t) * 4px); }
+  .pp-block-row{ display:flex; gap:calc(8px + var(--pp-t) * 5px); }
+  .pp-block-row span{ flex:1; height:calc(38px + var(--pp-t) * 23px); border-radius:calc(8px + var(--pp-t) * 5px); background:var(--ink); opacity:.08; }
+  .pp-cta{ margin-top:auto; height:calc(26px + var(--pp-t) * 16px); border-radius:calc(13px + var(--pp-t) * 8px); background:var(--ink); }
+
+  .pp-badge{
+    position:absolute; z-index:4; white-space:nowrap;
+    font-size:calc(.66rem + var(--pp-t) * .4rem); font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+    padding:calc(.42rem + var(--pp-t) * .25rem) calc(.85rem + var(--pp-t) * .51rem);
+    border-radius:999px; border:calc(1.5px + var(--pp-t) * 1px) solid var(--ink);
+    background:var(--cream); color:var(--ink);
+  }
+  .pp-badge-figma{ top:calc(20px + var(--pp-t) * 11px); right:calc(183px + var(--pp-t) * 110px); }
+  .pp-badge-claude{ top:calc(-7px + var(--pp-t) * -9px); right:calc(-5px + var(--pp-t) * 61px); }
+  .pp-badge-cursor{ top:calc(246px + var(--pp-t) * 148px); right:calc(156px + var(--pp-t) * 94px); }
+
+  .pp-spark{
+    position:absolute; z-index:5; pointer-events:none;
+    font-family:'Material Symbols Outlined';
+    font-variation-settings:'FILL' 1,'wght' 600,'GRAD' 0,'opsz' 20;
+    line-height:1; color:var(--coral);
+    animation:wand-twinkle 2.8s ease-in-out infinite;
+  }
+  .pp-spark-1{ top:calc(-24px + var(--pp-t) * -14px); right:calc(110px + var(--pp-t) * 66px); font-size:calc(22px + var(--pp-t) * 13px); animation-delay:0s; }
+  .pp-spark-2{ top:calc(306px + var(--pp-t) * 184px); right:calc(130px + var(--pp-t) * 78px); font-size:calc(15px + var(--pp-t) * 9px); color:var(--ink); animation-delay:.9s; }
+  .pp-spark-3{ top:calc(92px + var(--pp-t) * 55px); right:calc(266px + var(--pp-t) * 160px); font-size:calc(17px + var(--pp-t) * 10px); animation-delay:1.8s; }
+
+  @media (prefers-reduced-motion: reduce){
+    .pp-ring, .pp-phone, .pp-spark{ animation:none; }
+  }
+  @media (max-width:900px){
+    .pp-badge, .pp-spark{ display:none; }
+  }
+
+  /* group-training card — empathetic note inviting visitors to bring their own cohort */
+  .group-cohort-note{
+    display:flex; gap:.7rem; align-items:flex-start;
+    margin:0 0 1.6rem; padding:.9rem 1rem;
+    background:rgba(63,207,110,.10); border:1px solid rgba(63,207,110,.3); border-radius:10px;
+  }
+  .group-cohort-note-icon{
+    flex-shrink:0; width:28px; height:28px; border-radius:8px; margin-top:.05rem;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(63,207,110,.15); color:var(--lime);
+  }
+  .group-cohort-note-icon svg{ width:14px; height:14px; }
+  .group-cohort-note-title{ font-weight:700; font-size:.85rem; color:var(--lime); margin-bottom:.2rem; }
+  .group-cohort-note-body{ font-size:.8rem; line-height:1.5; color:rgba(245,239,226,.75); }
+
+  /* curriculum session snapshot line — tools used, visible without opening the accordion */
+  .session-meta{
+    display:flex; gap:.5rem; align-items:center; flex-wrap:wrap;
+    margin-top:.6rem; font-size:.7rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--coral);
+  }
+  .session-meta > span:not(:last-child)::after{ content:'·'; margin-left:.5rem; color:var(--ink-50); font-weight:400; }
+
+  /* curriculum "you'll leave with" outcome — a named deliverable plus what it's for.
+     Same size as the "what you'll learn" bullets so the two columns share one body
+     scale; weight alone marks the title as the deliverable name. */
+  .session-outcome-title{ font-weight:700; font-size:.88rem; line-height:1.55; margin:0 0 .35rem; }
+  .session-outcome-desc{ font-size:.88rem; line-height:1.55; color:var(--ink-70); margin:0; }
+
+  /* pain section — reframe line that closes the breakage story */
+  .pain-insight{
+    font-family:var(--serif); font-weight:700; font-size:clamp(1.15rem,2.2vw,1.5rem); line-height:1.4;
+    color:var(--cream); max-width:34ch; margin-top:clamp(2.5rem,5vw,3.5rem);
+  }
+  .pain-insight em{ font-style:normal; color:var(--lime); }
+
+  /* who-it's-for checklist — replaces the single proof card with 5 qualifiers */
+  .for-you-list{ list-style:none; margin:1.5rem 0 0; padding:0; display:grid; gap:.75rem; }
+  .for-you-list li{ position:relative; padding-left:1.3rem; font-size:1.05rem; color:var(--ink-70); line-height:1.55; }
+  .for-you-list li::before{
+    content:''; position:absolute; left:0; top:.6em; width:6px; height:6px; border-radius:50%; background:var(--coral);
+  }
+
+
+  /* structural column switch stays a hard breakpoint — going from stacked to
+     side-by-side is inherently binary, unlike the illustration's own scale above */
+  @media (min-width:1300px){
+    .hero-grid{ grid-template-columns:1fr 448px; }
+    .hero-visual{ width:448px; height:560px; justify-self:end; }
+  }
