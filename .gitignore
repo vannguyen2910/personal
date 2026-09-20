@@ -7,3 +7,7 @@
 
 # Local preview tooling (machine-specific absolute paths)
 .claude/
+
+# React build
+node_modules
+dist
