@@ -1,0 +1,11 @@
+  .go1-visual-placeholder {
+    aspect-ratio: 16/9; border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, var(--yellow-tint) 0%, var(--yellow-mid) 100%);
+    display:flex; align-items:center; justify-content:center;
+    margin: var(--space-6) 0;
+  }
+  .go1-visual-placeholder span {
+    font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: var(--tracking-mono);
+    text-transform: uppercase; color: #8A6615; background: rgba(255,255,255,0.6);
+    padding: 8px 16px; border-radius: var(--radius-pill);
+  }
