@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { revealOnScroll } from '../../hooks/reveal.js'
 import ProgramNav from './ProgramNav.jsx'
-import ProgramContactModal from './ProgramContactModal.jsx'
+import { ContactModal } from '../contact'
 import EnrollSuccessModal from './EnrollSuccessModal.jsx'
 import ProgramFooter from './ProgramFooter.jsx'
 
@@ -45,7 +45,7 @@ export default function ProgramShell({ children, navVi }) {
 
   return (
     <ProgramContext.Provider value={value}>
-      <ProgramContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
+      <ContactModal accent="coral" role="UX Product Design Educator" image="/portfolio/images/headshot-square.jpg" open={contactOpen} onClose={() => setContactOpen(false)} />
       <EnrollSuccessModal open={enrollOpen} onClose={() => setEnrollOpen(false)} />
       <ProgramNav navVi={navVi} />
       {children}

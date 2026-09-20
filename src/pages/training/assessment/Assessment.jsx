@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { ContactModal } from '../../../components/contact'
 import { startAssessment, prevQuestion, nextQuestion, backToQuestions, submitDirection, downloadPDF, openShareModal, copyShareLink, clearAndRestart, trackEvent, getState, init } from './engine.js'
 
 // The assessment flow (welcome, 15 questions, direction picker, results) is driven by ./engine.js,
@@ -9,38 +10,7 @@ export default function Assessment() {
   return (
     <>
     {/* ── Contact modal ── */}
-    <div id="contactModal" className="modal-overlay" onClick={(e) => { if(e.target===e.currentTarget)e.currentTarget.classList.remove('open') }}>
-      <div className="modal" style={{ maxWidth: '440px' }}>
-        <button className="modal-close" onClick={(e) => { document.getElementById('contactModal').classList.remove('open') }}>✕</button>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '20px' }}>
-          <img src="/portfolio/images/headshot-square.jpg" alt="Winnie Nguyen" style={{ width: '52px', height: '52px', borderRadius: '50%', objectFit: 'cover', objectPosition: 'center top', flexShrink: '0' }}/>
-          <div>
-            <div style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-base)', fontWeight: '700', color: 'var(--text-primary)' }}>Winnie Nguyen</div>
-            <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginTop: '2px' }}>UX Product Design Educator</div>
-          </div>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          <a href="mailto:nguyenphuctuongvan@gmail.com" style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', border: '1.5px solid var(--border-default)', borderRadius: 'var(--radius-md)', textDecoration: 'none', color: 'var(--text-primary)', transition: 'var(--transition)' }} onMouseOver={(e) => { e.currentTarget.style.borderColor='var(--purple)';e.currentTarget.style.background='var(--purple-subtle)' }} onMouseOut={(e) => { e.currentTarget.style.borderColor='var(--border-default)';e.currentTarget.style.background='' }}>
-            <span style={{ width: '36px', height: '36px', borderRadius: 'var(--radius-sm)', background: 'var(--purple-tint)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: '0' }}>
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="var(--purple)" strokeWidth="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-            </span>
-            <div>
-              <div style={{ fontSize: 'var(--text-xs)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-tertiary)', marginBottom: '2px' }}>Email</div>
-              <div style={{ fontSize: 'var(--text-sm)', fontWeight: '500' }}>nguyenphuctuongvan@gmail.com</div>
-            </div>
-          </a>
-          <a href="https://www.linkedin.com/in/winnienguyen2910/" target="_blank" rel="noopener" style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', border: '1.5px solid var(--border-default)', borderRadius: 'var(--radius-md)', textDecoration: 'none', color: 'var(--text-primary)', transition: 'var(--transition)' }} onMouseOver={(e) => { e.currentTarget.style.borderColor='var(--purple)';e.currentTarget.style.background='var(--purple-subtle)' }} onMouseOut={(e) => { e.currentTarget.style.borderColor='var(--border-default)';e.currentTarget.style.background='' }}>
-            <span style={{ width: '36px', height: '36px', borderRadius: 'var(--radius-sm)', background: 'var(--purple-tint)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: '0' }}>
-              <svg width="16" height="16" fill="var(--purple)" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-            </span>
-            <div>
-              <div style={{ fontSize: 'var(--text-xs)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-tertiary)', marginBottom: '2px' }}>LinkedIn</div>
-              <div style={{ fontSize: 'var(--text-sm)', fontWeight: '500' }}>linkedin.com/in/winnienguyen2910</div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
+    <ContactModal id="contactModal" accent="purple" role="UX Product Design Educator" />
 
     {/* ── Header ── */}
     <header className="site-header">
@@ -54,47 +24,7 @@ export default function Assessment() {
     </header>
 
     {/* ── Contact dialog ── */}
-    <div id="contactDialog" className="modal-overlay" onClick={(e) => { if(e.target===e.currentTarget)e.currentTarget.classList.remove('open') }}>
-      <div className="modal" style={{ maxWidth: '440px' }}>
-        <button className="modal-close" onClick={(e) => { document.getElementById('contactDialog').classList.remove('open') }}>✕</button>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '20px' }}>
-          <img src="/training/assets/GV5.jpg" alt="Winnie Nguyen" style={{ width: '52px', height: '52px', borderRadius: '50%', objectFit: 'cover', objectPosition: 'center top', flexShrink: '0' }}/>
-          <div>
-            <div style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-base)', fontWeight: '700', color: 'var(--text-primary)' }}>Winnie Nguyen</div>
-            <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginTop: '2px' }}>UX Product Design Mentor</div>
-          </div>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          <a href="mailto:nguyenphuctuongvan@gmail.com" style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', border: '1.5px solid var(--border-default)', borderRadius: 'var(--radius-md)', textDecoration: 'none', color: 'var(--text-primary)', transition: 'var(--transition)' }} onMouseOver={(e) => { e.currentTarget.style.borderColor='var(--purple)';e.currentTarget.style.background='var(--purple-subtle)' }} onMouseOut={(e) => { e.currentTarget.style.borderColor='var(--border-default)';e.currentTarget.style.background='' }}>
-            <span style={{ width: '36px', height: '36px', borderRadius: 'var(--radius-sm)', background: 'var(--purple-tint)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: '0' }}>
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="var(--purple)" strokeWidth="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-            </span>
-            <div>
-              <div style={{ fontSize: 'var(--text-xs)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-tertiary)', marginBottom: '2px' }}>Email</div>
-              <div style={{ fontSize: 'var(--text-sm)', fontWeight: '500' }}>nguyenphuctuongvan@gmail.com</div>
-            </div>
-          </a>
-          <a href="https://www.linkedin.com/in/winnienguyen2910/" target="_blank" rel="noopener" style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', border: '1.5px solid var(--border-default)', borderRadius: 'var(--radius-md)', textDecoration: 'none', color: 'var(--text-primary)', transition: 'var(--transition)' }} onMouseOver={(e) => { e.currentTarget.style.borderColor='var(--purple)';e.currentTarget.style.background='var(--purple-subtle)' }} onMouseOut={(e) => { e.currentTarget.style.borderColor='var(--border-default)';e.currentTarget.style.background='' }}>
-            <span style={{ width: '36px', height: '36px', borderRadius: 'var(--radius-sm)', background: 'var(--purple-tint)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: '0' }}>
-              <svg width="16" height="16" fill="var(--purple)" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-            </span>
-            <div>
-              <div style={{ fontSize: 'var(--text-xs)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-tertiary)', marginBottom: '2px' }}>LinkedIn</div>
-              <div style={{ fontSize: 'var(--text-sm)', fontWeight: '500' }}>linkedin.com/in/winnienguyen2910</div>
-            </div>
-          </a>
-          <a href="https://adplist.org/mentors/winnie-nguyen" target="_blank" rel="noopener" style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', border: '1.5px solid var(--border-default)', borderRadius: 'var(--radius-md)', textDecoration: 'none', color: 'var(--text-primary)', transition: 'var(--transition)' }} onMouseOver={(e) => { e.currentTarget.style.borderColor='var(--purple)';e.currentTarget.style.background='var(--purple-subtle)' }} onMouseOut={(e) => { e.currentTarget.style.borderColor='var(--border-default)';e.currentTarget.style.background='' }}>
-            <span style={{ width: '36px', height: '36px', borderRadius: 'var(--radius-sm)', background: 'var(--purple-tint)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: '0' }}>
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="var(--purple)" strokeWidth="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            </span>
-            <div>
-              <div style={{ fontSize: 'var(--text-xs)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-tertiary)', marginBottom: '2px' }}>ADPList</div>
-              <div style={{ fontSize: 'var(--text-sm)', fontWeight: '500' }}>Book a free mentoring session</div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
+    <ContactModal id="contactDialog" accent="purple" role="UX Product Design Mentor" image="/training/assets/GV5.jpg" links={['email', 'linkedin', 'adplist']} />
 
     {/* ── Share results dialog ── */}
     <div id="shareDialog" className="modal-overlay" onClick={(e) => { if(e.target===e.currentTarget)e.currentTarget.classList.remove('open') }}>
