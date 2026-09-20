@@ -25,12 +25,16 @@ export const sessions = [
             "vi": "Hiểu vì sao prompt từng màn hình khiến AI bị lệch và đốt hết credit của bạn"
           },
           {
-            "en": "Learn the AI basics and pick the right tool",
-            "vi": "Nắm kiến thức AI cơ bản và chọn đúng tool"
+            "en": "Build your AI foundation: how AI works, how to brief it well, and which tool to use",
+            "vi": "Xây nền tảng AI: AI hoạt động ra sao, cách brief AI cho tốt, và dùng tool nào"
           },
           {
-            "en": "Name your Design Pattern and set up a project folder AI reads automatically",
-            "vi": "Đặt tên Design Pattern và thiết lập project folder mà AI tự động đọc"
+            "en": "Name your Design Pattern: tokens, component inventory and template",
+            "vi": "Đặt tên Design Pattern: token, component inventory và template"
+          },
+          {
+            "en": "Set up a project folder for AI, with a context file it reads automatically",
+            "vi": "Thiết lập project folder cho AI, cùng 1 context file mà AI tự động đọc"
           }
         ]
       },
