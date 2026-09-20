@@ -1,0 +1,44 @@
+    /* ── Style guide scaffolding (not part of the DS) ── */
+    .sg-page { max-width: 1100px; margin: 0 auto; padding: 3rem clamp(20px,4vw,56px) 6rem; }
+
+    .sg-section { margin-bottom: 5rem; }
+    .sg-section-title {
+      font-family: var(--serif); font-size: 1.9rem; font-weight: 800;
+      letter-spacing: -.02em; color: var(--ink);
+      margin-bottom: .3rem;
+    }
+    .sg-section-desc { font-size: .95rem; color: var(--ink-70); margin-bottom: 2rem; }
+
+    .sg-row { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; margin-bottom: 1rem; }
+    .sg-label {
+      font-size: .68rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--ink-50); margin-bottom: .5rem; font-weight: 700;
+    }
+    .sg-group { margin-bottom: 2rem; }
+    .sg-group-title {
+      font-family: var(--serif); font-size: 1.15rem; font-weight: 700;
+      color: var(--ink); margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .sg-group-title::before { content: '▶'; color: var(--coral); font-size: 11px; }
+
+    .sg-divider { border: none; border-top: 1px solid var(--line); margin: 3rem 0; }
+
+    .sg-swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: .75rem; }
+    .sg-swatch { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+    .sg-swatch__block { height: 70px; width: 100%; }
+    .sg-swatch__info { padding: 10px 12px; background: #fff; }
+    .sg-swatch__name { font-size: .72rem; font-weight: 700; color: var(--ink); }
+    .sg-swatch__value { font-family: monospace; font-size: 10px; color: var(--ink-50); margin-top: 2px; }
+
+    .type-row { display: flex; align-items: baseline; gap: 1.5rem; padding: 1rem 0; border-bottom: 1px solid var(--line); }
+    .type-row:last-child { border-bottom: none; }
+    .type-row__meta { flex: 0 0 90px; font-family: monospace; font-size: 11px; color: var(--ink-50); }
+    .type-row__sample { flex: 1; line-height: 1.2; }
+
+    .sg-demo-box { background: var(--paper); border-radius: 16px; padding: 2rem; }
+    .sg-demo-box.dark { background: var(--forest); }
+    .sg-demo-box.darkest { background: var(--forest-2); }
+
+    code.sgc { font-family: monospace; font-size: .82em; background: var(--paper); padding: 2px 6px; border-radius: 4px; }
+  

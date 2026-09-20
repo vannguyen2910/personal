@@ -1,4 +1,6 @@
 import { useEffect } from 'react'
+import { ContactModal } from '../../../components/contact'
+import ResultsScreen from './results/ResultsScreen.jsx'
 import { startAssessment, prevQuestion, nextQuestion, backToQuestions, submitDirection, downloadPDF, openShareModal, copyShareLink, clearAndRestart, trackEvent, getState, init } from './engine.js'
 
 // The assessment flow (welcome, 15 questions, direction picker, results) is driven by ./engine.js,
@@ -9,38 +11,7 @@ export default function Assessment() {
   return (
     <>
     {/* ── Contact modal ── */}
-    <div id="contactModal" className="modal-overlay" onClick={(e) => { if(e.target===e.currentTarget)e.currentTarget.classList.remove('open') }}>
-      <div className="modal" style={{ maxWidth: '440px' }}>
-        <button className="modal-close" onClick={(e) => { document.getElementById('contactModal').classList.remove('open') }}>✕</button>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '20px' }}>
-          <img src="/portfolio/images/headshot-square.jpg" alt="Winnie Nguyen" style={{ width: '52px', height: '52px', borderRadius: '50%', objectFit: 'cover', objectPosition: 'center top', flexShrink: '0' }}/>
-          <div>
-            <div style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-base)', fontWeight: '700', color: 'var(--text-primary)' }}>Winnie Nguyen</div>
-            <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginTop: '2px' }}>UX Product Design Educator</div>
-          </div>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          <a href="mailto:nguyenphuctuongvan@gmail.com" style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', border: '1.5px solid var(--border-default)', borderRadius: 'var(--radius-md)', textDecoration: 'none', color: 'var(--text-primary)', transition: 'var(--transition)' }} onMouseOver={(e) => { e.currentTarget.style.borderColor='var(--purple)';e.currentTarget.style.background='var(--purple-subtle)' }} onMouseOut={(e) => { e.currentTarget.style.borderColor='var(--border-default)';e.currentTarget.style.background='' }}>
-            <span style={{ width: '36px', height: '36px', borderRadius: 'var(--radius-sm)', background: 'var(--purple-tint)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: '0' }}>
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="var(--purple)" strokeWidth="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-            </span>
-            <div>
-              <div style={{ fontSize: 'var(--text-xs)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-tertiary)', marginBottom: '2px' }}>Email</div>
-              <div style={{ fontSize: 'var(--text-sm)', fontWeight: '500' }}>nguyenphuctuongvan@gmail.com</div>
-            </div>
-          </a>
-          <a href="https://www.linkedin.com/in/winnienguyen2910/" target="_blank" rel="noopener" style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', border: '1.5px solid var(--border-default)', borderRadius: 'var(--radius-md)', textDecoration: 'none', color: 'var(--text-primary)', transition: 'var(--transition)' }} onMouseOver={(e) => { e.currentTarget.style.borderColor='var(--purple)';e.currentTarget.style.background='var(--purple-subtle)' }} onMouseOut={(e) => { e.currentTarget.style.borderColor='var(--border-default)';e.currentTarget.style.background='' }}>
-            <span style={{ width: '36px', height: '36px', borderRadius: 'var(--radius-sm)', background: 'var(--purple-tint)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: '0' }}>
-              <svg width="16" height="16" fill="var(--purple)" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-            </span>
-            <div>
-              <div style={{ fontSize: 'var(--text-xs)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-tertiary)', marginBottom: '2px' }}>LinkedIn</div>
-              <div style={{ fontSize: 'var(--text-sm)', fontWeight: '500' }}>linkedin.com/in/winnienguyen2910</div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
+    <ContactModal id="contactModal" accent="purple" role="UX Product Design Educator" />
 
     {/* ── Header ── */}
     <header className="site-header">
@@ -54,47 +25,7 @@ export default function Assessment() {
     </header>
 
     {/* ── Contact dialog ── */}
-    <div id="contactDialog" className="modal-overlay" onClick={(e) => { if(e.target===e.currentTarget)e.currentTarget.classList.remove('open') }}>
-      <div className="modal" style={{ maxWidth: '440px' }}>
-        <button className="modal-close" onClick={(e) => { document.getElementById('contactDialog').classList.remove('open') }}>✕</button>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '20px' }}>
-          <img src="/training/assets/GV5.jpg" alt="Winnie Nguyen" style={{ width: '52px', height: '52px', borderRadius: '50%', objectFit: 'cover', objectPosition: 'center top', flexShrink: '0' }}/>
-          <div>
-            <div style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-base)', fontWeight: '700', color: 'var(--text-primary)' }}>Winnie Nguyen</div>
-            <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginTop: '2px' }}>UX Product Design Mentor</div>
-          </div>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          <a href="mailto:nguyenphuctuongvan@gmail.com" style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', border: '1.5px solid var(--border-default)', borderRadius: 'var(--radius-md)', textDecoration: 'none', color: 'var(--text-primary)', transition: 'var(--transition)' }} onMouseOver={(e) => { e.currentTarget.style.borderColor='var(--purple)';e.currentTarget.style.background='var(--purple-subtle)' }} onMouseOut={(e) => { e.currentTarget.style.borderColor='var(--border-default)';e.currentTarget.style.background='' }}>
-            <span style={{ width: '36px', height: '36px', borderRadius: 'var(--radius-sm)', background: 'var(--purple-tint)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: '0' }}>
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="var(--purple)" strokeWidth="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-            </span>
-            <div>
-              <div style={{ fontSize: 'var(--text-xs)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-tertiary)', marginBottom: '2px' }}>Email</div>
-              <div style={{ fontSize: 'var(--text-sm)', fontWeight: '500' }}>nguyenphuctuongvan@gmail.com</div>
-            </div>
-          </a>
-          <a href="https://www.linkedin.com/in/winnienguyen2910/" target="_blank" rel="noopener" style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', border: '1.5px solid var(--border-default)', borderRadius: 'var(--radius-md)', textDecoration: 'none', color: 'var(--text-primary)', transition: 'var(--transition)' }} onMouseOver={(e) => { e.currentTarget.style.borderColor='var(--purple)';e.currentTarget.style.background='var(--purple-subtle)' }} onMouseOut={(e) => { e.currentTarget.style.borderColor='var(--border-default)';e.currentTarget.style.background='' }}>
-            <span style={{ width: '36px', height: '36px', borderRadius: 'var(--radius-sm)', background: 'var(--purple-tint)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: '0' }}>
-              <svg width="16" height="16" fill="var(--purple)" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-            </span>
-            <div>
-              <div style={{ fontSize: 'var(--text-xs)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-tertiary)', marginBottom: '2px' }}>LinkedIn</div>
-              <div style={{ fontSize: 'var(--text-sm)', fontWeight: '500' }}>linkedin.com/in/winnienguyen2910</div>
-            </div>
-          </a>
-          <a href="https://adplist.org/mentors/winnie-nguyen" target="_blank" rel="noopener" style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', border: '1.5px solid var(--border-default)', borderRadius: 'var(--radius-md)', textDecoration: 'none', color: 'var(--text-primary)', transition: 'var(--transition)' }} onMouseOver={(e) => { e.currentTarget.style.borderColor='var(--purple)';e.currentTarget.style.background='var(--purple-subtle)' }} onMouseOut={(e) => { e.currentTarget.style.borderColor='var(--border-default)';e.currentTarget.style.background='' }}>
-            <span style={{ width: '36px', height: '36px', borderRadius: 'var(--radius-sm)', background: 'var(--purple-tint)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: '0' }}>
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="var(--purple)" strokeWidth="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            </span>
-            <div>
-              <div style={{ fontSize: 'var(--text-xs)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-tertiary)', marginBottom: '2px' }}>ADPList</div>
-              <div style={{ fontSize: 'var(--text-sm)', fontWeight: '500' }}>Book a free mentoring session</div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
+    <ContactModal id="contactDialog" accent="purple" role="UX Product Design Mentor" image="/training/assets/GV5.jpg" links={['email', 'linkedin', 'adplist']} />
 
     {/* ── Share results dialog ── */}
     <div id="shareDialog" className="modal-overlay" onClick={(e) => { if(e.target===e.currentTarget)e.currentTarget.classList.remove('open') }}>
@@ -257,108 +188,7 @@ export default function Assessment() {
     {/* ════════════════════════════════════════════════════════
          SCREEN RESULTS
     ════════════════════════════════════════════════════════ */}
-    <div id="screen-results" className="screen">
-      <div className="results-wrap">
-
-        <div className="results-hero">
-          <div className="rh-label">Your Assessment Results</div>
-          <div className="rh-name" id="heroName">—</div>
-          <div className="rh-meta" id="heroMeta">—</div>
-          <div className="rh-date" id="heroDate">—</div>
-          <div id="heroDirection"></div>
-        </div>
-
-        {/* ── New: Archetype + stats + insight cards ── */}
-        <div id="insightArchetype"></div>
-        <div className="insight-stats">
-          <div className="insight-stat" id="insightReadiness"></div>
-          <div className="insight-stat" id="insightCalibration"></div>
-          <div className="insight-stat" id="insightAIReadiness"></div>
-        </div>
-        <div className="insight-cards" id="insightCards"></div>
-
-        <div className="chart-card">
-          <canvas id="radarChart"></canvas>
-          <div className="chart-legend">
-            <span><span className="legend-dot" style={{ background: 'var(--purple)' }}></span>Your rating</span>
-            <span><span className="legend-dot" style={{ background: 'var(--yellow)', border: '2px dashed var(--yellow-deep)' }}></span>Target level</span>
-          </div>
-        </div>
-
-        {/* ── New: One-level-up plan ── */}
-        <div id="insightOneLevelUp"></div>
-
-        <div className="res-section-head" id="focusAreasHead">
-          <h3>Your top focus areas</h3>
-          <p id="focusAreasDesc">Ranked by gap size within your chosen direction.</p>
-        </div>
-        <div id="priorityGaps"></div>
-
-        <div className="res-section-head">
-          <h3>Your personalised learning pathway</h3>
-          <p>Resources matched to your skill gaps on your chosen path.</p>
-        </div>
-        <div id="learningPathway" className="pathway-wrap"></div>
-
-        <div className="res-section-head"><h3>Operating behaviours summary</h3></div>
-        <div id="behaviourSummary" className="beh-summary"></div>
-
-        <div className="res-section-head" id="coachingNotesHead" style={{ display: 'none' }}>
-          <h3>Your notes</h3>
-          <p>The context and examples you added — with tailored advice where a note points to something specific.</p>
-        </div>
-        <div id="coachingNotes"></div>
-
-        <div id="recommendedProgram"></div>
-
-        <div className="cta-block">
-          <div className="cta-eyebrow">Ready to level up?</div>
-          <div className="cta-title">Turn your gaps into a growth plan</div>
-          <div className="cta-sub">A 1-on-1 session with Winnie can help you build a structured, realistic roadmap — with accountability built in.</div>
-          <div className="cta-btns">
-            <a href="https://adplist.org/mentors/winnie-nguyen" target="_blank" className="btn btn-primary">Book a Free Discovery Call</a>
-            <button onClick={(e) => { downloadPDF() }} className="btn btn-outline" id="pdfBtn">Download PDF</button>
-            <button onClick={(e) => { openShareModal() }} className="btn btn-outline" id="shareBtn">Copy Link</button>
-          </div>
-          <div className="cta-note">The free discovery call is a 20-min conversation — no commitment, no pitch. Just clarity on where to go next.</div>
-        </div>
-
-        <div className="res-section-head">
-          <h3>About me</h3>
-        </div>
-        <div className="mentor-grid" style={{ marginBottom: '20px' }}>
-          <div className="mentor-photo-wrap">
-            <div className="mentor-ring float-a"></div>
-            <img src="/training/assets/GV5.jpg" alt="Winnie Nguyen" className="mentor-photo"/>
-            <div className="mentor-badge">
-              <strong>50+</strong>
-              <span>designers mentored</span>
-            </div>
-          </div>
-          <div className="mentor-text">
-            <p>I'm a <strong>Senior Product Designer &amp; UX Product Design Educator</strong> based in Vietnam, with a Master of UX &amp; Service Design, helping designers and teams build genuine design intuition, not just surface-level skills.</p>
-            <p>With 10+ years as a UX product designer and experience mentoring 50+ designers through ADPList, UX Boot Camp, and private programs, I've developed a practical, human-centred approach to teaching design, one that bridges real-world product work with structured learning.</p>
-            <div className="mentor-social">
-              <a href="https://adplist.org/mentors/winnie-nguyen" target="_blank" rel="noopener" className="mentor-social-icon" title="ADPList" aria-label="ADPList">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.6"/>
-                  <path d="M8.3 10.65 C6.35 8.7 7.4 7.35 8.3 8.55 C9.2 7.35 10.25 8.7 8.3 10.65 Z" fill="currentColor"/>
-                  <path d="M15.7 10.65 C13.75 8.7 14.8 7.35 15.7 8.55 C16.6 7.35 17.65 8.7 15.7 10.65 Z" fill="currentColor"/>
-                  <path d="M8.3 13.3 C9.3 15 10.6 15.8 12 15.8 C13.4 15.8 14.7 15 15.7 13.3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" fill="none"/>
-                </svg>
-              </a>
-              <a href="https://www.linkedin.com/in/winnienguyen2910/" target="_blank" rel="noopener" className="mentor-social-icon" title="LinkedIn" aria-label="LinkedIn">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <rect width="24" height="24" rx="4" fill="#0A66C2"/>
-                  <path fill="#fff" d="M19 19h-3v-4.7c0-1.1 0-2.6-1.6-2.6-1.6 0-1.9 1.3-1.9 2.5V19h-3V9.5h2.9v1.3h.1c.4-.8 1.4-1.6 2.9-1.6 3.1 0 3.6 2 3.6 4.7V19zM6.7 8.1a1.7 1.7 0 1 1 0-3.5 1.7 1.7 0 0 1 0 3.5zM8.2 19H5.2V9.5h3V19z"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
+    <ResultsScreen />
 
     <footer>
       <div className="footer-inner">

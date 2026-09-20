@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { EditorialContactModal } from '../../components/layout'
+import { ContactModal } from '../../components/contact'
 import { caseStudies } from '../../data/caseStudies.js'
 import { BEHANCE_URL, LINKEDIN_URL } from '../../data/site.js'
 
@@ -37,7 +37,7 @@ export default function PortfolioHome() {
         </div>
       </nav>
 
-      <EditorialContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
+      <ContactModal accent="coral" links={['email', 'linkedin', 'behance']} open={contactOpen} onClose={() => setContactOpen(false)} />
 
       <header className="hero">
         <div className="wrap">
