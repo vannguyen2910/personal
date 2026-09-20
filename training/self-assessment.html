@@ -728,7 +728,7 @@
   <a href="index.html" class="nav-logo">
     <img src="assets/Logo.svg" alt="Winnie Nguyen">
   </a>
-  <button class="header-link" onclick="document.getElementById('contactDialog').classList.add('open')" style="background:none;border:none;cursor:pointer;">
+  <button class="header-link" onclick="trackEvent('Clicked contact', {completed: state.completedAt ? 'yes' : 'no'}); document.getElementById('contactDialog').classList.add('open')" style="background:none;border:none;cursor:pointer;">
     <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     Contact me
   </button>
@@ -834,7 +834,7 @@
         </div>
         <div class="input-field">
           <input type="email" id="inputEmail" placeholder=" ">
-          <label for="inputEmail">Email address</label>
+          <label for="inputEmail">Email address *</label>
         </div>
         <div class="form-2col">
           <div class="select-field">
@@ -1045,7 +1045,7 @@
   <div class="footer-inner">
     <p>© 2026 Winnie Nguyen · UX Product Design Educator</p>
     <div class="footer-links">
-      <a href="#" onclick="document.getElementById('contactModal').classList.add('open'); return false;">Contact</a>
+      <a href="#" onclick="trackEvent('Clicked contact', {completed: state.completedAt ? 'yes' : 'no'}); document.getElementById('contactModal').classList.add('open'); return false;">Contact</a>
       <a href="https://www.linkedin.com/in/winnienguyen2910" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </div>
@@ -1482,40 +1482,46 @@ function setGlobalProgress(pct) {
 
 // ── SCREEN 0: WELCOME ────────────────────────────────────────────
 function startAssessment() {
-  const name = document.getElementById('inputName').value.trim();
-  const exp  = document.getElementById('inputExperience').value;
-  const tgt  = document.getElementById('inputTarget').value;
+  const name  = document.getElementById('inputName').value.trim();
+  const email = document.getElementById('inputEmail').value.trim();
+  const exp   = document.getElementById('inputExperience').value;
+  const tgt   = document.getElementById('inputTarget').value;
   if (!name) { alert('Please enter your name.'); return; }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Please enter a valid email address.'); return; }
   if (!exp)  { alert('Please select your experience level.'); return; }
   if (!tgt)  { alert('Please select your target level.'); return; }
   state.name = name;
-  state.email = document.getElementById('inputEmail').value.trim();
+  state.email = email;
   state.experience = exp;
   state.target = tgt;
   saveState();
-  captureLead(state.name, state.email, state.experience, state.target);
+  trackEvent('New self-assessment started', {});
   questionIndex = 0;
   renderQuestion(0);
   showScreen('screen-q');
 }
 
-// Sends the "About you" details to Formspree so a new assessment start
-// shows up by email. Fire-and-forget: never blocks or interrupts the
-// assessment if the request is slow or fails. Skips test@email.com so
-// testing the flow doesn't count as a real submission.
-function captureLead(name, email, experience, target) {
-  if (email.trim().toLowerCase() === 'test@email.com') return;
+// Sends an event to Formspree so it shows up by email — same endpoint used
+// for every tracked moment in the tool. Fire-and-forget: never blocks or
+// interrupts the assessment if the request is slow or fails. `keepalive`
+// lets the request finish even if the click also navigates away (e.g. a
+// program link). Skips test@email.com so testing the flow doesn't count
+// as a real submission.
+function trackEvent(subject, extra) {
+  if ((state.email || '').trim().toLowerCase() === 'test@email.com') return;
   const fd = new FormData();
-  fd.append('_subject', 'New self-assessment started');
+  fd.append('_subject', subject);
   fd.append('source', 'Self-Assessment Tool');
-  fd.append('name', name);
-  fd.append('email', email);
-  fd.append('experience', experience);
-  fd.append('target', target);
+  fd.append('name', state.name || '');
+  fd.append('email', state.email || '');
+  fd.append('experience', state.experience || '');
+  fd.append('target', state.target || '');
+  Object.entries(extra || {}).forEach(([k, v]) => fd.append(k, v));
   fetch('https://formspree.io/f/mvzedpvn', {
     method: 'POST',
     body: fd,
-    headers: { 'Accept': 'application/json' }
+    headers: { 'Accept': 'application/json' },
+    keepalive: true
   }).catch(() => {});
 }
 
@@ -1711,6 +1717,13 @@ function submitDirection() {
   buildResults();
   showScreen('screen-results');
   setGlobalProgress(100);
+  const dirNames = (state.directions||[]).map(id => (DIRECTIONS.find(d => d.id === id)||{}).name).filter(Boolean).join(', ');
+  trackEvent('Self-assessment completed', {
+    archetype: getArchetype().name,
+    readiness_score: getReadinessScore() + '%',
+    directions: dirNames,
+    results_link: location.origin + location.pathname + '?r=' + encodeReportState(state)
+  });
 }
 
 // Returns union of skills across all selected directions, or null if none selected
@@ -1836,7 +1849,7 @@ function buildRecommendedProgram() {
     ai: `<span class="pc-ring"></span><span class="ppc-blob"></span><span class="ppc-phone"><span class="ppc-line-1"></span><span class="ppc-line-2"></span></span><svg class="ppc-spark" viewBox="0 0 24 24" width="12" height="12"><path d="M12 0 C12 6 14 10 20 12 C14 14 12 18 12 24 C12 18 10 14 4 12 C10 10 12 6 12 0 Z"/></svg>`
   };
   const cards = programs.map(program => `
-    <a href="${program.href}" class="program-card">
+    <a href="${program.href}" class="program-card" onclick='trackEvent("Clicked recommended program", {program: ${JSON.stringify(program.title)}, href: ${JSON.stringify(program.href)}})'>
       <div class="program-card-visual" aria-hidden="true">
         ${visualHtml[program.visual] || visualHtml.steps}
       </div>
@@ -2330,6 +2343,7 @@ function buildBehaviourSummary() {
 
 // ── PDF ──────────────────────────────────────────────────────────
 async function downloadPDF() {
+  trackEvent('Downloaded assessment PDF', {});
   const btn = document.getElementById('pdfBtn');
   btn.innerHTML = '<span class="loading-spinner"></span> Generating…';
   btn.disabled = true;
