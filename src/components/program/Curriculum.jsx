@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const bi = (en, vi) => (
   <>
@@ -12,6 +12,25 @@ const bi = (en, vi) => (
 // One session stays open at a time; click or press Enter/Space to toggle.
 export default function Curriculum({ sessions }) {
   const [open, setOpen] = useState(null)
+  // React owns these rows' class names, so the fade-in is tracked in state instead of by adding
+  // a class to the element (React would wipe it the next time the row opens or closes).
+  const [seen, setSeen] = useState({})
+  const rowRefs = useRef([])
+
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => {
+        if (!e.isIntersecting) return
+        const i = rowRefs.current.indexOf(e.target)
+        setSeen((s) => ({ ...s, [i]: true }))
+        io.unobserve(e.target)
+      }),
+      { threshold: 0.15, rootMargin: '0px 0px -60px 0px' },
+    )
+    rowRefs.current.forEach((el) => el && io.observe(el))
+    return () => io.disconnect()
+  }, [sessions])
+
   const toggle = (i) => setOpen((cur) => (cur === i ? null : i))
   return (
     <div className="session-list">
@@ -23,7 +42,9 @@ export default function Curriculum({ sessions }) {
       ) : (
         <div
           key={i}
-          className={`session-row reveal${open === i ? ' is-open' : ''}`}
+          data-own-reveal
+          ref={(el) => rowRefs.current[i] = el}
+          className={`session-row reveal${seen[i] ? ' is-visible' : ''}${open === i ? ' is-open' : ''}`}
           tabIndex={0}
           role="button"
           aria-expanded={open === i}

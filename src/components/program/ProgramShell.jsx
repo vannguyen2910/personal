@@ -30,7 +30,7 @@ export default function ProgramShell({ children, navVi }) {
   }, [contactOpen, enrollOpen])
 
   useEffect(() => {
-    const io = revealOnScroll(document.querySelectorAll('.reveal'))
+    const io = revealOnScroll(document.querySelectorAll('.reveal:not([data-own-reveal])'))
     const onClick = (e) => {
       const link = e.target.closest('a[data-format]')
       if (!link) return
