@@ -4,10 +4,10 @@
    Single source of truth for program page design values.
 
    Used by:
-     - Themes/program-components.css
+     - assets/css/program-components.css
      - training/programs/*.html (program page template)
 
-   This is a SEPARATE system from the main Themes/tokens.css
+   This is a SEPARATE system from the main assets/css/tokens.css
    (Purple/Yellow, used by the homepage, Portfolio, and Training Hub).
    It exists so program pages can carry their own editorial identity
    without affecting the rest of the site.

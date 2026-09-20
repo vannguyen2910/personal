@@ -4,7 +4,7 @@
    Purple (#6B3FEE) primary · Yellow (#F5D028) secondary
 
    Used by:
-     - Themes/components.css        → learning pages & hub
+     - assets/css/components.css        → learning pages & hub
      - _Config/slide-design/        → teaching slide decks (via @import)
 
    Edit values here → every HTML file inherits automatically.
@@ -14,14 +14,14 @@
 /* ── Public Sans variable font (self-hosted) ──────────────── */
 @font-face {
   font-family: 'Public Sans';
-  src: url('./assets/fonts/PublicSans-VariableFont_wght.ttf') format('truetype');
+  src: url('../fonts/PublicSans-VariableFont_wght.ttf') format('truetype');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Public Sans';
-  src: url('./assets/fonts/PublicSans-Italic-VariableFont_wght.ttf') format('truetype');
+  src: url('../fonts/PublicSans-Italic-VariableFont_wght.ttf') format('truetype');
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
@@ -30,7 +30,7 @@
 /* ── Syne variable font (self-hosted — display headings) ──── */
 @font-face {
   font-family: 'Syne';
-  src: url('./assets/fonts/Syne-VariableFont_wght.ttf') format('truetype');
+  src: url('../fonts/Syne-VariableFont_wght.ttf') format('truetype');
   font-weight: 400 800;
   font-style: normal;
   font-display: swap;

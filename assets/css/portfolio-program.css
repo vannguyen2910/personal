@@ -1,6 +1,6 @@
 /* ================================================================
    PORTFOLIO-PROGRAM.CSS — Portfolio homepage, program design system
-   Page-specific components built on top of ../../Themes/program-tokens.css
+   Page-specific components built on top of ./program-tokens.css
    + program-components.css + editorial-patterns.css. Those files stay
    generic (program pages only); anything Portfolio-only lives here.
 ================================================================ */
@@ -44,12 +44,12 @@
 
 /* ── Case study cards ─────────────────────────────────────────── */
 /* .case-grid / .case-card family now lives in the shared
-   ../../Themes/editorial-patterns.css (themed via --case-card-* in
-   ../../Themes/program-tokens.css) so other pages can reuse it. */
+   ./editorial-patterns.css (themed via --case-card-* in
+   ./program-tokens.css) so other pages can reuse it. */
 .work-section { padding: clamp(4rem, 9vw, 7rem) 0; }
 .work-more { text-align: center; margin-top: 2.6rem; }
 
 /* ── Footer + contact modal ──────────────────────────────────────
    .footer-inner / .footer-links / .modal-overlay / .modal / .contact-*
-   now live in the shared ../../Themes/program-components.css so other
+   now live in the shared ./program-components.css so other
    program-system pages (e.g. training/programs/*.html) can reuse them. */

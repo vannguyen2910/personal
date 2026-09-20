@@ -51,7 +51,7 @@ section{ position:relative; }
 .on-dark .kicker{ color:rgba(245,239,226,.62); }
 .on-dark .kicker .bracket{ color:var(--lime); }
 
-/* .mark is defined in the shared Themes/editorial-patterns.css,
+/* .mark is defined in the shared assets/css/editorial-patterns.css,
    themed by the --mark-* custom properties in program-tokens.css. */
 /* .hero-lines forces child spans to display:block for its line-reveal animation —
    override back to inline for .mark so it hugs the word instead of the whole line */
@@ -270,7 +270,7 @@ body.is-vi .lang-vi { display: revert !important; }
   font-size:clamp(1.8rem,4.4vw,3.1rem); line-height:1.15; max-width:18ch;
 }
 body.is-vi .pain-headline{ max-width:30ch; }
-/* .pain-list structure lives in the shared Themes/editorial-patterns.css,
+/* .pain-list structure lives in the shared assets/css/editorial-patterns.css,
    themed by the --pain-list-* custom properties in program-tokens.css. */
 .pain .pain-list{ margin-top:clamp(3rem,6vw,4.5rem); }
 
@@ -325,7 +325,7 @@ body.is-vi .pain-headline{ max-width:30ch; }
 
 /* ============ ABOUT MENTOR ============
    .mentor / .mentor-grid / .mentor-photo-wrap / .mentor-badge / .mentor-pills /
-   .mentor-link live in the shared Themes/editorial-patterns.css, themed by
+   .mentor-link live in the shared assets/css/editorial-patterns.css, themed by
    the --mentor-* custom properties in program-tokens.css. Reused as-is by
    the Training Hub's About section via tokens-training-editorial.css. */
 
@@ -338,7 +338,7 @@ body.is-vi .pain-headline{ max-width:30ch; }
 .curriculum-head p{ max-width:46ch; font-size:1.125rem; color:var(--ink-70); margin-top:1rem; }
 
 /* .session-list / .session-row / .phase-label / accordion parts live in
-   the shared Themes/editorial-patterns.css, themed by the --session-*
+   the shared assets/css/editorial-patterns.css, themed by the --session-*
    custom properties in program-tokens.css. */
 
 .curriculum-note{

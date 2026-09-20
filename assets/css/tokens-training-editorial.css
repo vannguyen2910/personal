@@ -4,7 +4,7 @@
    ported from training/programs/concept 2.html.
 
    Load this ONLY on training/*.html pages, AFTER tokens.css and
-   components.css, and BEFORE Themes/editorial-patterns.css. It only
+   components.css, and BEFORE assets/css/editorial-patterns.css. It only
    overrides token VALUES and adds a few new utility classes — it
    never edits tokens.css or components.css. Because every component
    in components.css is built from these variables (never a
@@ -13,7 +13,7 @@
 
    The .mark / .pain-list / .session-list patterns used to be
    reimplemented here in full. They now live in the shared
-   Themes/editorial-patterns.css (also used by program pages) —
+   assets/css/editorial-patterns.css (also used by program pages) —
    this file just supplies the custom properties that theme them.
 
    Portfolio, the homepage, style-guide.html, and the teaching slide
@@ -86,5 +86,5 @@
 .editorial-dark .section-label { color: var(--yellow); }
 
 /* .mark, .pain-list, .session-list/.session-row/.phase-label are
-   defined once in the shared Themes/editorial-patterns.css, themed
+   defined once in the shared assets/css/editorial-patterns.css, themed
    by the custom properties above. Load that file after this one. */

@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UI/UX Design Fundamentals — Winnie Nguyen</title>
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="stylesheet" href="../../Themes/program-tokens.css?v=2">
-<link rel="stylesheet" href="../../Themes/program-components.css?v=2">
-<link rel="stylesheet" href="../../Themes/editorial-patterns.css?v=2">
+<link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+<link rel="stylesheet" href="../../assets/css/program-tokens.css?v=2">
+<link rel="stylesheet" href="../../assets/css/program-components.css?v=2">
+<link rel="stylesheet" href="../../assets/css/editorial-patterns.css?v=2">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=wand_stars" />
 <style>
   .group-cohort-note{
@@ -672,9 +672,9 @@
     </div>
   </section>
 
-  <div data-include="../../Themes/partials/mentor-section.html"></div>
+  <div data-include="../../layouts/mentor-section.html"></div>
 
-  <div data-include="../../Themes/partials/testimonial-section.html"></div>
+  <div data-include="../../layouts/testimonial-section.html"></div>
 
   <!-- ============ CLOSING / FORMAT / CTA ============ -->
   <section class="closing" id="closing">
@@ -732,7 +732,7 @@
 
   <script>
    (async function(){
-    // load shared partials (e.g. the testimonial section) before wiring up interactions below
+    // load shared layouts (e.g. the testimonial section) before wiring up interactions below
     await Promise.all([...document.querySelectorAll('[data-include]')].map(async node => {
       const res = await fetch(node.dataset.include);
       node.outerHTML = await res.text();
