@@ -44,23 +44,39 @@ function loadState() {
 }
 
 // ── SHAREABLE RESULTS LINK ──────────────────────────────────────
-// Packs the finished results into a URL-safe code (no server, no database —
-// the link itself carries the data) so a report can be shared or revisited.
-// Email is left out on purpose: it's never shown in the report itself.
-function encodeReportState(s) {
+// A finished report is saved to a small free Google Apps Script + Sheet
+// store (see REPORT_STORE_URL) and the link just carries the short code it
+// hands back, not the report itself — so the link stays a few dozen
+// characters no matter how much someone writes in their notes.
+// Email is left out of what's saved: it's never shown in the report itself.
+// Notes are left out too: they're free text that shaped this person's own
+// coaching-advice matching (still on their downloaded PDF) — keeping them
+// out of the shared store means a stranger's personal answers are never
+// sitting behind a link someone else could open.
+const REPORT_STORE_URL = 'https://script.google.com/macros/s/AKfycbw3o9agEjhiv0UXX0mAZ_VyCuTwz6D45uN_GtN7ERP0Ti4uTR9r9gP7q0cdHoq1sjlg/exec';
+
+async function saveReportState(s) {
   const payload = {
     name: s.name, experience: s.experience, target: s.target,
     skills: s.skills, behaviours: s.behaviours,
     directions: s.directions, deprioritised: s.deprioritised,
-    notes: s.notes, completedAt: s.completedAt
+    completedAt: s.completedAt
   };
-  const json = JSON.stringify(payload);
-  const b64 = btoa(encodeURIComponent(json).replace(/%([0-9A-F]{2})/g,
-    (_, p) => String.fromCharCode('0x' + p)));
-  return b64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  try {
+    const res = await fetch(REPORT_STORE_URL, { method: 'POST', body: JSON.stringify(payload) });
+    const out = await res.json();
+    return out.code || null;
+  } catch (e) {
+    console.error('Could not save results to the report store', e);
+    return null;
+  }
 }
 
-function decodeReportState(code) {
+// Earlier versions of this tool packed the whole report into the code itself
+// (a long base64 blob) instead of saving it and handing back a short code.
+// Those already-shared links must keep working, so anything longer than a
+// short store code is decoded locally the old way instead of looked up.
+function decodeLegacyReportState(code) {
   try {
     let b64 = code.replace(/-/g, '+').replace(/_/g, '/');
     while (b64.length % 4) b64 += '=';
@@ -68,24 +84,40 @@ function decodeReportState(code) {
       c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
     return JSON.parse(json);
   } catch (e) {
+    console.error('Could not read legacy results link', e);
+    return null;
+  }
+}
+
+async function loadReportState(code) {
+  if (code.length > 20) return decodeLegacyReportState(code);
+  try {
+    const res = await fetch(REPORT_STORE_URL + '?code=' + encodeURIComponent(code));
+    const out = await res.json();
+    if (out.error) { console.error('Could not read results from link:', out.error); return null; }
+    return out.data;
+  } catch (e) {
     console.error('Could not read results from link', e);
     return null;
   }
 }
 
-// Updates the address bar (no reload) so copying the URL at this point
-// shares/saves this exact result.
-function updateResultsUrl() {
-  const code = encodeReportState(state);
-  const url = location.pathname + '?r=' + code;
-  history.replaceState(null, '', url);
-}
+// The report save is fire-and-forget from submitDirection so results render
+// instantly; this lets the share dialog wait for it if someone clicks
+// "Copy Link" in the brief window before the short code comes back, instead
+// of showing a link with no report attached to it. Only set on a fresh
+// completion — null when viewing a revisited link, whose URL is already correct.
+let pendingSave = null;
 
-function openShareModal() {
-  document.getElementById('shareLinkInput').value = location.href;
+async function openShareModal() {
   const label = document.getElementById('shareCopyLabel');
   label.textContent = 'Copy';
   document.getElementById('shareDialog').classList.add('open');
+  document.getElementById('shareLinkInput').value = pendingSave ? 'Preparing your link…' : location.href;
+  if (pendingSave) {
+    await pendingSave;
+    document.getElementById('shareLinkInput').value = location.href;
+  }
 }
 
 function copyShareLink() {
@@ -376,23 +408,37 @@ function submitDirection() {
   buildResults();
   showScreen('screen-results');
   setGlobalProgress(100);
+  pendingSave = finishNewReport().finally(() => { pendingSave = null; });
+}
+
+// Saves a newly finished report to the store, swaps the address bar over to
+// the short link once it comes back, then sends the "completed" tracking
+// email with that link. Fire-and-forget from submitDirection so the results
+// screen renders instantly and doesn't wait on the network round-trip.
+// Only called for a fresh completion — never from init()'s revisit path,
+// otherwise reopening a shared link would save a duplicate copy every time.
+async function finishNewReport() {
+  const code = await saveReportState(state);
+  if (code) {
+    state.shareCode = code;
+    history.replaceState(null, '', location.pathname + '?r=' + code);
+  }
   const dirNames = (state.directions||[]).map(id => (DIRECTIONS.find(d => d.id === id)||{}).name).filter(Boolean).join(', ');
   trackEvent('Self-assessment completed', {
     archetype: getArchetype().name,
     readiness_score: getReadinessScore() + '%',
     directions: dirNames,
-    results_link: location.origin + location.pathname + '?r=' + encodeReportState(state)
+    results_link: code ? (location.origin + location.pathname + '?r=' + code) : '(link unavailable — report store failed)'
   });
 }
 
 // ── RESULTS ──────────────────────────────────────────────────────
 
 // The results themselves are drawn by the React components in ./results. This just records when the
-// quiz was finished, hands the answers over, and puts them in the address bar for sharing.
+// quiz was finished and hands the answers over to them.
 function buildResults() {
   if (!state.completedAt) state.completedAt = Date.now();
   publishResults(state);
-  updateResultsUrl();
 }
 
 // ── PDF ──────────────────────────────────────────────────────────
@@ -774,19 +820,21 @@ function footer(doc,p,W,H,m,g6,pu) {
 }
 
 // ── INIT ─────────────────────────────────────────────────────────
-export function init() {
-  // Opened via a shared/revisited results link (?r=...) — decode it and
-  // jump straight to the report, skipping the quiz entirely.
+export async function init() {
+  // Opened via a shared/revisited results link (?r=...) — look it up (or
+  // decode it locally if it's an old-style long link) and jump straight to
+  // the report, skipping the quiz entirely.
   const sharedCode = new URLSearchParams(location.search).get('r');
   if (sharedCode) {
-    const decoded = decodeReportState(sharedCode);
+    const decoded = await loadReportState(sharedCode);
     if (decoded) {
-      state = { name:'', email:'', experience:'', target:'', skills:{}, behaviours:{}, directions:[], deprioritised:[], notes:{}, ...decoded };
+      state = { name:'', email:'', experience:'', target:'', skills:{}, behaviours:{}, directions:[], deprioritised:[], notes:{}, ...decoded, shareCode: sharedCode };
       buildResults();
       showScreen('screen-results');
       setGlobalProgress(100);
       return;
     }
+    // Bad or expired code — fall through to the normal start screen below.
   }
 
   const has = loadState();
