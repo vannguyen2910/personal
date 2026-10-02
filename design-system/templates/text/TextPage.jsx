@@ -1,5 +1,5 @@
 import { PortfolioLayout } from '../../components/layout'
-import { Chip, Tabs } from '../../components/atoms'
+import { Tabs } from '../../components/atoms'
 import { renderLesson } from './markdown.js'
 // TEMPLATE: point this at any Markdown file. Same front matter as the Mentoring Library lessons.
 import lessonSource from './example-lesson.md?raw'
@@ -8,7 +8,7 @@ import { slidesUrl, homework, relatedLinks, programLinks } from './lesson.extras
 const lesson = renderLesson(lessonSource)
 
 // Where the "back" link goes, and the name of the Markdown file this page is built from.
-const backLink = { href: '/templates/index.html', label: 'Page templates' }
+const backLink = { href: '/design-system/index.html', label: 'Page templates' }
 const sourceName = 'design-thinking-lesson.md'
 
 function SlidesTab() {

@@ -164,7 +164,7 @@ function Closing() {
           <div className="reveal">
             <span className="kicker"><T v={closing.title} /></span>
             <div className="closing-cta" style={{ marginTop: '1.5rem' }}>
-              <LeadForm subject={`New coaching inquiry: ${program.name}`} source={`${program.name} Program — Contact Form`} formats={formats} />
+              <LeadForm subject={`New coaching inquiry: ${program.name}`} source={`${program.name} Program: Contact Form`} formats={formats} />
             </div>
           </div>
           <div className="format-list reveal reveal-d2">

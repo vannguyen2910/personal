@@ -3,7 +3,7 @@
 export const cards = [
   {
     category: 'Programs',
-    href: '/templates/program.html',
+    href: '/design-system/program.html',
     cover: '/portfolio/work/images/cover/Cover - Go1 Content Curation.png',
     coverAlt: 'Describe the image',
     badge: 'Open for enrolment',
@@ -15,7 +15,7 @@ export const cards = [
   },
   {
     category: 'Events',
-    href: '/templates/resource.html',
+    href: '/design-system/resource.html',
     cover: '/portfolio/work/images/cover/Cover - Pinbus.png',
     coverAlt: 'Describe the image',
     badge: '12 Dec 2026',
@@ -27,7 +27,7 @@ export const cards = [
   },
   {
     category: 'Learning',
-    href: '/templates/resource.html',
+    href: '/design-system/resource.html',
     cover: '/portfolio/work/images/cover/Cover - Refer Plus.png',
     coverAlt: 'Describe the image',
     badge: null,
@@ -39,7 +39,7 @@ export const cards = [
   },
   {
     category: 'Programs',
-    href: '/templates/resource.html',
+    href: '/design-system/resource.html',
     cover: '/portfolio/work/images/cover/Cover - Pinbus.png',
     coverAlt: 'Describe the image',
     badge: null,
@@ -51,7 +51,7 @@ export const cards = [
   },
   {
     category: 'Events',
-    href: '/templates/resource.html',
+    href: '/design-system/resource.html',
     cover: '/portfolio/work/images/cover/Cover - Pinbus.png',
     coverAlt: 'Describe the image',
     badge: null,
@@ -63,7 +63,7 @@ export const cards = [
   },
   {
     category: 'Learning',
-    href: '/templates/resource.html',
+    href: '/design-system/resource.html',
     cover: '/portfolio/work/images/cover/Cover - Pinbus.png',
     coverAlt: 'Describe the image',
     badge: null,
@@ -75,7 +75,7 @@ export const cards = [
   },
   {
     category: 'Learning',
-    href: '/templates/resource.html',
+    href: '/design-system/resource.html',
     cover: '/portfolio/work/images/cover/Cover - Pinbus.png',
     coverAlt: 'Describe the image',
     badge: null,
@@ -87,7 +87,7 @@ export const cards = [
   },
   {
     category: 'Programs',
-    href: '/templates/resource.html',
+    href: '/design-system/resource.html',
     cover: '/portfolio/work/images/cover/Cover - Pinbus.png',
     coverAlt: 'Describe the image',
     badge: null,

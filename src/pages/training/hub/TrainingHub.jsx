@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import CountUp from '../../../components/CountUp.jsx'
-import { ContactModal } from '../../../components/contact'
+import CountUp from '../../../../design-system/components/CountUp.jsx'
+import { ContactModal } from '../../../../design-system/components/contact'
 
 function Nav() {
   return (

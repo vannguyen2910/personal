@@ -1,6 +1,6 @@
-import { PortfolioLayout } from '../../components/layout'
-import { Avatar, Button, Card } from '../../components/atoms'
-import { EMAIL, LINKEDIN_URL, BEHANCE_URL } from '../../data/site.js'
+import { PortfolioLayout } from '../../../design-system/components/layout'
+import { Avatar, Button, Card } from '../../../design-system/components/atoms'
+import { EMAIL, LINKEDIN_URL, BEHANCE_URL } from '../../../design-system/data/site.js'
 
 export default function Contact() {
   return (

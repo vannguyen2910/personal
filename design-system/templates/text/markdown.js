@@ -19,8 +19,8 @@ function parseFrontMatter(raw) {
 }
 
 // Images written as assets/file.png (or ../assets/file.png) are served from here.
-// Copy the lesson's assets folder to public/templates/text/lesson-assets/ with spaces in names changed to hyphens.
-const ASSET_BASE = '/templates/text/lesson-assets/'
+// Copy the lesson's assets folder to design-system/examples/text/lesson-assets/ with spaces in names changed to hyphens.
+const ASSET_BASE = '/design-system/examples/text/lesson-assets/'
 const assetUrl = (href) => {
   const m = decodeURIComponent(href).match(/(?:^|\/)assets\/(.+)$/)
   return m ? ASSET_BASE + encodeURIComponent(m[1].trim().replace(/\s+/g, '-')) : href

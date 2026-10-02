@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { ContactModal } from '../../../components/contact'
+import { ContactModal } from '../../../../design-system/components/contact'
 import ResultsScreen from './results/ResultsScreen.jsx'
 import { startAssessment, prevQuestion, nextQuestion, backToQuestions, submitDirection, downloadPDF, openShareModal, copyShareLink, clearAndRestart, trackEvent, getState, init } from './engine.js'
 

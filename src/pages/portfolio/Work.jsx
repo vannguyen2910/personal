@@ -1,8 +1,8 @@
-import { PortfolioLayout, PageHeader } from '../../components/layout'
-import { Button } from '../../components/atoms'
-import CaseCard from '../../components/CaseCard.jsx'
+import { PortfolioLayout, PageHeader } from '../../../design-system/components/layout'
+import { Button } from '../../../design-system/components/atoms'
+import CaseCard from '../../../design-system/components/CaseCard.jsx'
 import { caseStudies } from '../../data/caseStudies.js'
-import { BEHANCE_URL } from '../../data/site.js'
+import { BEHANCE_URL } from '../../../design-system/data/site.js'
 
 export default function Work() {
   return (

@@ -1,4 +1,4 @@
-import { PortfolioNav, SiteFooter } from '../../components/layout'
+import { PortfolioNav, SiteFooter } from '../../../design-system/components/layout'
 import './go1.css'
 
 export default function Go1() {

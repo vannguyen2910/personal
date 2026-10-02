@@ -1,4 +1,4 @@
-import { ProgramShell, MentorSection, TestimonialSection, Curriculum, LeadForm } from '../../../components/program'
+import { ProgramShell, MentorSection, TestimonialSection, Curriculum, LeadForm } from '../../../../design-system/components/program'
 import { sessions } from './mid-to-senior.sessions.js'
 
 const FORMATS = [

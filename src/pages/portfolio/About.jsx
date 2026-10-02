@@ -1,4 +1,4 @@
-import { PortfolioLayout, PageHeader } from '../../components/layout'
+import { PortfolioLayout, PageHeader } from '../../../design-system/components/layout'
 import { experience } from '../../data/experience.js'
 
 export default function About() {

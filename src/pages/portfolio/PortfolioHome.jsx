@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { ContactModal } from '../../components/contact'
+import { ContactModal } from '../../../design-system/components/contact'
 import { caseStudies } from '../../data/caseStudies.js'
-import { BEHANCE_URL, LINKEDIN_URL } from '../../data/site.js'
+import { BEHANCE_URL, LINKEDIN_URL } from '../../../design-system/data/site.js'
 
 // This page uses the editorial ("program") design system, not the portfolio one.
 function HomeCaseCard({ study }) {

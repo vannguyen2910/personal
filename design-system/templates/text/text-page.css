@@ -1,6 +1,5 @@
 .tp { max-width: var(--max-width); margin: 0 auto; padding: var(--space-16) var(--gutter) var(--space-20); }
 .tp-head { max-width: none; margin-bottom: var(--space-12); }
-.tp-facts { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-5); }
 
 .tp-layout { display: grid; grid-template-columns: 220px minmax(0, 720px); gap: var(--space-12); align-items: start; }
 @media (max-width: 900px) { .tp-layout { grid-template-columns: 1fr; } .tp-toc { display: none; } }
@@ -38,7 +37,6 @@
 .tp-meta dt { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: var(--space-1); }
 .tp-meta dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
 .tp-meta code { font-size: var(--text-sm); font-weight: 500; }
-.tp-tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-4); }
 
 /* tabs: Lesson | Slides | Homework */
 .tp-tabs > .tabs__list { margin-bottom: var(--space-10); background: var(--tp-tabs-bg, #1a1325); }
@@ -69,7 +67,7 @@ a.tp-hw__card:hover { box-shadow: 0 10px 24px rgba(0,0,0,.1); transform: transla
 body.tp-white { background: #fff; }
 
 /* topics: a full-width bottom row inside the details box, plain text with dots between */
-.tp-meta > .tp-meta__tags { grid-column: 1 / -1; border-right: 0; border-top: 1px solid var(--border-default); background: var(--gray-50, #f7f7fa); display: flex; gap: var(--space-5); align-items: baseline; flex-wrap: wrap; }
+.tp-meta > .tp-meta__tags { grid-column: 1 / -1; border-right: 0; border-top: 1px solid var(--border-default); background: var(--tp-topics-bg, #f4f1ff); display: flex; gap: var(--space-5); align-items: baseline; flex-wrap: wrap; }
 .tp-meta__tags dt { margin: 0; }
 .tp-meta__tags dd { display: flex; flex-wrap: wrap; font-weight: 500; font-size: var(--text-sm); color: var(--text-secondary); }
 .tp-meta__tags dd span + span::before { content: "·"; margin: 0 var(--space-3); color: var(--border-strong); }
@@ -85,8 +83,6 @@ a.tp-related__card:hover { border-color: var(--purple, #6c4cf1); box-shadow: 0 8
 .tp-related__card span { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-secondary); }
 .tp-related__card strong { font-size: 1.125rem; }
 
-/* topics row: soft purple, same family as the tab bar */
-.tp-meta > .tp-meta__tags { background: var(--tp-topics-bg, #f4f1ff); }
 
 /* images inside the lesson text */
 .tp-fig { display: block; width: fit-content; max-width: 100%; margin: var(--space-4) 0 var(--space-6); text-decoration: none; }

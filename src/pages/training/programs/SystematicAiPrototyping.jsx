@@ -1,4 +1,4 @@
-import { ProgramShell, MentorSection, TestimonialSection, Curriculum, LeadForm } from '../../../components/program'
+import { ProgramShell, MentorSection, TestimonialSection, Curriculum, LeadForm } from '../../../../design-system/components/program'
 import { sessions } from './systematic-ai-prototyping.sessions.js'
 
 const FORMATS = [

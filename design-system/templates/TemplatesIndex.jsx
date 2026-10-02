@@ -1,10 +1,10 @@
 import { PortfolioLayout, PageHeader } from '../components/layout'
 import CaseCard from '../components/CaseCard.jsx'
 
-// To add a template: build it under src/templates/<name>/, then add a card here.
+// To add a template: build it under design-system/templates/<name>/, then add a card here.
 const templates = [
   {
-    href: '/templates/program.html',
+    href: '/design-system/program.html',
     cover: '/portfolio/work/images/cover/Cover - Go1 Content Curation.png',
     coverAlt: '',
     badge: 'Template',
@@ -15,7 +15,7 @@ const templates = [
     newTab: false,
   },
   {
-    href: '/templates/card-list.html',
+    href: '/design-system/card-list.html',
     cover: '/portfolio/work/images/cover/Cover - Pinbus.png',
     coverAlt: '',
     badge: 'Template',
@@ -26,7 +26,7 @@ const templates = [
     newTab: false,
   },
   {
-    href: '/templates/resource.html',
+    href: '/design-system/resource.html',
     cover: '/portfolio/work/images/cover/Cover - Refer Plus.png',
     coverAlt: '',
     badge: 'Template',
@@ -37,7 +37,7 @@ const templates = [
     newTab: false,
   },
   {
-    href: '/templates/text.html',
+    href: '/design-system/text.html',
     cover: '/portfolio/work/images/cover/Cover-LeapXpert.png',
     coverAlt: '',
     badge: 'Template',
