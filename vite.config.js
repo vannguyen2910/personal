@@ -68,6 +68,7 @@ export default defineConfig({
         programMidToSenior: resolve(__dirname, 'training/programs/mid-to-senior.html'),
         programSystematicAi: resolve(__dirname, 'training/programs/systematic-ai-prototyping.html'),
         programUiUxFundamentals: resolve(__dirname, 'training/programs/ui-ux-fundamentals.html'),
+        programAiDesignWorkflow: resolve(__dirname, 'training/programs/ai-design-workflow.html'),
       },
     },
   },

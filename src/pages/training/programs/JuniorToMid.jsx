@@ -126,7 +126,7 @@ function CurriculumSection() {
         <div className="wrap">
           <div className="curriculum-head reveal">
             <span className="kicker"><span className="lang-en">The curriculum</span><span className="lang-vi">Giáo trình</span></span>
-            <h2 style={{ marginTop: '1rem' }}><span className="lang-en">What each<br/><em style={{ fontStyle: 'normal', color: 'var(--coral)' }}>session builds.</em></span><span className="lang-vi">Mỗi buổi học,<br/><em style={{ fontStyle: 'normal', color: 'var(--coral)' }}>bạn xây dựng được gì.</em></span></h2>
+            <h2 style={{ marginTop: '1rem' }}><span className="lang-en">What you'll<br/><em style={{ fontStyle: 'normal', color: 'var(--coral)' }}>learn.</em></span><span className="lang-vi">Bạn sẽ<br/><em style={{ fontStyle: 'normal', color: 'var(--coral)' }}>học gì.</em></span></h2>
             <p className="curriculum-head-note"><span className="material-symbols-rounded" aria-hidden="true">wand_stars</span> <span className="lang-en">You won't learn AI as a bonus skill. You'll learn to think with it, built into how you research, strategize, and design from the first session to the last.</span><span className="lang-vi">Bạn sẽ không học AI như một kỹ năng phụ. Bạn sẽ học cách tư duy cùng AI, được lồng vào cách bạn nghiên cứu, xây dựng chiến lược và thiết kế, từ buổi đầu tiên đến buổi cuối cùng.</span></p>
           </div>
 

@@ -136,7 +136,7 @@ function CurriculumSection() {
         <div className="wrap">
           <div className="curriculum-head reveal">
             <span className="kicker"><span className="lang-en">The curriculum</span><span className="lang-vi">Nội dung khoá học</span></span>
-            <h2 style={{ marginTop: '1rem' }}><span className="lang-en">What you build,<br/><em style={{ fontStyle: 'normal', color: 'var(--coral)' }}>session by session.</em></span><span className="lang-vi">Mỗi buổi,<br/><em style={{ fontStyle: 'normal', color: 'var(--coral)' }}>bạn xây dựng được gì.</em></span></h2>
+            <h2 style={{ marginTop: '1rem' }}><span className="lang-en">What you'll<br/><em style={{ fontStyle: 'normal', color: 'var(--coral)' }}>learn.</em></span><span className="lang-vi">Bạn sẽ<br/><em style={{ fontStyle: 'normal', color: 'var(--coral)' }}>học gì.</em></span></h2>
           </div>
 
           <Curriculum sessions={sessions} />

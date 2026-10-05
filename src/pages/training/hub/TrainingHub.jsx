@@ -178,6 +178,26 @@ function Programs() {
                 <span className="program-card-link">View program</span>
               </div>
             </a>
+            <a href="/training/programs/ai-design-workflow.html" className="program-card animate d5">
+              <div className="program-card-visual" aria-hidden="true">
+                <span className="pc-ring"></span>
+                <span className="pc-steps">
+                  <span className="pc-step"></span>
+                  <span className="pc-step"></span>
+                  <span className="pc-step"></span>
+                </span>
+                <svg className="ppc-spark" viewBox="0 0 24 24" width="12" height="12"><path d="M12 0 C12 6 14 10 20 12 C14 14 12 18 12 24 C12 18 10 14 4 12 C10 10 12 6 12 0 Z"/></svg>
+              </div>
+              <div className="program-card-body">
+                <div className="program-card-tags">
+                  <span className="program-card-tag">Group · 7 to 8</span>
+                  <span className="program-card-level is-advanced">Mid / Senior</span>
+                </div>
+                <h3>AI Design Workflow for UI/UX Product Designer</h3>
+                <p>A repeatable AI workflow from business question to tested prototype, with every step reviewed. 10 sessions, weekly, over about 2.5 months.</p>
+                <span className="program-card-link">View program</span>
+              </div>
+            </a>
           </div>
         </div>
       </div>
