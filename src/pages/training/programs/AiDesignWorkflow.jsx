@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import { ProgramShell, MentorSection, TestimonialSection, Curriculum, LeadForm } from '../../../../design-system/components/program'
 import { sessions } from './ai-design-workflow.sessions.js'
 
@@ -31,7 +32,7 @@ function Hero() {
               <span><span><em className="it">AI Design</em></span></span>
               <span><span><span className="mark"><span>Workflow</span></span></span></span>
             </h1>
-            <p className="hero-desc"><span className="lang-en">A repeatable way to work with AI, from the business question to a tested, handoff-ready prototype. Every step's output feeds the next, and every output passes a review gate.</span><span className="lang-vi">Một cách làm việc với AI có thể lặp lại, từ business questions đến prototype đã test và sẵn sàng handoff. Output của mỗi bước là input của bước sau, và mỗi output đều qua 1 gate kiểm tra.</span></p>
+            <p className="hero-desc"><span className="lang-en">A repeatable way to work with AI, from the business question to a tested, handoff-ready prototype. Every step's output feeds the next, and every output passes a review gate.</span><span className="lang-vi">Một cách làm việc với AI lặp lại được, từ business question đến prototype đã test và sẵn sàng handoff. Output của mỗi bước là input của bước sau, và mỗi output đều qua một gate kiểm tra.</span></p>
             <a href="#mentor" className="hero-mentor">
               <img src="/training/assets/avatar.png" alt="Winnie Nguyen" className="hero-mentor-avatar"/>
               <span className="hero-mentor-text">
@@ -44,7 +45,7 @@ function Hero() {
               <a href="#curriculum" className="btn btn-ghost"><span className="lang-en">View Curriculum</span><span className="lang-vi">Xem nội dung khoá học</span></a>
             </div>
             <div className="hero-stats">
-              <div className="hero-stat"><strong>10</strong><span><span className="lang-en">Sessions · 90 min weekly</span><span className="lang-vi">Buổi học · 90 phút/tuần</span><span className="hero-stat-sub"><span className="lang-en">~2.5 months</span><span className="lang-vi">~2,5 tháng</span></span></span></div>
+              <div className="hero-stat"><strong>12</strong><span><span className="lang-en">Sessions · 90 min each</span><span className="lang-vi">Buổi học · 90 phút/buổi</span><span className="hero-stat-sub"><span className="lang-en">2 a week, 6 weeks</span><span className="lang-vi">2 buổi/tuần, 6 tuần</span></span></span></div>
               <div className="hero-stat"><strong>7–8</strong><span><span className="lang-en">Designers per cohort</span><span className="lang-vi">Designer mỗi lớp</span></span></div>
               <div className="hero-stat"><strong>1</strong><span><span className="lang-en">Your own real case, start to finish</span><span className="lang-vi">Case thật của bạn, từ đầu đến cuối</span></span></div>
             </div>
@@ -77,10 +78,10 @@ function Pain() {
         <p className="pain-headline reveal"><span className="lang-en">Using AI is easy. <em>Trusting what comes out is the hard part.</em></span><span className="lang-vi">Dùng AI thì dễ. <em>Tin được kết quả AI trả về mới là phần khó.</em></span></p>
 
         <ul className="pain-list">
-          <li className="reveal reveal-d1"><em>01</em><span><span className="lang-en">You wait for the PRD, then turn it into screens. If AI can do that part, where does that leave you?</span><span className="lang-vi">Bạn chờ PRD, rồi biến nó thành design. Nếu AI làm được phần đó, vị trí của bạn ở đâu?</span></span></li>
-          <li className="reveal reveal-d2"><em>02</em><span><span className="lang-en">You use AI here and there, but each task starts from zero. Nothing carries over to the next step.</span><span className="lang-vi">Bạn dùng AI chỗ này chỗ kia, nhưng mỗi task lại bắt đầu từ số 0. Không có gì carry over sang bước sau.</span></span></li>
-          <li className="reveal reveal-d3"><em>03</em><span><span className="lang-en">AI summaries sound confident. You are not sure which parts are real, and you cannot trace them back to a source.</span><span className="lang-vi">AI Summaries nghe rất tự tin. Bạn không chắc phần nào là thật, và không truy ngược được về source.</span></span></li>
-          <li className="reveal reveal-d4"><em>04</em><span><span className="lang-en">When a stakeholder asks "why this design?", the answer is scattered across chats and files.</span><span className="lang-vi">Khi stakeholder hỏi "sao lại design thế này?", câu trả lời nằm rải rác trong các cuộc chat và file.</span></span></li>
+          <li className="reveal reveal-d1"><em>01</em><span><span className="lang-en">You wait for the PRD, then turn it into screens. If AI can do that part, where does that leave you?</span><span className="lang-vi">Bạn chờ PRD rồi biến nó thành design. Nếu AI làm được phần đó, bạn đứng ở đâu?</span></span></li>
+          <li className="reveal reveal-d2"><em>02</em><span><span className="lang-en">You use AI here and there, but each task starts from zero. Nothing carries over to the next step.</span><span className="lang-vi">Bạn dùng AI chỗ này chỗ kia, nhưng task nào cũng bắt đầu lại từ đầu. Kết quả của bước trước không đi tiếp sang bước sau.</span></span></li>
+          <li className="reveal reveal-d3"><em>03</em><span><span className="lang-en">AI summaries sound confident. You are not sure which parts are real, and you cannot trace them back to a source.</span><span className="lang-vi">Bản tóm tắt của AI nghe rất tự tin. Bạn không chắc phần nào đúng, và không truy ngược được về nguồn.</span></span></li>
+          <li className="reveal reveal-d4"><em>04</em><span><span className="lang-en">When a stakeholder asks "why this design?", the answer is scattered across chats and files.</span><span className="lang-vi">Khi stakeholder hỏi "sao lại thiết kế thế này?", câu trả lời nằm rải rác trong các cuộc chat và file.</span></span></li>
         </ul>
 
         <p className="pain-insight reveal"><span className="lang-en">AI won't replace designers. <em>Designers who run a clear workflow with AI will replace those who don't.</em></span><span className="lang-vi">AI sẽ không thay thế designer. <em>Designer có workflow rõ ràng với AI sẽ thay thế người không có.</em></span></p>
@@ -101,11 +102,52 @@ function Who() {
           <div className="reveal reveal-d2">
             <ul className="for-you-list">
               <li><span className="lang-en">You are a mid or senior UI/UX product designer with solid design foundations</span><span className="lang-vi">Bạn là UI/UX product designer mid hoặc senior với nền tảng thiết kế vững</span></li>
-              <li><span className="lang-en">You want to move upstream and help shape the requirement, not just receive it</span><span className="lang-vi">Bạn muốn tham gia sớm hơn và cùng shape requirement, không chỉ nhận nó</span></li>
-              <li><span className="lang-en">You have a real case to work on (or we provide one)</span><span className="lang-vi">Bạn có 1 case thật để làm (hoặc mình cung cấp)</span></li>
+              <li><span className="lang-en">You want to move upstream and help shape the requirement, not just receive it</span><span className="lang-vi">Bạn muốn tham gia sớm hơn và cùng định hình requirement, không chỉ nhận nó</span></li>
+              <li><span className="lang-en">You have a real case to work on (or we provide one)</span><span className="lang-vi">Bạn có một case thật để làm (hoặc mình cung cấp)</span></li>
+              <li><span className="lang-en">You do not need to code. The AI coding tool builds the prototype, you direct and check it</span><span className="lang-vi">Bạn không cần biết code. AI coding tool dựng prototype, bạn chỉ đạo và kiểm tra</span></li>
             </ul>
           </div>
         </div>
+      </div>
+    </section>
+  )
+}
+
+function WhyNow() {
+  const stats = [
+    {
+      num: '91%',
+      en: 'of designers use AI for design work at least weekly, up from 54% a year earlier.',
+      vi: 'designer dùng AI cho công việc design ít nhất mỗi tuần, tăng từ 54% một năm trước.',
+    },
+    {
+      num: '50%',
+      en: 'have shipped AI-generated code to production. The lines between roles are blurring.',
+      vi: 'đã ship code do AI tạo lên production. Ranh giới giữa các vai trò đang mờ đi.',
+    },
+    {
+      num: '40%',
+      en: 'say PMs and engineers now do more design work than before.',
+      vi: 'cho biết PM và engineer làm nhiều việc design hơn trước.',
+    },
+  ]
+  return (
+    <section className="who why-now" id="why-now">
+      <div className="wrap">
+        <div className="reveal">
+          <span className="kicker"><span className="lang-en">Why now</span><span className="lang-vi">Vì sao lúc này</span></span>
+          <p className="who-headline" style={{ marginTop: '1.2rem' }}><span className="lang-en">AI use is already <span className="mark"><span>everywhere.</span></span></span><span className="lang-vi">AI đã được dùng <span className="mark"><span>ở khắp nơi.</span></span></span></p>
+        </div>
+
+        <div className="why-now-stats">
+          {stats.map((st, i) => (
+            <div className={`why-now-stat reveal reveal-d${i + 1}`} key={st.num}>
+              <strong className="why-now-num">{st.num}</strong>
+              <p><span className="lang-en">{st.en}</span><span className="lang-vi">{st.vi}</span></p>
+            </div>
+          ))}
+        </div>
+        <p className="why-now-source reveal"><span className="lang-en">Source: <a href="https://designerfund.com/blog/ai-in-design-2026" target="_blank" rel="noopener noreferrer">AI in Design 2026</a>, Designer Fund and Foundation Capital. Survey of 900+ designers, self-reported.</span><span className="lang-vi">Nguồn: <a href="https://designerfund.com/blog/ai-in-design-2026" target="_blank" rel="noopener noreferrer">AI in Design 2026</a>, Designer Fund và Foundation Capital. Khảo sát hơn 900 designer, người trả lời tự khai báo.</span></p>
       </div>
     </section>
   )
@@ -120,7 +162,133 @@ function Walkaway() {
             <span className="material-symbols-rounded" aria-hidden="true">wand_stars</span>
             <span className="lang-en">What you walk away with</span><span className="lang-vi">Học xong bạn làm được gì</span>
           </span>
-          <p className="walkaway-headline"><span className="lang-en">A <span className="mark"><span>repeatable workflow</span></span> and an <span className="mark"><span>Experience Hub</span></span> that links every decision to its evidence.</span><span className="lang-vi">Một <span className="mark"><span>workflow lặp lại được</span></span> và 1 <span className="mark"><span>Experience Hub</span></span> kết nối mỗi decision với evidence tương ứng.</span></p>
+          <p className="walkaway-headline"><span className="lang-en">A <span className="mark"><span>repeatable workflow</span></span> and an <span className="mark"><span>Knowledge Hub</span></span> that links every decision to its evidence.</span><span className="lang-vi">Một <span className="mark"><span>workflow lặp lại được</span></span> và một <span className="mark"><span>Knowledge Hub</span></span> kết nối mỗi decision với evidence tương ứng.</span></p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+const OUTCOMES = [
+  {
+    file: 'knowledge-hub-overview',
+    tab: { en: 'Hub overview', vi: 'Hub: tổng quan' },
+    w: 2000, h: 1120,
+    title: { en: 'Knowledge Hub: overview', vi: 'Knowledge Hub: tổng quan' },
+    desc: {
+      en: 'Every opportunity, hypothesis, decision and gate in one place, with what is still missing.',
+      vi: 'Mọi opportunity, hypothesis, decision và gate ở một chỗ, kèm những phần còn thiếu.',
+    },
+    alt: { en: 'Overview page of a Knowledge Hub showing counts of opportunities, hypotheses and decisions, and the status of four gates', vi: 'Trang tổng quan của Knowledge Hub với số lượng opportunity, hypothesis, decision và trạng thái bốn gate' },
+  },
+  {
+    file: 'knowledge-hub-insights',
+    tab: { en: 'Hub insights', vi: 'Hub: insights' },
+    w: 2000, h: 1115,
+    title: { en: 'Knowledge Hub: insights', vi: 'Knowledge Hub: insights' },
+    desc: {
+      en: 'Opportunities, hypotheses and decisions linked to each other, so any decision traces back to its reason.',
+      vi: 'Opportunity, hypothesis và decision liên kết với nhau, nên decision nào cũng truy ngược được về lý do.',
+    },
+    alt: { en: 'Insights page of a Knowledge Hub with opportunity and hypothesis cards', vi: 'Trang Insights của Knowledge Hub với các thẻ opportunity và hypothesis' },
+  },
+  {
+    file: 'knowledge-hub-work',
+    tab: { en: 'Hub documents', vi: 'Hub: tài liệu' },
+    w: 2000, h: 1132,
+    title: { en: 'Knowledge Hub: work documents', vi: 'Knowledge Hub: tài liệu công việc' },
+    desc: {
+      en: 'Research, personas and the problem brief by stage, each marked Draft or Verified.',
+      vi: 'Research, persona và problem brief theo từng stage, mỗi tài liệu đánh dấu Draft hoặc Verified.',
+    },
+    alt: { en: 'Work page of a Knowledge Hub listing documents by stage with Draft and Verified labels', vi: 'Trang Work của Knowledge Hub liệt kê tài liệu theo stage với nhãn Draft và Verified' },
+  },
+  {
+    file: 'information-architecture',
+    tab: { en: 'Information architecture', vi: 'Information architecture' },
+    w: 2000, h: 847,
+    title: { en: 'Information architecture', vi: 'Information architecture' },
+    desc: {
+      en: 'The structure of the product, with the riskiest assumption marked for testing.',
+      vi: 'Cấu trúc của sản phẩm, kèm giả định rủi ro nhất được đánh dấu để đem đi test.',
+    },
+    alt: { en: 'Information architecture diagram of an app with entry, hub and content pillars', vi: 'Sơ đồ information architecture của một app với phần vào app, hub và các nhóm nội dung' },
+  },
+  {
+    file: 'user-flow-swimlane',
+    tab: { en: 'User flow', vi: 'User flow' },
+    w: 2000, h: 1361,
+    title: { en: 'User flow', vi: 'User flow' },
+    desc: {
+      en: 'A swimlane flow showing who does what, from arrival to meeting a local in person.',
+      vi: 'Luồng swimlane cho thấy ai làm gì, từ lúc đến nơi đến khi gặp người địa phương.',
+    },
+    alt: { en: 'Swimlane user flow with lanes for traveler, the app, a local and a companion', vi: 'User flow dạng swimlane với các làn: du khách, app, người địa phương và bạn đồng hành' },
+  },
+  {
+    file: 'prototype-welcome-screen',
+    tab: { en: 'Prototype', vi: 'Prototype' },
+    w: 2000, h: 1141,
+    title: { en: 'Working prototype', vi: 'Prototype chạy được' },
+    desc: {
+      en: 'The first screen of a prototype built with an AI coding tool from your own design rules.',
+      vi: 'Màn hình đầu của prototype dựng bằng AI coding tool từ quy tắc design của chính bạn.',
+    },
+    alt: { en: 'First screen of a mobile travel app prototype', vi: 'Màn hình đầu của prototype app du lịch trên điện thoại' },
+  },
+]
+
+function Outcomes() {
+  const trackRef = useRef(null)
+  const [pos, setPos] = useState({ atStart: true, atEnd: false })
+  const src = (file) => `/training/assets/ai-design-workflow/${file}.webp`
+
+  const update = () => {
+    const el = trackRef.current
+    if (!el) return
+    setPos({ atStart: el.scrollLeft < 4, atEnd: el.scrollLeft + el.clientWidth >= el.scrollWidth - 4 })
+  }
+  useEffect(() => {
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
+  const go = (dir) => {
+    const el = trackRef.current
+    if (el) el.scrollBy({ left: dir * el.clientWidth, behavior: 'smooth' })
+  }
+
+  return (
+    <section className="outcomes" id="outcomes">
+      <div className="wrap">
+        <div className="outcomes-head reveal">
+          <div>
+            <span className="kicker"><span className="lang-en">Example outcomes</span><span className="lang-vi">Ví dụ kết quả</span></span>
+            <p className="who-headline" style={{ marginTop: '1.2rem' }}><span className="lang-en">What a finished case <span className="mark"><span>looks like.</span></span></span><span className="lang-vi">Một case hoàn chỉnh <span className="mark"><span>trông thế này.</span></span></span></p>
+            <p className="outcomes-lead"><span className="lang-en">From the Travel Buddy demo case, built with this workflow.</span><span className="lang-vi">Trích từ case mẫu Travel Buddy, làm theo đúng workflow của khoá.</span></p>
+          </div>
+          <div className="outcomes-nav">
+            <button type="button" className="outcomes-arrow" onClick={() => go(-1)} disabled={pos.atStart} aria-label="Previous">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+            </button>
+            <button type="button" className="outcomes-arrow" onClick={() => go(1)} disabled={pos.atEnd} aria-label="Next">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div className="outcomes-track reveal" ref={trackRef} onScroll={update} tabIndex={0} aria-label="Example outcomes">
+          {OUTCOMES.map((o) => (
+            <figure className="outcome-card" key={o.file}>
+              <a href={src(o.file)} target="_blank" rel="noopener noreferrer" className="outcome-media">
+                <img src={src(o.file)} width={o.w} height={o.h} loading="lazy" alt={o.alt.en} />
+              </a>
+              <figcaption>
+                <strong><span className="lang-en">{o.title.en}</span><span className="lang-vi">{o.title.vi}</span></strong>
+                <span><span className="lang-en">{o.desc.en}</span><span className="lang-vi">{o.desc.vi}</span></span>
+              </figcaption>
+            </figure>
+          ))}
         </div>
       </div>
     </section>
@@ -161,16 +329,16 @@ function Pricing() {
               <div className="pricing-price pricing-price-tba"><span className="lang-en">To be announced</span><span className="lang-vi">Sẽ công bố</span></div>
 
               <div className="pricing-facts">
-                <div className="pricing-fact"><div className="pricing-fact-num">10</div><div className="pricing-fact-label"><span className="lang-en">Sessions</span><span className="lang-vi">Buổi học</span></div></div>
-                <div className="pricing-fact"><div className="pricing-fact-num"><span className="lang-en">~2.5 mo</span><span className="lang-vi">~2,5 tháng</span></div><div className="pricing-fact-label"><span className="lang-en">Duration</span><span className="lang-vi">Thời lượng</span></div></div>
-                <div className="pricing-fact"><div className="pricing-fact-num"><span className="lang-en">Weekly</span><span className="lang-vi">Hàng tuần</span></div><div className="pricing-fact-label"><span className="lang-en">Cadence</span><span className="lang-vi">Tần suất</span></div></div>
+                <div className="pricing-fact"><div className="pricing-fact-num">12</div><div className="pricing-fact-label"><span className="lang-en">Sessions</span><span className="lang-vi">Buổi học</span></div></div>
+                <div className="pricing-fact"><div className="pricing-fact-num"><span className="lang-en">6 weeks</span><span className="lang-vi">6 tuần</span></div><div className="pricing-fact-label"><span className="lang-en">Duration</span><span className="lang-vi">Thời lượng</span></div></div>
+                <div className="pricing-fact"><div className="pricing-fact-num"><span className="lang-en">2 a week</span><span className="lang-vi">2 buổi/tuần</span></div><div className="pricing-fact-label"><span className="lang-en">Cadence</span><span className="lang-vi">Tần suất</span></div></div>
                 <div className="pricing-fact"><div className="pricing-fact-num"><span className="lang-en">90 min</span><span className="lang-vi">90 phút</span></div><div className="pricing-fact-label"><span className="lang-en">Per session</span><span className="lang-vi">Mỗi buổi</span></div></div>
               </div>
 
               <div className="pricing-features">
                 <div className="pricing-feature">
                   <span className="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 13c0-3 2.5-5 6-5s6 2 6 5M8 8a3 3 0 100-6 3 3 0 000 6z"/></svg></span>
-                  <div><div className="pricing-feature-title"><span className="lang-en">1:1 Support</span><span className="lang-vi">Đồng hành 1:1</span></div><div className="pricing-feature-desc"><span className="lang-en">Throughout all 10 sessions.</span><span className="lang-vi">Xuyên suốt cả 10 buổi.</span></div></div>
+                  <div><div className="pricing-feature-title"><span className="lang-en">1:1 Support</span><span className="lang-vi">Đồng hành 1:1</span></div><div className="pricing-feature-desc"><span className="lang-en">Throughout all 12 sessions.</span><span className="lang-vi">Xuyên suốt cả 12 buổi.</span></div></div>
                 </div>
                 <div className="pricing-feature">
                   <span className="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 13l3-9 3 9M4.5 9.5h3M9 13l3-9 3 9"/></svg></span>
@@ -178,7 +346,7 @@ function Pricing() {
                 </div>
                 <div className="pricing-feature">
                   <span className="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 13c0-3 2.5-5 6-5s6 2 6 5M8 8a3 3 0 100-6 3 3 0 000 6z"/></svg></span>
-                  <div><div className="pricing-feature-title"><span className="lang-en">Direct Feedback</span><span className="lang-vi">Phản hồi trực tiếp</span></div><div className="pricing-feature-desc"><span className="lang-en">On your own workflow and Experience Hub.</span><span className="lang-vi">Trên workflow và Experience Hub của bạn.</span></div></div>
+                  <div><div className="pricing-feature-title"><span className="lang-en">Direct Feedback</span><span className="lang-vi">Phản hồi trực tiếp</span></div><div className="pricing-feature-desc"><span className="lang-en">On your own workflow and Knowledge Hub.</span><span className="lang-vi">Trên workflow và Knowledge Hub của bạn.</span></div></div>
                 </div>
                 <div className="pricing-feature">
                   <span className="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2.5" y="3" width="11" height="10.5" rx="1.5"/><path d="M2.5 6h11M5.5 1.5v3M10.5 1.5v3"/></svg></span>
@@ -195,12 +363,12 @@ function Pricing() {
                 <span className="pricing-badge"><span className="lang-en">Best Value</span><span className="lang-vi">Tiết kiệm nhất</span></span>
               </div>
               <div className="pricing-price pricing-price-tba"><span className="lang-en">To be announced</span><span className="lang-vi">Sẽ công bố</span></div>
-              <p className="pricing-total"><span className="lang-en">Per person</span><span className="lang-vi">Mỗi người</span> <span className="pricing-total-label"><span className="lang-en">· groups of 7–8</span><span className="lang-vi">· nhóm 7–8 người</span></span></p>
+              <p className="pricing-total"><span className="lang-en">Per person</span><span className="lang-vi">Mỗi người</span> <span className="pricing-total-label"><span className="lang-en">· groups of 7–8</span><span className="lang-vi">· nhóm 7 đến 8 người</span></span></p>
 
               <div className="pricing-facts">
-                <div className="pricing-fact"><div className="pricing-fact-num">10</div><div className="pricing-fact-label"><span className="lang-en">Sessions</span><span className="lang-vi">Buổi học</span></div></div>
-                <div className="pricing-fact"><div className="pricing-fact-num"><span className="lang-en">~2.5 mo</span><span className="lang-vi">~2,5 tháng</span></div><div className="pricing-fact-label"><span className="lang-en">Duration</span><span className="lang-vi">Thời lượng</span></div></div>
-                <div className="pricing-fact"><div className="pricing-fact-num"><span className="lang-en">Weekly</span><span className="lang-vi">Hàng tuần</span></div><div className="pricing-fact-label"><span className="lang-en">Cadence</span><span className="lang-vi">Tần suất</span></div></div>
+                <div className="pricing-fact"><div className="pricing-fact-num">12</div><div className="pricing-fact-label"><span className="lang-en">Sessions</span><span className="lang-vi">Buổi học</span></div></div>
+                <div className="pricing-fact"><div className="pricing-fact-num"><span className="lang-en">6 weeks</span><span className="lang-vi">6 tuần</span></div><div className="pricing-fact-label"><span className="lang-en">Duration</span><span className="lang-vi">Thời lượng</span></div></div>
+                <div className="pricing-fact"><div className="pricing-fact-num"><span className="lang-en">2 a week</span><span className="lang-vi">2 buổi/tuần</span></div><div className="pricing-fact-label"><span className="lang-en">Cadence</span><span className="lang-vi">Tần suất</span></div></div>
                 <div className="pricing-fact"><div className="pricing-fact-num"><span className="lang-en">90 min</span><span className="lang-vi">90 phút</span></div><div className="pricing-fact-label"><span className="lang-en">Per session</span><span className="lang-vi">Mỗi buổi</span></div></div>
               </div>
 
@@ -208,14 +376,14 @@ function Pricing() {
                 <span className="group-cohort-note-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1.5 13c0-2.5 2-4 4-4s4 1.5 4 4M5.5 6.5a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5zM9.7 5.2c.3-.1.6-.2 1-.2 2 0 4 1.5 4 4M10.8 2.3c.9.2 1.5 1 1.5 1.9"/></svg></span>
                 <div>
                   <div className="group-cohort-note-title"><span className="lang-en">Building your own cohort</span><span className="lang-vi">Tự rủ nhóm cùng học</span></div>
-                  <div className="group-cohort-note-body"><span className="lang-en">Group training starts once there's a full cohort, so it may take a little longer to kick off than 1:1. If you know a few designers who'd want this too, bring them with you and I'll take it from there.</span><span className="lang-vi">Học nhóm chỉ bắt đầu khi đã đủ người, nên có thể mất thêm thời gian hơn so với học 1:1. Nếu bạn biết vài designer khác cũng đang cần điều này, hãy rủ họ cùng đăng ký. Phần còn lại để mình lo.</span></div>
+                  <div className="group-cohort-note-body"><span className="lang-en">Group training starts once there's a full cohort, so it may take a little longer to kick off than 1:1. If you know a few designers who'd want this too, bring them with you and I'll take it from there.</span><span className="lang-vi">Học nhóm chỉ bắt đầu khi đã đủ người, nên có thể mất thêm thời gian so với học 1:1. Nếu bạn biết vài designer khác cũng cần điều này, hãy rủ họ cùng đăng ký. Phần còn lại để mình lo.</span></div>
                 </div>
               </div>
 
               <div className="pricing-features">
                 <div className="pricing-feature">
                   <span className="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 13l3-9 3 9M4.5 9.5h3M9 13l3-9 3 9"/></svg></span>
-                  <div><div className="pricing-feature-title"><span className="lang-en">Same Content</span><span className="lang-vi">Cùng nội dung</span></div><div className="pricing-feature-desc"><span className="lang-en">10 sessions, learned in a group of 7–8.</span><span className="lang-vi">10 buổi, học theo nhóm 7–8 người.</span></div></div>
+                  <div><div className="pricing-feature-title"><span className="lang-en">Same Content</span><span className="lang-vi">Cùng nội dung</span></div><div className="pricing-feature-desc"><span className="lang-en">12 sessions, learned in a group of 7–8.</span><span className="lang-vi">12 buổi, học theo nhóm 7 đến 8 người.</span></div></div>
                 </div>
                 <div className="pricing-feature">
                   <span className="pricing-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1.5 13c0-2.5 2-4 4-4s4 1.5 4 4M5.5 6.5a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5zM9.7 5.2c.3-.1.6-.2 1-.2 2 0 4 1.5 4 4M10.8 2.3c.9.2 1.5 1 1.5 1.9"/></svg></span>
@@ -247,8 +415,8 @@ function Closing() {
         <div className="closing-grid">
           <div className="reveal">
             <span className="kicker"><span className="lang-en">Ready to start?</span><span className="lang-vi">Sẵn sàng bắt đầu?</span></span>
-            <h2 style={{ marginTop: '1rem' }}><span className="lang-en">Ready to run AI like a workflow?<br/><em style={{ fontStyle: 'normal', color: 'var(--lime)' }}>Bring a real case.</em></span><span className="lang-vi">Sẵn sàng dùng AI như 1 workflow chưa?<br/><em style={{ fontStyle: 'normal', color: 'var(--lime)' }}>Mang theo 1 case thật.</em></span></h2>
-            <p style={{ marginTop: '1rem', fontSize: '1.05rem', color: 'rgba(245,239,226,.75)', maxWidth: '38ch' }}><span className="lang-en">We will take it from the business question to a tested prototype together.</span><span className="lang-vi">Cùng nhau đưa nó từ business questions đến prototype đã test.</span></p>
+            <h2 style={{ marginTop: '1rem' }}><span className="lang-en">Ready to run AI like a workflow?<br/><em style={{ fontStyle: 'normal', color: 'var(--lime)' }}>Bring a real case.</em></span><span className="lang-vi">Sẵn sàng dùng AI như một workflow chưa?<br/><em style={{ fontStyle: 'normal', color: 'var(--lime)' }}>Mang theo một case thật.</em></span></h2>
+            <p style={{ marginTop: '1rem', fontSize: '1.05rem', color: 'rgba(245,239,226,.75)', maxWidth: '38ch' }}><span className="lang-en">We will take it from the business question to a tested prototype together.</span><span className="lang-vi">Cùng nhau đưa nó từ business question đến prototype đã test.</span></p>
             <div className="closing-cta">
               <LeadForm subject="New inquiry: AI Design Workflow program" source="AI Design Workflow Program - Contact Form" formats={FORMATS} />
               <a href="/training/self-assessment.html" className="btn btn-ghost lead-form-secondary" style={{ borderColor: 'rgba(245,239,226,.4)', color: 'var(--cream)' }}>
@@ -274,7 +442,9 @@ export default function AiDesignWorkflow() {
       <Hero />
       <Pain />
       <Who />
+      <WhyNow />
       <Walkaway />
+      <Outcomes />
       <CurriculumSection />
       <Pricing />
       <MentorSection />
