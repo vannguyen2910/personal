@@ -5,7 +5,7 @@ import CaseCard from '../components/CaseCard.jsx'
 const templates = [
   {
     href: '/design-system/program.html',
-    cover: '/portfolio/work/images/cover/Cover - Go1 Content Curation.png',
+    cover: '/design-system/examples/covers/Cover - Go1 Content Curation.png',
     coverAlt: '',
     badge: 'Template',
     meta: 'Training',
@@ -16,7 +16,7 @@ const templates = [
   },
   {
     href: '/design-system/card-list.html',
-    cover: '/portfolio/work/images/cover/Cover - Pinbus.png',
+    cover: '/design-system/examples/covers/Cover - Pinbus.png',
     coverAlt: '',
     badge: 'Template',
     meta: 'Listing',
@@ -27,7 +27,7 @@ const templates = [
   },
   {
     href: '/design-system/resource.html',
-    cover: '/portfolio/work/images/cover/Cover - Refer Plus.png',
+    cover: '/design-system/examples/covers/Cover - Refer Plus.png',
     coverAlt: '',
     badge: 'Template',
     meta: 'Download',
@@ -38,7 +38,7 @@ const templates = [
   },
   {
     href: '/design-system/text.html',
-    cover: '/portfolio/work/images/cover/Cover-LeapXpert.png',
+    cover: '/design-system/examples/covers/Cover-LeapXpert.png',
     coverAlt: '',
     badge: 'Template',
     meta: 'Reading',

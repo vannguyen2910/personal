@@ -48,7 +48,7 @@ export default function ContactModal({
   id = 'contactModal',
   accent = 'purple',
   role = 'Senior Product Designer',
-  image = '/portfolio/images/headshot-square.jpg',
+  image = '/assets/images/brand/headshot-square.jpg',
   links = ['email', 'linkedin'],
   open,
   onClose,

@@ -50,11 +50,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         home: resolve(__dirname, 'index.html'),
-        portfolioHome: resolve(__dirname, 'portfolio/index.html'),
-        portfolioAbout: resolve(__dirname, 'portfolio/about.html'),
-        portfolioContact: resolve(__dirname, 'portfolio/contact.html'),
-        portfolioWork: resolve(__dirname, 'portfolio/work.html'),
-        portfolioGo1: resolve(__dirname, 'portfolio/work/go1.html'),
+        // Work (portfolio) pages are hidden from the site: their files stay in portfolio/
+        // and are not built. To publish them again, add their entries back here.
         designSystemIndex: resolve(__dirname, 'design-system/index.html'),
         designSystemProgram: resolve(__dirname, 'design-system/program.html'),
         designSystemCardList: resolve(__dirname, 'design-system/card-list.html'),

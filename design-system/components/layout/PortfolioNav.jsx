@@ -8,14 +8,11 @@ export default function PortfolioNav({ active, onContact }) {
   )
   return (
     <nav>
-      <a href="/portfolio/index.html" className="nav-logo">
-        <img src="/portfolio/images/logo-nav.svg" alt="Winnie Nguyen" />
+      <a href="/training/index.html" className="nav-logo">
+        <img src="/assets/images/brand/logo-nav.svg" alt="Winnie Nguyen" />
       </a>
       <div className="nav-links">
         <a href="/training/index.html">Training</a>
-        {link('work', '/portfolio/work.html', 'Work')}
-        {link('about', '/portfolio/about.html', 'About')}
-        <a href="/portfolio/files/Winnie-Nguyen-Resume.pdf" download>Resume</a>
         {onContact ? (
           <Button size="sm" className={active === 'contact' ? 'active' : ''} onClick={onContact}>Contact</Button>
         ) : (

@@ -45,7 +45,7 @@ export default function ProgramShell({ children, navVi }) {
 
   return (
     <ProgramContext.Provider value={value}>
-      <ContactModal accent="coral" role="UX Product Design Educator" image="/portfolio/images/headshot-square.jpg" open={contactOpen} onClose={() => setContactOpen(false)} />
+      <ContactModal accent="coral" role="UX Product Design Educator" image="/assets/images/brand/headshot-square.jpg" open={contactOpen} onClose={() => setContactOpen(false)} />
       <EnrollSuccessModal open={enrollOpen} onClose={() => setEnrollOpen(false)} />
       <ProgramNav navVi={navVi} />
       {children}

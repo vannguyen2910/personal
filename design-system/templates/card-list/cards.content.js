@@ -4,7 +4,7 @@ export const cards = [
   {
     category: 'Programs',
     href: '/design-system/program.html',
-    cover: '/portfolio/work/images/cover/Cover - Go1 Content Curation.png',
+    cover: '/design-system/examples/covers/Cover - Go1 Content Curation.png',
     coverAlt: 'Describe the image',
     badge: 'Open for enrolment',
     meta: '12 sessions · Weekly',
@@ -16,7 +16,7 @@ export const cards = [
   {
     category: 'Events',
     href: '/design-system/resource.html',
-    cover: '/portfolio/work/images/cover/Cover - Pinbus.png',
+    cover: '/design-system/examples/covers/Cover - Pinbus.png',
     coverAlt: 'Describe the image',
     badge: '12 Dec 2026',
     meta: 'Online · 90 min',
@@ -28,7 +28,7 @@ export const cards = [
   {
     category: 'Learning',
     href: '/design-system/resource.html',
-    cover: '/portfolio/work/images/cover/Cover - Refer Plus.png',
+    cover: '/design-system/examples/covers/Cover - Refer Plus.png',
     coverAlt: 'Describe the image',
     badge: null,
     meta: 'Lesson · 10 min read',
@@ -40,7 +40,7 @@ export const cards = [
   {
     category: 'Programs',
     href: '/design-system/resource.html',
-    cover: '/portfolio/work/images/cover/Cover - Pinbus.png',
+    cover: '/design-system/examples/covers/Cover - Pinbus.png',
     coverAlt: 'Describe the image',
     badge: null,
     meta: 'Short detail',
@@ -52,7 +52,7 @@ export const cards = [
   {
     category: 'Events',
     href: '/design-system/resource.html',
-    cover: '/portfolio/work/images/cover/Cover - Pinbus.png',
+    cover: '/design-system/examples/covers/Cover - Pinbus.png',
     coverAlt: 'Describe the image',
     badge: null,
     meta: 'Short detail',
@@ -64,7 +64,7 @@ export const cards = [
   {
     category: 'Learning',
     href: '/design-system/resource.html',
-    cover: '/portfolio/work/images/cover/Cover - Pinbus.png',
+    cover: '/design-system/examples/covers/Cover - Pinbus.png',
     coverAlt: 'Describe the image',
     badge: null,
     meta: 'Short detail',
@@ -76,7 +76,7 @@ export const cards = [
   {
     category: 'Learning',
     href: '/design-system/resource.html',
-    cover: '/portfolio/work/images/cover/Cover - Pinbus.png',
+    cover: '/design-system/examples/covers/Cover - Pinbus.png',
     coverAlt: 'Describe the image',
     badge: null,
     meta: 'Short detail',
@@ -88,7 +88,7 @@ export const cards = [
   {
     category: 'Programs',
     href: '/design-system/resource.html',
-    cover: '/portfolio/work/images/cover/Cover - Pinbus.png',
+    cover: '/design-system/examples/covers/Cover - Pinbus.png',
     coverAlt: 'Describe the image',
     badge: null,
     meta: 'Short detail',

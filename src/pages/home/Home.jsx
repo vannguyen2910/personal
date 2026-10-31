@@ -1,7 +1,7 @@
 function BrandMark() {
   return (
     <div className="brand-mark">
-      <img className="brand-mark__photo" src="/portfolio/images/headshot-square.jpg" alt="Winnie Nguyen" />
+      <img className="brand-mark__photo" src="/assets/images/brand/headshot-square.jpg" alt="Winnie Nguyen" />
       <div className="brand-mark__text">
         <div className="brand-mark__name">Winnie Nguyen</div>
         <div className="brand-mark__title">Senior Product Designer | UX Product Design Educator</div>
@@ -38,16 +38,6 @@ export default function Home() {
     <>
       <BrandMark />
       <div className="split-hero">
-        <SplitPanel
-          side="portfolio"
-          href="/portfolio/index.html"
-          image="/assets/images/work.jpg"
-          imageAlt="Illustration of a designer at a laptop, working with charts and data"
-          title="See the work"
-          tag="For recruiters & hiring managers"
-          description="Real case studies with process, decisions, and outcomes, plus résumé and contact details."
-          cta="View portfolio"
-        />
         <SplitPanel
           side="training"
           href="/training/index.html"
