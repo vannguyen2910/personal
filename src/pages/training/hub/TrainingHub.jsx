@@ -105,18 +105,23 @@ function Programs() {
             <p style={{ fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: '1.75' }}>Beyond 1:1 mentoring, these are structured programs built around your own real work.</p>
           </div>
           <div className="programs-grid">
-            <a href="/training/programs/ui-ux-fundamentals.html" className="program-card animate d1">
+            <a href="/training/programs/ai-design-workflow.html" className="program-card is-featured animate d1">
               <div className="program-card-visual" aria-hidden="true">
-                <span className="pc-ring"></span>
-                <span className="spc-core"></span>
+                <svg className="hero-stairs" viewBox="0 0 560 650">
+                  <path className="hs-line" d="M40 470H170V360H300V250H430V120" />
+                  <circle className="hs-dot" cx="430" cy="62" r="56" />
+                  <path className="hs-link" d="M105 500V540M235 390V540M365 280V540M440 280V540" />
+                  <rect className="hs-bar" x="0" y="540" width="560" height="52" rx="26" />
+                </svg>
               </div>
               <div className="program-card-body">
                 <div className="program-card-tags">
-                  <span className="program-card-tag">1:1 or Group</span>
-                  <span className="program-card-level is-beginner">Beginner</span>
+                  <span className="program-card-new">New</span>
+                  <span className="program-card-tag">Group · 5 per batch</span>
+                  <span className="program-card-level is-advanced">Mid / Senior</span>
                 </div>
-                <h3>UI/UX Design Fundamentals</h3>
-                <p>Your first real design process, built step by step, from problem to portfolio-ready case study. 12 sessions, weekly, over about 3 months.</p>
+                <h3>AI Design Workflow for Product Teams</h3>
+                <p>Build a Knowledge Hub as shared memory for AI, then run an end-to-end design workflow on one project with every step checked. 12 sessions over 7 weeks.</p>
                 <span className="program-card-link">View program</span>
               </div>
             </a>
@@ -175,26 +180,6 @@ function Programs() {
                 </div>
                 <h3>Systematic AI Prototyping for UX Product Designer</h3>
                 <p>Stop prompting screen by screen. Define your design system once, then let AI build consistently at any scale.</p>
-                <span className="program-card-link">View program</span>
-              </div>
-            </a>
-            <a href="/training/programs/ai-design-workflow.html" className="program-card animate d5">
-              <div className="program-card-visual" aria-hidden="true">
-                <span className="pc-ring"></span>
-                <span className="pc-steps">
-                  <span className="pc-step"></span>
-                  <span className="pc-step"></span>
-                  <span className="pc-step"></span>
-                </span>
-                <svg className="ppc-spark" viewBox="0 0 24 24" width="12" height="12"><path d="M12 0 C12 6 14 10 20 12 C14 14 12 18 12 24 C12 18 10 14 4 12 C10 10 12 6 12 0 Z"/></svg>
-              </div>
-              <div className="program-card-body">
-                <div className="program-card-tags">
-                  <span className="program-card-tag">Group · 5 per batch</span>
-                  <span className="program-card-level is-advanced">Mid / Senior</span>
-                </div>
-                <h3>AI Design Workflow for Product Teams</h3>
-                <p>Build a Knowledge Hub as shared memory for AI, then run an end-to-end design workflow on one project with every step checked. 12 sessions over 7 weeks.</p>
                 <span className="program-card-link">View program</span>
               </div>
             </a>
