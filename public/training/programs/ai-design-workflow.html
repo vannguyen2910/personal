@@ -13,7 +13,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://uxlevelup.com/training/programs/ai-design-workflow-assets/img/og-ai-design-workflow-2.png">
 <title>AI Design Workflow · UX Level Up</title>
-<meta name="description" content="Khóa 12 buổi trong 7 tuần cho các bạn đã có 2-3 năm làm trong team Product (PM, PD, BA, etc.): xây Knowledge Hub làm bộ nhớ cho AI và chạy một workflow thiết kế end-to-end trên một project trọn vẹn. Batch 1 chỉ có 5 bạn.">
+<meta name="description" content="Khóa 12 buổi trong 7 tuần cho các bạn đã có 2-3 năm làm trong team Product (PM, PD, BA, etc.): xây Knowledge Hub làm bộ nhớ cho AI và chạy một workflow thiết kế end-to-end trên một project trọn vẹn. Batch 2 chỉ có 8 bạn.">
 <link rel="icon" href="/training/programs/ai-design-workflow-assets/brand/logo/mark-app.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,20 +66,27 @@ section{padding:var(--section) 0 0}
 .hero{position:relative;min-height:100svh;background:var(--indigo);color:#fff;border-radius:0 0 calc(32px + var(--p,0)*72px) calc(32px + var(--p,0)*72px);transform:scale(calc(1 - var(--p,0)*.05));transform-origin:50% 0;overflow:hidden;display:flex;align-items:center;padding:112px 0 72px;z-index:1;will-change:transform}
 .hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(24px,5vw,72px);align-items:center}
 .hero-copy{transform:translateY(calc(var(--p,0)*-40px));opacity:calc(1 - var(--p,0)*.9)}
-.eb{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--chartreuse)}
-.eb i{width:9px;height:9px;border-radius:50%;background:var(--chartreuse);animation:pulse 1.8s infinite}
-.hero h1{font-size:clamp(2.6rem,6.4vw,5.2rem);font-weight:800;letter-spacing:-.035em;line-height:1.02;margin-top:20px;text-wrap:balance}
+.hero h1{font-size:clamp(2.6rem,6.4vw,5.2rem);font-weight:800;letter-spacing:-.035em;line-height:1.02;margin-top:0;text-wrap:balance}
 .hero h1 .hl{color:var(--chartreuse)}
 .tagline{margin-top:22px;font-size:clamp(1.15rem,2vw,1.5rem);font-weight:700;line-height:1.4;max-width:30ch;color:#ffffffe6}
-.lead{margin-top:14px;max-width:44ch;color:#ffffffb3}
+.lead{margin-top:14px;max-width:46ch;font-size:.95rem;color:#ffffffb3}
 .h-cta{margin-top:34px;display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px}
 .hprice{display:flex;flex-direction:column;line-height:1.35;font-size:.9rem;color:#ffffffb3}
 .hprice b{font-size:1.35rem;color:#fff;letter-spacing:-.01em}
 .hprice s{margin-left:6px}
-.stats3{margin-top:44px;display:flex;gap:clamp(20px,4vw,48px)}
-.stats3 div{display:flex;flex-direction:column}
-.stats3 b{font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-.04em;line-height:1}
-.stats3 span{font-size:.85rem;color:#ffffffb3;font-weight:700;margin-top:4px}
+@media(min-width:901px){.h-cta{flex-wrap:nowrap}}
+.hbatch{margin-top:32px;display:grid;grid-template-columns:auto minmax(0,1fr);max-width:640px;border:0;border-radius:20px;background:#ffffff17}
+.hb{display:flex;flex-direction:column;gap:4px;padding:14px 16px}
+.hb-t{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.hb+.hb{border-left:1.5px solid #ffffff26}
+.nw{white-space:nowrap}
+.hb .stamp{color:var(--ink)}
+.hb b{font-size:1.1rem;font-weight:800;line-height:1.25;color:#fff}
+.hb>span:last-child{font-size:.85rem;line-height:1.4;color:#ffffffcc}
+.hb.closed b,.hb.closed>span:last-child{color:#ffffff73}
+.hb.closed>span:last-child{text-decoration:line-through}
+.hb .stamp--closed{background:transparent;box-shadow:inset 0 0 0 1.5px #ffffff59;color:#ffffffa6}
+@media(max-width:560px){.hbatch{grid-template-columns:minmax(0,1fr)}.hb+.hb{border-left:0;border-top:1.5px solid #ffffff26}}
 .hero-art{position:relative;aspect-ratio:560/650;width:100%;max-width:560px;justify-self:end;transform:translateY(calc(var(--p,0)*60px))}
 .stairs{width:100%;height:100%;overflow:visible}
 .stairs .line{fill:none;stroke:var(--chartreuse);stroke-width:40;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.8s .5s var(--ease) forwards}
@@ -310,7 +317,8 @@ details[open]>.more-btn .ms{transform:rotate(45deg)}
 .batch .bt{display:flex;align-items:center;gap:12px;font-weight:800;font-size:.9rem}
 .batch b{display:block;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:800;letter-spacing:-.04em;line-height:1.1;margin-top:6px}
 .batch p{color:var(--muted)}
-.batch.off b{color:#14123a55}
+.batch.off b,.batch.closed b{color:#14123a55}
+.batch.closed b{text-decoration:line-through;text-decoration-thickness:.06em}
 .stamp{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border-radius:var(--r-pill);padding:4px 12px;background:var(--chartreuse)}
 .stamp--plain{background:transparent;box-shadow:inset 0 0 0 1.5px var(--line);color:var(--muted)}
 .sched-note{margin-top:28px;color:var(--muted);font-size:.95rem;max-width:70ch}
@@ -400,7 +408,6 @@ footer .logo{color:#fff}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes mq{to{transform:translateX(-50%)}}
 @keyframes fade{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 #ddf24780}50%{box-shadow:0 0 0 8px #ddf24700}}
 .js .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em;margin-bottom:-.12em}
 .js .w>span{display:inline-block;transform:translateY(112%);animation:up .9s var(--ease) forwards;animation-delay:calc(var(--i)*70ms + 120ms)}
 @media(prefers-reduced-motion:reduce){
@@ -438,15 +445,17 @@ html{scroll-behavior:auto}
   <svg class="bgstar bgstar--b" viewBox="0 0 100 100" aria-hidden="true"><use href="#star"/></svg>
   <div class="wrap">
     <div class="hero-copy">
-      <p class="eb"><i></i>Batch 1 · Khai giảng 10/12/2026</p>
       <h1 data-split>Khoá học <span class="hl">AI Design Workflow</span></h1>
       <p class="tagline">Level up cách vận hành một design workflow với AI</p>
-      <p class="lead">Dành cho các bạn đã có 2-3 năm làm trong team Product (PM, PD, BA, etc.). Bạn xây một Knowledge Hub làm bộ nhớ chung cho AI, rồi dùng nó để chạy một workflow thiết kế với AI trọn vẹn trên một project, từ đầu đến cuối.</p>
+      <p class="lead">Dành cho các bạn đã có 2-3 năm làm trong team Product <span class="nw">(PM, PD, BA,...)</span>. Bạn xây dựng một Knowledge Hub làm bộ nhớ chung cho AI, rồi dùng nó để chạy một workflow thiết kế với AI trọn vẹn trên một project, từ đầu đến cuối.</p>
       <div class="h-cta">
         <a class="btn btn--lime btn--lg" href="https://forms.gle/r3v8ZwKAqRNNuh8N6" target="_blank" rel="noopener">Đăng ký giữ chỗ <span class="ms">arrow_forward</span></a>
-        <div class="hprice"><span><b>6.000.000đ</b> / bạn <s>9.000.000đ</s></span><span>Giá thử nghiệm Batch 1 · có thể thanh toán 2 đợt</span></div>
+        <div class="hprice"><span><b>6.000.000đ</b> / bạn <s>9.000.000đ</s></span><span>Giá thử nghiệm · có thể thanh toán 2 đợt</span></div>
       </div>
-      <div class="stats3"><div><b>7</b><span>tuần</span></div><div><b>12</b><span>buổi</span></div><div><b>5</b><span>bạn / lớp</span></div></div>
+      <div class="hbatch" aria-label="Lịch khai giảng">
+        <div class="hb closed"><div class="hb-t"><b>Batch 1</b><span class="stamp stamp--closed">Đóng đăng ký</span></div><span>Khai giảng 10/12/2026</span></div>
+        <div class="hb"><div class="hb-t"><b>Batch 2</b><span class="stamp">Đang tuyển sinh</span></div><span>Khai giảng Tháng 3/2027 <span class="nw">(dự kiến)</span> · <span class="nw">Sĩ số 8 bạn</span></span></div>
+      </div>
     </div>
     <div class="hero-art" aria-hidden="true">
       <svg class="stairs" viewBox="0 0 560 650">
@@ -637,13 +646,12 @@ html{scroll-behavior:auto}
   <div class="sched3">
     <div class="rv"><span class="label">Số buổi</span><b>12 buổi trong 7 tuần</b><ul><li><span class="ms">menu_book</span>6 buổi theory, thứ 5</li><li><span class="ms">edit_note</span>6 buổi practice, chủ nhật</li></ul></div>
     <div class="rv" style="--d:1"><span class="label">Lịch hàng tuần</span><b>2 buổi/tuần, online qua Zoom</b><ul><li><span class="ms">schedule</span>Thứ 5: 19:30–21:00</li><li><span class="ms">schedule</span>Chủ nhật: 14:00–15:30</li><li><span class="ms">videocam</span>Mọi buổi đều có ghi hình</li></ul></div>
-    <div class="rv" style="--d:2"><span class="label">Sĩ số</span><b>Batch 1 chỉ tuyển sinh 5 bạn</b><ul><li><span class="ms">group</span>Tụi mình tuyển sinh first come first serve, các bạn đăng ký sau sẽ được tự động ghi danh vào Batch 2.</li></ul></div>
+    <div class="rv" style="--d:2"><span class="label">Sĩ số</span><b>Batch 2 chỉ tuyển sinh 8 bạn</b><ul><li><span class="ms">group</span>Tụi mình tuyển sinh first come first serve, các bạn đăng ký sau sẽ được tự động ghi danh vào batch sau.</li></ul></div>
   </div>
   <div class="batches rv">
-    <div class="batch"><div class="bt"><span>Batch 1</span><span class="stamp">Đang tuyển sinh</span></div><b>10/12/2026</b><p>Khai giảng</p></div>
-    <div class="batch off"><div class="bt"><span>Batch 2</span><span class="stamp stamp--plain">Sắp mở</span></div><b>Tháng 3/2027</b><p>Dự kiến</p></div>
+    <div class="batch closed"><div class="bt"><span>Batch 1</span><span class="stamp stamp--plain">Đóng đăng ký</span></div><b>10/12/2026</b><p>Khai giảng</p></div>
+    <div class="batch"><div class="bt"><span>Batch 2</span><span class="stamp">Đang tuyển sinh</span></div><b>Đầu Tháng 3/2027</b><p>Khai giảng (dự kiến)</p></div>
   </div>
-  <details class="sched-note rv"><summary class="more-btn">Lưu ý về lịch tuần 3 và 4 <span class="ms">add</span></summary><p>Tuần 3 và 4, buổi theory dời sang thứ 4 (23/12 và 30/12) để tránh Giáng sinh và giao thừa, giữ giờ 19:30–21:00.</p></details>
 </div></section>
 
 <!-- 9. Học phí -->
@@ -653,7 +661,7 @@ html{scroll-behavior:auto}
       <span class="kick">Học phí</span>
       <div class="was">9.000.000đ</div>
       <div class="now">6.000.000đ <span>/ bạn</span></div>
-      <p class="tags"><span class="ms">event_available</span>Giá thử nghiệm cho Batch 1 · hỗ trợ thanh toán 2 đợt, hoàn tất trước khai giảng</p>
+      <p class="tags"><span class="ms">event_available</span>Giá thử nghiệm cho Batch 2 · hỗ trợ thanh toán 2 đợt, hoàn tất trước khai giảng</p>
     </div>
     <a class="btn btn--lg" href="https://forms.gle/r3v8ZwKAqRNNuh8N6" target="_blank" rel="noopener">Đăng ký giữ chỗ <span class="ms">arrow_forward</span></a>
   </div>
@@ -692,7 +700,7 @@ html{scroll-behavior:auto}
   <svg class="bgstar bgstar--b" viewBox="0 0 100 100" aria-hidden="true" style="width:220px;height:220px"><use href="#star"/></svg>
   <div class="wrap" style="position:relative;z-index:1">
     <h2 class="rv">Bạn muốn một workflow dùng AI mà <em>bạn kiểm tra được?</em></h2>
-    <p class="rv">Batch 1 khai giảng 10/12/2026, tối đa 5 chỗ, giá 6.000.000đ trong giai đoạn thử nghiệm.</p>
+    <p class="rv">Batch 2 khai giảng Đầu Tháng 3/2027 (dự kiến), tối đa 8 chỗ, giá 6.000.000đ trong giai đoạn thử nghiệm.</p>
     <a class="btn btn--lime btn--lg rv" href="https://forms.gle/r3v8ZwKAqRNNuh8N6" target="_blank" rel="noopener" id="register">Đăng ký giữ chỗ <span class="ms">arrow_forward</span></a>
   </div>
 </section>
